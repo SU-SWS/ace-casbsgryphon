@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+// Additional classes for person views
+//
+//}
+
+.casbs_jumpmenu {
+  &__item {
+    display: inline-block;
+  }
+}
+
+
+.casbs_person {
+  &_image {
+    padding: 10px;
+  }
+}

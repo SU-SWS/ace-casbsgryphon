@@ -1,9 +1,0 @@
-{
-  "name": "su-sws/casbs_subtheme",
-  "description": "CASBS Subtheme",
-  "type": "drupal-custom-theme",
-  "homepage": "https://github.com/SU-SWS/casbs_subtheme",
-  "authors": [],
-  "license": "GPL-2.0-or-later",
-  "minimum-stability": "dev"
-}
