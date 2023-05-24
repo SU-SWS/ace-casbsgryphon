@@ -8,11 +8,19 @@
 }
 
 .casbs-person__image {
-  margin: 10px;
+  margin: 0 10px 10px 0;
   display:inline-block;
   float: left;
 }
 
 .casbs-person__discipline{
-  text-transform: capitalize
+  text-transform: lowercase;
+}
+
+.casbs-person__discipline::first-letter{
+  text-transform: uppercase;
+}
+
+.casbs-person__affiliation{
+  font-weight: bold
 }
