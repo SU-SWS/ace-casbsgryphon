@@ -4,7 +4,7 @@
 }
 
 .casbs-person {
-  border-bottom: 10px;
+  border-bottom: 10px 1px #000;
 }
 
 .casbs-person__image {
