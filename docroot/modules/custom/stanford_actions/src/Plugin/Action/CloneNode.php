@@ -15,10 +15,13 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\field\FieldConfigInterface;
 use Drupal\node\NodeInterface;
+use Drupal\stanford_actions\Events\NodeCloneEvent;
+use Drupal\stanford_actions\Events\StanfordActionsEvents;
 use Drupal\stanford_actions\Plugin\Action\FieldClone\FieldCloneInterface;
 use Drupal\stanford_actions\Plugin\FieldCloneManagerInterface;
 use Drupal\views_bulk_operations\Action\ViewsBulkOperationsActionBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Clones a node.
@@ -32,41 +35,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class CloneNode extends ViewsBulkOperationsActionBase implements PluginFormInterface, ContainerFactoryPluginInterface {
 
   /**
-   * Entity field manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
-   */
-  protected $entityFieldManager;
-
-  /**
-   * Entity type manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
-
-  /**
-   * Field clone plugin manager service.
-   *
-   * @var \Drupal\stanford_actions\Plugin\FieldCloneManagerInterface
-   */
-  protected $fieldCloneManager;
-
-  /**
-   * Array of field clone plugins.
-   *
-   * @var \Drupal\stanford_actions\Plugin\Action\FieldClone\FieldCloneInterface[]
-   */
-  protected $fieldClonePlugins;
-
-  /**
-   * Currently active user.
-   *
-   * @var \Drupal\Core\Session\AccountProxyInterface
-   */
-  protected $currentUser;
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
@@ -78,23 +46,39 @@ class CloneNode extends ViewsBulkOperationsActionBase implements PluginFormInter
       $container->get('entity_type.manager'),
       $container->get('plugin.manager.stanford_actions_field_clone'),
       $container->get('config.factory'),
-      $container->get('current_user')
+      $container->get('current_user'),
+      $container->get('event_dispatcher')
     );
   }
 
   /**
-   * {@inheritdoc}
+   * Plugin constructor.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entityFieldManager
+   *   Entity Field manager service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   Entity type manager service.
+   * @param \Drupal\stanford_actions\Plugin\FieldCloneManagerInterface $fieldCloneManager
+   *   Field clone plugin manager.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   Config factory service.
+   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
+   *   Current active user.
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+   *   Event dispatcher service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityFieldManagerInterface $entity_field_manager, EntityTypeManagerInterface $entity_type_manager, FieldCloneManagerInterface $field_clone_manager, ConfigFactoryInterface $config_factory, AccountProxyInterface $current_user) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected EntityFieldManagerInterface $entityFieldManager, protected EntityTypeManagerInterface $entityTypeManager, protected FieldCloneManagerInterface $fieldCloneManager, ConfigFactoryInterface $config_factory, protected AccountProxyInterface $currentUser, protected EventDispatcherInterface $eventDispatcher) {
     $clone_entities = $config_factory->get('stanford_actions.settings')
       ->get('actions.node_clone_action.clone_entities');
     $configuration['clone_entities'] = $clone_entities ?? [];
 
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->entityFieldManager = $entity_field_manager;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->fieldCloneManager = $field_clone_manager;
-    $this->currentUser = $current_user;
   }
 
   /**
@@ -166,10 +150,8 @@ class CloneNode extends ViewsBulkOperationsActionBase implements PluginFormInter
     $fields = $this->entityFieldManager->getFieldDefinitions('node', $node->bundle());
     foreach ($fields as $field) {
       foreach ($field_clone_plugins as $plugin) {
-
         $plugin_definition = $plugin->getPluginDefinition();
         if (in_array($field->getType(), $plugin_definition['fieldTypes'])) {
-
           $form['field_clone'][$plugin_definition['id']][$field->getName()] = [
             '#type' => 'details',
             '#title' => $field->getLabel(),
@@ -232,7 +214,13 @@ class CloneNode extends ViewsBulkOperationsActionBase implements PluginFormInter
       $duplicate_node->set('uid', $this->currentUser->id());
       $duplicate_node->set('created', time());
       $duplicate_node->set('changed', time());
+
+      $event = new NodeCloneEvent($duplicate_node, $entity);
+      $this->eventDispatcher->dispatch($event, StanfordActionsEvents::PRE_NODE_CLONED);
       $duplicate_node->save();
+
+      $event = new NodeCloneEvent($duplicate_node, $entity);
+      $this->eventDispatcher->dispatch($event, StanfordActionsEvents::POST_NODE_CLONED);
     }
   }
 
@@ -349,7 +337,7 @@ class CloneNode extends ViewsBulkOperationsActionBase implements PluginFormInter
     // fields that are not base fields. Also we only want entity reference
     // fields that target specific entity types as defined above that require
     // cloning..
-    return array_filter($fields, function ($field) use ($clone_target_types) {
+    return array_filter($fields, function($field) use ($clone_target_types) {
       $target_entity_id = $field->getFieldStorageDefinition()
         ->getSetting('target_type');
       $types = ['entity_reference', 'entity_reference_revisions'];

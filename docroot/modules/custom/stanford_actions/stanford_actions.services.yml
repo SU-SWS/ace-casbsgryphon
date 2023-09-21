@@ -2,3 +2,9 @@ services:
   plugin.manager.stanford_actions_field_clone:
     class: Drupal\stanford_actions\Plugin\FieldCloneManager
     parent: default_plugin_manager
+
+  stanford_actions.event_subscriber:
+    class: Drupal\stanford_actions\EventSubscriber\StanfordActionsSubscriber
+    arguments: ['@entity_type.manager', '@entity_field.manager']
+    tags:
+      - { name: event_subscriber }

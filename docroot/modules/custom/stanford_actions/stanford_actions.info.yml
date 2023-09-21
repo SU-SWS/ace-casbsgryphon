@@ -2,7 +2,7 @@ name: 'Stanford Actions'
 type: module
 description: 'Provides action plugins to work with VBO module.'
 core_version_requirement: ^9 || ^10
-version: 8.x-2.7
+version: 8.2.9
 package: 'Stanford'
 dependencies:
   - 'views_bulk_operations:views_bulk_operations'

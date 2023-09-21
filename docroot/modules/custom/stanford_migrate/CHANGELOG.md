@@ -1,5 +1,42 @@
 # Stanford Migrate
 
+8.5.3
+--------------------------------------------------------------------------------
+_Release Date: 2023-09-11_
+
+- Only add readonly styling if modified on the form
+
+8.5.2
+--------------------------------------------------------------------------------
+_Release Date: 2023-09-08_
+
+- Update unit tests for D10
+
+8.5.1
+--------------------------------------------------------------------------------
+_Release Date: 2023-08-23_
+
+- Fetch pages when getting source data for localist json
+
+8.5.0
+--------------------------------------------------------------------------------
+_Release Date: 2023-08-23_
+
+- Added new `localist_json` data source to provide paged results from the Localist API.
+
+8.4.4
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-28_
+
+- Update event subscribers to match interface declaration
+
+8.4.3
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-19_
+
+- D8CORE-6816 Fix permissions for disabled migrations
+- Removed dependency on seven library that will be removed in D10
+
 8.4.2
 --------------------------------------------------------------------------------
 _Release Date: 2023-01-23_

@@ -1,5 +1,142 @@
 # Stanford Profile Helper
 
+9.3.0
+--------------------------------------------------------------------------------
+_Release Date: 2023-09-07_
+
+- Add response_code_condition replacing the contrib module (#266)
+- D8CORE-6802 Update preview styles with most of the front end styles (#262)
+- D8CORE-4495 Update past events text on node page
+
+9.2.15
+--------------------------------------------------------------------------------
+_Release Date: 2023-08-04_
+- 69c5073 SDSS-763: Check for number of regions on banner restriction. (#261)
+
+9.2.14
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-28_
+- Update event subscribers to match interface declaration
+
+9.2.13
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-25_
+- D8CORE-6838 fix responsive two column layout
+- 100% image in cards
+- D8CORE-6791 Remove access to sitemap.xml for intranet sites
+
+9.2.12
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-18_
+
+- D8CORE-6820 Increased z-index for ckeditor balloons (link dialogs)
+
+9.2.11
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-07_
+
+- Specific styles for full width basic pages.
+
+9.2.10
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-07_
+
+- reverted language change for layout paragraphs
+- Handle the action link behavior better
+- Prevent gallery from 2 and 3 column layouts
+- D8CORE-6800 D8CORE-6803 fix gutters on rows and remove token link on list paragraph field
+
+9.2.9
+--------------------------------------------------------------------------------
+_Release Date: 2023-06-29_
+
+- D8CORE-4778: adding the underline to splash in theme (#253)
+- D8CORE-6761: added button and link styles to the layout paragraph preview (#251)
+- D8CORE-4850 add space between people rows after load more
+- D8CORE-2005 Refactor section to div tag for people page sections
+- D8CORE-6463 Prevent encoded subject names in course listing
+- Margin 0 on the paragraph icons for layout paragraphs
+- Various tweaks to layout paragraphs form displays (#252)
+- D8CORE-6541 Index home page for search
+- HSD8-6476 Increase authority field for policy
+- D8CORE-6758 | Fixup gallery h2 for layout paragraphs (#249)
+- added webpack scss compiler
+- added max width for paragraphs on large screens
+- Set max width for media captions
+- Fixed some styles for responsive paragraphs
+- Corrected gallery grid display
+- alter nobots field widget with state default value
+- D8CORE-4495 Update past events list styles (#248)
+- Adjusted styles for the list paragraph in the new layout paragraphs
+- Revert "D8CORE-4495: changing lineheight of past event note (#245)" (#247)
+- D8CORE-4495: changing lineheight of past event note (#245)
+
+
+9.2.8
+--------------------------------------------------------------------------------
+_Release Date: 2023-06-23_
+
+- Restored link processing for card paragraph.
+
+9.2.7
+--------------------------------------------------------------------------------
+_Release Date: 2023-06-12_
+
+- Use a better github action for releases
+- Set minimum height to Layout Builder component
+- Additional check for route name
+- Fixed styles for cards on giant screen full width
+- Fixed styles for two column different widths
+- Fixed error when page_cache_query_ignore module is disabled
+
+9.2.6
+--------------------------------------------------------------------------------
+_Release Date: 2023-05-17_
+
+- Fixed AJAX issue on taxonomy form related to the argument helper.
+
+9.2.5
+--------------------------------------------------------------------------------
+_Release Date: 2023-05-15_
+
+- Base64 json api processor for image urls.
+- Added styles for paragraphs and layout paragraphs.
+
+9.2.4
+--------------------------------------------------------------------------------
+_Release Date: 2023-05-12_
+
+- Provide some hooks to improve or fix parts when the site is inteneded to be decoupled.
+
+9.2.3
+--------------------------------------------------------------------------------
+_Release Date: 2023-05-10_
+
+- Fixed error when editing taxonomy.
+
+9.2.2
+--------------------------------------------------------------------------------
+_Release Date: 2023-05-10_
+
+- Fixed intranet background not stretching.
+- Added to taxonomy form to display the argument format of the term name.
+
+9.2.1
+--------------------------------------------------------------------------------
+_Release Date: 2023-05-05_
+
+- Fixed bug when saving menu items.
+- Added support to clear caches when saving the menu link field module.
+
+9.2.0
+--------------------------------------------------------------------------------
+_Release Date: 2023-04-27_
+
+- NEW layout paragraphs enhancer module for LP layouts and styles.
+- Removed all deprecated code for D10 Prep.
+- Move card link field to paragraph behaviors.
+-
+
 9.1.0
 --------------------------------------------------------------------------------
 _Release Date: 2023-01-17_

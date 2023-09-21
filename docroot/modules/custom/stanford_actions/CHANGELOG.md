@@ -1,4 +1,17 @@
-# Stanford Module Example
+# Stanford Actions
+
+8.2.9
+--------------------------------------------------------------------------------
+_Release Date: 2023-09-08_
+
+- Update unit tests for d10
+
+8.2.8
+--------------------------------------------------------------------------------
+_Release Date: 2023-09-06_
+
+- Added pre and post clone events.
+- Provided clone fix for layout paragraphs parent uuid.
 
 8.2.7
 --------------------------------------------------------------------------------

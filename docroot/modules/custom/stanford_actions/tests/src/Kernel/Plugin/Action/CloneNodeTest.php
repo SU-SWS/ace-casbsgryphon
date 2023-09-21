@@ -6,6 +6,8 @@ use Drupal\Core\Form\FormState;
 use Drupal\datetime_range\Plugin\Field\FieldType\DateRangeItem;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\stanford_actions\Plugin\Action\CloneNode;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\Entity\Node;
@@ -38,18 +40,22 @@ class CloneNodeTest extends KernelTestBase {
     'stanford_actions',
     'field',
     'datetime',
+    'paragraphs',
+    'entity_reference_revisions',
+    'file',
   ];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  public function setup(): void {
     parent::setUp();
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
     $this->installSchema('system', 'sequences');
     $this->installEntitySchema('field_config');
     $this->installEntitySchema('field_storage_config');
+    $this->installEntitySchema('paragraph');
 
     NodeType::create(['type' => 'page', 'name' => 'page'])->save();
 
@@ -67,10 +73,61 @@ class CloneNodeTest extends KernelTestBase {
     ]);
     $field->save();
 
+    // Create a field with paragraphs for the node type.
+    $paragraph_field = FieldStorageConfig::create([
+      'entity_type' => 'node',
+      'type' => 'entity_reference_revisions',
+      'field_name' => strtolower($this->randomMachineName()),
+      'settings' => [
+        'target_type' => 'paragraph',
+      ],
+      'cardinality' => -1,
+      'translatable' => TRUE,
+    ]);
+    $paragraph_field->save();
+    FieldConfig::create([
+      'entity_type' => 'node',
+      'bundle' => 'page',
+      'field_name' => $paragraph_field->getName(),
+      'label' => $this->randomString(),
+      'settings' => [
+        'handler' => 'default:paragraph',
+        'handler_settings' => [
+          'negate' => 1,
+          'target_bundles' => NULL,
+          'target_bundles_drag_drop' => [],
+        ],
+      ],
+    ])->save();
+
+    ParagraphsType::create([
+      'id' => 'layout',
+      'label' => 'layout',
+    ])->save();
+    ParagraphsType::create([
+      'id' => 'text',
+      'label' => 'text',
+    ])->save();
+    $layout = Paragraph::create(['type' => 'layout']);
+    $layout->save();
+    $text = Paragraph::create(['type' => 'text']);
+    $text->setAllBehaviorSettings(['layout_paragraphs' => ['parent_uuid' => $layout->uuid()]]);
+    $text->save();
+
     $this->node = Node::create([
       'title' => $this->randomMachineName(),
       'type' => 'page',
       $field_storage->getName() => date('Y-m-d'),
+      $paragraph_field->getName() => [
+        [
+          'target_id' => $layout->id(),
+          'target_revision_id' => $layout->getRevisionId(),
+        ],
+        [
+          'target_id' => $text->id(),
+          'target_revision_id' => $text->getRevisionId(),
+        ],
+      ],
     ]);
     $this->node->save();
   }
@@ -106,7 +163,6 @@ class CloneNodeTest extends KernelTestBase {
 
     $action->execute($this->node);
     $this->assertEquals(8, $this->getNodeCount());
-
 
     $form_state->setValue('clone_count', 1);
     $form_state->setValue('prepend_title', 'foo bar');

@@ -18,6 +18,7 @@
         "drupal/views_bulk_operations": "^4.2"
     },
     "require-dev": {
+        "drupal/paragraphs": "^1.15",
         "drupal/smart_date": "^3.4"
     },
     "config": {

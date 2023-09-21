@@ -6,6 +6,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Link;
 use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Path\PathValidatorInterface;
+use Drupal\Core\Url;
 use Drupal\Core\Utility\LinkGeneratorInterface;
 use Drupal\Tests\UnitTestCase;
 
@@ -18,7 +19,7 @@ abstract class FieldFormatterTestBase extends UnitTestCase {
   /**
    * {@inheritDoc}
    */
-  protected function setUp(): void {
+  public function setUp(): void {
     parent::setUp();
     $path_matcher = $this->createMock(PathMatcherInterface::class);
     $path_matcher->method('isFrontPage')
@@ -27,6 +28,9 @@ abstract class FieldFormatterTestBase extends UnitTestCase {
     $path_validator = $this->createMock(PathValidatorInterface::class);
 
     $link_generator = $this->createMock(LinkGeneratorInterface::class);
+
+    $link_generator->method('generate')
+      ->will($this->returnCallback([$this, 'generateLink']));
     $link_generator->method('generateFromLink')
       ->will($this->returnCallback([$this, 'generateFromLinkCallback']));
 
@@ -41,6 +45,11 @@ abstract class FieldFormatterTestBase extends UnitTestCase {
   public function isFrontPageCallback() {
     return $this->isFrontPage;
   }
+
+  public function generateLink($text, Url $url) {
+      return '<a href="/foo-bar">Foo Bar</a>';
+    }
+
 
   public function generateFromLinkCallback(Link $link) {
     return '<a href="/foo-bar">Foo Bar</a>';

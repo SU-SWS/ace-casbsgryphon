@@ -25,6 +25,7 @@ class StanfordSspCommandsTest extends KernelTestBase {
     'externalauth',
     'user',
     'stanford_ssp_test',
+    'path_alias',
   ];
 
   /**
@@ -87,7 +88,7 @@ class StanfordSspCommandsTest extends KernelTestBase {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function testAddingUser() {
-    $sunet = $this->randomMachineName();
+    $sunet = strtolower($this->randomMachineName());
     $options = [
       'email' => $this->randomMachineName() . '@' . $this->randomMachineName() . '.com',
       'roles' => '',

@@ -58,7 +58,7 @@ class EntityEventSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritDoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       EntityHookEvents::ENTITY_PRE_SAVE => 'onEntityPresave',
       EntityHookEvents::ENTITY_INSERT => 'onEntityInsert',
@@ -145,6 +145,76 @@ class EntityEventSubscriber implements EventSubscriberInterface {
   }
 
   /**
+   * On node insert event listener.
+   *
+   * @param \Drupal\node\NodeInterface $node
+   *   The node.
+   */
+  protected static function insertNode(NodeInterface $node): void {
+    // Clear menu links cache if the node has a menu link data.
+    if (
+      $node->hasField('field_menulink') &&
+      !$node->get('field_menulink')->isEmpty()
+    ) {
+      Cache::invalidateTags(['stanford_profile_helper:menu_links']);
+    }
+  }
+
+  /**
+   * On node update event listener.
+   *
+   * @param \Drupal\node\NodeInterface $node
+   *   The node.
+   * @param \Drupal\node\NodeInterface $original_node
+   *   The original node.
+   */
+  protected static function updateNode(NodeInterface $node, NodeInterface $original_node): void {
+    // Compare the original menu link with the new menu link data. If any
+    // important parts changed, clear the menu links cache.
+    if (
+      $node->hasField('field_menulink') &&
+      (!$node->get('field_menulink')->isEmpty() || !$original_node->get('field_menulink')->isEmpty())
+    ) {
+
+      $keys = ['title', 'description', 'weight', 'expanded', 'parent'];
+      $changes = $node->get('field_menulink')->getValue();
+      $original = $original_node->get('field_menulink')->getValue();
+
+      foreach ($keys as $key) {
+        $change_value = $changes[0][$key] ?? NULL;
+        $original_value = $original[0][$key] ?? NULL;
+
+        if ($change_value != $original_value) {
+          Cache::invalidateTags(['stanford_profile_helper:menu_links']);
+          return;
+        }
+      }
+    }
+
+  }
+
+  /**
+   * Force the menu link to clear when a node is deleted.
+   *
+   * @param \Drupal\node\NodeInterface $node
+   *   Node being deleted.
+   */
+  protected static function deleteNode(NodeInterface $node): void {
+    // If a node has menu link data, delete the menu link.
+    if (
+      $node->hasField('field_menulink') &&
+      !$node->get('field_menulink')->isEmpty()
+    ) {
+      \Drupal::database()->delete('menu_tree')
+        ->condition('id', 'menu_link_field:%', 'LIKE')
+        ->condition('route_param_key', 'node=' . $node->id())
+        ->execute();
+      \Drupal::service('router.builder')->rebuildIfNeeded();
+      Cache::invalidateTags(['stanford_profile_helper:menu_links']);
+    }
+  }
+
+  /**
    * For configuration entities, make sure the uuid matches the config file.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
@@ -183,16 +253,21 @@ class EntityEventSubscriber implements EventSubscriberInterface {
       \Drupal::service('router.builder')->rebuildIfNeeded();
     }
 
+    $state = \Drupal::state();
+    if ($config_page->hasField('su_site_nobots')) {
+      $enable_nobots = (bool) $config_page->get('su_site_nobots')->getString();
+      $enable_nobots ? $state->set('nobots', TRUE) : $state->delete('nobots');
+    }
+
     if (
       $config_page->hasField('su_site_url') &&
       $config_page->get('su_site_url')->count()
     ) {
       // Set the xml sitemap module state to the new domain.
-      \Drupal::state()
-        ->set('xmlsitemap_base_url', $config_page->get('su_site_url')
-          ->get(0)
-          ->get('uri')
-          ->getString());
+      $state->set('xmlsitemap_base_url', $config_page->get('su_site_url')
+        ->get(0)
+        ->get('uri')
+        ->getString());
     }
 
     // Invalidate cache tags on config pages save. This is a blanket cache clear
@@ -268,8 +343,6 @@ class EntityEventSubscriber implements EventSubscriberInterface {
    *   The menu link being saved.
    */
   protected static function preSaveMenuLinkContent(MenuLinkContentInterface $entity): void {
-    $cache_tags = [];
-
     $destination = $entity->get('link')->getString();
     if ($internal_path = self::lookupInternalPath($destination)) {
       $entity->set('link', $internal_path);
@@ -277,33 +350,23 @@ class EntityEventSubscriber implements EventSubscriberInterface {
 
     // For new menu link items created on a node form (normally), set the
     // expanded attribute so all menu items are expanded by default.
-    $expanded = $entity->isNew() ?: (bool) $entity->get('expanded')->getString();
+    $expanded = $entity->isNew() ?: $entity->isExpanded();
     $entity->set('expanded', $expanded);
+    /** @var \Drupal\Core\Menu\MenuLinkManagerInterface $link_manager */
+    $link_manager = \Drupal::service('plugin.manager.menu.link');
+    $parent_ids = $link_manager->getParentIds($entity->getPluginId()) ?: [];
 
+    $cache_tags = [];
     // When a menu item is added as a child of another menu item clear the
     // parent pages cache so that the block shows up as it doesn't get
     // invalidated just by the menu cache tags.
-    while ($entity && ($parent_id = $entity->getParentId())) {
-
-      [$entity_name, $uuid] = explode(':', $parent_id);
-      $entity = \Drupal::entityTypeManager()
-        ->getStorage($entity_name)
-        ->loadByProperties(['uuid' => $uuid]);
-
-      if (!$entity) {
-        break;
-      }
-
-      $entity = array_pop($entity);
-      /** @var \Drupal\Core\Url $url */
-      $url = $entity->getUrlObject();
-      if (!$url->isExternal() && $url->isRouted()) {
-        $params = $url->getRouteParameters();
-        if (isset($params['node'])) {
-          $cache_tags[] = 'node:' . $params['node'];
-        }
+    foreach ($parent_ids as $parent_id) {
+      $link = $link_manager->getDefinition($parent_id);
+      if (isset($link['route_parameters']['node'])) {
+        $cache_tags[] = 'node:' . $link['route_parameters']['node'];
       }
     }
+
     Cache::invalidateTags($cache_tags);
   }
 

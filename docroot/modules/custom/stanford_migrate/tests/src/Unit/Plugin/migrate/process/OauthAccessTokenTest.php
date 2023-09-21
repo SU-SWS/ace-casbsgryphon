@@ -27,7 +27,7 @@ class OauthAccessTokenTest extends UnitTestCase {
   /**
    * {@inheritDoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $auth_headers = ['headers' => ['Authorization' => 'Bearer foo-bar-baz']];
     $auth_plugin = $this->createMock(AuthenticationPluginInterface::class);

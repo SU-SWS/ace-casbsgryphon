@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\stanford_actions\Kernel\Plugin\Action\FieldClone;
 
+use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\Core\Form\FormState;
 use Drupal\field\Entity\FieldConfig;
@@ -35,7 +36,7 @@ class SmartDateTest extends FieldCloneTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  public function setup(): void {
     parent::setUp();
     $this->installConfig('smart_date');
 
