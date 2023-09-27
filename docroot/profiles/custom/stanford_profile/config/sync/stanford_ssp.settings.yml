@@ -3,10 +3,14 @@ _core:
 saml_attribute: eduPersonEntitlement
 hide_local_login: true
 use_workgroup_api: true
-workgroup_api_cert: ''
-workgroup_api_key: ''
+workgroup_api_cert: ""
+workgroup_api_key: ""
 restriction: all
 allowed:
-  affiliations: {  }
-  groups: {  }
-  users: {  }
+  affiliations: {}
+  groups: {}
+  users: {}
+exclude_redirect:
+  - /jsonapi
+  - "/jsonapi/*"
+  - /subrequests
