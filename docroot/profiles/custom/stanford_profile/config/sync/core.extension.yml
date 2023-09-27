@@ -144,7 +144,6 @@ module:
   pdb_react: 0
   preprocess_event_dispatcher: 0
   printable: 0
-  purge_ui: 0
   rabbit_hole: 0
   react_paragraphs: 0
   react_paragraphs_behaviors: 0
