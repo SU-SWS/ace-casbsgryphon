@@ -156,7 +156,7 @@
         "su-sws/stanford_media": "^9.0",
         "su-sws/stanford_migrate": "^8.3",
         "su-sws/stanford_profile_helper": "dev-core-9.5.0",
-        "su-sws/stanford_ssp": "^8.2"
+        "su-sws/stanford_ssp": "^8.3"
     },
     "require-dev": {
         "acquia/blt-drupal-test": "^1.0",

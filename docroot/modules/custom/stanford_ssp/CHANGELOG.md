@@ -1,5 +1,35 @@
 # Stanford SSP
 
+8.3.5
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-17_
+
+- Fixed url redirect for user create page.
+
+8.3.3
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-10_
+
+- Fixed unit testing.
+
+8.3.2
+--------------------------------------------------------------------------------
+_Release Date: 2023-07-07_
+
+- Add validation for sunetID add user form.
+
+8.3.1
+--------------------------------------------------------------------------------
+_Release Date: 2023-06-27_
+
+- Redirect the /admin/people/create page if the local login form is disabled.
+
+8.3.0
+--------------------------------------------------------------------------------
+_Release Date: 2023-05-03_
+
+- Added ability to exclude specific path patterns from redirecting, such as JSON API Endpoints.
+
 8.2.6
 --------------------------------------------------------------------------------
 _Release Date: 2023-01-09_
