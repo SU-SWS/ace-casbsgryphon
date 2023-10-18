@@ -31,6 +31,13 @@ $databases = array(
 
 $dir = dirname(DRUPAL_ROOT);
 
+// Use development service parameters.
+$settings['container_yamls'][] = $dir . '/docroot/sites/development.services.yml';
+$settings['container_yamls'][] = $dir . '/docroot/sites/blt.development.services.yml';
+
+// Allow access to update.php.
+$settings['update_free_access'] = TRUE;
+
 /**
  * Assertions.
  *
@@ -61,8 +68,8 @@ $config['system.logging']['error_level'] = 'verbose';
 /**
  * Disable CSS and JS aggregation.
  */
-$config['system.performance']['css']['preprocess'] = TRUE;
-$config['system.performance']['js']['preprocess'] = TRUE;
+$config['system.performance']['css']['preprocess'] = FALSE;
+$config['system.performance']['js']['preprocess'] = FALSE;
 
 /**
  * Disable the render cache (this includes the page cache).
@@ -162,3 +169,5 @@ if (isset($_acsf_site_name)) {
 $settings['trusted_host_patterns'] = array(
   '^.+$',
 );
+
+error_reporting(E_ALL & ~E_DEPRECATED);

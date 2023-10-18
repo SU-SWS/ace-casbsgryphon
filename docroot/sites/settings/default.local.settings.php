@@ -8,15 +8,21 @@
  */
 
 /**
- * SimpleSaml Workgroup configuration
+ * SAML configuration
  */
-$config['stanford_ssp.settings'] = [
-  'workgroup_api_url' => 'https://workgroupsvc.stanford.edu/v1/workgroups',
-  'use_workgroup_api' => TRUE,
-  'workgroup_api_cert' => DRUPAL_ROOT . '/../keys/workgroup_api.cert',
-  'workgroup_api_key' => DRUPAL_ROOT . '/../keys/workgroup_api.key',
+$config['samlauth.authentication']['sp_x509_certificate'] = 'file:' . DRUPAL_ROOT . '/../keys/saml.crt';
+$config['samlauth.authentication']['sp_private_key'] = 'file:' . DRUPAL_ROOT . '/../keys/saml.pem';
+$config['samlauth.authentication']['idp_certs'] = [
+  'file:' . DRUPAL_ROOT . '/../keys/signing.crt',
+];
+$config['stanford_samlauth.settings']['role_mapping']['workgroup_api'] = [
+  'cert' => DRUPAL_ROOT . '/../keys/workgroup_api.cert',
+  'key' => DRUPAL_ROOT . '/../keys/workgroup_api.key',
 ];
 
-// Suppress deprecation and strict errors for PHP on local.
-// Disable this if you are trying a new PHP version.
-error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
+error_reporting(E_ALL & ~E_DEPRECATED);
+
+// Saml login doesn't work on gitpod or tugboat, don't set config values.
+if (getenv('GITPOD_WORKSPACE_URL') || getenv('TUGBOAT_REPO')) {
+  unset($config['samlauth.authentication'], $config['stanford_samlauth.settings']);
+}

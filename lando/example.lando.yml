@@ -29,7 +29,7 @@ services:
             {
               "extensions" : {
                 "Behat\\MinkExtension" : {
-                  "base_url" : "http://soegryphon.lndo.site/"
+                  "base_url" : "http://casbs.lndo.site/"
                 }
               }
             }
@@ -73,3 +73,6 @@ tooling:
     service: appserver
     cmd: "/app/vendor/bin/phpunit -c /app/docroot/core"
     description: Run phpunit tests
+  codeception:
+    service: appserver
+    cmd: "/app/vendor/bin/blt tests:codeception:run"

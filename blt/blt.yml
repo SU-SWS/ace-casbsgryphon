@@ -39,6 +39,7 @@ modules:
       - environment_indicator
       - memcache
       - memcache_admin
+      
     uninstall: {  }
   test:
     enable:

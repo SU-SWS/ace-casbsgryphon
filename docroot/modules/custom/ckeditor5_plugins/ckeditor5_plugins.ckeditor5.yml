@@ -1,0 +1,8 @@
+ckeditor5_plugins_plain_paste:
+  ckeditor5:
+    plugins:
+      - plainPaste.PlainPaste
+  drupal:
+    label: Plain Paste
+    library: ckeditor5_plugins/plain_paste
+    elements: false

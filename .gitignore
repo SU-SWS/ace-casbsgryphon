@@ -68,6 +68,7 @@ tests/codeception/_output
 tests/codeception/_data
 tests/codeception/_support/_generated
 
+
 # Ignore contrib modules. These should be created during build process.
 docroot/modules/contrib
 # docroot/modules/custom
@@ -195,3 +196,9 @@ drush/sites/.checksums
 .rules
 docroot/sites/settings/settings.local.php
 .docksal/docksal-local.env
+
+# local lando file
+.lando.yml
+
+#ian_notes.txt
+ian_notes.txt

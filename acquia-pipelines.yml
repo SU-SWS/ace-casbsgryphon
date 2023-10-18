@@ -12,5 +12,4 @@ events:
           type: script
           script:
             - 'composer install --no-dev --no-interaction --optimize-autoloader'
-            - 'vendor/bin/blt blt:telemetry:disable --no-interaction'
-            - 'vendor/bin/blt source:build:simplesamlphp-config'
+

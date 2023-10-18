@@ -1,0 +1,11 @@
+{
+    "name": "su-sws/ckeditor5_plugins",
+    "description": "Drupal CKEditor5 Plugin extensions",
+    "type": "drupal-custom-module",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "drupal/core": "^9.5 || ^10.0"
+    }
+}

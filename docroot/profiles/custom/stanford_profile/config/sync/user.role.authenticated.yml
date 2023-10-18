@@ -8,7 +8,10 @@ dependencies:
     - field_permissions
     - filter
     - media
+    - printable
     - shortcut
+    - stanford_policy
+    - subrequests
     - system
     - ui_patterns_library
 _core:
@@ -21,6 +24,7 @@ permissions:
   - 'access content'
   - 'access patterns page'
   - 'access shortcuts'
+  - 'issue subrequests'
   - 'use text format stanford_minimal_html'
   - 'view field_media_embeddable_code'
   - 'view media'
@@ -34,6 +38,8 @@ permissions:
   - 'view own su_site_404'
   - 'view own su_site_home'
   - 'view own su_site_url'
+  - 'view policy log'
+  - 'view printer friendly versions'
   - 'view su_metatags'
   - 'view su_policy_auto_prefix'
   - 'view su_policy_chapter'

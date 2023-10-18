@@ -106,9 +106,9 @@ third_party_settings:
               follow_parent: child
               level: 2
               depth: 0
-              expand: true
               parent: 'main:'
               suggestion: secondary_nav
+              expand: true
             weight: 0
             additional: {  }
           c40ac234-fff7-4c9d-8a34-03fb9d335617:
@@ -156,6 +156,8 @@ third_party_settings:
       - 'Content fields'
       - 'Custom block types'
       - 'Custom blocks'
+      - Devel
+      - 'Devel PHP'
       - 'Events Lists (Views)'
       - Forms
       - Help
@@ -166,14 +168,11 @@ third_party_settings:
       - 'News Lists (Views)'
       - 'PDB React'
       - 'People Lists (Views)'
-      - 'Policy (Views)'
       - Printable
       - 'Publication (Views)'
       - React
-      - 'SimpleSAMLphp Authentication'
       - 'Stanford News'
       - 'Stanford Profile Helper'
-      - 'Stanford SimpleSAML PHP'
       - System
       - 'Taxonomy Terms (Views)'
       - Views
@@ -254,12 +253,9 @@ third_party_settings:
         - Forms
         - Help
         - 'Lists (Views)'
-        - 'Policy (Views)'
         - Printable
         - React
-        - 'SimpleSAMLphp Authentication'
         - 'Stanford Profile Helper'
-        - 'Stanford SimpleSAML PHP'
         - 'Taxonomy Terms (Views)'
         - Views
   field_group:
@@ -335,6 +331,7 @@ content:
     weight: 5
     region: main
 hidden:
+  field_menulink: true
   layout_builder__layout: true
   layout_selection: true
   search_api_excerpt: true

@@ -14,6 +14,7 @@ try cp lando/example.php.ini lando/php.ini
 try cp lando/example.local.blt.yml blt/local.blt.yml
 try cp docroot/sites/default/settings/default.local.settings.php docroot/sites/default/settings/local.settings.php
 # try cp lando/example.local.config.php simplesamlphp/config/local.config.php
+try cp lando/codeception.yml tests/codeception.yml
 
 try lando start
 try lando composer init-stack

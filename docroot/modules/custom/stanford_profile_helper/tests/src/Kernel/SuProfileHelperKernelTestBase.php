@@ -23,7 +23,6 @@ abstract class SuProfileHelperKernelTestBase extends KernelTestBase {
     'hook_event_dispatcher',
     'preprocess_event_dispatcher',
     'default_content',
-    'hal',
     'node',
     'serialization',
     'stanford_profile_helper',
@@ -33,21 +32,24 @@ abstract class SuProfileHelperKernelTestBase extends KernelTestBase {
     'rabbit_hole',
     'rh_node',
     'menu_link_content',
-    'link',
     'redirect',
     'text',
     'field',
+    'field_ui',
     'config_pages',
     'link',
     'taxonomy',
     'pathauto',
     'token',
+    'paragraphs',
+    'options',
+    'file',
   ];
 
   /**
    * {@inheritDoc}
    */
-  protected function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->installEntitySchema('node');
     $this->installEntitySchema('user');

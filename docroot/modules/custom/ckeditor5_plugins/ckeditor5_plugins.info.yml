@@ -1,0 +1,8 @@
+name: CKEditor5 Plguins
+type: module
+description: Plugins and text editor additions for CKEditor5
+package: Stanford
+core_version_requirement: ^9 || ^10
+version: 1.0.2
+dependencies:
+  - drupal:ckeditor5

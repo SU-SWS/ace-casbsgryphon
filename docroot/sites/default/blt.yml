@@ -2,11 +2,11 @@ project:
   local:
     hostname: localhost
     protocol: http
-  machine_name: soegryphon
-  human_name: soegryphon
+  machine_name: casbsgryphon
+  human_name: casbsgryphon
 drush:
   aliases:
-    local: soegryphon.local
-    remote: soegryphon.dev
+    local: casbsgryphon.local
+    remote: casbsgryphon.dev
 drupal:
   db: {  }

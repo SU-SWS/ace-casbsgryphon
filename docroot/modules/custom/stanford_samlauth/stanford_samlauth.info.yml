@@ -1,0 +1,12 @@
+name: Stanford SAML Authentication
+type: module
+description: Adds enhancements to SAML Authentication module.
+package: Stanford
+core_version_requirement: ^9 || ^10
+version: 1.0.3
+dependencies:
+  - drupal:path_alias
+  - autologout:autologout
+  - samlauth:samlauth
+  - samlauth:samlauth_user_fields
+  - r4032login:r4032login

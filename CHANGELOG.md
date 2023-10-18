@@ -1,4 +1,49 @@
 # CardinalSites Changelog
+
+4.0.5 - 2023-09-28
+--------------------------------------------------------------------
+- Update stanford_samlauth
+
+4.0.4 - 2023-09-28
+--------------------------------------------------------------------
+- Update dependencies
+
+4.0.3 - 2023-09-15
+--------------------------------------------------------------------
+- D8CORE-6842 Samlauth module upgrade
+
+4.0.2 - 2023-07-26
+--------------------------------------------------------------------
+- ignore google tag settings
+
+4.0.1 - 2023-07-13
+--------------------------------------------------------------------
+- Updated dependencies to add edge case in update hook.
+
+4.0.0 - 2023-07-10
+--------------------------------------------------------------------
+- Added blt hook to log users out at beginning of deployment
+- Updated ui patterns patch
+- Updated factory hooks
+- updated db update factory hook
+- Updated fast404 settings
+- updated dependencies
+- added easy way to re-stage dev sites
+- Updated stanford profile and all dependencies
+
+3.2.1 - 2023-06-23
+--------------------------------------------------------------------
+- Updated su-sws/* packages as hotfix.
+
+3.2.0 - 2023-06-22
+--------------------------------------------------------------------
+- Updated dependencies
+- Adjusted fast 404 settings for generation
+
+3.1.7 - 2023-03-16
+--------------------------------------------------------------------
+- Updated dependencies
+
 3.1.6 - 2022-12-13
 --------------------------------------------------------------------
 - Updated dependencies
