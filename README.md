@@ -1,6 +1,6 @@
 # ACE CASBS Gryphon
 
-This stack is based on the ace-gryphon stack, but it is customized for CASBS
+This stack is based on the ace-gryphon stack, but it is customized for CASBS.  The 11.x branch is the default branch, and contains the Drupal 10 version of the site.
 
 ---
 # Setup Local Environment - Lando
