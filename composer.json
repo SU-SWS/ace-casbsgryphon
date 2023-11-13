@@ -308,7 +308,8 @@
             "blt blt:init:settings"
         ],
         "post-drupal-scaffold-cmd": [
-            "patch -Ns -r \"\" --no-backup-if-mismatch -p1 < ./patches/htaccess.patch"
+            "patch -Ns -r \"\" --no-backup-if-mismatch -p1 < ./patches/htaccess.patch",
+            "patch -Ns -r \"\" --no-backup-if-mismatch -p1 < ./patches/robotstxt.patch"
         ],
         "sync-casbs": [
             "drush -y sql:sync @default.prod @default.local",
