@@ -1,12 +1,28 @@
 diff --git a/docroot/robots.txt b/docroot/robots.txt
-index ebcd04b..282a8e6 100644
+index 3ad8e2e..4e353ef 100644
 --- a/docroot/robots.txt
 +++ b/docroot/robots.txt
-@@ -63,3 +63,9 @@ Disallow: /index.php/user/login
+@@ -37,15 +37,7 @@ Allow: /profiles/*.svg
+ Disallow: /core/
+ Disallow: /profiles/
+ # Files
+-Disallow: /README.md
+-Disallow: /composer/Metapackage/README.txt
+-Disallow: /composer/Plugin/ProjectMessage/README.md
+-Disallow: /composer/Plugin/Scaffold/README.md
+-Disallow: /composer/Plugin/VendorHardening/README.txt
+-Disallow: /composer/Template/README.txt
+-Disallow: /modules/README.txt
+-Disallow: /sites/README.txt
+-Disallow: /themes/README.txt
++Disallow: /README.txt
+ Disallow: /web.config
+ # Paths (clean URLs)
+ Disallow: /admin/
+@@ -71,3 +63,8 @@ Disallow: /index.php/user/login
  Disallow: /index.php/user/logout
  Disallow: /index.php/media/oembed
  Disallow: /index.php/*/media/oembed
-+
 +# Block saml Paths
 +Disallow: /sso/login
 +Disallow: /saml_login
