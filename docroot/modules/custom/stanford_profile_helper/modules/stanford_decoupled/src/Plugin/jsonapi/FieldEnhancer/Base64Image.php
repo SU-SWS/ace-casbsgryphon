@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\stanford_profile_helper\Plugin\jsonapi\FieldEnhancer;
+namespace Drupal\stanford_decoupled\Plugin\jsonapi\FieldEnhancer;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;

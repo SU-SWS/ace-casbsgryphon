@@ -23,6 +23,20 @@
   }
 
   .su-event-type {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    div {
+      &:after {
+        display: inline-block;
+        content: ",";
+      }
+
+      &:last-child:after {
+        content: "";
+      }
+    }
 
     a {
       color: $su-color-bright-red;
@@ -288,6 +302,10 @@
 .su-events-body {
   .main-region {
     @include modular-spacing('margin', null null 5 null);
+
+    display: flex;
+    flex-direction: column;
+    gap: 7.2rem;
   }
 }
 

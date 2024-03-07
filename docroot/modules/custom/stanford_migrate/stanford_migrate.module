@@ -8,9 +8,11 @@
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\Display\EntityFormDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\migrate\Row;
 use Drupal\migrate_plus\Entity\Migration;
 use Drupal\node\NodeInterface;
 use Drupal\ultimate_cron\CronJobInterface;
@@ -29,6 +31,23 @@ function stanford_migrate_help($route_name, RouteMatchInterface $route_match) {
 
     default:
   }
+}
+
+/**
+ * Implements hook_migrate_prepare_row().
+ */
+function stanford_migrate_migrate_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration) {
+  // Oauth2 authentication adds a token query parameter into the data urls that changes frequently. Since it
+  // changes, the hash of the row  changes without any data actually changing. Fix the row data so that it doesn't
+  // contain those tokens.
+  $authentication = $row->getSourceProperty('authentication/plugin');
+  $current_url = $row->getSourceProperty('current_feed_url');
+  if ($current_url && $authentication == 'oauth2') {
+    $row->setSourceProperty('current_feed_url', preg_replace('/access_token=.*?&/', '', $current_url));
+  }
+  // In case the list of urls changes dynamically, lets just remove it from the source data to avoid unnecessary hash
+  // changes.
+  $row->setSourceProperty('urls', []);
 }
 
 /**

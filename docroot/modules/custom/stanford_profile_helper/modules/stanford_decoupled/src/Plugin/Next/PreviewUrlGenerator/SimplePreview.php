@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\stanford_profile_helper\Plugin\Next\PreviewUrlGenerator;
+namespace Drupal\stanford_decoupled\Plugin\Next\PreviewUrlGenerator;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
@@ -25,7 +25,7 @@ class SimplePreview extends PreviewUrlGeneratorBase {
   public function generate(NextSiteInterface $next_site, EntityInterface $entity, string $resource_version = NULL): ?Url {
     return Url::fromUri($next_site->getPreviewUrl(), [
       'query' => [
-        'slug' => $entity->toUrl()->toString(),
+        'slug' => $entity->toUrl()->toString(TRUE)->getGeneratedUrl(),
         'secret' => $next_site->getPreviewSecret(),
       ],
     ]);

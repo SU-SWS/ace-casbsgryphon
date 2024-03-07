@@ -1,5 +1,45 @@
 # Stanford Profile Helper
 
+9.5.1
+--------------------------------------------------------------------------------
+_Release Date: 2024-02-15_
+
+- Fixed logging syntax.
+
+9.5.0
+--------------------------------------------------------------------------------
+_Release Date: 2024-02-14_
+
+- Fixed template include path
+- Removed repeated templates
+- Unlock xmlsitemap rebuild and search api reindexing forms
+- D8CORE-4039 Add spacing on events page between the body and components
+- Add rel=nofollow to print links on policy pages
+- D8CORE-7131 Allow site managers to save config pages with logos uploaded from others
+- D8CORE-7103 Push the gallery image under the text on smaller screens
+- D8CORE-7086 Add space before news social links
+- Fix layout builder blocks not showing all menu options
+- D8CORE-5956 Display event types horizontal instead of vertical
+- Wrap citation generator in error handling with a user message
+- D8CORE-7215 Modify layout builder block for taxonomy menu labels (#290)
+- D8CORE-7207 Prevent use of admin html (#288)
+- Allow access to layout field for decoupled data
+- Implemented decoupled submodule with some JSON API and GraphQL parts (#287)
+- Provide some plugins for GraphQL Compose module (#286)
+
+9.4.2
+--------------------------------------------------------------------------------
+_Release Date: 2023-12-12_
+
+- Added composer conflict for seboettg/collection >= 4.0.0 since it breaks publications.
+
+9.4.1
+--------------------------------------------------------------------------------
+_Release Date: 2023-12-05_
+
+- D8CORE-7074 Alter search api custom field to support better tokens (#282)
+- Added cron job to construct site information file
+
 9.4.0
 --------------------------------------------------------------------------------
 _Release Date: 2023-10-23_

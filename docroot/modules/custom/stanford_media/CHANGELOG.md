@@ -1,5 +1,42 @@
 # Stanford Media
 
+11.0.1
+--------------------------------------------------------------------------------
+_Release Date: 2024-01-08_
+
+- Update hook to remove filter plugin.
+
+11.0.0
+--------------------------------------------------------------------------------
+_Release Date: 2024-01-08_
+
+- Removed deprecated filter plugin.
+- Removed dependency on transliterate_filenames in favor of D10.2 settings.
+
+10.1.4
+--------------------------------------------------------------------------------
+_Release Date: 2023-12-18_
+
+- Update dropzone widget for D10.2
+
+10.1.3
+--------------------------------------------------------------------------------
+_Release Date: 2023-12-13_
+
+- Update inline_entity_form
+
+10.1.2
+--------------------------------------------------------------------------------
+_Release Date: 2023-12-08_
+
+- Uncommented line that adds media styling.
+
+10.1.1
+--------------------------------------------------------------------------------
+_Release Date: 2023-11-28_
+
+- HSD8-1527 Fetch oembed data and title on client side if none exists (#144)
+
 10.1.0
 --------------------------------------------------------------------------------
 _Release Date: 2023-09-20_

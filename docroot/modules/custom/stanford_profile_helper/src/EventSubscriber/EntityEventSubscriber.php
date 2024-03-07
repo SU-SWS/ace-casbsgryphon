@@ -20,8 +20,9 @@ use Drupal\core_event_dispatcher\Event\Entity\EntityInsertEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\field\FieldStorageConfigInterface;
+use Drupal\layout_builder\Event\SectionComponentBuildRenderArrayEvent;
+use Drupal\layout_builder\LayoutBuilderEvents;
 use Drupal\menu_link_content\MenuLinkContentInterface;
-use Drupal\next\Entity\NextSiteInterface;
 use Drupal\node\NodeInterface;
 use Drupal\stanford_profile_helper\StanfordDefaultContentInterface;
 use Drupal\user\RoleInterface;
@@ -65,6 +66,7 @@ class EntityEventSubscriber implements EventSubscriberInterface {
       EntityHookEvents::ENTITY_INSERT => 'onEntityInsert',
       EntityHookEvents::ENTITY_UPDATE => 'onEntityUpdate',
       EntityHookEvents::ENTITY_DELETE => 'onEntityDelete',
+      LayoutBuilderEvents::SECTION_COMPONENT_BUILD_RENDER_ARRAY => 'prepareLayoutBuilderComponent',
     ];
   }
 
@@ -146,6 +148,45 @@ class EntityEventSubscriber implements EventSubscriberInterface {
   }
 
   /**
+   * Modify the component build for layout builder.
+   *
+   * @param \Drupal\layout_builder\Event\SectionComponentBuildRenderArrayEvent $event
+   *   Triggered event.
+   */
+  public function prepareLayoutBuilderComponent(SectionComponentBuildRenderArrayEvent $event) {
+    $menus = self::getTaxonomyMenuIds();
+
+    $component_config = $event->getComponent()->get('configuration');
+
+    if (in_array($component_config['id'], $menus)) {
+      // Always display the label for taxonomy menus due to the twig template.
+      $build = $event->getBuild();
+      $build['#configuration']['label_display'] = 'visible';
+      $event->setBuild($build);
+    }
+  }
+
+  /**
+   * Get the list of all taxonomy menus.
+   *
+   * @return string[]
+   *   Menu id strings.
+   */
+  protected function getTaxonomyMenuIds(): array {
+    $menu_ids = &drupal_static(self::class . __METHOD__, []);
+    if ($menu_ids) {
+      return $menu_ids;
+    }
+
+    $tax_menus = $this->entityTypeManager->getStorage('taxonomy_menu')
+      ->loadMultiple();
+    foreach ($tax_menus as $menu) {
+      $menu_ids[] = 'system_menu_block:' . $menu->getMenu();
+    }
+    return $menu_ids;
+  }
+
+  /**
    * On node insert event listener.
    *
    * @param \Drupal\node\NodeInterface $node
@@ -162,40 +203,6 @@ class EntityEventSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * When a new Next site is created, create all Next node entity type configs.
-   *
-   * @param \Drupal\next\Entity\NextSiteInterface $next_site
-   *   Created next site config.
-   */
-  protected static function insertNextSite(NextSiteInterface $next_site): void {
-    $next_storage = \Drupal::entityTypeManager()
-      ->getStorage('next_entity_type_config');
-    $node_types = \Drupal::entityTypeManager()
-      ->getStorage('node_type')
-      ->loadMultiple();
-
-    // Create each of the node type bundle configs.
-    foreach (array_keys($node_types) as $node_bundle) {
-
-      // Make sure one doesn't already exist.
-      if (!$next_storage->load("node.$node_bundle")) {
-        $next_storage->create([
-          'id' => "node.$node_bundle",
-          'site_resolver' => 'site_selector',
-          'revalidator' => 'path',
-          'configuration' => [
-            'sites' => [$next_site->id() => $next_site->id()],
-          ],
-          'revalidator_configuration' => [
-            'revalidate_page' => TRUE,
-            'additional_paths' => FALSE,
-          ],
-        ])->save();
-      }
-    }
-  }
-
-  /**
    * On node update event listener.
    *
    * @param \Drupal\node\NodeInterface $node
@@ -207,10 +214,11 @@ class EntityEventSubscriber implements EventSubscriberInterface {
     // Compare the original menu link with the new menu link data. If any
     // important parts changed, clear the menu links cache.
     if (
-      $node->hasField('field_menulink') &&
-      (!$node->get('field_menulink')->isEmpty() || !$original_node->get('field_menulink')->isEmpty())
+      $node->hasField('field_menulink') && (
+        !$node->get('field_menulink')->isEmpty() ||
+        !$original_node->get('field_menulink')->isEmpty()
+      )
     ) {
-
       $keys = ['title', 'description', 'weight', 'expanded', 'parent'];
       $changes = $node->get('field_menulink')->getValue();
       $original = $original_node->get('field_menulink')->getValue();
@@ -225,7 +233,6 @@ class EntityEventSubscriber implements EventSubscriberInterface {
         }
       }
     }
-
   }
 
   /**

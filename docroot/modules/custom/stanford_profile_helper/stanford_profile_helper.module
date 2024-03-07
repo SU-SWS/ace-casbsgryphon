@@ -8,14 +8,16 @@
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Render\Element;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Site\Settings;
@@ -25,8 +27,73 @@ use Drupal\search_api\IndexInterface;
 use Drupal\stanford_profile_helper\StanfordProfileHelper;
 use Drupal\taxonomy\TermInterface;
 use Drupal\taxonomy_menu\Plugin\Menu\TaxonomyMenuMenuLink;
-use Drupal\Core\Render\Element;
 use Drupal\views\ViewEntityInterface;
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function stanford_profile_helper_module_implements_alter(&$implementations, $hook) {
+  if ($hook === 'plugin_filter_block__layout_builder_alter') {
+    unset($implementations['menu_block']);
+  }
+}
+
+/**
+ * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
+ *
+ * Curate the blocks available in the Layout Builder "Add Block" UI.
+ */
+function stanford_profile_helper_plugin_filter_block__layout_builder_alter(array &$definitions, array $extra) {
+  foreach ($definitions as &$definition) {
+    if ($definition['provider'] == 'menu_block') {
+      // Change the category for blocks provided by the menu block module so it
+      // is separate from the "system" menus.
+      $definition['category'] = t('Menu Block');
+    }
+  }
+}
+
+
+/**
+ * Implements hook_cron().
+ */
+function stanford_profile_helper_cron() {
+  if (!\Drupal::hasService('config_pages.loader')) {
+    return;
+  }
+  /** @var \Drupal\config_pages\ConfigPagesLoaderServiceInterface $config_pages */
+  $config_pages = \Drupal::service('config_pages.loader');
+
+  $canonical_url = $config_pages->getValue('stanford_basic_site_settings', 'su_site_url', 0, 'value');
+  $owners = $config_pages->getValue('stanford_basic_site_settings', 'su_site_owner_contact', [], 'value');
+  $site_managers = $config_pages->getValue('stanford_basic_site_settings', 'su_site_tech_contact', [], 'value');
+  $ally = $config_pages->getValue('stanford_basic_site_settings', 'su_site_a11y_contact', [], 'value');
+  $org_ids = $config_pages->getValue('stanford_basic_site_settings', 'su_site_org', [], 'target_id');
+  $renewal_date = $config_pages->getValue('stanford_basic_site_settings', 'su_site_renewal_due', 0, 'value');
+
+  $orgs = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadMultiple($org_ids);
+
+  foreach ($orgs as &$org) {
+    $org = $org->label();
+  }
+
+  $site_information = [
+    'siteName' => \Drupal::config('system.site')->get('name'),
+    'canonicalUrl' => $canonical_url,
+    'owners' => $owners ?: [],
+    'siteManagers' => $site_managers ?: [],
+    'accessibility' => $ally ?: [],
+    'organizations' => array_values($orgs) ?: [],
+    'renewalDate' => $renewal_date,
+  ];
+  $uri = 'private://stanford';
+  $directory = \Drupal::service('stream_wrapper_manager')->normalizeUri($uri);
+  $file_system = \Drupal::service('file_system');
+  $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+  $file_system->saveData(json_encode($site_information, JSON_PRETTY_PRINT), "$directory/site-info.json", FileSystemInterface::EXISTS_REPLACE);
+}
 
 /**
  * Implements hook_cache_flush().
@@ -114,7 +181,7 @@ function stanford_profile_helper_redirect_presave(EntityInterface $redirect) {
  */
 function _stanford_profile_helper_purge_path($path) {
   $url = Url::fromUserInput('/' . trim($path, '/'), ['absolute' => TRUE])
-    ->toString();
+    ->toString(TRUE)->getGeneratedUrl();
 
   $purgeInvalidationFactory = \Drupal::service('purge.invalidation.factory');
   $purgeProcessors = \Drupal::service('purge.processors');
@@ -379,7 +446,9 @@ function stanford_profile_helper_help_section_info_alter(array &$info) {
 function stanford_profile_helper_preprocess_input__submit__paragraph_action(&$variables) {
   // Change the top banner field button from "Add @type" to "Add Top @type".
   if ($variables['element']['#name'] == 'su_page_banner_stanford_banner_add_more') {
-    $variables['attributes']['value'] = t('Add Top @type', $variables['attributes']['value']->getArguments());
+    if (!is_string($variables['attributes']['value'])) {
+      $variables['attributes']['value'] = t('Add Top @type', $variables['attributes']['value']->getArguments());
+    }
   }
 }
 
@@ -388,6 +457,7 @@ function stanford_profile_helper_preprocess_input__submit__paragraph_action(&$va
  */
 function stanford_profile_helper_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
   if (
+    $operation != 'view' &&
     $field_definition->getName() == 'status' &&
     $field_definition->getTargetEntityTypeId() == 'node' &&
     $items &&
@@ -450,7 +520,7 @@ function stanford_profile_helper_contextual_links_alter(array &$links, $group, a
 function stanford_profile_helper_node_access(NodeInterface $node, $op, AccountInterface $account) {
   if ($op == 'delete') {
     $site_config = \Drupal::config('system.site');
-    $node_urls = [$node->toUrl()->toString(), "/node/{$node->id()}"];
+    $node_urls = [$node->toUrl()->toString(TRUE)->getGeneratedUrl(), "/node/{$node->id()}"];
 
     // If the node is configured to be the home page, 404, or 403, prevent the
     // user from deleting. Unfortunately this only works for roles without the
@@ -554,14 +624,17 @@ function stanford_profile_helper_config_readonly_whitelist_patterns() {
   // Allow the form to be submitted in the UI for specific routes that don't
   // alter the configuration, such as resetting the order of taxonomy terms.
   $routes_to_config = [
-    'entity.taxonomy_vocabulary.reset_form' => 'taxonomy.vocabulary.*',
+    'entity.taxonomy_vocabulary.reset_form' => ['taxonomy.vocabulary.*'],
+    'entity.search_api_index.rebuild_tracker' => ['search_api.index.*'],
+    'entity.search_api_index.clear' => ['search_api.index.*'],
+    'entity.search_api_index.reindex' => ['search_api.index.*'],
+    'xmlsitemap.admin_rebuild' => ['xmlsitemap.settings'],
   ];
-  foreach ($routes_to_config as $route => $config_pattern) {
-    if (\Drupal::routeMatch()->getRouteName() == $route) {
-      $patterns[] = $config_pattern;
-    }
-  }
 
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (isset($routes_to_config[$route_name])) {
+    $patterns = [...$patterns, ...$routes_to_config[$route_name]];
+  }
   return $patterns;
 }
 
@@ -649,7 +722,7 @@ function stanford_profile_helper_preprocess_pattern_alert(&$variables) {
     // Validate that the entity has the field we need so we don't 500 the site.
     if (!$entity->hasField('su_global_msg_type')) {
       \Drupal::logger('stanford_profile_helper')
-        ->error(t("Global Messages Config Block is missing the field su_global_msg_type"));
+        ->error("Global Messages Config Block is missing the field su_global_msg_type");
       return;
     }
 
@@ -739,7 +812,7 @@ function stanford_profile_helper_preprocess_pattern_localfooter(&$variables) {
     $link = $entity->get('su_local_foot_loc_link')->getString();
     if ($link) {
       $variables['lockup_link'] = [
-        '#markup' => URL::fromUri($link)->toString(),
+        '#markup' => URL::fromUri($link)->toString(TRUE)->getGeneratedUrl(),
       ];
     }
 
@@ -1043,37 +1116,25 @@ function stanford_profile_helper_entity_view(array &$build, EntityInterface $ent
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_search_api_processor_info_alter().
  */
-function stanford_profile_helper_preprocess_image(&$variables) {
-  $decoupled = _stanford_profile_is_decoupled();
+function stanford_profile_helper_search_api_processor_info_alter(array &$processors) {
+  $processors['custom_value']['class'] = '\Drupal\stanford_profile_helper\Plugin\search_api\processor\CustomValue';
+}
 
-  if ($decoupled && (empty($variables['width']) || empty($variables['height']))) {
-    $path = str_starts_with($variables['uri'], '/') ? DRUPAL_ROOT . $variables['uri'] : $variables['uri'];
-    $path = preg_replace('/\?.*$/', '', $path);
-    if ($size = @getimagesize($path)) {
-      $variables['attributes']['data-width'] = $size[0];
-      $variables['attributes']['data-height'] = $size[1];
-    }
+/**
+ * Implements hook_entity_view_display_alter().
+ */
+function stanford_profile_helper_entity_view_display_alter(EntityViewDisplayInterface $display, array $context) {
+  if ($context['view_mode'] == 'search_indexing' && $context['entity_type'] == 'node') {
+    // The title is already in the template, it's not needed in the display.
+    $display->removeComponent('title');
   }
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_ENTITY_TYPE_access().
  */
-function stanford_profile_helper_preprocess_file_link(&$variables) {
-  if (_stanford_profile_is_decoupled()) {
-    $variables['link']['#url']->setAbsolute();
-  }
-}
-
-/**
- * Check if the site is configured to be decoupled.
- *
- * @return bool
- *   True if it's intended to be decoupled.
- */
-function _stanford_profile_is_decoupled(): bool {
-  return (bool) \Drupal::state()
-    ->get('stanford_profile_helper.decoupled', FALSE);
+function stanford_profile_helper_filter_format_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  return AccessResult::forbiddenIf($entity->id() == 'administrative_html');
 }

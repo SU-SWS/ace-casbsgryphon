@@ -20,10 +20,10 @@ class StanfordFileImport extends FileImport {
       $allowed = FALSE;
       $headers = get_headers($value, TRUE);
 
-      if (isset($headers['Content-Length'])) {
-        $size = is_array($headers['Content-Length']) ? end($headers['Content-Length']) : $headers['Content-Length'];
+      if (isset($headers['Content-Length']) && str_contains($headers[0], '200 OK')) {
+        $size = (int) (is_array($headers['Content-Length']) ? end($headers['Content-Length']) : $headers['Content-Length']);
 
-        if ((int) $size <= Bytes::toNumber($this->configuration['max_size'])) {
+        if ($size && $size <= Bytes::toNumber($this->configuration['max_size'])) {
           $allowed = TRUE;
         }
       }

@@ -6,8 +6,40 @@
  */
 
 /**
- * Removed 9.0.0.
+ * Implements hook_install().
  */
-function stanford_media_update_8220() {
-  // Removed 9.0.0.
+function stanford_media_install() {
+  \Drupal::configFactory()->getEditable('file.settings')
+    ->set('filename_sanitization.deduplicate_separators', TRUE)
+    ->set('filename_sanitization.lowercase', TRUE)
+    ->set('filename_sanitization.replace_non_alphanumeric', TRUE)
+    ->set('filename_sanitization.replace_whitespace', TRUE)
+    ->set('filename_sanitization.transliterate', TRUE)
+    ->set('filename_sanitization.replacement_character', '-')
+    ->save();
+}
+
+/**
+ * Uninstall transliterate_filenames module.
+ */
+function stanford_media_update_11000() {
+  if (\Drupal::moduleHandler()->moduleExists('transliterate_filenames')) {
+    \Drupal::service('module_installer')->uninstall([
+      'transliterate_filenames',
+    ]);
+  }
+  stanford_media_install();
+}
+
+/**
+ * Remove filter plugin settings.
+ */
+function stanford_media_update_11001() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('filter.format.') as $config_name) {
+    $config = $config_factory->getEditable($config_name);
+    if ($config->get('filters.stanford_media_embed_markup')) {
+      $config->clear('filters.stanford_media_embed_markup')->save();
+    }
+  }
 }

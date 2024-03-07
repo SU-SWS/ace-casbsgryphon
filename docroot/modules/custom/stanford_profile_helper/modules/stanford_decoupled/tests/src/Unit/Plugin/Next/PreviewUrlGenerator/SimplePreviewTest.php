@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\stanford_profile_helper\Unit\Plugin\Next\PreviewUrlGenerator;
+namespace Drupal\Tests\stanford_decoupled\Unit\Plugin\Next\PreviewUrlGenerator;
 
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
@@ -13,7 +13,7 @@ use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssembler;
 use Drupal\next\Entity\NextSiteInterface;
 use Drupal\next\PreviewSecretGeneratorInterface;
-use Drupal\stanford_profile_helper\Plugin\Next\PreviewUrlGenerator\SimplePreview;
+use Drupal\stanford_decoupled\Plugin\Next\PreviewUrlGenerator\SimplePreview;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

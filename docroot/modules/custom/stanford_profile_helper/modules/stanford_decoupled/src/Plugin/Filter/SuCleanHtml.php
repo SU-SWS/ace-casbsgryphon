@@ -1,9 +1,9 @@
 <?php
 
-namespace Drupal\stanford_profile_helper\Plugin\Filter;
+namespace Drupal\stanford_decoupled\Plugin\Filter;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\State\StateInterface;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -29,14 +29,14 @@ class SuCleanHtml extends FilterBase implements ContainerFactoryPluginInterface 
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('state')
+      $container->get('entity_type.manager')
     );
   }
 
   /**
    * {@inheritDoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected StateInterface $state) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected EntityTypeManagerInterface $entityTypeManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
@@ -44,9 +44,7 @@ class SuCleanHtml extends FilterBase implements ContainerFactoryPluginInterface 
    * {@inheritdoc}
    */
   public function process($text, $langcode) {
-    $decoupled = (bool) $this->state->get('stanford_profile_helper.decoupled', FALSE);
-
-    if ($decoupled) {
+    if ($this->isDecoupled()) {
       // Remove line breaks.
       $text = preg_replace('/(\r\n)+|\r+|\n+|\t+/', ' ', $text);
       // Remove html comments.
@@ -56,6 +54,21 @@ class SuCleanHtml extends FilterBase implements ContainerFactoryPluginInterface 
     }
 
     return new FilterProcessResult(trim($text));
+  }
+
+  /**
+   * If any next site configs exist, the site can be considered decoupled.
+   *
+   * @return bool
+   *   If the site is decoupled.
+   */
+  protected function isDecoupled(): bool {
+    $next_site_count = $this->entityTypeManager->getStorage('next_site')
+      ->getQuery()
+      ->accessCheck(FALSE)
+      ->count()
+      ->execute();
+    return $next_site_count > 0;
   }
 
 }
