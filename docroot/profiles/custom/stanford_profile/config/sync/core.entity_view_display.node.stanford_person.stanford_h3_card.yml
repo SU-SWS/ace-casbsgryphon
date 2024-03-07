@@ -107,6 +107,23 @@ hidden:
   links: true
   search_api_excerpt: true
   stanford_intranet__access: true
+  su_casbs_cs_year: true
+  su_casbs_current_affiliation: true
+  su_casbs_custom_order: true
+  su_casbs_faculty_fellow_year: true
+  su_casbs_feature_people: true
+  su_casbs_feature_people_text: true
+  su_casbs_fellow_year: true
+  su_casbs_field_discipline: true
+  su_casbs_person_bio: true
+  su_casbs_person_book_links: true
+  su_casbs_person_id: true
+  su_casbs_person_journal_links: true
+  su_casbs_person_type: true
+  su_casbs_practitioner_year: true
+  su_casbs_profile_picture: true
+  su_casbs_ra_year: true
+  su_casbs_visiting_scholar_year: true
   su_metatags: true
   su_person_academic_appt: true
   su_person_admin_appts: true

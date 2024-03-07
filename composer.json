@@ -135,7 +135,7 @@
         "su-sws/stanford_fields": "^8.2",
         "su-sws/stanford_media": "^11.0",
         "su-sws/stanford_migrate": "^8.3",
-        "su-sws/stanford_profile_helper": "^9.4",
+        "su-sws/stanford_profile_helper": "9.4.2",
         "su-sws/stanford_samlauth": "^1.0",
         "acquia/blt": "^13.7",
         "cweagans/composer-patches": "^1.6",

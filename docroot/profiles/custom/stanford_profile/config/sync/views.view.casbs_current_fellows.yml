@@ -171,7 +171,6 @@ display:
           default_argument_options:
             index: 0
             use_alias: false
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -450,7 +449,6 @@ display:
           default_argument_options:
             index: 0
             use_alias: false
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -674,7 +672,6 @@ display:
           default_argument_options:
             index: 0
             use_alias: false
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -1227,7 +1224,6 @@ display:
           default_argument_options:
             index: '0'
             use_alias: 0
-          default_argument_skip_url: 0
           summary_options:
             base_path: ''
             count: 1
@@ -1773,7 +1769,6 @@ display:
           default_argument_options:
             index: '0'
             use_alias: 0
-          default_argument_skip_url: 0
           summary_options:
             base_path: ''
             count: 1
@@ -2325,7 +2320,6 @@ display:
           default_argument_options:
             index: '0'
             use_alias: 0
-          default_argument_skip_url: 0
           summary_options:
             base_path: ''
             count: 1
@@ -2869,7 +2863,6 @@ display:
           default_argument_options:
             index: '0'
             use_alias: 0
-          default_argument_skip_url: 0
           summary_options:
             base_path: ''
             count: 1
@@ -3693,7 +3686,6 @@ display:
           default_argument_options:
             index: '0'
             use_alias: 0
-          default_argument_skip_url: 0
           summary_options:
             base_path: ''
             count: 1
@@ -4271,7 +4263,6 @@ display:
           default_argument_options:
             index: '0'
             use_alias: 0
-          default_argument_skip_url: 0
           summary_options:
             base_path: ''
             count: 1
