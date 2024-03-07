@@ -14,7 +14,7 @@
         "citation-style-language/locales": "1.0.0",
         "citation-style-language/styles-distribution": "1.0.0",
         "composer/installers": ">=1.2",
-        "drupal/address": "^1.2",
+        "drupal/address": "^2.0",
         "drupal/admin_toolbar": "^3.1",
         "drupal/allowed_formats": "^3.0",
         "drupal/auto_entitylabel": "^3.0@beta",
@@ -32,7 +32,7 @@
         "drupal/config_split": "^2.0",
         "drupal/confirm_leave": "^1.0@beta",
         "drupal/content_lock": "^2.2",
-        "drupal/core": "~10.1.0",
+        "drupal/core": "~10.2.0",
         "drupal/cshs": "^4.0",
         "drupal/default_content": "^2.0@alpha",
         "drupal/diff": "^1.0@RC",
@@ -48,16 +48,18 @@
         "drupal/field_encrypt": "^3.0",
         "drupal/field_formatter_class": "^1.5",
         "drupal/field_group": "^3.0@rc",
+        "drupal/field_label": "^1.4",
         "drupal/field_permissions": "^1.0@RC",
         "drupal/field_validation": "^1.0-alpha",
-        "drupal/file_mdm_exif": "^2.4",
-        "drupal/file_mdm_font": "^2.4",
+        "drupal/file_mdm": "^2.4 || ^3.0",
         "drupal/flat_taxonomy": "^2.0",
         "drupal/fontawesome": "^2.19",
         "drupal/google_analytics": "^4.0",
         "drupal/google_tag": "^2.0",
+        "drupal/graphql_compose": "^2.0",
         "drupal/hook_event_dispatcher": "^4.0@beta",
         "drupal/image_effects": "^3.2",
+        "drupal/imagecache_external": "^3.0",
         "drupal/imagemagick": "^3.1",
         "drupal/jquery_ui_draggable": "^2.0",
         "drupal/jsonapi_extras": "^3.20",
@@ -89,7 +91,7 @@
         "drupal/page_cache_query_ignore": "^2.2",
         "drupal/page_manager": "^4.0@beta",
         "drupal/paragraphs": "^1.11",
-        "drupal/paragraphs_edit": "^2.0@alpha",
+        "drupal/paragraphs_edit": "^3.0",
         "drupal/paranoia": "^1.0@alpha",
         "drupal/path_redirect_import": "^2.0",
         "drupal/pathauto": "^1.6",
@@ -102,6 +104,7 @@
         "drupal/role_delegation": "^1.0@beta",
         "drupal/scheduler": "^2.0",
         "drupal/search_api": "^1.19",
+        "drupal/search_api_algolia": "^3.0@beta",
         "drupal/seckit": "^2.0",
         "drupal/shs": "^2.0@RC",
         "drupal/smart_date": "^4.0",
@@ -130,9 +133,9 @@
         "su-sws/react_paragraphs": "^8.2",
         "su-sws/stanford_actions": "^8.2",
         "su-sws/stanford_fields": "^8.2",
-        "su-sws/stanford_media": "^10.0",
+        "su-sws/stanford_media": "^11.0",
         "su-sws/stanford_migrate": "^8.3",
-        "su-sws/stanford_profile_helper": "^9.3",
+        "su-sws/stanford_profile_helper": "^9.4",
         "su-sws/stanford_samlauth": "^1.0",
         "acquia/blt": "^13.7",
         "cweagans/composer-patches": "^1.6",
@@ -144,7 +147,7 @@
         "drupal/devel": "^5.1",
         "drupal/devel_php": "^1.5",
         "drupal/mysql56": "^1.1",
-        "drush/drush": "^11"
+        "drush/drush": "^12"
     },
     "require-dev": {
         "acquia/blt-drupal-test": "^1.0",
@@ -156,7 +159,8 @@
         "drupal/coder": "*"
     },
     "conflict": {
-        "drupal/drupal": "*"
+        "drupal/drupal": "*",
+        "seboettg/collection": ">=4.0.0"
     },
     "repositories": [
         {
@@ -190,22 +194,17 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "Gryphon\\": "blt/src/"
-        }
-    },
     "config": {
-        "allow-plugins": true,
+        "sort-packages": true,
         "discard-changes": true,
-        "sort-packages": true
+        "allow-plugins": true
     },
     "extra": {
         "drupal-scaffold": {
-            "gitignore": false,
             "locations": {
                 "web-root": "docroot/"
-            }
+            },
+            "gitignore": false
         },
         "installer-paths": {
             "docroot/core": [
@@ -274,28 +273,32 @@
             "drupal/menu_link_weight": {
                 "https://www.drupal.org/project/menu_link_weight/issues/2875984": "https://git.drupalcode.org/project/menu_link_weight/-/merge_requests/2.diff"
             },
-            "ckeditor-plugin/link": {
-                "http://github.com/ckeditor/ckeditor4/pull/3965": "patches/libraries/ckeditor-plugin-link-anchor-id.patch",
-                "Disable double click double modal": "patches/libraries/ckeditor-plugin-link-disable-double.patch"
-            },
             "drupal/core": {
-                "https://www.drupal.org/project/drupal/issues/3151977": "patches/media-recursion-limit.patch"
+                "https://www.drupal.org/project/drupal/issues/3151977": "patches/media-recursion-limit.patch",
+                "https://www.drupal.org/project/drupal/issues/3413508": "patches/core-3413508.patch"
             },
             "drupal/paranoia": {
                 "https://stanfordits.atlassian.net/browse/D8CORE-1351": "patches/contrib/paranoia.patch"
             },
-            "drupal/taxonomy_entity_index": {
-                "Fix PHP 8 strict error with arrays": "patches/contrib/taxonomy_entity_index.patch"
-            },
             "drupal/ui_patterns": {
                 "Ui Patterns Views Fixes": "patches/contrib/ui_patterns_views-preview.patch"
             },
+            "drupal/taxonomy_entity_index": {
+                "Fix PHP 8 strict error with arrays": "patches/contrib/taxonomy_entity_index.patch"
+            },
             "drupal/google_tag": {
                 "Comment out GA conflict in Google Tag": "patches/contrib/google_tag-ga_conflict.patch"
+            },
+            "seboettg/citeproc-php": {
+                "D8CORE-6866 Non Numeric pages for citation generator": "patches/contrib/citeproc-pages.patch"
             }
         }
     },
     "scripts": {
+        "post-drupal-scaffold-cmd": [
+            "patch -Ns -r \"\" --no-backup-if-mismatch -p1 < ./patches/htaccess.patch",
+            "patch -Ns -r \"\" --no-backup-if-mismatch -p1 < ./patches/robotstxt.patch"
+        ],
         "init-stack": [
             "vendor/bin/blt blt:telemetry:disable --no-interaction",
             "vendor/bin/blt blt:init:settings",
@@ -306,10 +309,6 @@
             "composer update --no-interaction",
             "cp lando/example.local.blt.yml blt/local.blt.yml",
             "blt blt:init:settings"
-        ],
-        "post-drupal-scaffold-cmd": [
-            "patch -Ns -r \"\" --no-backup-if-mismatch -p1 < ./patches/htaccess.patch",
-            "patch -Ns -r \"\" --no-backup-if-mismatch -p1 < ./patches/robotstxt.patch"
         ],
         "sync-casbs": [
             "drush -y sql:sync @default.prod @default.local",

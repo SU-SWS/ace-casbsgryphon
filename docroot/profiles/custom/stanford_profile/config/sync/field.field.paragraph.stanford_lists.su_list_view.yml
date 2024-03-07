@@ -20,7 +20,6 @@ default_value_callback: ''
 settings:
   force_default: false
   allowed_views:
-    stanford_shared_tags: stanford_shared_tags
     stanford_basic_pages: stanford_basic_pages
     _book_mosaic: _book_mosaic
     casbs_board_of_directors: casbs_board_of_directors
@@ -36,6 +35,7 @@ settings:
     stanford_news: stanford_news
     stanford_person: stanford_person
     stanford_publications: stanford_publications
+    stanford_shared_tags: stanford_shared_tags
     su_block_edit_links: '0'
     content: '0'
     block_content: '0'

@@ -1,53 +1,13 @@
 diff --git a/docroot/.htaccess b/docroot/.htaccess
-index 4d19147..a43a44d 100644
+index 4031da4..c8f2200 100644
 --- a/docroot/.htaccess
 +++ b/docroot/.htaccess
-@@ -1,3 +1,54 @@
+@@ -1,3 +1,14 @@
 +# Block bad bots
 +# See https://docs.acquia.com/cloud-platform/arch/security/restrict/#cloud-blocking-by-ip.
 +<ifmodule mod_setenvif.c>
 +# See https://support-acquia.force.com/s/case/5006g00000i7TdjAAE/continued-and-ongoing-service-disruption-on-multiple-applications
 +SetEnvIf AH_CLIENT_IP ^146\.190\.24\.114$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^146\.190\.20\.213$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^146\.190\.20\.13$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^188\.166\.70\.114$ Deny_host
-+# 10.19.2022
-+SetEnvIf AH_CLIENT_IP ^159\.223\.3\.1$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^124\.120\.35\.211$ Deny_Host
-+# 10.21.2022
-+SetEnvIf AH_CLIENT_IP ^101\.35\.194\.201$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^103\.127\.57\.120$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^104\.215\.177\.75$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^104\.222\.30\.137$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^104\.238\.83\.154$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^104\.248\.116\.116$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^104\.28\.124\.101$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^104\.28\.124\.101$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^193\.239\.164\.105$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^87\.249\.134\.33$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^94\.102\.59\.165$ Deny_Host
-+# 12.08.2022
-+SetEnvIf AH_CLIENT_IP ^104\.248\.161\.147$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^104\.248\.161\.74$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^104\.248\.175\.194$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^134\.209\.188\.129$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^134\.209\.188\.28$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^138\.68\.175\.84$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^139\.59\.161\.100$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^142\.93\.45\.60$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^157\.230\.80\.177$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^165\.232\.32\.74$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^167\.71\.132\.216$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^167\.99\.194\.186$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^167\.99\.198\.105$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^178\.128\.32\.144$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^178\.62\.13\.92$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^178\.62\.75\.10$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^188\.166\.171\.68$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^206\.189\.112\.143$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^46\.101\.1\.117$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^46\.101\.87\.51$ Deny_Host
-+SetEnvIf AH_CLIENT_IP ^68\.183\.34\.96$ Deny_Host
 +
 +Order allow,deny
 +Allow from all
@@ -57,7 +17,7 @@ index 4d19147..a43a44d 100644
  #
  # Apache/PHP/Drupal settings:
  #
-@@ -22,6 +73,9 @@ DirectoryIndex index.php index.html index.htm
+@@ -22,6 +33,9 @@ DirectoryIndex index.php index.html index.htm
  AddType image/svg+xml svg svgz
  AddEncoding gzip svgz
  
@@ -67,7 +27,7 @@ index 4d19147..a43a44d 100644
  # Most of the following PHP settings cannot be changed at runtime. See
  # sites/default/default.settings.php and
  # Drupal\Core\DrupalKernel::bootEnvironment() for settings that can be
-@@ -67,6 +121,69 @@ AddEncoding gzip svgz
+@@ -60,6 +74,69 @@ AddEncoding gzip svgz
  <IfModule mod_rewrite.c>
    RewriteEngine on
  
@@ -137,7 +97,7 @@ index 4d19147..a43a44d 100644
    # Set "protossl" to "s" if we were accessed via https://.  This is used later
    # if you enable "www." stripping or enforcement, in order to ensure that
    # you don't bounce between http and https.
-@@ -126,6 +243,11 @@ AddEncoding gzip svgz
+@@ -119,6 +196,11 @@ AddEncoding gzip svgz
    RewriteCond %{REQUEST_URI} !core
    RewriteRule ^ %1/core/%2 [L,QSA,R=301]
  
@@ -149,7 +109,7 @@ index 4d19147..a43a44d 100644
    # Rewrite install.php during installation to see if mod_rewrite is working
    RewriteRule ^core/install\.php core/install.php?rewrite=ok [QSA,L]
  
-@@ -144,10 +266,14 @@ AddEncoding gzip svgz
+@@ -137,10 +219,14 @@ AddEncoding gzip svgz
    RewriteCond %{REQUEST_URI} !/core/[^/]*\.php$
    # Allow access to test-specific PHP files:
    RewriteCond %{REQUEST_URI} !/core/modules/system/tests/https?\.php

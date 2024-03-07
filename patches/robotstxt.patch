@@ -1,30 +1,29 @@
 diff --git a/docroot/robots.txt b/docroot/robots.txt
-index 3ad8e2e..4e353ef 100644
+index ebcd04b..8927a2b 100644
 --- a/docroot/robots.txt
 +++ b/docroot/robots.txt
-@@ -37,15 +37,7 @@ Allow: /profiles/*.svg
- Disallow: /core/
- Disallow: /profiles/
- # Files
--Disallow: /README.md
--Disallow: /composer/Metapackage/README.txt
--Disallow: /composer/Plugin/ProjectMessage/README.md
--Disallow: /composer/Plugin/Scaffold/README.md
--Disallow: /composer/Plugin/VendorHardening/README.txt
--Disallow: /composer/Template/README.txt
--Disallow: /modules/README.txt
--Disallow: /sites/README.txt
--Disallow: /themes/README.txt
-+Disallow: /README.txt
- Disallow: /web.config
- # Paths (clean URLs)
- Disallow: /admin/
-@@ -71,3 +63,8 @@ Disallow: /index.php/user/login
+@@ -14,6 +14,7 @@
+ # http://www.robotstxt.org/robotstxt.html
+ 
+ User-agent: *
++Crawl-delay: 30
+ # CSS, JS, Images
+ Allow: /core/*.css$
+ Allow: /core/*.css?
+@@ -63,3 +64,16 @@ Disallow: /index.php/user/login
  Disallow: /index.php/user/logout
  Disallow: /index.php/media/oembed
  Disallow: /index.php/*/media/oembed
-+# Block saml Paths
++# Block saml paths links
 +Disallow: /sso/login
 +Disallow: /saml_login
 +Disallow: /saml/login
 +Disallow: /saml/acs
++# Block Femtosearch
++User-agent: FemtosearchBot
++Crawl-Delay: 120
++Disallow: /
++# Block SemrushBot
++User-agent: SemrushBot
++Crawl-Delay: 120
++Disallow: /

@@ -1,5 +1,43 @@
 # Stanford Profile
 
+11.2.1
+-------------------------------------------------------------------------------
+- Provide items per page for graphql views
+- Expose event image via graphql
+- Added external image url for events content from Localist
+
+11.2.1
+-------------------------------------------------------------------------------
+- Fixed logger syntax during site install.
+
+11.2.0
+-------------------------------------------------------------------------------
+- Removed decanter from stanford_basic in favor of jumpstart_ui templates
+- D8CORE-7125 Use field_label module to choose which heading element for field labels (#761)
+- D8CORE-6982 Add validation to publication DOI fields to avoid full urls
+- D8CORE-7203 Some improvements to metatags on some content types
+- Add empty alt text to logo in policy print page
+- D8CORE-7088 Replace policy print page h2 with h1 tag
+- Adjust allowed menus in layout builder restrictions
+- D8CORE-7132 Add policy content types to teasser paragraph field
+- D8CORE-7255 exclude lazy load oembed links from external links (#760)
+- D8CORE-7215 Test to Display the topic menu label on list pages (#758)
+- Added "fields" to page cache query ignore for jsonapi
+- D8CORE-7111 Add local footer social icons for mastodon and google scholar (#756)
+- Increase jsonapi page limit to 500 for nodes
+- D8CORE-7205 Trim all html before sending index data to Algolia
+- Replaced transliterate_filenames module functionality
+- Add and configure graphql compose module (#751)
+- Drupal 11.2.0 upgrade (#752)
+
+11.1.0
+-------------------------------------------------------------------------------
+- D8CORE-7096 Update algolia search results styles and structure (#747)
+- D8CORE-7074 Implement Search API Algolia (#743)
+- D8CORE-6726: Overrode the colorbox formatter template to remove aria-label (#746)
+- Update alert styles (#744)
+- D8CORE-2761: reduced padding on filterby menu (#728)
+
 11.0.8
 -------------------------------------------------------------------------------
 - D8CORE-7066 Adjust site contact fields & language (#741)
