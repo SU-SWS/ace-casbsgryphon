@@ -72,6 +72,30 @@ function stanford_profile_post_update_8202() {
 }
 
 /**
+ * Specific for CASBS upgrade for 5.1.0.
+ */
+function stanford_profile_post_update_11001() {
+  $theme_name = 'stanford_profile_admin_theme';
+  $theme_handler = \Drupal::service('theme_handler');
+  $theme_installer = \Drupal::service('theme_installer');
+
+  // Check if the theme is already installed.
+  if (!$theme_handler->themeExists($theme_name)) {
+    // The theme is not installed, try to install it.
+    if ($theme_installer->install([$theme_name], TRUE)) {
+      // Theme installation was successful.
+      \Drupal::messenger()->addMessage("The theme {$theme_name} has been successfully installed.");
+    } else {
+      // Theme installation failed.
+      \Drupal::messenger()->addMessage("The theme {$theme_name} could not be installed.", 'error');
+    }
+  } else {
+    // The theme is already installed.
+    \Drupal::messenger()->addMessage("The theme {$theme_name} is already installed.");
+  }
+}
+
+/**
  * Update field storage definitions.
  */
 function stanford_profile_post_update_update_field_defs() {
