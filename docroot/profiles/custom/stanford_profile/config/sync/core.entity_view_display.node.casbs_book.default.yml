@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.casbs_book.body
+    - field.field.node.casbs_book.layout_builder__layout
     - field.field.node.casbs_book.su_casbs_author_links
     - field.field.node.casbs_book.su_casbs_author_name
     - field.field.node.casbs_book.su_casbs_book_cover
@@ -15,33 +16,242 @@ dependencies:
     - field.field.node.casbs_book.su_casbs_recent_works
     - node.type.casbs_book
   module:
-    - ds
     - image
+    - jumpstart_ui
+    - layout_builder
+    - layout_discovery
+    - layout_library
     - text
     - user
 third_party_settings:
-  ds:
-    layout:
-      id: defaults
-      library: null
-      disable_css: false
-      entity_classes: all_classes
-      settings:
-        label: ''
-        extra_classes: ''
-        centered: centered-container
-        columns: default
-    regions:
-      main:
-        - links
-        - body
-        - su_casbs_author_name
-        - su_casbs_author_links
-        - su_casbs_book_cover
-        - su_casbs_book_title
-        - su_casbs_book_publisher
-        - su_casbs_book_publisher_loc
-        - su_casbs_book_publish_year
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: jumpstart_ui_two_column
+        layout_settings:
+          label: casbs_bookcover_picture
+          context_mapping: {  }
+          extra_classes: ''
+          centered: centered-container
+          orientation: right
+        components:
+          97566c62-79c1-47b3-985f-c171da084a4d:
+            uuid: 97566c62-79c1-47b3-985f-c171da084a4d
+            region: left
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_cover'
+              label: casbs_book_cover
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: image
+                label: above
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 0
+            additional: {  }
+          0b2c1a2c-9890-4bcf-acea-1b693ee83179:
+            uuid: 0b2c1a2c-9890-4bcf-acea-1b693ee83179
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:body'
+              label: Body
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          b739a908-0703-41bf-aec7-5e7c6ba308e9:
+            uuid: b739a908-0703-41bf-aec7-5e7c6ba308e9
+            region: main
+            configuration:
+              id: 'extra_field_block:node:casbs_book:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          48de41f9-52a8-4301-9459-cf7eb2de17af:
+            uuid: 48de41f9-52a8-4301-9459-cf7eb2de17af
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          dad06ab0-1f05-4faa-be77-8eecd711fa63:
+            uuid: dad06ab0-1f05-4faa-be77-8eecd711fa63
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_author_name'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          7f461a27-53ec-4699-9129-45de59e2845d:
+            uuid: 7f461a27-53ec-4699-9129-45de59e2845d
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_author_links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          d11aadfc-581b-4250-b54d-36b15413965e:
+            uuid: d11aadfc-581b-4250-b54d-36b15413965e
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_cover'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: hidden
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          7040e221-5545-4d70-825d-4db1e5760097:
+            uuid: 7040e221-5545-4d70-825d-4db1e5760097
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_title'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+          82132f7e-292b-4955-a962-143c8f871d35:
+            uuid: 82132f7e-292b-4955-a962-143c8f871d35
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publisher'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 6
+            additional: {  }
+          3d1a0b5e-0382-4149-95a5-329e688fdd33:
+            uuid: 3d1a0b5e-0382-4149-95a5-329e688fdd33
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publisher_loc'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 7
+            additional: {  }
+          4e21d5f8-9a38-432c-b550-19987ba0b187:
+            uuid: 4e21d5f8-9a38-432c-b550-19987ba0b187
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publish_year'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
+          e305a593-f5fb-4d72-87d5-cb57bb14aff0:
+            uuid: e305a593-f5fb-4d72-87d5-cb57bb14aff0
+            region: content
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_recent_works'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
 id: node.casbs_book.default
 targetEntityType: node
 bundle: casbs_book
@@ -123,5 +333,6 @@ content:
     weight: 9
     region: content
 hidden:
+  layout_builder__layout: true
   search_api_excerpt: true
   su_casbs_book_id: true

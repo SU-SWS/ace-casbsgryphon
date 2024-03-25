@@ -6,13 +6,12 @@ dependencies:
     - field.storage.node.su_casbs_current_affiliation
     - node.type.stanford_person
   module:
-    - allowed_formats
     - text
 id: node.stanford_person.su_casbs_current_affiliation
 field_name: su_casbs_current_affiliation
 entity_type: node
 bundle: stanford_person
-label: casbs_current_affiliation
+label: 'Current Affiliation'
 description: 'Current Affiliation'
 required: false
 translatable: false

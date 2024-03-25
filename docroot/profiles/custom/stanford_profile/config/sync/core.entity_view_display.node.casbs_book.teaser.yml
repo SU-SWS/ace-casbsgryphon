@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.casbs_book.body
+    - field.field.node.casbs_book.layout_builder__layout
     - field.field.node.casbs_book.su_casbs_author_links
     - field.field.node.casbs_book.su_casbs_author_name
     - field.field.node.casbs_book.su_casbs_book_cover
@@ -37,6 +38,7 @@ content:
     weight: 100
     region: content
 hidden:
+  layout_builder__layout: true
   search_api_excerpt: true
   su_casbs_author_links: true
   su_casbs_author_name: true
