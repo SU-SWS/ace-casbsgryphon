@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.full
     - field.field.node.casbs_book.body
+    - field.field.node.casbs_book.layout_builder__layout
     - field.field.node.casbs_book.su_casbs_author_links
     - field.field.node.casbs_book.su_casbs_author_name
     - field.field.node.casbs_book.su_casbs_book_cover
@@ -17,13 +18,283 @@ dependencies:
     - node.type.casbs_book
   module:
     - image
+    - jumpstart_ui
     - layout_builder
+    - layout_builder_restrictions
+    - layout_discovery
+    - layout_library
     - text
     - user
 third_party_settings:
   layout_builder:
-    enabled: false
-    allow_custom: false
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: header
+          context_mapping: {  }
+        components:
+          1f00de36-f439-4d79-82c4-2509f6c52a03:
+            uuid: 1f00de36-f439-4d79-82c4-2509f6c52a03
+            region: content
+            configuration:
+              id: jumpstart_ui_page_heading
+              label: 'Heading Block'
+              label_display: '0'
+              provider: jumpstart_ui
+              context_mapping: {  }
+              heading_text: ''
+              wrapper: h1
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: jumpstart_ui_two_column
+        layout_settings:
+          label: casbs_bookcover_picture
+          context_mapping: {  }
+          extra_classes: ''
+          centered: centered-container
+          orientation: right
+        components:
+          30aa0801-3bf2-4fd7-923f-77a453c74411:
+            uuid: 30aa0801-3bf2-4fd7-923f-77a453c74411
+            region: left
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_cover'
+              label: casbs_book_cover
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: responsive_image
+                label: hidden
+                settings:
+                  responsive_image_style: full_responsive
+                  image_link: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 0
+            additional: {  }
+          49240547-e3d6-4b05-8044-6a242d82d62c:
+            uuid: 49240547-e3d6-4b05-8044-6a242d82d62c
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:body'
+              label: Body
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 1
+            additional: {  }
+          fb36f9ed-d856-4a1a-a045-9e8544d3bc57:
+            uuid: fb36f9ed-d856-4a1a-a045-9e8544d3bc57
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_author_name'
+              label: Author(s)
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 2
+            additional: {  }
+          8aee2672-5038-4fca-af2a-b2969fde5380:
+            uuid: 8aee2672-5038-4fca-af2a-b2969fde5380
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_author_links'
+              label: casbs_author_links
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 3
+            additional: {  }
+          0203f272-e6ca-4000-a7d5-abf246938a1d:
+            uuid: 0203f272-e6ca-4000-a7d5-abf246938a1d
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_title'
+              label: 'Book Title'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: wrapper_class
+                label: hidden
+                settings:
+                  class: ''
+                  tag: h3
+                  link: false
+                  link_class: ''
+                  summary: false
+                  trim: 200
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 0
+            additional: {  }
+          002e053f-d412-4471-902e-3d3ea47d0ac3:
+            uuid: 002e053f-d412-4471-902e-3d3ea47d0ac3
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publisher'
+              label: 'Book Publisher'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 4
+            additional: {  }
+          72322905-a597-40db-a50a-dd3130b26f6f:
+            uuid: 72322905-a597-40db-a50a-dd3130b26f6f
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publisher_loc'
+              label: 'Publisher Location'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 5
+            additional: {  }
+          2b2b5aa5-223b-47f1-bb41-89b2c9102f9a:
+            uuid: 2b2b5aa5-223b-47f1-bb41-89b2c9102f9a
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publish_year'
+              label: 'Published Year'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 6
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          ae8dc498-818f-423f-9ca9-aaa96cd2106e:
+            uuid: ae8dc498-818f-423f-9ca9-aaa96cd2106e
+            region: content
+            configuration:
+              id: 'extra_field_block:node:casbs_book:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+  layout_library:
+    enable: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      allowed_layouts: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
+      restricted_categories: {  }
 id: node.casbs_book.full
 targetEntityType: node
 bundle: casbs_book
@@ -104,5 +375,6 @@ content:
     weight: 105
     region: content
 hidden:
+  layout_builder__layout: true
   search_api_excerpt: true
   su_casbs_recent_works: true
