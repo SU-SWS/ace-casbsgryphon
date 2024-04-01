@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.casbs_book.su_casbs_recent_works
     - node.type.casbs_book
   module:
+    - ds
     - image
     - jumpstart_ui
     - layout_builder
@@ -31,22 +32,28 @@ third_party_settings:
     allow_custom: true
     sections:
       -
-        layout_id: layout_onecol
+        layout_id: ds_1col
         layout_settings:
-          label: header
+          label: ''
           context_mapping: {  }
+          classes:
+            layout_class: {  }
+          wrappers:
+            ds_content: div
+          outer_wrapper: div
+          attributes: ''
+          link_attribute: ''
+          link_custom: ''
         components:
-          1f00de36-f439-4d79-82c4-2509f6c52a03:
-            uuid: 1f00de36-f439-4d79-82c4-2509f6c52a03
-            region: content
+          4bdb969d-2143-4c16-a841-984d5b3f85d3:
+            uuid: 4bdb969d-2143-4c16-a841-984d5b3f85d3
+            region: ds_content
             configuration:
-              id: jumpstart_ui_page_heading
-              label: 'Heading Block'
+              id: jumpstart_ui_skipnav_main_anchor
+              label: Spacer
               label_display: '0'
               provider: jumpstart_ui
               context_mapping: {  }
-              heading_text: ''
-              wrapper: h1
             weight: 0
             additional: {  }
         third_party_settings: {  }
@@ -88,31 +95,6 @@ third_party_settings:
                     label_tag: ''
             weight: 0
             additional: {  }
-          49240547-e3d6-4b05-8044-6a242d82d62c:
-            uuid: 49240547-e3d6-4b05-8044-6a242d82d62c
-            region: main
-            configuration:
-              id: 'field_block:node:casbs_book:body'
-              label: Body
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: ''
-            weight: 1
-            additional: {  }
           fb36f9ed-d856-4a1a-a045-9e8544d3bc57:
             uuid: fb36f9ed-d856-4a1a-a045-9e8544d3bc57
             region: main
@@ -136,7 +118,7 @@ third_party_settings:
                   field_label:
                     label_value: ''
                     label_tag: ''
-            weight: 2
+            weight: 4
             additional: {  }
           8aee2672-5038-4fca-af2a-b2969fde5380:
             uuid: 8aee2672-5038-4fca-af2a-b2969fde5380
@@ -161,7 +143,82 @@ third_party_settings:
                   field_label:
                     label_value: ''
                     label_tag: ''
-            weight: 3
+            weight: 5
+            additional: {  }
+          002e053f-d412-4471-902e-3d3ea47d0ac3:
+            uuid: 002e053f-d412-4471-902e-3d3ea47d0ac3
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publisher'
+              label: 'Book Publisher'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 6
+            additional: {  }
+          72322905-a597-40db-a50a-dd3130b26f6f:
+            uuid: 72322905-a597-40db-a50a-dd3130b26f6f
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publisher_loc'
+              label: 'Publisher Location'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 7
+            additional: {  }
+          2b2b5aa5-223b-47f1-bb41-89b2c9102f9a:
+            uuid: 2b2b5aa5-223b-47f1-bb41-89b2c9102f9a
+            region: main
+            configuration:
+              id: 'field_block:node:casbs_book:su_casbs_book_publish_year'
+              label: 'Published Year'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 8
             additional: {  }
           0203f272-e6ca-4000-a7d5-abf246938a1d:
             uuid: 0203f272-e6ca-4000-a7d5-abf246938a1d
@@ -192,14 +249,14 @@ third_party_settings:
                   field_label:
                     label_value: ''
                     label_tag: ''
-            weight: 0
+            weight: 1
             additional: {  }
-          002e053f-d412-4471-902e-3d3ea47d0ac3:
-            uuid: 002e053f-d412-4471-902e-3d3ea47d0ac3
+          49240547-e3d6-4b05-8044-6a242d82d62c:
+            uuid: 49240547-e3d6-4b05-8044-6a242d82d62c
             region: main
             configuration:
-              id: 'field_block:node:casbs_book:su_casbs_book_publisher'
-              label: 'Book Publisher'
+              id: 'field_block:node:casbs_book:body'
+              label: Body
               label_display: '0'
               provider: layout_builder
               context_mapping:
@@ -207,7 +264,7 @@ third_party_settings:
                 view_mode: view_mode
               formatter:
                 type: text_default
-                label: above
+                label: hidden
                 settings: {  }
                 third_party_settings:
                   empty_fields:
@@ -217,57 +274,7 @@ third_party_settings:
                   field_label:
                     label_value: ''
                     label_tag: ''
-            weight: 4
-            additional: {  }
-          72322905-a597-40db-a50a-dd3130b26f6f:
-            uuid: 72322905-a597-40db-a50a-dd3130b26f6f
-            region: main
-            configuration:
-              id: 'field_block:node:casbs_book:su_casbs_book_publisher_loc'
-              label: 'Publisher Location'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: ''
-            weight: 5
-            additional: {  }
-          2b2b5aa5-223b-47f1-bb41-89b2c9102f9a:
-            uuid: 2b2b5aa5-223b-47f1-bb41-89b2c9102f9a
-            region: main
-            configuration:
-              id: 'field_block:node:casbs_book:su_casbs_book_publish_year'
-              label: 'Published Year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: ''
-            weight: 6
+            weight: 3
             additional: {  }
         third_party_settings: {  }
       -

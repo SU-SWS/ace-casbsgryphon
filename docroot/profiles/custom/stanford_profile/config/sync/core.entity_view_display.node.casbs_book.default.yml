@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.casbs_book.su_casbs_recent_works
     - node.type.casbs_book
   module:
+    - ds
     - image
     - jumpstart_ui
     - layout_builder
@@ -28,6 +29,34 @@ third_party_settings:
     enabled: true
     allow_custom: false
     sections:
+      -
+        layout_id: ds_1col_wrapper
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          classes:
+            layout_class: {  }
+          wrappers:
+            ds_content: div
+          outer_wrapper: div
+          attributes: ''
+          link_attribute: ''
+          link_custom: ''
+        components:
+          359ec2bc-d759-45b6-aa55-050c7bb4a619:
+            uuid: 359ec2bc-d759-45b6-aa55-050c7bb4a619
+            region: ds_content
+            configuration:
+              id: jumpstart_ui_page_heading
+              label: 'Heading Block'
+              label_display: visible
+              provider: jumpstart_ui
+              context_mapping: {  }
+              heading_text: ''
+              wrapper: h1
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
       -
         layout_id: jumpstart_ui_two_column
         layout_settings:
