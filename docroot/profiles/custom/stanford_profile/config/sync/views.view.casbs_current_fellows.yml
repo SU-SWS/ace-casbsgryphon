@@ -8,7 +8,9 @@ dependencies:
     - field.storage.node.su_casbs_person_bio
     - field.storage.node.su_casbs_profile_picture
     - field.storage.node.su_person_email
+    - field.storage.node.su_person_first_name
     - field.storage.node.su_person_full_title
+    - field.storage.node.su_person_last_name
     - field.storage.node.su_person_telephone
     - image.style.medium
     - taxonomy.vocabulary.su_casbs_faculty_fellow_year
@@ -857,6 +859,132 @@ display:
           separator: ', '
           field_api_classes: 0
           plugin_id: field
+        su_person_first_name:
+          id: su_person_first_name
+          table: node__su_person_first_name
+          field: su_person_first_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: 0
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        su_person_last_name:
+          id: su_person_last_name
+          table: node__su_person_last_name
+          field: su_person_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: 0
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
         nid:
           id: nid
           table: node_field_data
@@ -933,8 +1061,8 @@ display:
           label: ''
           exclude: 0
           alter:
-            alter_text: 0
-            text: ''
+            alter_text: 1
+            text: "<a href={{view_node}} alt=\"{{su_person_first_name}} {{su_person_last_name}}\">{{ su_casbs_profile_picture }}\r\n</a>\r\n\r\n"
             make_link: 0
             path: ''
             absolute: 0
@@ -975,7 +1103,7 @@ display:
           type: image
           settings:
             image_style: medium
-            image_link: content
+            image_link: ''
             image_loading:
               attribute: lazy
           group_column: entity_id
@@ -1263,6 +1391,8 @@ display:
         - 'config:field.storage.node.su_casbs_field_discipline'
         - 'config:field.storage.node.su_casbs_person_bio'
         - 'config:field.storage.node.su_casbs_profile_picture'
+        - 'config:field.storage.node.su_person_first_name'
+        - 'config:field.storage.node.su_person_last_name'
   viewfield_block_2:
     id: viewfield_block_2
     display_title: 'Faculty Fellows and Research Affiliates(Filter by Year)'
