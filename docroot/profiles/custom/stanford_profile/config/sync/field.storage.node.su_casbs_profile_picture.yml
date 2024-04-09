@@ -17,7 +17,7 @@ settings:
   uri_scheme: public
   default_image:
     uuid: ''
-    alt: ''
+    alt: 'Fellow Picture'
     title: ''
     width: null
     height: null
