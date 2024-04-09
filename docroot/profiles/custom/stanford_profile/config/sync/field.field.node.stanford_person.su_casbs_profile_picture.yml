@@ -31,7 +31,7 @@ settings:
   title_field_required: false
   default_image:
     uuid: ''
-    alt: ''
+    alt: 'Fellow Picture'
     title: ''
     width: 300
     height: 300
