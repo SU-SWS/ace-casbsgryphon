@@ -1,0 +1,22 @@
+uuid: a5fd89e5-80d8-4dcf-8426-39ed0202424b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_ra_year_in_stu
+    - node.type.stanford_person
+  module:
+    - text
+id: node.stanford_person.su_casbs_ra_year_in_stu
+field_name: su_casbs_ra_year_in_stu
+entity_type: node
+bundle: stanford_person
+label: casbs_researchaffilate_year_insitution_study
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

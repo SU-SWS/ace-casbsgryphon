@@ -8,22 +8,28 @@ dependencies:
     - field.field.node.stanford_person.layout_builder__layout
     - field.field.node.stanford_person.stanford_intranet__access
     - field.field.node.stanford_person.su_casbs_cs_year
+    - field.field.node.stanford_person.su_casbs_cs_year_in_stu
     - field.field.node.stanford_person.su_casbs_current_affiliation
     - field.field.node.stanford_person.su_casbs_custom_order
+    - field.field.node.stanford_person.su_casbs_facfellow_year_in_stu
     - field.field.node.stanford_person.su_casbs_faculty_fellow_year
     - field.field.node.stanford_person.su_casbs_feature_people
     - field.field.node.stanford_person.su_casbs_feature_people_text
     - field.field.node.stanford_person.su_casbs_fellow_year
+    - field.field.node.stanford_person.su_casbs_fellow_year_in_stu
     - field.field.node.stanford_person.su_casbs_field_discipline
     - field.field.node.stanford_person.su_casbs_person_bio
     - field.field.node.stanford_person.su_casbs_person_book_links
     - field.field.node.stanford_person.su_casbs_person_id
     - field.field.node.stanford_person.su_casbs_person_journal_links
     - field.field.node.stanford_person.su_casbs_person_type
+    - field.field.node.stanford_person.su_casbs_pract_year_in_stu
     - field.field.node.stanford_person.su_casbs_practitioner_year
     - field.field.node.stanford_person.su_casbs_profile_picture
     - field.field.node.stanford_person.su_casbs_ra_year
+    - field.field.node.stanford_person.su_casbs_ra_year_in_stu
     - field.field.node.stanford_person.su_casbs_visiting_scholar_year
+    - field.field.node.stanford_person.su_casbs_vs_year_in_stu
     - field.field.node.stanford_person.su_metatags
     - field.field.node.stanford_person.su_person_academic_appt
     - field.field.node.stanford_person.su_person_admin_appts
@@ -209,6 +215,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  su_casbs_cs_year_in_stu:
+    type: text_textarea
+    weight: 74
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   su_casbs_current_affiliation:
     type: text_textfield
     weight: 58
@@ -222,6 +236,14 @@ content:
     weight: 71
     region: content
     settings:
+      placeholder: ''
+    third_party_settings: {  }
+  su_casbs_facfellow_year_in_stu:
+    type: text_textarea
+    weight: 73
+    region: content
+    settings:
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
   su_casbs_faculty_fellow_year:
@@ -264,6 +286,14 @@ content:
         field_label_overwrite: ''
         hide_add_another: 0
         force_single_cardinality: 0
+  su_casbs_fellow_year_in_stu:
+    type: text_textarea
+    weight: 72
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   su_casbs_field_discipline:
     type: text_textfield
     weight: 59
@@ -318,6 +348,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  su_casbs_pract_year_in_stu:
+    type: text_textarea
+    weight: 76
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   su_casbs_practitioner_year:
     type: entity_reference_autocomplete
     weight: 65
@@ -346,6 +384,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  su_casbs_ra_year_in_stu:
+    type: text_textarea
+    weight: 77
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   su_casbs_visiting_scholar_year:
     type: entity_reference_autocomplete
     weight: 68
@@ -354,6 +400,14 @@ content:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  su_casbs_vs_year_in_stu:
+    type: text_textarea
+    weight: 75
+    region: content
+    settings:
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
   su_metatags:

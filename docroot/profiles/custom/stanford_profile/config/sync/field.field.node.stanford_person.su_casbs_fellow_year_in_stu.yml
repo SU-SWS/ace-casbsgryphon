@@ -1,0 +1,24 @@
+uuid: 1d4b06c1-8f46-49e8-9b45-2e32c8a3af1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_fellow_year_in_stu
+    - filter.format.stanford_minimal_html
+    - node.type.stanford_person
+  module:
+    - text
+id: node.stanford_person.su_casbs_fellow_year_in_stu
+field_name: su_casbs_fellow_year_in_stu
+entity_type: node
+bundle: stanford_person
+label: casbs_fellow_year_institution_study
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - stanford_minimal_html
+field_type: text_long
