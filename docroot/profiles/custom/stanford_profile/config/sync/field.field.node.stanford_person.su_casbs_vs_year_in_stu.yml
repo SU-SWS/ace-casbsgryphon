@@ -1,0 +1,22 @@
+uuid: f0f44879-8730-4894-b71f-156d6c875360
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_vs_year_in_stu
+    - node.type.stanford_person
+  module:
+    - text
+id: node.stanford_person.su_casbs_vs_year_in_stu
+field_name: su_casbs_vs_year_in_stu
+entity_type: node
+bundle: stanford_person
+label: casbs_visitingscholar_year_institution_study
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

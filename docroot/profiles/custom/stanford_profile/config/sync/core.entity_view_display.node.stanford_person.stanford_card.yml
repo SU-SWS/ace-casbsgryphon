@@ -9,22 +9,28 @@ dependencies:
     - field.field.node.stanford_person.layout_builder__layout
     - field.field.node.stanford_person.stanford_intranet__access
     - field.field.node.stanford_person.su_casbs_cs_year
+    - field.field.node.stanford_person.su_casbs_cs_year_in_stu
     - field.field.node.stanford_person.su_casbs_current_affiliation
     - field.field.node.stanford_person.su_casbs_custom_order
+    - field.field.node.stanford_person.su_casbs_facfellow_year_in_stu
     - field.field.node.stanford_person.su_casbs_faculty_fellow_year
     - field.field.node.stanford_person.su_casbs_feature_people
     - field.field.node.stanford_person.su_casbs_feature_people_text
     - field.field.node.stanford_person.su_casbs_fellow_year
+    - field.field.node.stanford_person.su_casbs_fellow_year_in_stu
     - field.field.node.stanford_person.su_casbs_field_discipline
     - field.field.node.stanford_person.su_casbs_person_bio
     - field.field.node.stanford_person.su_casbs_person_book_links
     - field.field.node.stanford_person.su_casbs_person_id
     - field.field.node.stanford_person.su_casbs_person_journal_links
     - field.field.node.stanford_person.su_casbs_person_type
+    - field.field.node.stanford_person.su_casbs_pract_year_in_stu
     - field.field.node.stanford_person.su_casbs_practitioner_year
     - field.field.node.stanford_person.su_casbs_profile_picture
     - field.field.node.stanford_person.su_casbs_ra_year
+    - field.field.node.stanford_person.su_casbs_ra_year_in_stu
     - field.field.node.stanford_person.su_casbs_visiting_scholar_year
+    - field.field.node.stanford_person.su_casbs_vs_year_in_stu
     - field.field.node.stanford_person.su_metatags
     - field.field.node.stanford_person.su_person_academic_appt
     - field.field.node.stanford_person.su_person_admin_appts
@@ -119,22 +125,28 @@ hidden:
   search_api_excerpt: true
   stanford_intranet__access: true
   su_casbs_cs_year: true
+  su_casbs_cs_year_in_stu: true
   su_casbs_current_affiliation: true
   su_casbs_custom_order: true
+  su_casbs_facfellow_year_in_stu: true
   su_casbs_faculty_fellow_year: true
   su_casbs_feature_people: true
   su_casbs_feature_people_text: true
   su_casbs_fellow_year: true
+  su_casbs_fellow_year_in_stu: true
   su_casbs_field_discipline: true
   su_casbs_person_bio: true
   su_casbs_person_book_links: true
   su_casbs_person_id: true
   su_casbs_person_journal_links: true
   su_casbs_person_type: true
+  su_casbs_pract_year_in_stu: true
   su_casbs_practitioner_year: true
   su_casbs_profile_picture: true
   su_casbs_ra_year: true
+  su_casbs_ra_year_in_stu: true
   su_casbs_visiting_scholar_year: true
+  su_casbs_vs_year_in_stu: true
   su_metatags: true
   su_person_academic_appt: true
   su_person_admin_appts: true
