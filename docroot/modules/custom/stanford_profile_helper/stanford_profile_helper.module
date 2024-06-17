@@ -27,7 +27,26 @@ use Drupal\search_api\IndexInterface;
 use Drupal\stanford_profile_helper\StanfordProfileHelper;
 use Drupal\taxonomy\TermInterface;
 use Drupal\taxonomy_menu\Plugin\Menu\TaxonomyMenuMenuLink;
+use Drupal\user\RoleInterface;
 use Drupal\views\ViewEntityInterface;
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function stanford_profile_helper_preprocess_html(&$variables) {
+  $module_handler = \Drupal::moduleHandler();
+  $environment = 'sws-other';
+
+  if ($module_handler->moduleExists('acquia_purge')) {
+    $environment = 'sws-acquia';
+  }
+
+  if ($module_handler->moduleExists('acsf')) {
+    $environment = 'sws-acsf';
+  }
+  // Add a class to the body tag to identify sws applications.
+  $variables['attributes']['class'][] = $environment;
+}
 
 /**
  * Implements hook_module_implements_alter().
@@ -199,24 +218,6 @@ function _stanford_profile_helper_purge_path($path) {
 }
 
 /**
- * Implements hook_search_api_index_items_alter().
- */
-function stanford_profile_helper_search_api_index_items_alter(IndexInterface $index, array &$items) {
-  $exclude_pages = \Drupal::config('system.site')->get('page');
-  unset($exclude_pages['front']);
-  // Remove the 404, and 403 from indexing for search results.
-  /** @var \Drupal\search_api\Item\Item $item */
-  foreach ($items as $item_id => $item) {
-    $entity = $item->getOriginalObject()->getValue();
-    if ($entity instanceof NodeInterface) {
-      if (in_array('/node/' . $entity->id(), $exclude_pages)) {
-        unset($items[$item_id]);
-      }
-    }
-  }
-}
-
-/**
  * Implements hook_page_attachments().
  */
 function stanford_profile_helper_page_attachments(array &$attachments) {
@@ -293,11 +294,25 @@ function stanford_profile_helper_form_node_form_alter(&$form, FormStateInterface
   $hours = (int) floor($scheduler_increment / 3600);
   $mins = (int) floor($scheduler_increment / 60 % 60);
   $scheduler_increment = $hours ? "$hours hour(s)" : "$mins minute(s)";
+  $example_start = new DateTime('today 8:00 AM');
+  $example_end = clone $example_start;
+  if ($hours > 0) {
+    $example_end->modify("+$hours hours");
+  }
+  $example_end->modify("+$mins minutes");
+
   $help_text = [
     t('Select a date and time* to publish this content in the future.'),
-    t('After scheduling the publish, it will automatically publish to your site on the scheduled date within four hours of the selected time.'),
-    t('For example, if you select 8:00am as the publish time, the content will be published between 8am-12pm.'),
-    t('<p><strong>*Note</strong>: You must select a time that is increments of @times, starting with 12AM.</p>', ['@times' => $scheduler_increment]),
+    t('After scheduling the publish, it will automatically publish to your site on the scheduled date within @times of the selected time.', [
+      '@times' => $scheduler_increment,
+    ]),
+    t('For example, if you select @start as the publish time, the content will be published between @start and @end.', [
+      '@start' => $example_start->format('H:i'),
+      '@end' => $example_end->format('H:i'),
+    ]),
+    t('<p><strong>*Note</strong>: You must select a time that is increments of @times, starting with 12AM.</p>', [
+      '@times' => $scheduler_increment,
+    ]),
   ];
 
   $form['scheduling'] = [
@@ -441,18 +456,6 @@ function stanford_profile_helper_help_section_info_alter(array &$info) {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
- */
-function stanford_profile_helper_preprocess_input__submit__paragraph_action(&$variables) {
-  // Change the top banner field button from "Add @type" to "Add Top @type".
-  if ($variables['element']['#name'] == 'su_page_banner_stanford_banner_add_more') {
-    if (!is_string($variables['attributes']['value'])) {
-      $variables['attributes']['value'] = t('Add Top @type', $variables['attributes']['value']->getArguments());
-    }
-  }
-}
-
-/**
  * Implements hook_entity_field_access().
  */
 function stanford_profile_helper_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemListInterface $items = NULL) {
@@ -478,6 +481,26 @@ function stanford_profile_helper_entity_field_access($operation, FieldDefinition
       return AccessResult::forbidden();
     }
   }
+  $route_match = \Drupal::routeMatch();
+  // When the page title banner is in use on the page, disable the node title
+  // field access because the field title will be used in the banner.
+  if (
+    $operation == 'view' &&
+    $field_definition->getName() == 'title' &&
+    $items?->getEntity()->getEntityTypeId() == 'node' &&
+    $items->getEntity()->bundle() == 'stanford_page' &&
+    $items->getEntity()->get('su_page_banner')->count() &&
+    $route_match->getRouteName() == 'entity.node.canonical' &&
+    $route_match->getParameter('node')->id() == $items->getEntity()->id()
+  ) {
+    // Now we know we are on the node page and the node has a banner paragraph
+    // of some sort. If the banner paragraph is the correct type, we can prevent
+    // the original node title from displaying.
+    /** @var \Drupal\paragraphs\ParagraphInterface $banner_paragraph */
+    $banner_paragraph = $items->getEntity()->get('su_page_banner')->get(0)->entity;
+    return AccessResult::forbiddenIf($banner_paragraph->bundle() == 'stanford_page_title_banner');
+  }
+
   return AccessResult::neutral();
 }
 
@@ -968,7 +991,11 @@ function _stanford_profile_helper_get_assignable_roles(): array {
     return $role_delegation->getAssignableRoles(\Drupal::currentUser());
   }
 
-  return user_role_names(TRUE);
+  $roles = \Drupal::entityTypeManager()
+    ->getStorage('user_role')
+    ->loadMultiple();
+  unset($roles[RoleInterface::ANONYMOUS_ID]);
+  return array_map(fn($role) => $role->label(), $roles);
 }
 
 /**
@@ -1126,7 +1153,7 @@ function stanford_profile_helper_search_api_processor_info_alter(array &$process
  * Implements hook_entity_view_display_alter().
  */
 function stanford_profile_helper_entity_view_display_alter(EntityViewDisplayInterface $display, array $context) {
-  if ($context['view_mode'] == 'search_indexing' && $context['entity_type'] == 'node') {
+  if (str_contains($context['view_mode'], 'search_indexing') && $context['entity_type'] == 'node') {
     // The title is already in the template, it's not needed in the display.
     $display->removeComponent('title');
   }
@@ -1137,4 +1164,46 @@ function stanford_profile_helper_entity_view_display_alter(EntityViewDisplayInte
  */
 function stanford_profile_helper_filter_format_access(EntityInterface $entity, $operation, AccountInterface $account) {
   return AccessResult::forbiddenIf($entity->id() == 'administrative_html');
+}
+
+/**
+ * Implements hook_search_api_algolia_objects_alter().
+ */
+function stanford_profile_helper_search_api_algolia_objects_alter(array &$objects, IndexInterface $index, array $items) {
+  /** @var \Drupal\config_pages\ConfigPagesLoaderServiceInterface $config_page_loader */
+  $config_page_loader = \Drupal::service('config_pages.loader');
+
+  // If the canonical url is set, use that to adjust the urls.
+  $site_domain = $config_page_loader->getValue('stanford_basic_site_settings', 'su_site_url', 0, 'uri');
+  $current_host = \Drupal::request()->getSchemeAndHttpHost();
+
+  foreach ($objects as &$item) {
+    // Remove fields that aren't necessary.
+    unset($item['search_api_datasource'], $item['status']);
+
+    foreach ($item as $name => &$field) {
+      // Data that is being sent as the taxonomy term names should always be
+      // sent as an array of strings. When the node is only configured with one
+      // term in the field, it tries to send it as a string. So we force to be
+      // an array.
+      $property_path = $index->getField($name)?->getPropertyPath() ?: '';
+      if (is_string($field) && str_contains($property_path, ':entity:name')) {
+        $field = [$field];
+      }
+
+      // Either the canonical url hasn't been set, or it matches the current
+      // request. It would match the current request when the event is happening
+      // in the UI. If cron is running, the current host won't match the canonical
+      // url.
+      if (
+        $site_domain &&
+        $site_domain != $current_host &&
+        is_string($field) &&
+        str_contains($field, $current_host)
+      ) {
+        // Change the urls from the current host to the canonical url.
+        $field = str_replace($current_host, $site_domain, $field);
+      }
+    }
+  }
 }

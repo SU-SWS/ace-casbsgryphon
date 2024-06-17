@@ -1,5 +1,59 @@
 # Stanford Profile
 
+11.3.8
+-------------------------------------------------------------------------------
+
+- Updated stanford_samlauth.settings timeout.
+
+11.3.7
+-------------------------------------------------------------------------------
+- Improve decoupled menu by using js data on the page instead of json api
+- D8CORE-7362 Add necessary permission for site embedder role (#786)
+- Fixed publication url rabbit hole
+- D8CORE-6981: Fix lockup on very small screen size (#785)
+- Added noscript on algolia search results page
+- D8CORE-7360 Adjust Person  node detail page heading structure for "Links" field
+
+11.3.6
+-------------------------------------------------------------------------------
+- D8CORE-000 Update Past Event List
+
+11.3.5
+-------------------------------------------------------------------------------
+- Disabled link trimming on content type displays and view settings.
+
+11.3.4
+-------------------------------------------------------------------------------
+- Index algolia items only during cron
+- Added event image to algolia index data
+- D8CORE-7295 D8CORE-7301 Enable rabbit hole for publications content type
+
+11.3.3
+-------------------------------------------------------------------------------
+- D8CORE-7341 Add h2 headings to courses quarter term pages
+
+11.3.2
+-------------------------------------------------------------------------------
+- D8CORE-7341 Add h2 headings to past events and courses term pages
+
+11.3.1
+-------------------------------------------------------------------------------
+- Fix images and oembed videos to be lazy loading
+
+11.3.0
+-------------------------------------------------------------------------------
+- Add taxonomy terms to algolia search indexing
+- D8CORE-7333 Change paragraph behaviors for teaser and lists (#774)
+- Add role evaluation choice to saml config page
+- D8CORE-7307 Remove anonymous access to /patterns or /admin/patterns page
+- D8CORE-6983: added test for stacking site_embedder role (#773)
+- D8CORE-7331 Use aria-labelledby on the submenu buttons in the decoupled menu
+- D8CORE-7300 Add Algolia checkbox to allow indexing separate from search results
+- D8CORE-7212 Use h3 header for cards in teasers when appropriate (#765)
+- D8CORE-7207 Add Page Title Banner Paragraph (#754)
+- D8CORE-7211 Header behaviors for card and banners (#763)
+- added pager for events and publication graphql views
+
 11.2.1
 -------------------------------------------------------------------------------
 - Provide items per page for graphql views

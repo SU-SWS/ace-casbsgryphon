@@ -177,7 +177,7 @@ class EventsSubscriber implements EventSubscriberInterface {
 
         switch ($orphan_action) {
           case self::ORPHAN_DELETE:
-            $this->logger->notice($this->t('Deleted entity since it no longer exists in the source data. Migration: @migration, Entity Type: @entity_type, Label: @label'), [
+            $this->logger->notice('Deleted entity since it no longer exists in the source data. Migration: @migration, Entity Type: @entity_type, Label: @label', [
               '@migration' => $event->getMigration()->label(),
               '@entity_type' => $type,
               '@label' => $entity->label(),
@@ -190,7 +190,7 @@ class EventsSubscriber implements EventSubscriberInterface {
 
           // Tell the migration to ignore the given source ids.
           case self::ORPHAN_FORGET:
-            $this->logger->notice($this->t('Entity since it no longer exists in the source data, it will be now be ignored. Migration: @migration, Entity Type: @entity_type, Label: @label'), [
+            $this->logger->notice('Entity since it no longer exists in the source data, it will be now be ignored. Migration: @migration, Entity Type: @entity_type, Label: @label', [
               '@migration' => $event->getMigration()->label(),
               '@entity_type' => $type,
               '@label' => $entity->label(),
@@ -212,7 +212,7 @@ class EventsSubscriber implements EventSubscriberInterface {
               $entity->set($status_key, 0)->save();
               $id_map->setUpdate($id_map->currentSource());
 
-              $this->logger->notice($this->t('Unpublished entity since it no longer exists in the source data. Migration: @migration, Entity Type: @entity_type, Label: @label'), [
+              $this->logger->notice('Unpublished entity since it no longer exists in the source data. Migration: @migration, Entity Type: @entity_type, Label: @label', [
                 '@migration' => $event->getMigration()->label(),
                 '@entity_type' => $type,
                 '@label' => $entity->label(),

@@ -74,6 +74,12 @@ AddType image/webp .webp
 <IfModule mod_rewrite.c>
   RewriteEngine on
 
+  # Rewrite all requests to www.earth.stanford.edu and earth.stanford.edu to
+  # sustainability.stanford.edu. Include request paths and query strings.
+  RewriteCond %{HTTP_HOST} ^earth\.stanford\.edu [NC,OR]
+  RewriteCond %{HTTP_HOST} ^www\.earth\.stanford\.edu [NC]
+  RewriteRule ^(.*)$ https://sustainability.stanford.edu/$1 [R=301,L,QSA]
+
   # Block access via specific user-agents
   RewriteCond %{HTTP_USER_AGENT} CQ-API-Spyder [NC]
   RewriteRule .* - [F,L]
@@ -219,8 +225,6 @@ AddType image/webp .webp
   RewriteCond %{REQUEST_URI} !/core/[^/]*\.php$
   # Allow access to test-specific PHP files:
   RewriteCond %{REQUEST_URI} !/core/modules/system/tests/https?\.php
-  # Allow access to simplesaml paths.
-  RewriteCond %{REQUEST_URI} !^/simplesaml
   # Allow access to Statistics module's custom front controller.
   # Copy and adapt this rule to directly execute PHP files in contributed or
   # custom modules or to run another PHP application in the same directory.
