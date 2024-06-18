@@ -74,12 +74,6 @@ AddType image/webp .webp
 <IfModule mod_rewrite.c>
   RewriteEngine on
 
-  # Rewrite all requests to www.earth.stanford.edu and earth.stanford.edu to
-  # sustainability.stanford.edu. Include request paths and query strings.
-  RewriteCond %{HTTP_HOST} ^earth\.stanford\.edu [NC,OR]
-  RewriteCond %{HTTP_HOST} ^www\.earth\.stanford\.edu [NC]
-  RewriteRule ^(.*)$ https://sustainability.stanford.edu/$1 [R=301,L,QSA]
-
   # Block access via specific user-agents
   RewriteCond %{HTTP_USER_AGENT} CQ-API-Spyder [NC]
   RewriteRule .* - [F,L]
