@@ -364,13 +364,6 @@ function stanford_profile_update_9100(&$sandbox) {
  * Install menu_link module and configure the field.
  */
 function stanford_profile_update_9101() {
-try {
-    \Drupal::service('theme_installer')->install(['stanford_profile_admin']);
-  }
-  catch (\Exception $e) {
-    // Theme is already installed.
-  }
-
   $entity_type_manager = \Drupal::entityTypeManager();
 
   \Drupal::service('module_installer')->install(['menu_link']);
@@ -654,4 +647,19 @@ function stanford_profile_update_9105() {
   foreach ($tables as $table) {
     \Drupal::database()->truncate($table)->execute();
   }
+}
+
+/**
+ * Fix the stanford_profile_helper update issue.
+ */
+function stanford_profile_update_9106() {
+  // Use the post_update key-value store
+  $key_value = \Drupal::keyValue('post_update');
+  $module_name = 'stanford_profile_helper';
+  $update_hook = 'stanford_profile_helper_post_update_create_cron';
+  // Fetch the current value for the module
+  $current_value = $key_value->get("existing_updates");
+  $current_value[] = $update_hook;
+  // Save the updated value back to the key-value store
+  $key_value->set("existing_updates", $current_value);
 }

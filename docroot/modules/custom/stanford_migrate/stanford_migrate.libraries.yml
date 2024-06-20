@@ -2,5 +2,3 @@ readonly:
   css:
     component:
       css/stanford_migrate.readonly.css: {}
-  dependencies:
-    - seven/classy.messages

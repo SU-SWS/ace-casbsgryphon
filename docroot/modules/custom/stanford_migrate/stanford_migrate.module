@@ -267,6 +267,7 @@ function stanford_migrate_entity_delete(EntityInterface $entity) {
 function stanford_migrate_ultimate_cron_task(CronJobInterface $cron_entity) {
   // Invalidate migration plugins to gather any changes to config entities
   // before running import. This allows for any changes to the source urls.
+  \Drupal::service('plugin.manager.migration')->clearCachedDefinitions();
   Cache::invalidateTags(['migration_plugins']);
 
   /** @var \Drupal\stanford_migrate\StanfordMigrateInterface $migrate_service */

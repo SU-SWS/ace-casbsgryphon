@@ -3,6 +3,7 @@
 namespace Drupal\stanford_migrate\Form;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -184,6 +185,8 @@ class StanfordMigrateImportForm extends FormBase {
       'update' => 0,
       'force' => 0,
     ];
+    $this->migrationManager->clearCachedDefinitions();
+    Cache::invalidateTags(['migration_plugins']);
 
     $executable = new StanfordMigrateBatchExecutable($migration, $migrateMessage, $options);
     $executable->batchImport();

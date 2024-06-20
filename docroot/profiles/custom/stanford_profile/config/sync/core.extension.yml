@@ -23,7 +23,6 @@ module:
   components: 0
   conditional_fields: 0
   config: 0
-  config_filter: 0
   config_ignore: 0
   config_pages: 0
   config_readonly: 0
@@ -79,7 +78,9 @@ module:
   google_tag: 0
   graphql: 0
   graphql_compose: 0
+  graphql_compose_blocks: 0
   graphql_compose_edges: 0
+  graphql_compose_image_style: 0
   graphql_compose_layout_paragraphs: 0
   graphql_compose_layouts: 0
   graphql_compose_menus: 0
@@ -96,6 +97,7 @@ module:
   inline_form_errors: 0
   jquery_ui: 0
   jquery_ui_draggable: 0
+  js_cookie: 0
   jsonapi: 0
   jsonapi_defaults: 0
   jsonapi_extras: 0
@@ -141,7 +143,6 @@ module:
   nobots: 0
   node: 0
   node_revision_delete: 0
-  oembed_lazyload: 0
   oembed_providers: 0
   options: 0
   page_cache: 0
