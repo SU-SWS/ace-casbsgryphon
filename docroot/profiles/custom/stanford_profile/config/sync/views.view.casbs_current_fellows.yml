@@ -1152,7 +1152,7 @@ display:
             preserve_tags: ''
             html: 0
           element_type: div
-          element_class: casbs_person__discipline
+          element_class: ''
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -1683,7 +1683,7 @@ display:
             preserve_tags: ''
             html: 0
           element_type: div
-          element_class: casbs_person__discipline
+          element_class: ''
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -2236,7 +2236,7 @@ display:
             preserve_tags: ''
             html: 0
           element_type: div
-          element_class: casbs_person__discipline
+          element_class: ''
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false

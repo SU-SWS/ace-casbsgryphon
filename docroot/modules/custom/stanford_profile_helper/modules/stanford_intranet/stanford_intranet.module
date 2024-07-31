@@ -117,7 +117,7 @@ function stanford_intranet_library_info_build() {
  */
 function stanford_intranet_entity_create_access(AccountInterface $account, array $context, $entity_bundle) {
   // Block access to uploading files on the intranet. Leave the door open for
-  // the super user account though.
+  // the user 1 account though.
   if (
     $context['entity_type_id'] == 'media' &&
     $entity_bundle == 'file' &&
@@ -134,10 +134,14 @@ function stanford_intranet_entity_create_access(AccountInterface $account, array
  * Implements hook_entity_access().
  */
 function stanford_intranet_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+
   // Paragraphs inherit their access from the parents they live on, so we can
   // ignore them.
+  // Check for the role because doing `$account->isAuthenticated() only checks
+  // for the uid > 0. This doesn't work for search_api functionality, so just
+  // check for the role instead.
   if (
-    $account->isAnonymous() &&
+    !in_array(RoleInterface::AUTHENTICATED_ID, $account->getRoles()) &&
     \Drupal::state()->get('stanford_intranet', FALSE) &&
     !($entity instanceof ParagraphInterface)
   ) {
@@ -236,8 +240,11 @@ function stanford_intranet_node_grants(AccountInterface $account, $op) {
 function stanford_intranet_user_role_insert(RoleInterface $role) {
   $state = \Drupal::state()->get('stanford_intranet.rids', []);
   $state = array_flip($state);
+  $roles = \Drupal::entityTypeManager()
+    ->getStorage('user_role')
+    ->loadMultiple();
 
-  foreach (array_keys(user_role_names()) as $role_id) {
+  foreach (array_keys($roles) as $role_id) {
     if (!in_array($role_id, $state)) {
       $state[] = $role_id;
     }

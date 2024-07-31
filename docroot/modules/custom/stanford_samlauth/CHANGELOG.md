@@ -1,5 +1,36 @@
 # Stanford SamlAuth
 
+1.0.9
+--------------------------------------------------------------------------------
+_Release Date: 2024-05-29_
+
+- Store workgroup api responses during the login to avoid unneeded requests.
+
+1.0.8
+--------------------------------------------------------------------------------
+_Release Date: 2024-05-28_
+
+- Adjusted Dependency versions
+
+1.0.7
+--------------------------------------------------------------------------------
+_Release Date: 2024-04-23_
+
+- Fixed update hook number.
+
+1.0.6
+--------------------------------------------------------------------------------
+_Release Date: 2024-04-22_
+
+- Add configurable workgroup api timeout and increase it (#12)
+
+
+1.0.4
+--------------------------------------------------------------------------------
+_Release Date: 2024-03-29_
+
+- Fix saml login block to only use the path, not query params.
+
 1.0.3
 --------------------------------------------------------------------------------
 _Release Date: 2023-09-28_

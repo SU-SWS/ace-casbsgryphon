@@ -1,5 +1,86 @@
 # Stanford Profile Helper
 
+9.6.10
+--------------------------------------------------------------------------------
+_Release Date: 2024-05-28_
+
+- D8CORE-7413 Add space between html tags for search indexing
+
+9.6.9
+--------------------------------------------------------------------------------
+_Release Date: 2024-05-08_
+
+- Fixed error with focal point in GraphQL response for images.
+
+9.6.8
+--------------------------------------------------------------------------------
+_Release Date: 2024-04-30_
+
+- Trigger next invalidations for events when the start or end date has recently passed.
+- Tweak next path invalidation
+
+9.6.7
+--------------------------------------------------------------------------------
+_Release Date: 2024-04-10_
+
+- Disable editoria11y on decoupled sites
+- Add focal point coordinates to graphql data
+- Add "Next" invalidation for referencing entities when a referenced entity changes
+- D8CORE-7296 Fix icon alignment on mobile for person detail page;
+- D8CORE-7345 Fixed heading spacing on person teasers
+- D8CORE-7299 Fine tune intranet algolia indexing (#310)
+
+9.6.6
+--------------------------------------------------------------------------------
+_Release Date: 2024-03-28_
+
+- Added Redirect support in Graphql.
+
+9.6.5
+--------------------------------------------------------------------------------
+_Release Date: 2024-03-21_
+
+- D8CORE-7189 Update banner styles
+
+9.6.4
+--------------------------------------------------------------------------------
+_Release Date: 2024-03-20_
+
+- Improve algolia search indexing primarily for intranet sites.
+
+9.6.3
+--------------------------------------------------------------------------------
+_Release Date: 2024-03-18_
+
+- Improve algolia data with urls.
+
+9.6.2
+--------------------------------------------------------------------------------
+_Release Date: 2024-03-18_
+
+- Removed hard coded h3 header in course list pattern
+
+9.6.1
+--------------------------------------------------------------------------------
+_Release Date: 2024-03-17_
+
+- Allow heading block to be visually hidden in layout builder.
+
+
+9.6.0
+--------------------------------------------------------------------------------
+_Release Date: 2024-03-14_
+
+- Clean up Algolia search index data before sending
+- D8CORE-7333 Change teaser and list paragraph headline behaviors (#300)
+- D8CORE-7307 Move /patterns to /admin/patterns
+- D8CORE-7189 Update splash font card headline margin-bottom (#299)
+- Added drush command to easily connect a Next.js site
+- D8CORE-7212 Add behavior to teaser paragraph to change headers to h3 (#294)
+- D8CORE-7208 D8CORE-7209 Prevent page title when using page title banner' (#291)
+- D8CORE-7211 D8CORE-7210 Add header behaviors for banner and card paragraphs (#292)
+- Updated help text for publishing scheduler (#289)
+
 9.5.1
 --------------------------------------------------------------------------------
 _Release Date: 2024-02-15_
