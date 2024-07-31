@@ -19,7 +19,7 @@ dependencies:
     - stanford_decoupled
 name: HTML
 format: stanford_html
-weight: -10
+weight: -9
 filters:
   editor_file_reference:
     id: editor_file_reference
@@ -48,10 +48,10 @@ filters:
   filter_html:
     id: filter_html
     provider: filter
-    status: true
+    status: false
     weight: -50
     settings:
-      allowed_html: '<br> <p class id> <h2 id class> <h3 id class> <h4 id class> <h5 id class> <a class aria-label hreflang data-entity-substitution data-entity-type data-entity-uuid title name href> <b> <cite> <dt> <pre class> <code data-* class> <dl class> <dd class> <div id class> <i class> <aside class> <img src alt title class> <abbr id title> <span id class> <blockquote cite> <ul id type class> <ol id type class start> <li id class> <table id class> <tbody class> <th scope id class rowspan colspan> <td id class rowspan colspan> <tr id> <drupal-media data-* title alt> <strong> <em> <s> <sub> <sup> <hr> <thead> <tfoot> <caption>'
+      allowed_html: '<a class="su-button su-button--big su-button--secondary su-link--action"> <p class="plain-text su-intro-text su-font-splash su-quote-text su-drop-cap su-related-text su-callout-text su-subheading">'
       filter_html_help: true
       filter_html_nofollow: false
   filter_html_escape:

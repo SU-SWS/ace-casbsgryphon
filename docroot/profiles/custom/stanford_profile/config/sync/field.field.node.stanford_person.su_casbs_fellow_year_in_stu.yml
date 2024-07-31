@@ -4,6 +4,10 @@ status: true
 dependencies:
   config:
     - field.storage.node.su_casbs_fellow_year_in_stu
+    - filter.format.administrative_html
+    - filter.format.no_processing
+    - filter.format.plain_text
+    - filter.format.stanford_html
     - filter.format.stanford_minimal_html
     - node.type.stanford_person
   module:
@@ -20,5 +24,9 @@ default_value: {  }
 default_value_callback: ''
 settings:
   allowed_formats:
+    - stanford_html
     - stanford_minimal_html
+    - plain_text
+    - administrative_html
+    - no_processing
 field_type: text_long
