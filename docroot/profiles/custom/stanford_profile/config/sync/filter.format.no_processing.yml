@@ -6,7 +6,7 @@ dependencies:
     - responsive_tables_filter
 name: 'No processing'
 format: no_processing
-weight: 0
+weight: -10
 filters:
   filter_responsive_tables_filter:
     id: filter_responsive_tables_filter
@@ -15,4 +15,4 @@ filters:
     weight: 0
     settings:
       tablesaw_type: stack
-      tablesaw_persist: '1'
+      tablesaw_persist: true

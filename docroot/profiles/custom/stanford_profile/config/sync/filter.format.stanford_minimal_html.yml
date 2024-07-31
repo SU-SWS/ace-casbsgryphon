@@ -5,11 +5,10 @@ dependencies:
   module:
     - linkit
     - mathjax
-    - responsive_tables_filter
     - stanford_decoupled
 name: 'Minimal HTML'
 format: stanford_minimal_html
-weight: -9
+weight: -8
 filters:
   filter_html:
     id: filter_html
