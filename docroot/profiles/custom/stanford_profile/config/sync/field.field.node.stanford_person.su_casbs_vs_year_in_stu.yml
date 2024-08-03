@@ -11,7 +11,7 @@ id: node.stanford_person.su_casbs_vs_year_in_stu
 field_name: su_casbs_vs_year_in_stu
 entity_type: node
 bundle: stanford_person
-label: casbs_visitingscholar_year_institution_study
+label: 'Visiting Scholar year'
 description: ''
 required: false
 translatable: false

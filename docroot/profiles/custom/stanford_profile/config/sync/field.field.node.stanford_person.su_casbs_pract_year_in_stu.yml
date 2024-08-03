@@ -16,7 +16,7 @@ id: node.stanford_person.su_casbs_pract_year_in_stu
 field_name: su_casbs_pract_year_in_stu
 entity_type: node
 bundle: stanford_person
-label: casbs_practitioner_year_institution_study
+label: 'Practitioner year'
 description: ''
 required: false
 translatable: false
@@ -24,9 +24,9 @@ default_value: {  }
 default_value_callback: ''
 settings:
   allowed_formats:
+    - no_processing
     - stanford_html
     - stanford_minimal_html
     - plain_text
     - administrative_html
-    - no_processing
 field_type: text_long
