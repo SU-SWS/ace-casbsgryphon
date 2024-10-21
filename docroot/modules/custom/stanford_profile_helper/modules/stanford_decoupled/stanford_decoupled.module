@@ -12,8 +12,9 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\graphql\GraphQL\Execution\FieldContext;
 use Drupal\graphql_compose\Plugin\GraphQLCompose\GraphQLComposeFieldTypeInterface;
-use Drupal\node\NodeInterface;
 use Drupal\paragraphs\ParagraphInterface;
+use Drupal\stanford_decoupled\Config\DecoupledConfigOverrides;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_graphql_compose_field_type_alter().
@@ -33,7 +34,7 @@ function stanford_decoupled_graphql_compose_graphql_type_alter(array &$entity_ty
  * Implements hook_library_info_alter().
  */
 function stanford_decoupled_library_info_alter(&$libraries, $extension) {
-  if ($extension == 'editoria11y' && _stanford_decoupled_is_decoupled()) {
+  if ($extension == 'editoria11y' && DecoupledConfigOverrides::isDecoupled()) {
     // Disable Editoria11y library if the site is decoupled to avoid confusion.
     $libraries = [];
   }
@@ -44,13 +45,16 @@ function stanford_decoupled_library_info_alter(&$libraries, $extension) {
  */
 function stanford_decoupled_layout_access(EntityInterface $entity, $operation, AccountInterface $account) {
   // Only allow access if the site is decoupled. Otherwise, don't change access.
-  return AccessResult::allowedIf($operation == 'view' && _stanford_decoupled_is_decoupled());
+  return AccessResult::allowedIf($operation == 'view' && DecoupledConfigOverrides::isDecoupled());
 }
 
 /**
  * Implements hook_cron().
  */
 function stanford_decoupled_cron() {
+  if (!DecoupledConfigOverrides::isDecoupled()) {
+    return;
+  }
   $last_run = \Drupal::state()->get('stanford-decoupled-last-ran', 0);
   $now = time();
   $node_storage = \Drupal::entityTypeManager()->getStorage('node');
@@ -109,15 +113,22 @@ function stanford_decoupled_entity_delete(EntityInterface $entity) {
  *   Inserted, updated, or deleted entity.
  */
 function _stanford_decoupled_entity_changes(EntityInterface $entity) {
+  $tracked_types = \Drupal::config('stanford_decoupled.settings')
+    ->get('referenced_invalidated_types') ?: ['taxonomy_term', 'media'];
+
   if (
+    !in_array($entity->getEntityTypeId(), $tracked_types) ||
     !$entity instanceof ContentEntityInterface ||
-    $entity->getEntityType()->isRevisionable() ||
-    !_stanford_decoupled_is_decoupled()
+    !DecoupledConfigOverrides::isDecoupled()
   ) {
     return;
   }
   $entity_type_manager = \Drupal::entityTypeManager();
   $field_storage = $entity_type_manager->getStorage('field_storage_config');
+
+  /** @var \Drupal\Core\Queue\QueueFactoryInterface $queue_factory */
+  $queue_factory = \Drupal::service('queue');
+  $queue = $queue_factory->get('decoupled_referenced_invalidator');
 
   // Loop through the fields that use the changed entity as a possible target.
   // We'll then query to find entities that do reference the entity, and call
@@ -132,25 +143,10 @@ function _stanford_decoupled_entity_changes(EntityInterface $entity) {
       ->execute();
 
     foreach ($referencing_ids as $referencing_id) {
-      $referencing_entity = $entity_storage->load($referencing_id);;
-
-      next_entity_update($referencing_entity);
-
-      // Now if it's a node, look to see if there was a migration that imported
-      // the node. If there was, mark the record as needing update. This will
-      // update the node on the next cron job.
-      if ($referencing_entity instanceof NodeInterface) {
-        /** @var \Drupal\migrate_plus\Entity\Migration $migration */
-        $migration_entity = \Drupal::service('stanford_migrate')
-          ->getNodesMigration($referencing_entity);
-
-        if ($migration_entity) {
-          /** @var \Drupal\migrate\Plugin\Migration $migration */
-          $migration = \Drupal::service('plugin.manager.migration')->createInstance($migration_entity->id());
-          $source_ids = $migration->getIdMap()->lookupSourceId(['nid' => $referencing_entity->id()]);
-          $migration->getIdMap()->setUpdate($source_ids);
-        }
-      }
+      $queue->createItem([
+        'entity_type' => $field->getTargetEntityTypeId(),
+        'id' => $referencing_id,
+      ]);
     }
   }
 }
@@ -230,6 +226,19 @@ function stanford_decoupled_next_site_insert(EntityInterface $entity) {
     ])->save();
   }
 
+  if (!$next_storage->load('menu_link_content.menu_link_content')) {
+    $next_storage->create([
+      'id' => 'menu_link_content.menu_link_content',
+      'site_resolver' => 'site_selector',
+      'revalidator' => 'path',
+      'configuration' => ['sites' => [$entity->id() => $entity->id()]],
+      'revalidator_configuration' => [
+        'revalidate_page' => FALSE,
+        'additional_paths' => '/tags/menu:main',
+      ],
+    ])->save();
+  }
+
   $config_page_types = [
     'lockup_settings',
     'stanford_global_message',
@@ -240,7 +249,7 @@ function stanford_decoupled_next_site_insert(EntityInterface $entity) {
   // Create each of the node type bundle configs.
   foreach ($config_page_types as $config_page_type) {
     // Make sure one doesn't already exist.
-    if (!$next_storage->load("config_pages_type.$config_page_type")) {
+    if (!$next_storage->load("config_pages.$config_page_type")) {
       $next_storage->create([
         'id' => "config_pages.$config_page_type",
         'site_resolver' => 'site_selector',
@@ -261,7 +270,7 @@ function stanford_decoupled_next_site_insert(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_access().
  */
 function stanford_decoupled_redirect_access(EntityInterface $entity, $operation, AccountInterface $account) {
-  if ($operation == 'view' && _stanford_decoupled_is_decoupled()) {
+  if ($operation == 'view' && DecoupledConfigOverrides::isDecoupled()) {
     // Allowing viewing redirecting from JSON API.
     return AccessResult::allowed();
   }
@@ -283,7 +292,7 @@ function stanford_decoupled_next_site_preview_alter(array &$preview, array $cont
  * Implements hook_preprocess_HOOK().
  */
 function stanford_decoupled_preprocess_image(&$variables) {
-  $decoupled = _stanford_decoupled_is_decoupled();
+  $decoupled = DecoupledConfigOverrides::isDecoupled();
 
   if ($decoupled && (empty($variables['width']) || empty($variables['height']))) {
     $path = str_starts_with($variables['uri'], '/') ? DRUPAL_ROOT . $variables['uri'] : $variables['uri'];
@@ -296,29 +305,24 @@ function stanford_decoupled_preprocess_image(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_views_pre_execute().
  */
-function stanford_decoupled_preprocess_file_link(&$variables) {
-  if (_stanford_decoupled_is_decoupled()) {
-    $variables['link']['#url']->setAbsolute();
+function stanford_decoupled_views_pre_execute(ViewExecutable $view) {
+  $route = \Drupal::routeMatch()->getRouteName();
+  if (!($route == 'entity.node.canonical' && DecoupledConfigOverrides::isDecoupled())) {
+    return;
+  }
+  $current_limit = $view->query->getLimit();
+  if ($current_limit <= 0 || $current_limit > 5) {
+    $view->query->setLimit(30);
   }
 }
 
 /**
- * Check if the site is configured to be decoupled.
- *
- * @return bool
- *   True if it's intended to be decoupled.
+ * Implements hook_preprocess_HOOK().
  */
-function _stanford_decoupled_is_decoupled(): bool {
-  if (!\Drupal::entityTypeManager()->hasDefinition('next_site')) {
-    return FALSE;
+function stanford_decoupled_preprocess_file_link(&$variables) {
+  if (DecoupledConfigOverrides::isDecoupled()) {
+    $variables['link']['#url']->setAbsolute();
   }
-  $sites_count = \Drupal::entityTypeManager()
-    ->getStorage('next_site')
-    ->getQuery()
-    ->accessCheck(FALSE)
-    ->count()
-    ->execute();
-  return !!$sites_count;
 }

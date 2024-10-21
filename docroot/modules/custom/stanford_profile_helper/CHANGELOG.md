@@ -1,5 +1,79 @@
 # Stanford Profile Helper
 
+9.8.2
+--------------------------------------------------------------------------------
+_Release Date: 2024-10-17_
+
+- Escape special characters in title text for html cleanup
+
+9.8.1
+--------------------------------------------------------------------------------
+_Release Date: 2024-10-16_
+
+- Added created timestamp for site information cron
+
+9.8.0
+--------------------------------------------------------------------------------
+_Release Date: 2024-10-11_
+
+- SUL23-486 Remove redundant title attribute and disable responsive tables for decoupled Sites
+- Cleaned up old code.
+
+9.7.3
+--------------------------------------------------------------------------------
+_Release Date: 2024-09-24_
+
+- Remove Algolia record when a node is unpublished.
+
+9.7.2
+--------------------------------------------------------------------------------
+_Release Date: 2024-09-23_
+
+- Decoupled invalidation for node edits if the node is in the menu.
+
+9.7.1
+--------------------------------------------------------------------------------
+_Release Date: 2024-09-17_
+
+- Fixed site information cron job for canonical url.
+
+9.7.0
+--------------------------------------------------------------------------------
+_Release Date: 2024-09-16_
+
+- moved relative link url validation to stanford_fields
+- Adjust field access to avoid conflicting with node access
+- Run tests with Drupal 11 (#325)
+- Improve performance for detecting decoupled sites
+- Delete algolia records immediately upon entity deletion (#322)
+- Adjust xmlsitemap to submit to google with the correct domain
+- D8CORE-7455 Algolia Search: Decode html entities before stripping the html (#321)
+- Downgrade preact for event minicalendar
+- Added decoupled drush command to invalidate path
+- Fixed next connect drush command domain default value
+- Added escape handler on event mini calendar
+- Removed unused page_manager dependencies
+- D8CORE-7429 Style event subheadline without h2 tag
+- D8CORE-7425 Added dek and date fields for news vertical teaser cards
+- Prevent unnecessary decoupled invalidations on local environments
+- Replaced deprecated code for D11
+- Updated node form styles for Drupal 10.3
+- Fixed drush command to make nextjs users active
+- fixup for next module entity type creator
+- Update drush command to connect nextjs site
+
+9.6.15
+--------------------------------------------------------------------------------
+_Release Date: 2024-06-18_
+
+- Fixed html validation for events mini calendar.
+
+9.6.13
+--------------------------------------------------------------------------------
+_Release Date: 2024-06-17_
+
+- Added columnheader role to minicalendar table
+
 9.6.10
 --------------------------------------------------------------------------------
 _Release Date: 2024-05-28_

@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "drupal/core": "^9.0 || ^10",
+        "drupal/core": "^9.0 || ^10 || ^11",
         "drupal/views_bulk_operations": "^4.2"
     },
     "require-dev": {

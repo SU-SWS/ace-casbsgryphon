@@ -11,6 +11,7 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\file\FileInterface;
 use Drupal\media\Entity\MediaType;
@@ -279,15 +280,34 @@ function stanford_media_media_prepare_form(MediaInterface $media, $operation, Fo
   // Display a message to the user to alert them than editing will affect
   // multiple pieces of content.
   if ($count) {
-    $message = \Drupal::translation()->formatPlural(
+    $plural_text = \Drupal::translation()->formatPlural(
       $count,
-      'Changing this media item will affect %count piece of content.',
-      'Changing this media item will affect %count pieces of content.',
-      ['%count' => $count]
+      '@count piece of content',
+      '@count pieces of content',
+      [
+        '@count' => $count,
+      ]
+    );
+
+    $formatted_link = Link::fromTextAndUrl($plural_text, $media->toUrl('usage'));
+
+    $message = t(
+      'Changing this media will affect @formatted_link.',
+      [
+        '@formatted_link' => $formatted_link->toString(),
+      ]
     );
     \Drupal::messenger()->addWarning($message);
   }
 
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function stanford_media_form_media_form_alter(&$form, &$form_state) {
+  // Adding styling for media form for stanford_media_media_prepare_form items.
+  $form['#attached']['library'][] = 'stanford_media/admin';
 }
 
 /**

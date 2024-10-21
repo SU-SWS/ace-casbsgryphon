@@ -35,7 +35,11 @@
             }
         }
     ],
+    "conflict": {
+        "drupal/page_cache_query_ignore": "*"
+    },
     "require": {
+        "drupal/core": "^10.3 || ^11",
         "drupal/graphql_compose": "^2.0",
         "drupal/layout_paragraphs": "^2.0",
         "seboettg/collection": "~3.1"
@@ -61,6 +65,7 @@
         "drupal/layout_library": ">=1.0@beta",
         "drupal/mathjax": ">=4.0",
         "drupal/menu_block": ">=1.10",
+        "drupal/menu_link": ">=2.0",
         "drupal/name": ">=1.0@RC",
         "drupal/next": ">=1.6",
         "drupal/paragraphs": ">=1.15",
@@ -70,6 +75,7 @@
         "drupal/redirect": ">=1.8",
         "drupal/scheduler": ">=2.0",
         "drupal/search_api": ">=1.30",
+        "drupal/search_api_algolia": ">= 3.0@beta",
         "drupal/shs": ">=2.0@RC",
         "drupal/smart_date": ">=4.0",
         "drupal/smart_trim": ">=2.1",

@@ -6,6 +6,7 @@
     "authors": [],
     "license": "GPL-2.0-or-later",
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "repositories": [
         {
             "type": "composer",
@@ -13,12 +14,16 @@
         }
     ],
     "require": {
-        "drupal/core": "^9 || ^10",
-        "drupal/ds": "~3.3 || ^5.0@alpha"
+        "drupal/core": "^10.3 || ^11",
+        "drupal/ds": "~3.3 || ^5.0@alpha",
+        "drupal/book": "^1.0"
     },
     "autoload-dev": {
         "psr-4": {
             "Drupal\\Tests\\stanford_fields\\": "./tests/src"
         }
+    },
+    "require-dev": {
+        "drupal/cshs": "^4.0"
     }
 }

@@ -14,6 +14,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Extension\Extension;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -52,6 +53,12 @@ function stanford_profile_helper_preprocess_html(&$variables) {
  * Implements hook_module_implements_alter().
  */
 function stanford_profile_helper_module_implements_alter(&$implementations, $hook) {
+  // Only for test scenarios, disable all hooks in the next module since they
+  // cause errors with the containers in unit tests. It's just easier to remove
+  // the hooks than to work around the errors.
+  if (Settings::get('STANFORD_PROFILE_HELPER_DISABLE_NEXT')) {
+    unset($implementations['next']);
+  }
   if ($hook === 'plugin_filter_block__layout_builder_alter') {
     unset($implementations['menu_block']);
   }
@@ -72,6 +79,19 @@ function stanford_profile_helper_plugin_filter_block__layout_builder_alter(array
   }
 }
 
+/**
+ * Implements hook_entity_delete().
+ *
+ */
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function stanford_profile_helper_node_update(NodeInterface $node) {
+  if (!$node->isPublished() && $node->original?->isPublished() && \Drupal::hasService('search_api_algolia.helper')) {
+    // Trigger algolia to delete the record.
+    \Drupal::service('search_api_algolia.helper')->entityDelete($node);
+  }
+}
 
 /**
  * Implements hook_cron().
@@ -83,12 +103,14 @@ function stanford_profile_helper_cron() {
   /** @var \Drupal\config_pages\ConfigPagesLoaderServiceInterface $config_pages */
   $config_pages = \Drupal::service('config_pages.loader');
 
-  $canonical_url = $config_pages->getValue('stanford_basic_site_settings', 'su_site_url', 0, 'value');
-  $owners = $config_pages->getValue('stanford_basic_site_settings', 'su_site_owner_contact', [], 'value');
-  $site_managers = $config_pages->getValue('stanford_basic_site_settings', 'su_site_tech_contact', [], 'value');
   $ally = $config_pages->getValue('stanford_basic_site_settings', 'su_site_a11y_contact', [], 'value');
+  $canonical_url = $config_pages->getValue('stanford_basic_site_settings', 'su_site_url', 0, 'uri');
+  $created = (int) $config_pages->getValue('stanford_basic_site_settings', 'su_site_created', 0, 'value');
   $org_ids = $config_pages->getValue('stanford_basic_site_settings', 'su_site_org', [], 'target_id');
+  $owners = $config_pages->getValue('stanford_basic_site_settings', 'su_site_owner_contact', [], 'value');
   $renewal_date = $config_pages->getValue('stanford_basic_site_settings', 'su_site_renewal_due', 0, 'value');
+  $site_managers = $config_pages->getValue('stanford_basic_site_settings', 'su_site_tech_contact', [], 'value');
+  $site_type = $config_pages->getValue('stanford_basic_site_settings', 'su_site_type', 0, 'value');
 
   $orgs = \Drupal::entityTypeManager()
     ->getStorage('taxonomy_term')
@@ -99,49 +121,22 @@ function stanford_profile_helper_cron() {
   }
 
   $site_information = [
-    'siteName' => \Drupal::config('system.site')->get('name'),
-    'canonicalUrl' => $canonical_url,
-    'owners' => $owners ?: [],
-    'siteManagers' => $site_managers ?: [],
     'accessibility' => $ally ?: [],
+    'canonicalUrl' => $canonical_url,
+    'created' => $created,
     'organizations' => array_values($orgs) ?: [],
+    'owners' => $owners ?: [],
     'renewalDate' => $renewal_date,
+    'siteManagers' => $site_managers ?: [],
+    'siteName' => \Drupal::config('system.site')->get('name'),
+    'siteType' => $site_type,
+    'theme' => \Drupal::config('system.theme')->get('default'),
   ];
   $uri = 'private://stanford';
   $directory = \Drupal::service('stream_wrapper_manager')->normalizeUri($uri);
   $file_system = \Drupal::service('file_system');
   $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
-  $file_system->saveData(json_encode($site_information, JSON_PRETTY_PRINT), "$directory/site-info.json", FileSystemInterface::EXISTS_REPLACE);
-}
-
-/**
- * Implements hook_cache_flush().
- */
-function stanford_profile_helper_cache_flush() {
-  $queries = [];
-  /** @var \Drupal\views\Entity\View[] $views */
-  $views = \Drupal::entityTypeManager()->getStorage('view')
-    ->loadByProperties(['status' => TRUE]);
-  foreach ($views as $view) {
-    foreach ($view->get('display') as $display) {
-      $filters = $display['display_options']['filters'] ?? [];
-      foreach ($filters as $filter) {
-        $queries[] = $filter['expose']['identifier'] ?? NULL;
-      }
-    }
-  }
-  $queries = array_unique(array_filter($queries));
-  asort($queries);
-  \Drupal::state()
-    ->set('page_cache_query_ignore.view_params', array_values($queries));
-}
-
-/**
- * Implements hook_ENTITY_TYPE_update().
- */
-function stanford_profile_helper_view_update(ViewEntityInterface $view) {
-  // After updating a view, reset the page_cache_query_ignore state.
-  stanford_profile_helper_cache_flush();
+  $file_system->saveData(json_encode($site_information, JSON_PRETTY_PRINT), "$directory/site-info.json", FileExists::Replace);
 }
 
 /**
@@ -151,16 +146,6 @@ function stanford_profile_helper_entity_type_alter(array &$entity_types) {
   if (isset($entity_types['menu_link_content'])) {
     $entity_types['menu_link_content']->addConstraint('menu_link_item_url_constraint');
   }
-}
-
-/**
- * Implements hook_local_tasks_alter().
- */
-function stanford_profile_helper_local_tasks_alter(&$local_tasks) {
-  // Remove this when a new release for the scheduler module comes out above
-  // 2.0.0-alpha1.
-  // @see https://www.drupal.org/project/scheduler/issues/3224340.
-  unset($local_tasks['scheduler.scheduled_content'], $local_tasks['scheduler.scheduled_media'], $local_tasks['scheduler.media_overview']);
 }
 
 /**
@@ -467,7 +452,19 @@ function stanford_profile_helper_entity_field_access($operation, FieldDefinition
     $items->getEntity()->id()
   ) {
     // Prevent unpublishing the home, 404 and 403 pages.
-    return stanford_profile_helper_node_access($items->getEntity(), 'delete', $account);
+    $node = $items->getEntity();
+    $site_config = \Drupal::config('system.site');
+    $node_urls = [
+      $node->toUrl()->toString(TRUE)->getGeneratedUrl(),
+      "/node/{$node->id()}",
+    ];
+
+    // If the node is configured to be the home page, 404, or 403, prevent the
+    // user from deleting. Unfortunately this only works for roles without the
+    // "Bypass content access control" permission.
+    if (array_intersect($node_urls, $site_config->get('page'))) {
+      return AccessResult::forbidden();
+    }
   }
 
   if (
@@ -551,6 +548,11 @@ function stanford_profile_helper_node_access(NodeInterface $node, $op, AccountIn
     if (array_intersect($node_urls, $site_config->get('page'))) {
       return AccessResult::forbidden();
     }
+  }
+
+  $locked_node_ids = \Drupal::state()->get('stanford_profile_helper.locked_admin_nodes', []);
+  if (in_array($node->id(), $locked_node_ids)) {
+    return $op === 'view' ? AccessResult::forbiddenIf($account->isAnonymous()) : AccessResult::forbidden();
   }
   return AccessResult::neutral();
 }
@@ -968,7 +970,6 @@ function stanford_profile_helper_field_widget_datetime_timestamp_no_default_form
  * Implements hook_entity_bundle_field_info_alter().
  */
 function stanford_profile_helper_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
-
   if (
     $bundle == 'stanford_global_message' &&
     !empty($fields['su_global_msg_enabled'])
@@ -1205,5 +1206,20 @@ function stanford_profile_helper_search_api_algolia_objects_alter(array &$object
         $field = str_replace($current_host, $site_domain, $field);
       }
     }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_load().
+ */
+function stanford_profile_helper_xmlsitemap_load($entities) {
+  /** @var \Drupal\xmlsitemap\XmlSitemapInterface $xml_entity */
+  foreach ($entities as $xml_entity) {
+    // When loading the XML sitemaps, set the uri to include the base url. This
+    // will fix cron google submissions as well as decoupled site scenarios.
+    $uri = $xml_entity->get('uri');
+    $base_url = \Drupal::state()->get('xmlsitemap_base_url');
+    $uri['path'] = $base_url . $uri['path'];
+    $xml_entity->set('uri', $uri);
   }
 }

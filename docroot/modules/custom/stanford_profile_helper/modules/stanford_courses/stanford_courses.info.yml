@@ -1,8 +1,8 @@
 name: 'Stanford Courses'
 type: module
 description: 'Courses content type'
-core_version_requirement: ^9 || ^10 || ^11
-version: 9.6.12
+core_version_requirement: ^10.3 || ^11
+version: 9.8.2
 package: Stanford
 dependencies:
   - config_pages:config_pages
@@ -30,7 +30,6 @@ dependencies:
   - layout_library:layout_library
   - menu_block:menu_block
   - migrate_plus:migrate_plus
-  - page_manager:page_manager
   - pathauto:pathauto
   - rabbit_hole:rabbit_hole
   - rabbit_hole:rh_node

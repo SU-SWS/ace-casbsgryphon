@@ -69,3 +69,10 @@ drupal-media[data-align=right] {
     }
   }
 }
+
+// Fixes color contast issue with links inside warning messages.
+.messages.messages--warning a {
+  color: #000;
+  font-weight: bold;
+}
+
