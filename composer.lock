@@ -2532,17 +2532,17 @@
         },
         {
             "name": "drupal/admin_toolbar",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/admin_toolbar.git",
-                "reference": "3.5.0"
+                "reference": "3.5.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/admin_toolbar-3.5.0.zip",
-                "reference": "3.5.0",
-                "shasum": "099e8d4dc98e1d551b4f9cffdc39599eb8ad04e8"
+                "url": "https://ftp.drupal.org/files/projects/admin_toolbar-3.5.1.zip",
+                "reference": "3.5.1",
+                "shasum": "b5215109836f7fade374fef531231e36c1c9b945"
             },
             "require": {
                 "drupal/core": "^9.5 || ^10 || ^11"
@@ -2553,8 +2553,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.5.0",
-                    "datestamp": "1722639094",
+                    "version": "3.5.1",
+                    "datestamp": "1730409973",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -10495,7 +10495,7 @@
             ],
             "authors": [
                 {
-                    "name": "Heine",
+                    "name": "heine",
                     "homepage": "https://www.drupal.org/user/17943"
                 },
                 {
@@ -11091,7 +11091,7 @@
                     "homepage": "https://www.drupal.org/user/1321830"
                 },
                 {
-                    "name": "stBorchert",
+                    "name": "stborchert",
                     "homepage": "https://www.drupal.org/user/36942"
                 }
             ],
@@ -17062,16 +17062,16 @@
         },
         {
             "name": "su-sws/stanford_media",
-            "version": "11.1.1",
+            "version": "11.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SU-SWS/stanford_media.git",
-                "reference": "b5defd8c3f740b5a91154e27750cc61594fd667a"
+                "reference": "c52f9e03bfa31dbebf1478f03603a5eb73702053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SU-SWS/stanford_media/zipball/b5defd8c3f740b5a91154e27750cc61594fd667a",
-                "reference": "b5defd8c3f740b5a91154e27750cc61594fd667a",
+                "url": "https://api.github.com/repos/SU-SWS/stanford_media/zipball/c52f9e03bfa31dbebf1478f03603a5eb73702053",
+                "reference": "c52f9e03bfa31dbebf1478f03603a5eb73702053",
                 "shasum": ""
             },
             "require": {
@@ -17118,9 +17118,9 @@
             "homepage": "https://github.com/SU-SWS/stanford_media",
             "support": {
                 "issues": "https://github.com/SU-SWS/stanford_media/issues",
-                "source": "https://github.com/SU-SWS/stanford_media/tree/11.1.1"
+                "source": "https://github.com/SU-SWS/stanford_media/tree/11.1.2"
             },
-            "time": "2024-08-28T15:20:00+00:00"
+            "time": "2024-10-29T16:48:32+00:00"
         },
         {
             "name": "su-sws/stanford_migrate",

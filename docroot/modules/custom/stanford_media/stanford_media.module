@@ -156,15 +156,6 @@ function stanford_media_field_widget_single_element_form_alter(array &$element, 
   }
 }
 
-
-/**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
- */
-function stanford_media_field_widget_text_textarea_form_alter(&$element, FormStateInterface $form_state, $context) {
-  // Adds the library outside ckeditor iframe.
-  $element['#attached']['library'][] = 'stanford_media/admin';
-}
-
 /**
  * Implements hook_theme_registry_alter().
  */
