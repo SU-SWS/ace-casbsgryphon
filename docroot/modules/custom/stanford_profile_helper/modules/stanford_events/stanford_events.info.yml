@@ -3,10 +3,9 @@ type: module
 description: 'Event content type, views, and importer.'
 core_version_requirement: ^10.3 || ^11
 package: Stanford
-version: 9.8.2
+version: 9.8.8
 dependencies:
   - address:address
-  - allowed_formats:allowed_formats
   - auto_entitylabel:auto_entitylabel
   - components:components
   - default_content:default_content
