@@ -12,9 +12,10 @@ third_party_settings:
       - main
     parent: 'main:'
   node_revision_delete:
-    minimum_revisions_to_keep: 5
-    minimum_age_to_delete: 0
-    when_to_delete: 0
+    amount:
+      status: true
+      settings:
+        amount: 5
   scheduler:
     expand_fieldset: when_required
     fields_display_mode: vertical_tab
@@ -30,8 +31,8 @@ third_party_settings:
     unpublish_revision: false
 name: 'Basic Page'
 type: stanford_page
-description: ''
-help: ''
+description: null
+help: null
 new_revision: true
 preview_mode: 0
 display_submitted: false

@@ -7,6 +7,7 @@ use Drupal\consumers\Entity\Consumer;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\core_event_dispatcher\Event\Entity\EntityInsertEvent;
 use Drupal\Core\Site\Settings;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\default_content\Event\ImportEvent;
 use Drupal\file\Entity\File;
 use Drupal\KernelTests\KernelTestBase;
@@ -14,6 +15,7 @@ use Drupal\media\Entity\Media;
 use Drupal\media\Entity\MediaType;
 use Drupal\stanford_profile\EventSubscriber\EventSubscriber as StanfordEventSubscriber;
 use Drupal\user\Entity\Role;
+use GuzzleHttp\ClientInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -43,6 +45,8 @@ class EventSubscriberTest extends KernelTestBase {
     'serialization',
     'media',
     'test_stanford_profile',
+    'samlauth',
+    'externalauth'
   ];
 
   /**
@@ -68,8 +72,9 @@ class EventSubscriberTest extends KernelTestBase {
     $file_system = \Drupal::service('file_system');
     $logger_factory = \Drupal::service('logger.factory');
     $messenger = \Drupal::messenger();
+    $client = $this->createMock(ClientInterface::class);
 
-    $this->eventSubscriber = new TestStanfordEventSubscriber($file_system, $logger_factory, $messenger);
+    $this->eventSubscriber = new TestStanfordEventSubscriber($file_system, $client, $logger_factory, $messenger);
 
     /** @var \Drupal\media\MediaTypeInterface $media_type */
     $media_type = MediaType::create([
@@ -124,7 +129,6 @@ class EventSubscriberTest extends KernelTestBase {
   }
 
   public function testUserInsert() {
-    \Drupal::service('module_installer')->install(['samlauth']);
     $role = Role::create(['id' => 'test_role1', 'label' => 'Test role 1']);
     $role->save();
 
@@ -146,6 +150,7 @@ class EventSubscriberTest extends KernelTestBase {
     new Settings($site_settings);
 
     $config_page_loader = $this->createMock(ConfigPagesLoaderServiceInterface::class);
+    $config_page_loader->method('getValue')->willReturn(date(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, 0));
     \Drupal::getContainer()->set('config_pages.loader', $config_page_loader);
 
     $account = $this->createMock(AccountProxyInterface::class);

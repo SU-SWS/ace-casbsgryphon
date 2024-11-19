@@ -4,8 +4,8 @@ namespace Drupal\stanford_profile\EventSubscriber;
 
 use Acquia\DrupalEnvironmentDetector\AcquiaDrupalEnvironmentDetector;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
-use Drupal\Core\Installer\InstallerKernel;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Site\Settings;
@@ -19,7 +19,9 @@ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\default_content\Event\DefaultContentEvents;
 use Drupal\default_content\Event\ImportEvent;
 use Drupal\file\FileInterface;
+use Drupal\user\Entity\Role;
 use Drupal\user\RoleInterface;
+use GuzzleHttp\ClientInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -71,12 +73,14 @@ class EventSubscriber implements EventSubscriberInterface {
    *
    * @param \Drupal\Core\File\FileSystemInterface $fileSystem
    *   File system service.
+   * @param \GuzzleHttp\ClientInterface $client
+   *   Guzzle client service.
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
    *   Logger factory service.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   Messenger service.
    */
-  public function __construct(protected FileSystemInterface $fileSystem, LoggerChannelFactoryInterface $logger_factory, protected MessengerInterface $messenger) {
+  public function __construct(protected FileSystemInterface $fileSystem, protected ClientInterface $client, LoggerChannelFactoryInterface $logger_factory, protected MessengerInterface $messenger) {
     $this->logger = $logger_factory->get('stanford_profile');
   }
 
@@ -98,13 +102,21 @@ class EventSubscriber implements EventSubscriberInterface {
    * @param \Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent $event
    *   Entity presave event.
    */
-  public function onEntityPreSave(EntityPresaveEvent $event) {
+  public static function onEntityPreSave(EntityPresaveEvent $event) {
     $entity = $event->getEntity();
+
+    // Invalidate the site renewal redirect logic in case the user now has
+    // permissions to make the needed changes.
+    if ($entity->getEntityTypeId() == 'user') {
+      \Drupal::cache()->invalidate('su_renew_site:' . $entity->id());
+    }
     if (
+      PHP_SAPI != 'cli' &&
       $entity->getEntityTypeId() == 'config_pages' &&
-      $entity->bundle() == 'stanford_basic_site_settings'
+      $entity->bundle() == 'stanford_basic_site_settings' &&
+      self::redirectUser()
     ) {
-      $renewal_date = time() + (InstallerKernel::installationAttempted() ? 0 : 60 * 60 * 24 * 365);
+      $renewal_date = time() + 60 * 60 * 24 * 365;
       $entity->set('su_site_renewal_due', date(DateTimeItemInterface::DATETIME_STORAGE_FORMAT, $renewal_date));
       Cache::invalidateTags(['site-renew-date']);
     }
@@ -125,9 +137,11 @@ class EventSubscriber implements EventSubscriberInterface {
       !str_starts_with($current_uri, '/admin/config/system/basic-site-settings') &&
       self::redirectUser()
     ) {
-      $config_page_url = Url::fromRoute('config_pages.stanford_basic_site_settings', [], ['query' => ['destination' => $current_uri]]);
+      $config_page_url = Url::fromRoute('config_pages.stanford_basic_site_settings', [], ['query' => ['destination' => $current_uri]])
+        ->toString(TRUE)
+        ->getGeneratedUrl();
       $this->messenger->addWarning('Please update or verify the site contact information on the "Site Contacts" tab.');
-      $event->setResponse(new RedirectResponse($config_page_url->toString(TRUE)->getGeneratedUrl() . '#contact'));
+      $event->setResponse(new RedirectResponse($config_page_url . '#contact'));
     }
   }
 
@@ -148,7 +162,8 @@ class EventSubscriber implements EventSubscriberInterface {
       return FALSE;
     }
 
-    if ($cache_data = $cache->get('su_renew_site:' . $current_user->id())) {
+    $cache_data = $cache->get('su_renew_site:' . $current_user->id());
+    if ($cache_data) {
       return $cache_data->data;
     }
 
@@ -161,8 +176,8 @@ class EventSubscriber implements EventSubscriberInterface {
     $site_manager = $current_user->hasPermission('edit stanford_basic_site_settings config page entity') && !in_array('administrator', $current_user->getRoles());
 
     // If the renewal date has passed, they should be redirected.
-    $needs_renewal = !getenv('CI') && $site_manager && (strtotime($renewal_date) - time() < 60 * 60 * 24);
-    $cache->set('su_renew_site:' . $current_user->id(), $needs_renewal, time() + 60 * 60 * 24, ['site-renew-date']);
+    $needs_renewal = !getenv('CI') && $site_manager && strtotime($renewal_date) < time();
+    $cache->set('su_renew_site:' . $current_user->id(), $needs_renewal, strtotime($renewal_date), ['site-renew-date']);
 
     return $needs_renewal;
   }
@@ -187,7 +202,7 @@ class EventSubscriber implements EventSubscriberInterface {
       return;
     }
 
-    $role_ids = array_keys(user_role_names(TRUE));
+    $role_ids = array_keys(Role::loadMultiple());
     $role_ids = array_combine($role_ids, $role_ids);
     unset($role_ids[RoleInterface::AUTHENTICATED_ID]);
     asort($role_ids);
@@ -257,7 +272,7 @@ class EventSubscriber implements EventSubscriberInterface {
           '%source' => $local_file,
           '%destination' => $file_uri,
         ]);
-        $this->fileSystem->copy($local_file, $file_uri, FileSystemInterface::EXISTS_REPLACE);
+        $this->fileSystem->copy($local_file, $file_uri, FileExists::Replace);
         return;
       }
       catch (\Exception $e) {
@@ -292,7 +307,8 @@ class EventSubscriber implements EventSubscriberInterface {
       '%source' => $source,
       '%destination' => $destination,
     ]);
-    return system_retrieve_file($source, $destination, FALSE, FileSystemInterface::EXISTS_REPLACE);
+    $data = (string) $this->client->get($source)->getBody();
+    return $this->fileSystem->saveData($data, $destination, FileExists::Replace);
   }
 
 }

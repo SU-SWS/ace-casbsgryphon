@@ -8,29 +8,6 @@ dependencies:
     - field.field.node.stanford_person.field_menulink
     - field.field.node.stanford_person.layout_builder__layout
     - field.field.node.stanford_person.stanford_intranet__access
-    - field.field.node.stanford_person.su_casbs_cs_year
-    - field.field.node.stanford_person.su_casbs_cs_year_in_stu
-    - field.field.node.stanford_person.su_casbs_current_affiliation
-    - field.field.node.stanford_person.su_casbs_custom_order
-    - field.field.node.stanford_person.su_casbs_facfellow_year_in_stu
-    - field.field.node.stanford_person.su_casbs_faculty_fellow_year
-    - field.field.node.stanford_person.su_casbs_feature_people
-    - field.field.node.stanford_person.su_casbs_feature_people_text
-    - field.field.node.stanford_person.su_casbs_fellow_year
-    - field.field.node.stanford_person.su_casbs_fellow_year_in_stu
-    - field.field.node.stanford_person.su_casbs_field_discipline
-    - field.field.node.stanford_person.su_casbs_person_bio
-    - field.field.node.stanford_person.su_casbs_person_book_links
-    - field.field.node.stanford_person.su_casbs_person_id
-    - field.field.node.stanford_person.su_casbs_person_journal_links
-    - field.field.node.stanford_person.su_casbs_person_type
-    - field.field.node.stanford_person.su_casbs_pract_year_in_stu
-    - field.field.node.stanford_person.su_casbs_practitioner_year
-    - field.field.node.stanford_person.su_casbs_profile_picture
-    - field.field.node.stanford_person.su_casbs_ra_year
-    - field.field.node.stanford_person.su_casbs_ra_year_in_stu
-    - field.field.node.stanford_person.su_casbs_visiting_scholar_year
-    - field.field.node.stanford_person.su_casbs_vs_year_in_stu
     - field.field.node.stanford_person.su_metatags
     - field.field.node.stanford_person.su_person_academic_appt
     - field.field.node.stanford_person.su_person_admin_appts
@@ -62,7 +39,6 @@ dependencies:
     - views.view.stanford_publications
   module:
     - entity_reference_revisions
-    - image
     - jumpstart_ui
     - layout_builder
     - layout_builder_restrictions
@@ -196,7 +172,7 @@ third_party_settings:
                 third_party_settings:
                   field_formatter_class:
                     class: su-person-name
-            weight: 2
+            weight: 1
             additional: {  }
           e0a82a15-455a-4d3b-99f8-446122b1d302:
             uuid: e0a82a15-455a-4d3b-99f8-446122b1d302
@@ -208,6 +184,55 @@ third_party_settings:
               provider: jumpstart_ui
               context_mapping: {  }
             weight: -10
+            additional: {  }
+          65beb11f-8040-4951-8ad7-90e28d5a566a:
+            uuid: 65beb11f-8040-4951-8ad7-90e28d5a566a
+            region: quote_long_title
+            configuration:
+              id: 'field_block:node:stanford_person:su_person_full_title'
+              label: 'Full Title'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: basic_string
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  field_formatter_class:
+                    class: su-person-full-title
+            weight: 0
+            additional: {  }
+          4aa9941a-d5a0-4640-80b8-4f47de956405:
+            uuid: 4aa9941a-d5a0-4640-80b8-4f47de956405
+            region: quote_media
+            configuration:
+              id: 'field_block:node:stanford_person:su_person_photo'
+              label: Photo
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: media_image_formatter
+                label: hidden
+                settings:
+                  view_mode: default
+                  link: false
+                  image_style: large_square
+                  remove_alt: true
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: su-person-photo
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 0
             additional: {  }
           9e6e76d4-b758-4c2b-97a7-495f43965c3a:
             uuid: 9e6e76d4-b758-4c2b-97a7-495f43965c3a
@@ -228,302 +253,7 @@ third_party_settings:
                 third_party_settings:
                   field_formatter_class:
                     class: ''
-            weight: 3
-            additional: {  }
-          a396af0e-0034-42a9-94b8-8744e157c175:
-            uuid: a396af0e-0034-42a9-94b8-8744e157c175
-            region: content
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_person_journal_links'
-              label: 'Tyler Journal Articles'
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-            weight: 4
-            additional: {  }
-          4fd5ee88-7224-4455-b361-6ffedb47b583:
-            uuid: 4fd5ee88-7224-4455-b361-6ffedb47b583
-            region: quote_media
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_profile_picture'
-              label: casbs_profile_picture
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: image
-                label: hidden
-                settings:
-                  image_link: ''
-                  image_style: ''
-                  image_loading:
-                    attribute: lazy
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
             weight: 1
-            additional: {  }
-          aa06bafb-673f-4302-a7f2-01318f070942:
-            uuid: aa06bafb-673f-4302-a7f2-01318f070942
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_current_affiliation'
-              label: 'Current Affiliation'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: ''
-            weight: 2
-            additional: {  }
-          d69f9571-19ad-4732-aeb0-abc445b079da:
-            uuid: d69f9571-19ad-4732-aeb0-abc445b079da
-            region: content
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_person_book_links'
-              label: 'Tyler Books'
-              label_display: visible
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-            weight: 3
-            additional: {  }
-          3c7a5621-2806-4572-9c86-0ad5044841d6:
-            uuid: 3c7a5621-2806-4572-9c86-0ad5044841d6
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_field_discipline'
-              label: Discipline
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: ''
-            weight: 1
-            additional: {  }
-          303bfc10-c3b7-46c9-84fc-12ea90fae2b7:
-            uuid: 303bfc10-c3b7-46c9-84fc-12ea90fae2b7
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_fellow_year_in_stu'
-              label: 'Fellowship year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 5
-            additional: {  }
-          a65d51d3-48cb-43ae-ae56-d590a192a862:
-            uuid: a65d51d3-48cb-43ae-ae56-d590a192a862
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_facfellow_year_in_stu'
-              label: 'Faculty Fellow year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 7
-            additional: {  }
-          5698d21d-966e-404d-a2b7-b83b6fe41b8c:
-            uuid: 5698d21d-966e-404d-a2b7-b83b6fe41b8c
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_vs_year_in_stu'
-              label: 'Visiting Scholar year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 9
-            additional: {  }
-          7a779b74-a3af-4dc4-a490-9383b388f5d8:
-            uuid: 7a779b74-a3af-4dc4-a490-9383b388f5d8
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_cs_year_in_stu'
-              label: 'Consulting Scholar year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 13
-            additional: {  }
-          7703713d-3980-43aa-9145-90a09f900b40:
-            uuid: 7703713d-3980-43aa-9145-90a09f900b40
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_pract_year_in_stu'
-              label: 'Practitioner year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 15
-            additional: {  }
-          4f28d9ac-a14d-4deb-805b-744412f89627:
-            uuid: 4f28d9ac-a14d-4deb-805b-744412f89627
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_ra_year_in_stu'
-              label: 'Research Affiliate year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 11
-            additional: {  }
-          1cab0e05-0960-4b0e-83cf-8e42c26a0c56:
-            uuid: 1cab0e05-0960-4b0e-83cf-8e42c26a0c56
-            region: content
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_person_bio'
-              label: casbs_person_bio
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: ''
-            weight: 2
             additional: {  }
         third_party_settings: {  }
       -
@@ -553,10 +283,13 @@ third_party_settings:
                   rel: nofollow
                   target: '0'
                 third_party_settings:
+                  empty_fields:
+                    handler: ''
                   field_formatter_class:
                     class: su-person-links
-                  ds:
-                    ds_limit: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: h3
             weight: 10
             additional: {  }
           82a532c7-d73f-491e-8ce3-3fd27c29a815:
@@ -580,8 +313,14 @@ third_party_settings:
                   rel: '0'
                   target: '0'
                 third_party_settings:
+                  empty_fields:
+                    handler: ''
                   field_formatter_class:
                     class: su-person-map-link
+                  field_label:
+                    label_class: ''
+                    label_value: ''
+                    label_tag: ''
             weight: 9
             additional: {  }
           a69dd40a-c1a3-4266-b0ce-7efdaaa137fe:
@@ -621,9 +360,42 @@ third_party_settings:
                 settings:
                   link_to_entity: false
                 third_party_settings:
+                  empty_fields:
+                    handler: ''
                   field_formatter_class:
                     class: su-person-location-name
+                  field_label:
+                    label_class: ''
+                    label_value: ''
+                    label_tag: h3
             weight: 6
+            additional: {  }
+          8222e428-abc1-40e2-9309-e6ca03530c1f:
+            uuid: 8222e428-abc1-40e2-9309-e6ca03530c1f
+            region: right
+            configuration:
+              id: 'field_block:node:stanford_person:su_person_mail_code'
+              label: 'Mail Code'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: su-person-mail-code
+                  field_label:
+                    label_class: ''
+                    label_value: ''
+                    label_tag: ''
+            weight: 5
             additional: {  }
           0cff0fa4-edcc-4bae-93bf-865242051b35:
             uuid: 0cff0fa4-edcc-4bae-93bf-865242051b35
@@ -780,6 +552,26 @@ third_party_settings:
                     ds_limit: ''
             weight: 2
             additional: {  }
+          42f48ce2-9cfb-442c-9c7a-55a63ddf63e4:
+            uuid: 42f48ce2-9cfb-442c-9c7a-55a63ddf63e4
+            region: main
+            configuration:
+              id: 'field_block:node:stanford_person:body'
+              label: Body
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  field_formatter_class:
+                    class: su-person-body
+            weight: 0
+            additional: {  }
           cc3fd331-6cc8-4988-88ed-2312832a2e19:
             uuid: cc3fd331-6cc8-4988-88ed-2312832a2e19
             region: main
@@ -817,7 +609,7 @@ third_party_settings:
                 label: hidden
                 settings:
                   class: su-button
-                  trim_length: 80
+                  trim_length: null
                   url_only: false
                   url_plain: false
                   rel: '0'
@@ -854,14 +646,11 @@ third_party_settings:
   layout_builder_restrictions:
     allowed_block_categories:
       - 'Basic Page Type Lists (Views)'
-      - Book
-      - 'Changelog (Views)'
       - 'Chaos Tools'
       - 'Config Pages'
       - 'Content fields'
       - 'Custom block types'
       - 'Custom blocks'
-      - Editoria11y
       - 'Events Lists (Views)'
       - Forms
       - Help
@@ -872,42 +661,87 @@ third_party_settings:
       - 'News Lists (Views)'
       - 'PDB React'
       - 'People Lists (Views)'
-      - 'Policy (Views)'
-      - Printable
       - 'Publication (Views)'
       - React
+      - 'SimpleSAMLphp Authentication'
       - 'Stanford News'
       - 'Stanford Profile Helper'
-      - 'Stanford SAML Authentication'
+      - 'Stanford SimpleSAML PHP'
       - System
-      - 'Taxonomy Terms (Views)'
-      - User
       - Views
       - core
     entity_view_mode_restriction:
-      allowed_layouts: {  }
+      allowed_layouts:
+        - jumpstart_ui_one_column
+        - jumpstart_ui_two_column
+        - jumpstart_ui_three_column
+        - stanford_person_header
+        - stanford_person_body
       denylisted_blocks:
-        'Content fields': {  }
+        'Content fields':
+          - 'field_block:node:stanford_person:uid'
+          - 'field_block:node:stanford_person:created'
+          - 'field_block:node:stanford_person:type'
+          - 'field_block:node:stanford_person:revision_default'
+          - 'field_block:node:stanford_person:default_langcode'
+          - 'field_block:node:stanford_person:nid'
+          - 'field_block:node:stanford_person:langcode'
+          - 'extra_field_block:node:stanford_person:links'
+          - 'field_block:node:stanford_person:menu_link'
+          - 'field_block:node:stanford_person:promote'
+          - 'field_block:node:stanford_person:status'
+          - 'field_block:node:stanford_person:rh_action'
+          - 'field_block:node:stanford_person:rh_redirect_fallback_action'
+          - 'field_block:node:stanford_person:rh_redirect'
+          - 'field_block:node:stanford_person:rh_redirect_response'
+          - 'field_block:node:stanford_person:revision_timestamp'
+          - 'field_block:node:stanford_person:vid'
+          - 'field_block:node:stanford_person:revision_log'
+          - 'field_block:node:stanford_person:revision_translation_affected'
+          - 'field_block:node:stanford_person:revision_uid'
+          - 'extra_field_block:node:stanford_person:search_api_excerpt'
+          - 'field_block:node:stanford_person:sticky'
+          - 'field_block:node:stanford_person:unpublish_on'
+          - 'field_block:user:user:changed'
+          - 'field_block:user:user:created'
+          - 'field_block:user:user:default_langcode'
+          - 'field_block:user:user:su_display_name'
+          - 'field_block:user:user:mail'
+          - 'field_block:user:user:init'
+          - 'field_block:user:user:langcode'
+          - 'field_block:user:user:access'
+          - 'field_block:user:user:login'
+          - 'extra_field_block:user:user:member_for'
+          - 'field_block:user:user:name'
+          - 'field_block:user:user:preferred_admin_langcode'
+          - 'field_block:user:user:preferred_langcode'
+          - 'field_block:user:user:role_change'
+          - 'field_block:user:user:roles'
+          - 'extra_field_block:user:user:search_api_excerpt'
+          - 'field_block:user:user:timezone'
+          - 'field_block:user:user:uid'
+          - 'field_block:user:user:status'
       allowlisted_blocks:
-        Menus: {  }
-        System: {  }
-        core: {  }
+        Menus:
+          - 'system_menu_block:stanford-event-types'
+          - 'menu_block:main'
+          - 'system_menu_block:stanford-person-type'
+          - 'system_menu_block:stanford-publication-topics'
+          - 'system_menu_block:news-topics'
+        System:
+          - system_breadcrumb_block
+        core:
+          - page_title_block
       restricted_categories:
-        - Book
-        - 'Changelog (Views)'
         - 'Chaos Tools'
         - 'Config Pages'
-        - Editoria11y
         - Forms
         - Help
         - 'Lists (Views)'
-        - 'Policy (Views)'
-        - Printable
         - React
+        - 'SimpleSAMLphp Authentication'
         - 'Stanford Profile Helper'
-        - 'Stanford SAML Authentication'
-        - 'Taxonomy Terms (Views)'
-        - User
+        - 'Stanford SimpleSAML PHP'
         - Views
   layout_library:
     enable: false
@@ -928,183 +762,11 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
-  su_casbs_cs_year:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 132
-    region: content
-  su_casbs_cs_year_in_stu:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 149
-    region: content
-  su_casbs_current_affiliation:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 133
-    region: content
-  su_casbs_custom_order:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 146
-    region: content
-  su_casbs_facfellow_year_in_stu:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 148
-    region: content
-  su_casbs_faculty_fellow_year:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 135
-    region: content
-  su_casbs_feature_people:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 136
-    region: content
-  su_casbs_feature_people_text:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 139
-    region: content
-  su_casbs_fellow_year:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 145
-    region: content
-  su_casbs_fellow_year_in_stu:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 147
-    region: content
-  su_casbs_field_discipline:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 134
-    region: content
-  su_casbs_person_bio:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 131
-    region: content
-  su_casbs_person_book_links:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 129
-    region: content
-  su_casbs_person_id:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 128
-    region: content
-  su_casbs_person_journal_links:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 130
-    region: content
-  su_casbs_person_type:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 144
-    region: content
-  su_casbs_pract_year_in_stu:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 151
-    region: content
-  su_casbs_practitioner_year:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 140
-    region: content
-  su_casbs_profile_picture:
-    type: image
-    label: above
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
-    weight: 141
-    region: content
-  su_casbs_ra_year:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 142
-    region: content
-  su_casbs_visiting_scholar_year:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 143
-    region: content
-  su_casbs_vs_year_in_stu:
-    type: text_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 150
-    region: content
   su_person_affiliations:
     type: link
     label: above
     settings:
-      trim_length: 80
+      trim_length: null
       url_only: false
       url_plain: false
       rel: ''
@@ -1171,7 +833,7 @@ content:
     type: link
     label: above
     settings:
-      trim_length: 80
+      trim_length: null
       url_only: false
       url_plain: false
       rel: ''
@@ -1206,7 +868,7 @@ content:
     type: link
     label: above
     settings:
-      trim_length: 80
+      trim_length: null
       url_only: false
       url_plain: false
       rel: ''
@@ -1235,7 +897,7 @@ content:
     type: link
     label: above
     settings:
-      trim_length: 80
+      trim_length: null
       url_only: false
       url_plain: false
       rel: ''
@@ -1279,7 +941,6 @@ hidden:
   layout_builder__layout: true
   search_api_excerpt: true
   stanford_intranet__access: true
-  su_casbs_ra_year_in_stu: true
   su_metatags: true
   su_person_academic_appt: true
   su_person_admin_appts: true
