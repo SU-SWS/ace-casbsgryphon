@@ -7,7 +7,7 @@
         "docs": "https://userguide.sites.stanford.edu/"
     },
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.3",
         "acquia/blt": "^13.7",
         "cweagans/composer-patches": "^1.6",
         "drupal/acquia_connector": "^3.0",
