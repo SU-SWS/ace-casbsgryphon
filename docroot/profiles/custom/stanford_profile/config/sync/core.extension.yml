@@ -5,6 +5,7 @@ module:
   address: 0
   admin_toolbar: 0
   admin_toolbar_tools: 0
+  allowed_formats: 0
   autologout: 0
   basic_auth: 0
   block: 0
@@ -145,6 +146,7 @@ module:
   oembed_providers: 0
   options: 0
   page_cache: 0
+  page_manager: 0
   paragraphs_edit: 0
   path: 0
   path_alias: 0
