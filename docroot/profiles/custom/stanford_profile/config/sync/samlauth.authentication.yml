@@ -9,7 +9,6 @@ error_throw: false
 local_login_saml_error: false
 logout_different_user: false
 drupal_login_roles:
-  administrator: '0'
   authenticated: '0'
   stanford_faculty: '0'
   stanford_staff: '0'
