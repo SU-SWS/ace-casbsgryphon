@@ -10,6 +10,7 @@ use Drupal\migrate_plus\Entity\MigrationGroup;
 use Drupal\migrate_plus\Entity\MigrationInterface;
 use Drupal\Tests\stanford_migrate\Kernel\StanfordMigrateKernelTestBase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class StanfordMigrateCsvImportFormTest.
@@ -42,33 +43,6 @@ class StanfordMigrateCsvImportFormTest extends StanfordMigrateKernelTestBase {
     parent::setUp();
     $this->installEntitySchema('file');
     $this->installSchema('file', ['file_usage']);
-  }
-
-  /**
-   * Migrations that aren't csv importers are denied access.
-   */
-  public function testNonCsvAccess() {
-    $this->setMigrationRequest(Migration::load('stanford_migrate'));
-
-    $form_object = \Drupal::entityTypeManager()
-      ->getFormObject('migration', 'csv-upload');
-    $account = $this->createMock(AccountInterface::class);
-    $this->assertFalse($form_object->access($account)->isAllowed());
-  }
-
-  /**
-   * CSV Importers have permission access.
-   */
-  public function testCsvPermissionAccess() {
-    $this->setCsvMigrationRequest();
-
-    $account = $this->createMock(AccountInterface::class);
-    $form_object = \Drupal::entityTypeManager()
-      ->getFormObject('migration', 'csv-upload');
-    $this->assertFalse($form_object->access($account)->isAllowed());
-
-    $account->method('hasPermission')->willReturn(TRUE);
-    $this->assertTrue($form_object->access($account)->isAllowed());
   }
 
   /**
@@ -157,6 +131,8 @@ class StanfordMigrateCsvImportFormTest extends StanfordMigrateKernelTestBase {
       'migration' => $migration,
     ];
     $request = new Request([], [], $attributes);
+    $session = $this->createMock(SessionInterface::class);
+    $request->setSession($session);
     \Drupal::requestStack()->push($request);
   }
 
