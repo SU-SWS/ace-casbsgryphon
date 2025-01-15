@@ -1,6 +1,7 @@
 INSTALL.txt
 MAINTAINERS.txt
 UPGRADE.txt
+**/.yarn
 
 # Numerous always-ignore extensions
 *.diff

@@ -250,7 +250,7 @@ third_party_settings:
                     handler: ''
                   field_formatter_class:
                     class: ''
-            weight: 4
+            weight: 3
             additional: {  }
           4fd5ee88-7224-4455-b361-6ffedb47b583:
             uuid: 4fd5ee88-7224-4455-b361-6ffedb47b583
@@ -323,7 +323,29 @@ third_party_settings:
                     handler: ''
                   field_formatter_class:
                     class: ''
-            weight: 3
+            weight: 2
+            additional: {  }
+          1cab0e05-0960-4b0e-83cf-8e42c26a0c56:
+            uuid: 1cab0e05-0960-4b0e-83cf-8e42c26a0c56
+            region: content
+            configuration:
+              id: 'field_block:node:stanford_person:su_casbs_person_bio'
+              label: casbs_person_bio
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+            weight: 1
             additional: {  }
           3c7a5621-2806-4572-9c86-0ad5044841d6:
             uuid: 3c7a5621-2806-4572-9c86-0ad5044841d6
@@ -356,157 +378,7 @@ third_party_settings:
             configuration:
               id: 'field_block:node:stanford_person:su_casbs_fellow_year_in_stu'
               label: 'Fellowship year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 5
-            additional: {  }
-          a65d51d3-48cb-43ae-ae56-d590a192a862:
-            uuid: a65d51d3-48cb-43ae-ae56-d590a192a862
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_facfellow_year_in_stu'
-              label: 'Faculty Fellow year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 7
-            additional: {  }
-          5698d21d-966e-404d-a2b7-b83b6fe41b8c:
-            uuid: 5698d21d-966e-404d-a2b7-b83b6fe41b8c
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_vs_year_in_stu'
-              label: 'Visiting Scholar year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 9
-            additional: {  }
-          7a779b74-a3af-4dc4-a490-9383b388f5d8:
-            uuid: 7a779b74-a3af-4dc4-a490-9383b388f5d8
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_cs_year_in_stu'
-              label: 'Consulting Scholar year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 13
-            additional: {  }
-          7703713d-3980-43aa-9145-90a09f900b40:
-            uuid: 7703713d-3980-43aa-9145-90a09f900b40
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_pract_year_in_stu'
-              label: 'Practitioner year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 15
-            additional: {  }
-          4f28d9ac-a14d-4deb-805b-744412f89627:
-            uuid: 4f28d9ac-a14d-4deb-805b-744412f89627
-            region: quote_long_title
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_ra_year_in_stu'
-              label: 'Research Affiliate year'
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: above
-                settings: {  }
-                third_party_settings:
-                  empty_fields:
-                    handler: ''
-                  field_formatter_class:
-                    class: ''
-                  field_label:
-                    label_value: ''
-                    label_tag: h4
-            weight: 11
-            additional: {  }
-          1cab0e05-0960-4b0e-83cf-8e42c26a0c56:
-            uuid: 1cab0e05-0960-4b0e-83cf-8e42c26a0c56
-            region: content
-            configuration:
-              id: 'field_block:node:stanford_person:su_casbs_person_bio'
-              label: casbs_person_bio
-              label_display: '0'
+              label_display: visible
               provider: layout_builder
               context_mapping:
                 entity: layout_builder.entity
@@ -523,7 +395,132 @@ third_party_settings:
                   field_label:
                     label_value: ''
                     label_tag: ''
-            weight: 2
+            weight: 5
+            additional: {  }
+          a65d51d3-48cb-43ae-ae56-d590a192a862:
+            uuid: a65d51d3-48cb-43ae-ae56-d590a192a862
+            region: quote_long_title
+            configuration:
+              id: 'field_block:node:stanford_person:su_casbs_facfellow_year_in_stu'
+              label: 'Faculty Fellow year'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 7
+            additional: {  }
+          5698d21d-966e-404d-a2b7-b83b6fe41b8c:
+            uuid: 5698d21d-966e-404d-a2b7-b83b6fe41b8c
+            region: quote_long_title
+            configuration:
+              id: 'field_block:node:stanford_person:su_casbs_vs_year_in_stu'
+              label: 'Visiting Scholar year'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 9
+            additional: {  }
+          7a779b74-a3af-4dc4-a490-9383b388f5d8:
+            uuid: 7a779b74-a3af-4dc4-a490-9383b388f5d8
+            region: quote_long_title
+            configuration:
+              id: 'field_block:node:stanford_person:su_casbs_cs_year_in_stu'
+              label: 'Consulting Scholar year'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 13
+            additional: {  }
+          7703713d-3980-43aa-9145-90a09f900b40:
+            uuid: 7703713d-3980-43aa-9145-90a09f900b40
+            region: quote_long_title
+            configuration:
+              id: 'field_block:node:stanford_person:su_casbs_pract_year_in_stu'
+              label: 'Practitioner year'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 15
+            additional: {  }
+          4f28d9ac-a14d-4deb-805b-744412f89627:
+            uuid: 4f28d9ac-a14d-4deb-805b-744412f89627
+            region: quote_long_title
+            configuration:
+              id: 'field_block:node:stanford_person:su_casbs_ra_year_in_stu'
+              label: 'Research Affiliate year'
+              label_display: visible
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings:
+                  empty_fields:
+                    handler: ''
+                  field_formatter_class:
+                    class: ''
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
+            weight: 11
             additional: {  }
         third_party_settings: {  }
       -

@@ -223,7 +223,7 @@ class Embeddable extends OEmbed implements EmbeddableInterface {
       }
       catch (\Exception $e) {
         // The plugin didn't exist, log in and move on.
-        $this->logger->error($this->t('Unable to create embed validation plugin @plugin_id. @message'), [
+        $this->logger->error('Unable to create embed validation plugin @plugin_id. @message', [
           '@plugin_id' => $plugin_id,
           '@message' => $e->getMessage(),
         ]);

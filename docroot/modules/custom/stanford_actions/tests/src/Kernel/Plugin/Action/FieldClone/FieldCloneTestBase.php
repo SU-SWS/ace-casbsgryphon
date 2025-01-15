@@ -48,7 +48,7 @@ abstract class FieldCloneTestBase extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'system',
     'node',
     'user',

@@ -7,7 +7,7 @@
         "docs": "https://userguide.sites.stanford.edu/"
     },
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.3",
         "acquia/blt": "^13.7",
         "cweagans/composer-patches": "^1.6",
         "drupal/acquia_connector": "^3.0",
@@ -149,8 +149,7 @@
                 "https://www.drupal.org/project/menu_link_weight/issues/2875984": "https://git.drupalcode.org/project/menu_link_weight/-/merge_requests/2.diff"
             },
             "drupal/core": {
-                "https://www.drupal.org/project/drupal/issues/3151977": "patches/media-recursion-limit.patch",
-                "https://www.drupal.org/project/drupal/issues/3413508": "patches/core-3413508.patch"
+                "https://www.drupal.org/project/drupal/issues/3151977": "patches/media-recursion-limit.patch"
             },
             "drupal/paranoia": {
                 "https://stanfordits.atlassian.net/browse/D8CORE-1351": "patches/contrib/paranoia.patch"

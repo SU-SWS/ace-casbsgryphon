@@ -11,9 +11,10 @@ third_party_settings:
     available_menus: {  }
     parent: ''
   node_revision_delete:
-    minimum_revisions_to_keep: 5
-    minimum_age_to_delete: 0
-    when_to_delete: 0
+    amount:
+      status: true
+      settings:
+        amount: 5
   scheduler:
     expand_fieldset: when_required
     fields_display_mode: vertical_tab
@@ -30,7 +31,7 @@ third_party_settings:
 name: Event
 type: stanford_event
 description: 'An event content type with integration with events-legacy.stanford.edu'
-help: ''
+help: null
 new_revision: true
 preview_mode: 0
 display_submitted: false

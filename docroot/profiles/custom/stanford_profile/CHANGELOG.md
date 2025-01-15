@@ -1,5 +1,46 @@
 # Stanford Profile
 
+11.4.5
+-------------------------------------------------------------------------------
+- Remove edit links in views (#821)
+- D8CORE-7564: removed decanter link and replaced with identity guide (#822)
+- D8CORE-7517 | update event subtitle heading (#816)
+- D8Core-7515: adding a few additional "Site Type" options
+
+11.4.4
+-------------------------------------------------------------------------------
+- Updated image_effects module for compatibility with imagemagic 4.0.0.
+
+11.4.3
+-------------------------------------------------------------------------------
+- Fixed basic page cards when the page has a "page title banner" image.
+
+11.4.2
+-------------------------------------------------------------------------------
+- Adjusted codeception test for cache issue.
+
+11.4.1
+-------------------------------------------------------------------------------
+- Added "Site Type" field to site information config page.
+
+11.4.0
+-------------------------------------------------------------------------------
+- Enabled internal link force relative option
+- D8CORE-7424 Added various HTML attributes to the WSYIWYG allowed list (#799)
+- D8CORE-5741: Opportunities Content type with small amount of styles (#801)
+- Updated decoupled menu and algolia search components
+- D8CORE-7455 Algolia Search: Decode html entities before stripping the html
+- D8CORE-7422 Write test for basic page list paragraph display sorts (#798)
+- D8CORE-7400 Remove alt attribute on news card images
+- D8CORE-7418 Require course link url field
+- D8CORE-7429 Display event subheadline as normal text instead of h2
+- D8CORE-7425 Display dek and date field on news cards
+- Update to drupal 10.3.0 (#794)
+- Updated permission for config pages and decoupled user role
+- Enable basic auth module and remove permissions for graphql
+- D8CORE-7413 Enabled search api processor to add spaces between html tags (#792)
+- D8CORE-7414: Different sorting option for Basic Page lists (#791)
+
 11.3.8
 -------------------------------------------------------------------------------
 

@@ -2,7 +2,7 @@ name: casbsgryphon
 recipe: drupal9
 config:
   webroot: docroot
-  php: "8.1"
+  php: "8.3"
   xdebug: false
 proxy:
   appserver:
@@ -12,6 +12,9 @@ proxy:
 services:
   appserver:
     build_as_root:
+      - apt-get update && apt-get install -y libmagickwand-dev
+      - export PHP_IMAGICK_NS=autodetect && pecl install -n imagick
+      - docker-php-ext-enable imagick
       - pecl install pcov
       - docker-php-ext-enable pcov
     build:

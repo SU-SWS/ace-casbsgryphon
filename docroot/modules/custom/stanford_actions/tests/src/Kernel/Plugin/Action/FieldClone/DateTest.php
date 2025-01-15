@@ -100,12 +100,12 @@ class DateTest extends FieldCloneTestBase {
 
     $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
     $pre_render = $view_builder->view($this->node);
-    $rendered_output = \Drupal::service('renderer')->renderPlain($pre_render);
+    $rendered_output = \Drupal::service('renderer')->renderInIsolation($pre_render);
     $this->assertStringContainsString('June 2, 2019 2:15 AM', (string) $rendered_output);
 
     $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
     $pre_render = $view_builder->view($new_node);
-    $rendered_output = \Drupal::service('renderer')->renderPlain($pre_render);
+    $rendered_output = \Drupal::service('renderer')->renderInIsolation($pre_render);
     $this->assertStringContainsString('December 2, 2019 2:15 AM', (string) $rendered_output);
   }
 
@@ -138,12 +138,12 @@ class DateTest extends FieldCloneTestBase {
 
     $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
     $pre_render = $view_builder->view($this->node);
-    $rendered_output = \Drupal::service('renderer')->renderPlain($pre_render);
+    $rendered_output = \Drupal::service('renderer')->renderInIsolation($pre_render);
     $this->assertStringContainsString('December 2, 2019 3:15 AM', (string) $rendered_output);
 
     $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
     $pre_render = $view_builder->view($new_node);
-    $rendered_output = \Drupal::service('renderer')->renderPlain($pre_render);
+    $rendered_output = \Drupal::service('renderer')->renderInIsolation($pre_render);
     $this->assertStringContainsString('June 2, 2020 3:15 AM', (string) $rendered_output);
   }
 

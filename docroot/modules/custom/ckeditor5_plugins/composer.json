@@ -6,6 +6,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "drupal/core": "^9.5 || ^10.0"
+        "drupal/core": "^9.5 || ^10.0 || ^11"
     }
 }
