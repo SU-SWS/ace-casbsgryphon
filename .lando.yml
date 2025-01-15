@@ -11,14 +11,15 @@ proxy:
     - adminer.casbs.lndo.site
 services:
   appserver:
+    composer_version: '2'
     build_as_root:
-      - apt-get update && apt-get install -y libmagickwand-dev
-      - export PHP_IMAGICK_NS=autodetect && pecl install -n imagick
-      - docker-php-ext-enable imagick
+      # - apt-get update && apt-get install -y libmagickwand-dev
+      # - export PHP_IMAGICK_NS=autodetect && pecl install -n imagick
+      # - docker-php-ext-enable imagick
       - pecl install pcov
       - docker-php-ext-enable pcov
     build:
-      - composer install
+      # - composer install
     volumes:
       - ~/.acquia:/var/www/.acquia
     ssl: true
