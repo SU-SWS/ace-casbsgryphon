@@ -33,7 +33,7 @@ class CloneNodeTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'system',
     'node',
     'user',

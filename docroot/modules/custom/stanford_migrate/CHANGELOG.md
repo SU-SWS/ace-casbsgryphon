@@ -1,8 +1,69 @@
 # Stanford Migrate
 
+8.6.9
+--------------------------------------------------------------------------------
+_Release Date: 2025-01-09_
+
+- Allow install with migrate_file > 3.0 for D11 support.
+
+8.6.8
+--------------------------------------------------------------------------------
+_Release Date: 2024-12-13_
+
+- Fix access check for CSV upload form/
+
+8.6.7
+--------------------------------------------------------------------------------
+_Release Date: 2024-10-04_
+
+- Replaced defunct placeimg URL in unit test.
+
+8.6.6
+--------------------------------------------------------------------------------
+_Release Date: 2024-09-23_
+
+- Updated patch for readonly field widget module.
+
+8.6.5
+--------------------------------------------------------------------------------
+_Release Date: 2024-09-11_
+
+- Mark readonly fields for migrated fields with delta values.
+
+8.6.4
+--------------------------------------------------------------------------------
+_Release Date: 2024-08-08_
+
+- Fixed Localist json data parser to work with the new version of migrate_plus
+
+
+8.6.3
+--------------------------------------------------------------------------------
+_Release Date: 2024-07-31_
+
+- Updated Localist json for the latest version of migrate_plus (again).
+
+8.6.2
+--------------------------------------------------------------------------------
+_Release Date: 2024-07-19_
+
+- Updated Localist json for the latest version of migrate_plus.
+
+8.6.1
+--------------------------------------------------------------------------------
+_Release Date: 2024-07-17_
+
+- Bugfix: Fix readonly display settings for fields locked by migration.
+
+8.6.0
+--------------------------------------------------------------------------------
+_Release Date: 2024-06-26_
+
+- D11 upgrades, removing deprecated code.
+
 8.5.10
 --------------------------------------------------------------------------------
-_Release Date: 2024-004-05_
+_Release Date: 2024-04-05_
 
 - Fixed logging in orphan action
 

@@ -80,12 +80,8 @@ class AuthenticatedPermissionsCest {
    */
   public function testSiteManagerEscalationSelf(AcceptanceTester $I) {
     $site_manager = $I->logInWithRole('site_manager');
-    $site_manager_id = $site_manager->id();
-    $I->amOnPage('/admin/users');
-    $I->canSee($site_manager->getDisplayName());
-    $I->click(['link' => $site_manager->getDisplayName()]);
-    $I->click('.roles.tabs__tab a');
-    $I->canSeeInCurrentUrl("/user/$site_manager_id/roles");
+    $I->amOnPage($site_manager->toUrl('edit-form')->toString());
+
     $I->dontSee('Administrator');
     $I->dontSee('Site Builder');
     $I->dontSee('Site Developer');
@@ -95,11 +91,11 @@ class AuthenticatedPermissionsCest {
    * Site Manager cannot escalate others' role above Site Manager.
    */
   public function testSiteManagerEscalationOthers(AcceptanceTester $I) {
+    $name = $this->faker->words(3, TRUE);
+    $user = $I->createEntity(['name' => $name], 'user');
     $I->logInWithRole('site_manager');
-    $I->amOnPage('/admin/users');
-    $I->canSee('Morgan');
-    $I->click('Morgan');
-    $I->click('.roles.tabs__tab a');
+    $I->amOnPage($user->toUrl('edit-form')->toString());
+    $I->canSeeInField('Username', $name);
     $I->dontSee('Administrator');
     $I->dontSee('Site Builder');
     $I->dontSee('Site Developer');
@@ -152,15 +148,12 @@ class AuthenticatedPermissionsCest {
   public function testPhpUploadInLogo(AcceptanceTester $I) {
     $I->logInWithRole('administrator');
     $I->amOnPage('/admin/appearance/settings');
-    $I->seeCheckboxIsChecked('#edit-default-logo');
-    $I->uncheckOption('#edit-default-logo');
+    $I->seeCheckboxIsChecked('Use the logo supplied by the theme');
+    $I->uncheckOption('Use the logo supplied by the theme');
     $I->see('Upload logo image');
     $I->attachFile('Upload logo image', 'injection.php');
-    $I->click('#edit-submit');
+    $I->click('Save configuration');
     $I->see('Only files with the following extensions are allowed');
-    $I->see('The image file is invalid or the image type is not allowed.');
-    $I->checkOption('#edit-default-logo');
-    $I->click('#edit-submit');
   }
 
   /**

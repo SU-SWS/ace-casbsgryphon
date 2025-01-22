@@ -1,5 +1,30 @@
 # Stanford Media
 
+11.1.3
+--------------------------------------------------------------------------------
+_Release Date: 2024-12-02_
+
+- Show bundle list in 'Bulk Upload' button
+
+11.1.2
+--------------------------------------------------------------------------------
+_Release Date: 2024-10-29_
+
+- D8CORE-7579 Removed old styles and hook that were for CKEditor 4 and Drupal 9
+
+11.1.1
+--------------------------------------------------------------------------------
+_Release Date: 2024-08-28_
+
+- Improve message when editing media that is used in some location.
+
+11.1.0
+--------------------------------------------------------------------------------
+_Release Date: 2024-06-26_
+
+- D11 upgrades, requires D10.3
+- Logger syntax bug fix.
+
 11.0.3
 --------------------------------------------------------------------------------
 _Release Date: 2024-03-14_

@@ -1,5 +1,17 @@
 # Stanford SamlAuth
 
+1.1.0
+--------------------------------------------------------------------------------
+_Release Date: 2024-12-03_
+
+- SHS-5811: Add "logout" button block with destination return to current page.
+
+1.0.10
+--------------------------------------------------------------------------------
+_Release Date: 2024-09-16_
+
+- Updated unit test to install path_alias entity.
+
 1.0.9
 --------------------------------------------------------------------------------
 _Release Date: 2024-05-29_

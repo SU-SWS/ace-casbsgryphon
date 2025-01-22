@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @Block(
  *  id = "stanford_samlauth_login_block",
- *  admin_label = @Translation("SAML SUNetID Block")
+ *  admin_label = @Translation("SAML SUNetID Login Block")
  * )
  */
 class SamlLoginBlock extends BlockBase implements ContainerFactoryPluginInterface {

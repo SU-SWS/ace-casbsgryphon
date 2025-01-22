@@ -1,11 +1,10 @@
 name: 'Stanford News'
 type: module
 description: 'Stanford news items and views.'
-core_version_requirement: ^9 || ^10 || ^11
+core_version_requirement: ^10.3 || ^11
 package: Stanford
-version: 9.6.12
+version: 9.8.9
 dependencies:
-  - allowed_formats:allowed_formats
   - auto_entitylabel:auto_entitylabel
   - components:components
   - drupal:breakpoint
@@ -28,8 +27,6 @@ dependencies:
   - jumpstart_ui:jumpstart_ui
   - layout_builder_restrictions:layout_builder_restrictions
   - menu_block:menu_block
-  - page_manager:page_manager
-  - page_manager:page_manager_ui
   - paragraphs:paragraphs
   - pathauto:pathauto
   - rabbit_hole:rabbit_hole

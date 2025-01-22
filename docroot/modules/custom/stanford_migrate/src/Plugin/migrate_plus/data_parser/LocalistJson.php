@@ -17,10 +17,10 @@ class LocalistJson extends Json {
   /**
    * {@inheritDoc}
    */
-  protected function getSourceData(string $url): array {
+  protected function getSourceData(string $url, string|int $item_selector = ''): array {
     $source_data = [];
     foreach (self::getPagedUrls($url) as $page_url) {
-      $source_data = [...$source_data, ...parent::getSourceData($page_url)];
+      $source_data = [...$source_data, ...parent::getSourceData($page_url, $item_selector)];
     }
     return $source_data;
   }
@@ -35,7 +35,7 @@ class LocalistJson extends Json {
    *   Paged url results.
    */
   protected static function getPagedUrls(string $url): array {
-    $query = parse_url($url, PHP_URL_QUERY);
+    $query = parse_url($url, PHP_URL_QUERY) ?: '';
     $base_url = trim(str_replace($query, '', $url), '?');
     parse_str($query, $query_parts);
 

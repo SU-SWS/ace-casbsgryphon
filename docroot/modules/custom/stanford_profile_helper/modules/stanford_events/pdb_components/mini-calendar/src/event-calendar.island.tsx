@@ -1,11 +1,11 @@
 import {createIslandWebComponent} from 'preact-island'
-import {useEffect, useRef, useState} from "preact/compat";
+import {useCallback, useEffect, useRef, useState} from "preact/compat";
 import {DrupalJsonApiParams} from "drupal-jsonapi-params";
 import styled from "styled-components";
 import Jsona from "jsona";
 import Moment from "moment";
 import useOutsideClick from "./useOutsideClick";
-import {useBoolean} from "usehooks-ts";
+import {useBoolean, useEventListener} from "usehooks-ts";
 
 const islandName = 'event-calendar-island'
 
@@ -17,12 +17,12 @@ const Button = styled.button`
   background: #f4f4f4;
   color: #b1040e;
   cursor: pointer;
-  padding: 10px 5px;
-  transition: background-color .25s ease-in-out,color .25s ease-in-out;
+  padding: 12px 5px;
+  transition: background-color .25s ease-in-out, color .25s ease-in-out;
 
   &:hover, &:focus {
     background: #2e2d29;
-    color: #ffffff;
+    color: #fff;
   }
 `
 
@@ -69,12 +69,18 @@ const Table = styled.table`
   }
 `
 
-const EventCalendar = () => {
-  const apiUrl = (process.env.LOCAL_DRUPAL ?? '') + '/jsonapi/node/stanford_event';
-  const nextButtonRef = useRef(null);
+type EventNode = {
+  id: string,
+  title: string,
+  path: { alias: string },
+}
 
-  const [events, setEvents] = useState([])
-  const [shownDate, setCurrentMonth] = useState(new Date())
+const EventCalendar = () => {
+  const apiUrl = (process.env?.LOCAL_DRUPAL ?? '') + '/jsonapi/node/stanford_event';
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
+
+  const [events, setEvents] = useState<EventNode[]>([])
+  const [shownDate, setCurrentMonth] = useState<Date>(new Date())
   const currentMonth = shownDate;
   currentMonth.setDate(1);
   currentMonth.setHours(0);
@@ -86,15 +92,15 @@ const EventCalendar = () => {
     const url = new URL(apiUrl.startsWith('/') ? window.location.origin + apiUrl : apiUrl);
     const params = new DrupalJsonApiParams();
     params.addFilter('status', '1');
-    params.addFilter('su_event_date_time.value', Math.floor(currentMonth.getTime() / 1000), '>=')
-    params.addFilter('su_event_date_time.value', Math.floor(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1).getTime() / 1000), '<')
+    params.addFilter('su_event_date_time.value', Math.floor(currentMonth.getTime() / 1000).toString(), '>=')
+    params.addFilter('su_event_date_time.value', Math.floor(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1).getTime() / 1000).toString(), '<')
     params.addPageLimit(50);
 
     params.addSort('su_event_date_time.value', 'ASC')
     url.search = params.getQueryString();
 
     let events = [];
-    let fetchEvents = [];
+    let fetchEvents: EventNode[] = [];
     let fetchMore = true;
     let page = 1;
 
@@ -103,7 +109,7 @@ const EventCalendar = () => {
 
       fetchEvents = await fetch(url.toString(), {cache: "force-cache"})
         .then(response => response.json())
-        .then(data => dataFormatter.deserialize(data))
+        .then(data => dataFormatter.deserialize(data) as EventNode[])
 
       params.addPageOffset(50 * page);
       fetchMore = fetchEvents.length >= 50;
@@ -113,7 +119,9 @@ const EventCalendar = () => {
     setEvents(events);
   }
 
-  useEffect(() => fetchEvents(), [currentMonth])
+  useEffect(() => {
+    fetchEvents()
+  }, [currentMonth])
 
   let weeks = [];
   let days = [];
@@ -179,6 +187,7 @@ const EventCalendar = () => {
           {Moment(currentMonth).format('MMMM YYYY')}
         </caption>
         <thead>
+        <tr>
           <th scope="col" abbr="Sunday">Sun</th>
           <th scope="col" abbr="Monday">Mon</th>
           <th scope="col" abbr="Tuesday">Tue</th>
@@ -186,6 +195,7 @@ const EventCalendar = () => {
           <th scope="col" abbr="Thursday">Thu</th>
           <th scope="col" abbr="Friday">Fri</th>
           <th scope="col" abbr="Saturday">Sat</th>
+        </tr>
         </thead>
 
         <tbody>
@@ -243,60 +253,73 @@ const CloseButton = styled.button`
 `
 
 const DayTile = ({date, events}) => {
-  const {value: dialogOpen, setValue: setDialogOpen} = useBoolean()
+  const ref = useRef<HTMLDivElement>(null)
+  const {value: dialogOpen, setFalse: setDialogClosed, toggle: toggleDialog} = useBoolean()
 
   const dayEvents = events.filter(event => {
     const start = new Date(event.su_event_date_time.value)
     return start.toLocaleDateString() === date.toLocaleDateString()
   })
-  const dialogRef = useRef(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const closeDialog = () => {
-    dialogRef.current?.close()
-    setDialogOpen(false);
-  }
+  const closeDialog = useCallback(() => {
+    if (dialogOpen) {
+      setDialogClosed()
+      buttonRef.current.focus();
+    }
+  }, [setDialogClosed, dialogOpen])
 
-  const openDialog = () => {
-    dialogRef.current?.show()
-    setDialogOpen(true);
-  }
+  useOutsideClick(dialogRef, closeDialog)
 
-  const tileRef = useRef(null)
-  useOutsideClick(tileRef, closeDialog)
+  // If the user presses escape on the keyboard, close the container.
+  const handleEscape = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return
+
+      closeDialog()
+    },
+    [closeDialog]
+  )
+
+  useEventListener("keydown", handleEscape, ref)
 
   if (dayEvents.length) {
     return (
-      <div ref={tileRef}>
+      <div ref={ref}>
         <TileButton
-          onClick={openDialog}
+          ref={buttonRef}
+          onClick={toggleDialog}
           aria-label={Moment(date).format('MMM Do YYYY')}
           aria-current={date.toLocaleDateString() === new Date().toLocaleDateString() ? 'date' : undefined}
         >
           {date.getDate()}
         </TileButton>
 
-        <Dialog
-          className={dialogOpen ? 'open' : 'closed'} ref={dialogRef}
-          aria-label={Moment(date).format('MMM Do YYYY') + ' Events'}
-        >
-          <CloseButton onClick={closeDialog}>
-            <i className="far fa-window-close"/>
-            <span className="visually-hidden">Close Dialog</span>
-          </CloseButton>
-          <List>
-            {dayEvents.map(event =>
-              <li key={event.id}>
-                <EventTile event={event}/>
-              </li>
-            )}
-          </List>
-        </Dialog>
-
+        {dialogOpen &&
+          <Dialog
+            open={true}
+            className="open" ref={dialogRef}
+            aria-label={Moment(date).format('MMM Do, YYYY') + ' Events'}
+          >
+            <CloseButton onClick={closeDialog}>
+              <i className="far fa-window-close"/>
+              <span className="visually-hidden">Close Dialog</span>
+            </CloseButton>
+            <List>
+              {dayEvents.map(event =>
+                <li key={event.id}>
+                  <EventTile event={event}/>
+                </li>
+              )}
+            </List>
+          </Dialog>
+        }
       </div>
     )
   }
   return (
-    <div aria-label={Moment(date).format('MMM Do YYYY')}>{date.getDate()}</div>
+    <abbr title={Moment(date).format('MMM Do YYYY')}>{date.getDate()}</abbr>
   )
 }
 
