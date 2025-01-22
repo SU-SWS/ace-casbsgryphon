@@ -26,7 +26,7 @@ third_party_settings:
 name: datatables_data
 type: datatables_data
 description: 'Place to hold either longtext or file for datatables data (as arrays)'
-help: ''
+help: null
 new_revision: true
 preview_mode: 1
 display_submitted: true

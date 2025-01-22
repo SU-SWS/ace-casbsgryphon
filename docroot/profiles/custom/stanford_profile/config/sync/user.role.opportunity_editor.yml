@@ -15,7 +15,7 @@ dependencies:
 id: opportunity_editor
 label: 'Opportunity Editor'
 weight: 3
-is_admin: null
+is_admin: false
 permissions:
   - 'assign opportunity_editor role'
   - 'create stanford_opportunity content'
