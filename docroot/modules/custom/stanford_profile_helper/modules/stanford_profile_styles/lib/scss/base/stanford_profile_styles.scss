@@ -103,13 +103,17 @@ a {
 
   // Style the SVG for mailto.
   &.mailto {
+    &:after {
+      display: none;
+    }
+
     svg {
       @include margin(null 0 null 0.25em);
       @include padding(null 0.01em null null);
       fill: $su-color-bright-blue;
       transition: transform 0.2s ease-in-out;
       height: 19px;
-      width: 22px;
+      width: 24px;
 
       path {
         stroke: $su-color-bright-blue;
