@@ -12,6 +12,7 @@ dependencies:
     - field.storage.node.su_person_full_title
     - field.storage.node.su_person_last_name
     - field.storage.node.su_person_telephone
+    - image.style.media_library
     - image.style.medium
     - taxonomy.vocabulary.su_casbs_faculty_fellow_year
     - taxonomy.vocabulary.su_casbs_fellowship_year
@@ -19,6 +20,7 @@ dependencies:
     - taxonomy.vocabulary.su_casbs_research_affiliate_year
     - taxonomy.vocabulary.su_casbs_visiting_scholar_year
   module:
+    - element_class_formatter
     - image
     - node
     - stanford_fields
@@ -127,6 +129,11 @@ display:
         options: {  }
       empty: {  }
       sorts:
+        su_casbs_custom_order_value:
+          id: su_casbs_custom_order_value
+          table: node__su_casbs_custom_order
+          field: su_casbs_custom_order_value
+          plugin_id: standard
         su_person_last_name_value:
           id: su_person_last_name_value
           table: node__su_person_last_name
@@ -846,9 +853,12 @@ display:
           empty_zero: 0
           hide_alter_empty: 1
           click_sort_column: value
-          type: entity_title_heading
+          type: link_ally_class
           settings:
+            link_text: ''
+            screenreader_text: ''
             tag: h2
+            class: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1063,7 +1073,7 @@ display:
           exclude: 0
           alter:
             alter_text: 1
-            text: "<a href={{view_node}} alt=\"{{su_person_first_name}} {{su_person_last_name}}\"><img src=\"{{ su_casbs_profile_picture }}\" alt=\"{{su_person_first_name}} {{su_person_last_name}}\" />\r\n</a>\r\n\r\n"
+            text: "<a href={{view_node}} alt=\"{{su_person_first_name}} {{su_person_last_name}}\"><img src=\"{{ su_casbs_profile_picture }}\" alt=\"{{su_person_first_name}} {{su_person_last_name}}\" />\r\n</a>"
             make_link: 0
             path: ''
             absolute: 0
@@ -1272,7 +1282,7 @@ display:
             more_link: 0
             more_link_text: ''
             more_link_path: ''
-            strip_tags: 0
+            strip_tags: 1
             trim: 0
             preserve_tags: ''
             html: 0
@@ -1291,7 +1301,7 @@ display:
           click_sort_column: value
           type: text_default
           settings: {  }
-          group_column: entity_id
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -1329,7 +1339,7 @@ display:
         arguments: false
       block_description: 'Current Fellows'
       block_category: 'Basic Page Type Lists (Views)'
-      display_description: ''
+      display_description: 'Current Fellows with Jump Menu (Filter by Year)'
       group_by: 1
       arguments:
         term_node_taxonomy_name_depth:
@@ -1391,6 +1401,854 @@ display:
         - 'config:field.storage.node.su_casbs_profile_picture'
         - 'config:field.storage.node.su_person_first_name'
         - 'config:field.storage.node.su_person_last_name'
+  viewfield_block_10:
+    id: viewfield_block_10
+    display_title: 'Board Of DirectorsGrid(Filter by Year)'
+    display_plugin: viewfield_block
+    position: 2
+    display_options:
+      display_extenders: {  }
+      fields:
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: false
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          text: view
+          output_url_as_text: 1
+          absolute: 0
+          entity_type: node
+          plugin_id: entity_link
+        su_casbs_profile_picture:
+          id: su_casbs_profile_picture
+          table: node__su_casbs_profile_picture
+          field: su_casbs_profile_picture
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div style="position: relative;">{{su_casbs_profile_picture }}</div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: div
+          element_class: 'align-center img'
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: target_id
+          type: image_class
+          settings:
+            image_style: media_library
+            image_link: content
+            image_loading:
+              attribute: lazy
+            class: 'align-center img'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<a href={{view_node}}>{{ title }} </a>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: link_ally_class
+          settings:
+            link_text: ''
+            screenreader_text: ''
+            tag: ''
+            class: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div id="{{ nid }}" tabindex="-1" class="visually-hidden focusable"></div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: 1
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+      pager:
+        type: none
+        options:
+          offset: 0
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: '3'
+          automatic_width: 1
+          alignment: horizontal
+          col_class_default: 1
+          col_class_custom: views-align-center
+          row_class_default: 1
+          row_class_custom: su-local-footer__address
+      row:
+        type: fields
+        options:
+          default_field_elements: 1
+          inline: {  }
+          separator: ''
+          hide_empty: 1
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        title: false
+        relationships: false
+        arguments: false
+      block_description: 'Current Fellows'
+      block_category: 'Basic Page Type Lists (Views)'
+      display_description: ''
+      title: 'Board of Directors'
+      relationships:
+        term_node_tid:
+          id: term_node_tid
+          table: node_field_data
+          field: term_node_tid
+          relationship: none
+          group_type: group
+          admin_label: term
+          required: 1
+          vids:
+            - su_casbs_people_type
+          entity_type: node
+          plugin_id: node_term_data
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: term_node_tid
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: 0
+            title: All
+          title_enable: 0
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: '0'
+            use_alias: 0
+          summary_options:
+            base_path: ''
+            count: 1
+            override: 0
+            items_per_page: '25'
+          summary:
+            sort_order: asc
+            number_of_records: '0'
+            format: default_summary
+          specify_validation: 0
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          glossary: 0
+          limit: '0'
+          case: none
+          path_case: none
+          transform_dash: 0
+          break_phrase: 0
+          add_table: 0
+          require_value: 0
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.su_casbs_profile_picture'
+  viewfield_block_11:
+    id: viewfield_block_11
+    display_title: 'Staff Grid(Filter by Year)'
+    display_plugin: viewfield_block
+    position: 2
+    display_options:
+      display_extenders: {  }
+      fields:
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: false
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          text: view
+          output_url_as_text: 1
+          absolute: 0
+          entity_type: node
+          plugin_id: entity_link
+        su_casbs_profile_picture:
+          id: su_casbs_profile_picture
+          table: node__su_casbs_profile_picture
+          field: su_casbs_profile_picture
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div style="position: relative;">{{su_casbs_profile_picture }}</div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: div
+          element_class: 'align-center img'
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: target_id
+          type: image_class
+          settings:
+            image_style: media_library
+            image_link: content
+            image_loading:
+              attribute: lazy
+            class: 'align-center img'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<a href={{view_node}}>{{ title }} </a>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: link_ally_class
+          settings:
+            link_text: ''
+            screenreader_text: ''
+            tag: ''
+            class: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div id="{{ nid }}" tabindex="-1" class="visually-hidden focusable"></div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: 1
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+        su_casbs_field_discipline:
+          id: su_casbs_field_discipline
+          table: node__su_casbs_field_discipline
+          field: su_casbs_field_discipline
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 1
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        su_casbs_current_affiliation:
+          id: su_casbs_current_affiliation
+          table: node__su_casbs_current_affiliation
+          field: su_casbs_current_affiliation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+      pager:
+        type: none
+        options:
+          offset: 0
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: '3'
+          automatic_width: 1
+          alignment: horizontal
+          col_class_default: 1
+          col_class_custom: views-align-center
+          row_class_default: 1
+          row_class_custom: su-local-footer__address
+      row:
+        type: fields
+        options:
+          default_field_elements: 1
+          inline: {  }
+          separator: ''
+          hide_empty: 1
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        title: false
+        relationships: false
+        arguments: false
+      block_description: 'Current Fellows'
+      block_category: 'Basic Page Type Lists (Views)'
+      display_description: ''
+      title: Staff
+      relationships:
+        term_node_tid:
+          id: term_node_tid
+          table: node_field_data
+          field: term_node_tid
+          relationship: none
+          group_type: group
+          admin_label: term
+          required: 1
+          vids:
+            - su_casbs_people_type
+          entity_type: node
+          plugin_id: node_term_data
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: term_node_tid
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: 0
+            title: All
+          title_enable: 0
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: '0'
+            use_alias: 0
+          summary_options:
+            base_path: ''
+            count: 1
+            override: 0
+            items_per_page: '25'
+          summary:
+            sort_order: asc
+            number_of_records: '0'
+            format: default_summary
+          specify_validation: 0
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          glossary: 0
+          limit: '0'
+          case: none
+          path_case: none
+          transform_dash: 0
+          break_phrase: 0
+          add_table: 0
+          require_value: 0
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.su_casbs_current_affiliation'
+        - 'config:field.storage.node.su_casbs_field_discipline'
+        - 'config:field.storage.node.su_casbs_profile_picture'
   viewfield_block_2:
     id: viewfield_block_2
     display_title: 'Faculty Fellows and Research Affiliates(Filter by Year)'
@@ -4468,3 +5326,1618 @@ display:
         - 'config:field.storage.node.su_casbs_person_bio'
         - 'config:field.storage.node.su_casbs_profile_picture'
         - 'config:field.storage.node.su_person_full_title'
+  viewfield_block_7:
+    id: viewfield_block_7
+    display_title: 'Current Fellows Grid (Filter by Year) Grid'
+    display_plugin: viewfield_block
+    position: 2
+    display_options:
+      display_extenders: {  }
+      fields:
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: false
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: div
+          element_class: 'align-center img'
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          text: view
+          output_url_as_text: 1
+          absolute: 0
+          entity_type: node
+          plugin_id: entity_link
+        su_casbs_profile_picture:
+          id: su_casbs_profile_picture
+          table: node__su_casbs_profile_picture
+          field: su_casbs_profile_picture
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div style="position: relative;">{{su_casbs_profile_picture }}</div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: div
+          element_class: 'align-center img'
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: target_id
+          type: image_class
+          settings:
+            image_style: media_library
+            image_link: content
+            image_loading:
+              attribute: lazy
+            class: 'align-center img'
+          group_column: entity_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<a href={{view_node}}>{{ title }} </a>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: link_ally_class
+          settings:
+            link_text: ''
+            screenreader_text: ''
+            tag: ''
+            class: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        su_person_last_name:
+          id: su_person_last_name
+          table: node__su_person_last_name
+          field: su_person_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: 0
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        su_person_first_name:
+          id: su_person_first_name
+          table: node__su_person_first_name
+          field: su_person_first_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: 0
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div id="{{ nid }}" tabindex="-1" class="visually-hidden focusable"></div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: 1
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+        su_casbs_field_discipline:
+          id: su_casbs_field_discipline
+          table: node__su_casbs_field_discipline
+          field: su_casbs_field_discipline
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 1
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        su_casbs_current_affiliation:
+          id: su_casbs_current_affiliation
+          table: node__su_casbs_current_affiliation
+          field: su_casbs_current_affiliation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 1
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+      pager:
+        type: none
+        options:
+          offset: 0
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: '3'
+          automatic_width: 1
+          alignment: horizontal
+          col_class_default: 1
+          col_class_custom: views-align-center
+          row_class_default: 0
+          row_class_custom: su-local-footer__address
+      row:
+        type: fields
+        options:
+          default_field_elements: 1
+          inline: {  }
+          separator: ''
+          hide_empty: 1
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        group_by: false
+        arguments: false
+        sorts: false
+      block_description: 'Current Fellows'
+      block_category: 'Basic Page Type Lists (Views)'
+      display_description: ''
+      group_by: 1
+      arguments:
+        term_node_taxonomy_name_depth:
+          id: term_node_taxonomy_name_depth
+          table: node_field_data
+          field: term_node_taxonomy_name_depth
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: 0
+            title: All
+          title_enable: 0
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: '0'
+            use_alias: 0
+          summary_options:
+            base_path: ''
+            count: 1
+            override: 0
+            items_per_page: '25'
+          summary:
+            sort_order: asc
+            number_of_records: '0'
+            format: default_summary
+          specify_validation: 1
+          validate:
+            type: taxonomy_term_name
+            fail: 'not found'
+          validate_options:
+            bundles:
+              su_casbs_fellowship_year: su_casbs_fellowship_year
+            access: 0
+            operation: view
+            transform: 0
+          depth: '0'
+          vocabularies:
+            su_casbs_fellowship_year: su_casbs_fellowship_year
+          break_phrase: 1
+          use_taxonomy_term_path: false
+          entity_type: node
+          plugin_id: taxonomy_index_name_depth
+      sorts:
+        su_person_last_name_value:
+          id: su_person_last_name_value
+          table: node__su_person_last_name
+          field: su_person_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+            field_identifier: ''
+          plugin_id: standard
+        su_person_first_name_value:
+          id: su_person_first_name_value
+          table: node__su_person_first_name
+          field: su_person_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.su_casbs_current_affiliation'
+        - 'config:field.storage.node.su_casbs_field_discipline'
+        - 'config:field.storage.node.su_casbs_profile_picture'
+        - 'config:field.storage.node.su_person_first_name'
+        - 'config:field.storage.node.su_person_last_name'
+  viewfield_block_8:
+    id: viewfield_block_8
+    display_title: 'Faculty Fellows and Research Affiliates Grid(Filter by Year)'
+    display_plugin: viewfield_block
+    position: 2
+    display_options:
+      display_extenders: {  }
+      fields:
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: false
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          text: view
+          output_url_as_text: 1
+          absolute: 0
+          entity_type: node
+          plugin_id: entity_link
+        su_casbs_profile_picture:
+          id: su_casbs_profile_picture
+          table: node__su_casbs_profile_picture
+          field: su_casbs_profile_picture
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div style="position: relative;">{{su_casbs_profile_picture }}</div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: div
+          element_class: 'align-center img'
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: target_id
+          type: image_class
+          settings:
+            image_style: media_library
+            image_link: content
+            image_loading:
+              attribute: lazy
+            class: 'align-center img'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: "<span style=\"font-size: 14px\"><a href={{view_node}}>{{ title }} </a></span>\r\n"
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: link_ally_class
+          settings:
+            link_text: ''
+            screenreader_text: ''
+            tag: ''
+            class: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div id="{{ nid }}" tabindex="-1" class="visually-hidden focusable"></div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: 1
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+        su_casbs_field_discipline:
+          id: su_casbs_field_discipline
+          table: node__su_casbs_field_discipline
+          field: su_casbs_field_discipline
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 1
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        su_casbs_current_affiliation:
+          id: su_casbs_current_affiliation
+          table: node__su_casbs_current_affiliation
+          field: su_casbs_current_affiliation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+      pager:
+        type: none
+        options:
+          offset: 0
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: '3'
+          automatic_width: 1
+          alignment: horizontal
+          col_class_default: 1
+          col_class_custom: views-align-center
+          row_class_default: 1
+          row_class_custom: su-local-footer__address
+      row:
+        type: fields
+        options:
+          default_field_elements: 1
+          inline: {  }
+          separator: ''
+          hide_empty: 1
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        title: false
+        relationships: false
+        arguments: false
+        query: false
+      block_description: 'Current Fellows'
+      block_category: 'Basic Page Type Lists (Views)'
+      display_description: ''
+      title: 'Faculty Fellows and Research Affiliates'
+      relationships:
+        term_node_tid:
+          id: term_node_tid
+          table: node_field_data
+          field: term_node_tid
+          relationship: none
+          group_type: group
+          admin_label: term
+          required: 1
+          vids:
+            - su_casbs_faculty_fellow_year
+            - su_casbs_research_affiliate_year
+          entity_type: node
+          plugin_id: node_term_data
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: term_node_tid
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: 0
+            title: All
+          title_enable: 0
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: '0'
+            use_alias: 0
+          summary_options:
+            base_path: ''
+            count: 1
+            override: 0
+            items_per_page: '25'
+          summary:
+            sort_order: asc
+            number_of_records: '0'
+            format: default_summary
+          specify_validation: 0
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          glossary: 0
+          limit: '0'
+          case: none
+          path_case: none
+          transform_dash: 0
+          break_phrase: 0
+          add_table: 0
+          require_value: 0
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+      query:
+        type: views_query
+        options:
+          disable_sql_rewrite: 0
+          distinct: 1
+          replica: 0
+          query_comment: ''
+          query_tags: {  }
+          contextual_filters_or: 0
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.su_casbs_current_affiliation'
+        - 'config:field.storage.node.su_casbs_field_discipline'
+        - 'config:field.storage.node.su_casbs_profile_picture'
+  viewfield_block_9:
+    id: viewfield_block_9
+    display_title: 'Visiting Scholars Grid(Filter by Year)'
+    display_plugin: viewfield_block
+    position: 2
+    display_options:
+      display_extenders: {  }
+      fields:
+        view_node:
+          id: view_node
+          table: node
+          field: view_node
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 1
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: false
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          text: view
+          output_url_as_text: 1
+          absolute: 0
+          entity_type: node
+          plugin_id: entity_link
+        su_casbs_profile_picture:
+          id: su_casbs_profile_picture
+          table: node__su_casbs_profile_picture
+          field: su_casbs_profile_picture
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div style="position: relative;">{{su_casbs_profile_picture }}</div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: div
+          element_class: 'align-center img'
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: target_id
+          type: image_class
+          settings:
+            image_style: media_library
+            image_link: content
+            image_loading:
+              attribute: lazy
+            class: 'align-center img'
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<a href={{view_node}}>{{ title }} </a>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: link_ally_class
+          settings:
+            link_text: ''
+            screenreader_text: ''
+            tag: ''
+            class: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 1
+            text: '<div id="{{ nid }}" tabindex="-1" class="visually-hidden focusable"></div>'
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 1
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: 1
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+        su_casbs_field_discipline:
+          id: su_casbs_field_discipline
+          table: node__su_casbs_field_discipline
+          field: su_casbs_field_discipline
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 1
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+        su_casbs_current_affiliation:
+          id: su_casbs_current_affiliation
+          table: node__su_casbs_current_affiliation
+          field: su_casbs_current_affiliation
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: 0
+          alter:
+            alter_text: 0
+            text: ''
+            make_link: 0
+            path: ''
+            absolute: 0
+            external: 0
+            replace_spaces: 0
+            path_case: none
+            trim_whitespace: 0
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: 0
+            max_length: '0'
+            word_boundary: 1
+            ellipsis: 1
+            more_link: 0
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: 0
+            trim: 0
+            preserve_tags: ''
+            html: 0
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: 0
+          empty: ''
+          hide_empty: 0
+          empty_zero: 0
+          hide_alter_empty: 1
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: 0
+          plugin_id: field
+      pager:
+        type: none
+        options:
+          offset: 0
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: '3'
+          automatic_width: 1
+          alignment: horizontal
+          col_class_default: 1
+          col_class_custom: views-align-center
+          row_class_default: 1
+          row_class_custom: su-local-footer__address
+      row:
+        type: fields
+        options:
+          default_field_elements: 1
+          inline: {  }
+          separator: ''
+          hide_empty: 1
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        title: false
+        relationships: false
+        arguments: false
+      block_description: 'Current Fellows'
+      block_category: 'Basic Page Type Lists (Views)'
+      display_description: ''
+      title: 'Visiting Scholars'
+      relationships:
+        term_node_tid:
+          id: term_node_tid
+          table: node_field_data
+          field: term_node_tid
+          relationship: none
+          group_type: group
+          admin_label: term
+          required: 1
+          vids:
+            - su_casbs_visiting_scholar_year
+          entity_type: node
+          plugin_id: node_term_data
+      arguments:
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: term_node_tid
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: 0
+            title: All
+          title_enable: 0
+          title: ''
+          default_argument_type: raw
+          default_argument_options:
+            index: '0'
+            use_alias: 0
+          summary_options:
+            base_path: ''
+            count: 1
+            override: 0
+            items_per_page: '25'
+          summary:
+            sort_order: asc
+            number_of_records: '0'
+            format: default_summary
+          specify_validation: 0
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          glossary: 0
+          limit: '0'
+          case: none
+          path_case: none
+          transform_dash: 0
+          break_phrase: 0
+          add_table: 0
+          require_value: 0
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.su_casbs_current_affiliation'
+        - 'config:field.storage.node.su_casbs_field_discipline'
+        - 'config:field.storage.node.su_casbs_profile_picture'
