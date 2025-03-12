@@ -1403,7 +1403,7 @@ display:
         - 'config:field.storage.node.su_person_last_name'
   viewfield_block_10:
     id: viewfield_block_10
-    display_title: 'Board Of DirectorsGrid(Filter by Year)'
+    display_title: 'Board Of Directors Grid (Filter by su_casbs_people_type)'
     display_plugin: viewfield_block
     position: 2
     display_options:
@@ -1764,7 +1764,7 @@ display:
         - 'config:field.storage.node.su_casbs_profile_picture'
   viewfield_block_11:
     id: viewfield_block_11
-    display_title: 'Staff Grid(Filter by Year)'
+    display_title: 'Staff Grid (Filter by su_casbs_people_type)'
     display_plugin: viewfield_block
     position: 2
     display_options:
@@ -5328,7 +5328,7 @@ display:
         - 'config:field.storage.node.su_person_full_title'
   viewfield_block_7:
     id: viewfield_block_7
-    display_title: 'Current Fellows Grid (Filter by Year) Grid'
+    display_title: 'Current Fellows Grid (Filter by Year)'
     display_plugin: viewfield_block
     position: 2
     display_options:
@@ -5849,7 +5849,7 @@ display:
           alignment: horizontal
           col_class_default: 1
           col_class_custom: views-align-center
-          row_class_default: 0
+          row_class_default: 1
           row_class_custom: su-local-footer__address
       row:
         type: fields
@@ -6456,7 +6456,7 @@ display:
         - 'config:field.storage.node.su_casbs_profile_picture'
   viewfield_block_9:
     id: viewfield_block_9
-    display_title: 'Visiting Scholars Grid(Filter by Year)'
+    display_title: 'Visiting Scholars Grid (Filter by Year)'
     display_plugin: viewfield_block
     position: 2
     display_options:
