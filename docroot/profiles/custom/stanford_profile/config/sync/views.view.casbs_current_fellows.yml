@@ -133,7 +133,15 @@ display:
           id: su_casbs_custom_order_value
           table: node__su_casbs_custom_order
           field: su_casbs_custom_order_value
+          relationship: none
+          group_type: group
+          admin_label: ''
           plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         su_person_last_name_value:
           id: su_person_last_name_value
           table: node__su_person_last_name
@@ -438,6 +446,33 @@ display:
         type: none
         options:
           offset: 0
+      sorts:
+        su_person_last_name_value:
+          id: su_person_last_name_value
+          table: node__su_person_last_name
+          field: su_person_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        su_person_first_name_value:
+          id: su_person_first_name_value
+          table: node__su_person_first_name
+          field: su_person_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments:
         term_node_taxonomy_name_depth:
           id: term_node_taxonomy_name_depth
@@ -487,6 +522,7 @@ display:
         css_class: false
         group_by: false
         fields: false
+        sorts: false
         arguments: false
         footer: false
       css_class: casbs-jumpmenu
@@ -661,6 +697,33 @@ display:
         type: none
         options:
           offset: 0
+      sorts:
+        su_person_last_name_value:
+          id: su_person_last_name_value
+          table: node__su_person_last_name
+          field: su_person_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        su_person_first_name_value:
+          id: su_person_first_name_value
+          table: node__su_person_first_name
+          field: su_person_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments:
         term_node_taxonomy_name_depth:
           id: term_node_taxonomy_name_depth
@@ -711,6 +774,7 @@ display:
         css_class: false
         relationships: false
         fields: false
+        sorts: false
         arguments: false
         footer: false
       relationships: {  }
@@ -1337,6 +1401,7 @@ display:
         fields: false
         group_by: false
         arguments: false
+        sorts: false
       block_description: 'Current Fellows'
       block_category: 'Basic Page Type Lists (Views)'
       display_description: 'Current Fellows with Jump Menu (Filter by Year)'
@@ -1386,6 +1451,33 @@ display:
           use_taxonomy_term_path: false
           entity_type: node
           plugin_id: taxonomy_index_name_depth
+      sorts:
+        su_person_last_name_value:
+          id: su_person_last_name_value
+          table: node__su_person_last_name
+          field: su_person_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        su_person_first_name_value:
+          id: su_person_first_name_value
+          table: node__su_person_first_name
+          field: su_person_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -1753,7 +1845,7 @@ display:
         title: false
         relationships: false
         arguments: false
-      block_description: 'Current Fellows'
+      block_description: 'Board of Directors Grid'
       block_category: 'Basic Page Type Lists (Views)'
       display_description: ''
       title: 'Board of Directors'
@@ -3598,6 +3690,7 @@ display:
         relationships: false
         arguments: false
         query: false
+        sorts: false
       block_description: 'Current Fellows'
       block_category: 'Basic Page Type Lists (Views)'
       display_description: ''
@@ -3669,6 +3762,33 @@ display:
           query_comment: ''
           query_tags: {  }
           contextual_filters_or: 0
+      sorts:
+        su_person_last_name_value:
+          id: su_person_last_name_value
+          table: node__su_person_last_name
+          field: su_person_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        su_person_first_name_value:
+          id: su_person_first_name_value
+          table: node__su_person_first_name
+          field: su_person_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -4150,6 +4270,7 @@ display:
         title: false
         relationships: false
         arguments: false
+        sorts: false
       block_description: 'Current Fellows'
       block_category: 'Basic Page Type Lists (Views)'
       display_description: ''
@@ -4211,6 +4332,33 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: string
+      sorts:
+        su_person_last_name_value:
+          id: su_person_last_name_value
+          table: node__su_person_last_name
+          field: su_person_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        su_person_first_name_value:
+          id: su_person_first_name_value
+          table: node__su_person_first_name
+          field: su_person_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -4755,19 +4903,6 @@ display:
           entity_field: name
           plugin_id: string
       sorts:
-        su_casbs_custom_order_value:
-          id: su_casbs_custom_order_value
-          table: node__su_casbs_custom_order
-          field: su_casbs_custom_order_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-            field_identifier: ''
-          plugin_id: standard
         su_person_last_name_value:
           id: su_person_last_name_value
           table: node__su_person_last_name
@@ -5578,19 +5713,6 @@ display:
           entity_field: name
           plugin_id: string
       sorts:
-        su_casbs_custom_order_value:
-          id: su_casbs_custom_order_value
-          table: node__su_casbs_custom_order
-          field: su_casbs_custom_order_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-            field_identifier: ''
-          plugin_id: standard
         su_person_last_name_value:
           id: su_person_last_name_value
           table: node__su_person_last_name
@@ -6155,19 +6277,6 @@ display:
           entity_field: name
           plugin_id: string
       sorts:
-        su_casbs_custom_order_value:
-          id: su_casbs_custom_order_value
-          table: node__su_casbs_custom_order
-          field: su_casbs_custom_order_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-            field_identifier: ''
-          plugin_id: standard
         su_person_last_name_value:
           id: su_person_last_name_value
           table: node__su_person_last_name
@@ -7251,6 +7360,7 @@ display:
         relationships: false
         arguments: false
         query: false
+        sorts: false
       block_description: 'Current Fellows'
       block_category: 'Basic Page Type Lists (Views)'
       display_description: ''
@@ -7322,6 +7432,33 @@ display:
           query_comment: ''
           query_tags: {  }
           contextual_filters_or: 0
+      sorts:
+        su_person_last_name_value:
+          id: su_person_last_name_value
+          table: node__su_person_last_name
+          field: su_person_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        su_person_first_name_value:
+          id: su_person_first_name_value
+          table: node__su_person_first_name
+          field: su_person_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -7748,6 +7885,7 @@ display:
         title: false
         relationships: false
         arguments: false
+        sorts: false
       block_description: 'Current Fellows'
       block_category: 'Basic Page Type Lists (Views)'
       display_description: ''
@@ -7809,6 +7947,33 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: string
+      sorts:
+        su_person_last_name_value:
+          id: su_person_last_name_value
+          table: node__su_person_last_name
+          field: su_person_last_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        su_person_first_name_value:
+          id: su_person_first_name_value
+          table: node__su_person_first_name
+          field: su_person_first_name_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
     cache_metadata:
       max-age: -1
       contexts:
