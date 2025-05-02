@@ -1,0 +1,36 @@
+dev:
+    uri: stanfordcasbsdev.prod.acquia-sites.com
+    host: stanfordcasbsdev.ssh.prod.acquia-sites.com
+    options: {  }
+    paths: { dump-dir: /mnt/tmp }
+    root: /var/www/html/stanfordcasbs.dev/docroot
+    user: stanfordcasbs.dev
+    ssh: { options: '-p 22', tty: 0 }
+    env-vars: { WEBHEAD: stanfordcasbsdev }
+prod:
+    uri: stanfordcasbs.prod.acquia-sites.com
+    host: stanfordcasbs.ssh.prod.acquia-sites.com
+    options: {  }
+    paths: { dump-dir: /mnt/tmp }
+    root: /var/www/html/stanfordcasbs.prod/docroot
+    user: stanfordcasbs.prod
+    ssh: { options: '-p 22', tty: 0 }
+    env-vars: { WEBHEAD: stanfordcasbs }
+ra:
+    uri: stanfordcasbsra.prod.acquia-sites.com
+    host: stanfordcasbsra.ssh.prod.acquia-sites.com
+    options: {  }
+    paths: { dump-dir: /mnt/tmp }
+    root: /var/www/html/stanfordcasbs.ra/docroot
+    user: stanfordcasbs.ra
+    ssh: { options: '-p 22', tty: 0 }
+    env-vars: { WEBHEAD: stanfordcasbsra }
+test:
+    uri: stanfordcasbsstg.prod.acquia-sites.com
+    host: stanfordcasbsstg.ssh.prod.acquia-sites.com
+    options: {  }
+    paths: { dump-dir: /mnt/tmp }
+    root: /var/www/html/stanfordcasbs.test/docroot
+    user: stanfordcasbs.test
+    ssh: { options: '-p 22', tty: 0 }
+    env-vars: { WEBHEAD: stanfordcasbsstg }
