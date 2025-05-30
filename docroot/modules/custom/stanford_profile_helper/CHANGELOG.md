@@ -1,5 +1,58 @@
 # Stanford Profile Helper
 
+9.8.14
+--------------------------------------------------------------------------------
+_Release Date: 2025-03-10_
+
+- Fix string type to int type for book tree menu.
+
+9.8.13
+--------------------------------------------------------------------------------
+_Release Date: 2025-03-07_
+
+- Added sunet to site information cron
+- D8CORE-7893: changed size of mailto icon to match previous icon (#381)
+- D8CORE-7834: Accordions added a transparent background to icon (#376)
+- D8CORE-7835: Accordion add padding to prevent button overlaying text
+- D8CORE-7660: Styling for opportunities content type. (#353)
+- D8CORE-7662: Created a single collayout to added the filtered paragraph into (#378)
+- D8CORE-7783: updated the color of the caret on su-link--action for policy teaser (#372)
+- D8CORE-7641: formatted the spacing on search page (#374)
+- D8CORE-7801: fine tuning the news list (#377)
+- D8CORE-7784: adjustments to spacing on a person list (#371)
+- D8CORE-7726: adding space for touch targets on Events node taxonomy terms.  (#368)
+- D8CORE-7785: changed spacing on the basic page list (#369)
+- D8CORE-7786: Removed margin-bottom from the "This event has already occurred" (#370)
+
+9.8.12
+--------------------------------------------------------------------------------
+_Release Date: 2025-02-11_
+
+- Update hooks to support external link 2.0+ module
+
+9.8.11
+--------------------------------------------------------------------------------
+_Release Date: 2025-02-07_
+
+- Fix space between components in two and three column layouts.
+
+9.8.10
+--------------------------------------------------------------------------------
+_Release Date: 2025-01-31_
+
+- D8CORE-7753: Refactor accordion to use button and aria attributes (#364)
+- D8CORE-7722 D8CORE-7751: design tweaks (#363)
+- D8CORE-7781: Fix layout paragraph columns grid to flex (#362)
+- D8CORE-7749: tighten spacing on news list (#359)
+- D8CORE-7722: margin bottom zero on last item (#358)
+- D8CORE-7751: tighten up event list spacing (#360)
+- D8CORE-7633: added aria-live: polite to the modal (#361)
+- Add trash delete hook similar to node delete event
+- D8CORE-7531: removed max-width on intro text and drop cap text (#357)
+- D8CORE-7696 Add small spaces between components in two and three column layouts
+- D8CORE-7678: removed medium and small quotes (#356)
+- Replace field_widget_form_alter hook that was removed from core
+
 9.8.9
 --------------------------------------------------------------------------------
 _Release Date: 2024-11-20_

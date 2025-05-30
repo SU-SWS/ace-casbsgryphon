@@ -1,5 +1,17 @@
 # Stanford SamlAuth
 
+1.2.1
+--------------------------------------------------------------------------------
+_Release Date: 2025-02-25_
+
+- Fix validation error with empty field value.
+
+1.2.0
+--------------------------------------------------------------------------------
+_Release Date: 2025-02-25_
+
+- Add constraint plugin and field validation plugin to support sunet validation on fields
+
 1.1.0
 --------------------------------------------------------------------------------
 _Release Date: 2024-12-03_

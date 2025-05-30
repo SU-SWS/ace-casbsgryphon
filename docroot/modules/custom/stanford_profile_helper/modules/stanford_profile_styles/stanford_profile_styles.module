@@ -103,17 +103,17 @@ function stanford_profile_styles_library_info_alter(&$libraries, $extension) {
 }
 
 /**
- * Implements hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
+ * Implements hook_field_widget_complete_WIDGET_TYPE_form_alter().
  */
-function stanford_profile_styles_field_widget_multivalue_paragraphs_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
-  $elements['#attached']['library'][] = 'stanford_profile_styles/admin.field_widgets';
+function stanford_profile_styles_field_widget_complete_paragraphs_form_alter(&$field_widget_complete_form, FormStateInterface $form_state, $context) {
+  $field_widget_complete_form['#attached']['library'][] = 'stanford_profile_styles/admin.field_widgets';
 }
 
 /**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ * Implements hook_field_widget_complete_WIDGET_TYPE_form_alter().
  */
-function stanford_profile_styles_field_widget_smartdate_timezone_form_alter(array &$elements, FormStateInterface $form_state, array $context) {
-  $elements['#attached']['library'][] = 'stanford_profile_styles/admin.field_widgets';
+function stanford_profile_styles_field_widget_complete_smartdate_timezone_form_alter(&$field_widget_complete_form, FormStateInterface $form_state, $context) {
+  $field_widget_complete_form['#attached']['library'][] = 'stanford_profile_styles/admin.field_widgets';
 }
 
 /**
@@ -288,5 +288,18 @@ function stanford_profile_helper_extlink_settings_alter(array &$settings) {
     ->getValue('stanford_basic_site_settings', 'su_hide_ext_link_icons', 0, 'value');
   if ($no_ext_links) {
     $settings['extlink_class'] = '';
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function stanford_profile_styles_page_attachments_alter(array &$attachments) {
+  if (isset($attachments['#attached']['drupalSettings']['data']['extlink'])) {
+    $no_ext_links = \Drupal::service('config_pages.loader')
+      ->getValue('stanford_basic_site_settings', 'su_hide_ext_link_icons', 0, 'value');
+    if ($no_ext_links) {
+      $attachments['#attached']['drupalSettings']['data']['extlink']['extAdditionalLinkClasses'] = '';
+    }
   }
 }
