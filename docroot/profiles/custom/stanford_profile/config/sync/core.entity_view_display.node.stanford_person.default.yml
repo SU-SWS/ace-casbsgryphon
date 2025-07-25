@@ -344,7 +344,10 @@ third_party_settings:
                   empty_fields:
                     handler: ''
                   field_formatter_class:
-                    class: ''
+                    class: 'su-padding-bottom-2 su-padding-top-2'
+                  field_label:
+                    label_value: ''
+                    label_tag: ''
             weight: 1
             additional: {  }
           3c7a5621-2806-4572-9c86-0ad5044841d6:
@@ -867,6 +870,7 @@ third_party_settings:
       - 'Lists (Views)'
       - Menus
       - 'News Lists (Views)'
+      - 'Opportunities (Views)'
       - 'PDB React'
       - 'People Lists (Views)'
       - 'Policy (Views)'
@@ -898,6 +902,7 @@ third_party_settings:
         - Forms
         - Help
         - 'Lists (Views)'
+        - 'Opportunities (Views)'
         - 'Policy (Views)'
         - Printable
         - React
