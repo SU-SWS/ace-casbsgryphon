@@ -3,6 +3,4 @@ _core:
 allowed_types:
   - stanford_policy
 child_type: stanford_policy
-block:
-  navigation:
-    mode: 'all pages'
+book_sort: weight

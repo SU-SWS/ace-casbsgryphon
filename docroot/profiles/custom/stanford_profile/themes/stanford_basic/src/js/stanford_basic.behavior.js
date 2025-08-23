@@ -63,6 +63,37 @@ export default {
           .wrap('<li class="su-mobile-site-search"></li>');
       }
 
+      // Check for empty navigation and add space.
+      const $MenRegion = $('.region-menu', context);
+      if ($MenRegion.children().length === 0) {
+        $MenRegion.addClass( "empty-menu" );
+      }
+
+      // Move the utility button to the brand bar for mobile users
+      const $utiltyBtn = $('.su-site-header-button', context);
+      if ($utiltyBtn.length) {
+        const $clonedutiltyBtn = $utiltyBtn.clone();
+        $clonedutiltyBtn.appendTo('.su-brand-bar__container', context)
+          .wrap('<div class="su-mobile-utility-button"></div>');
+      }
+
+      // Move the Utiltiy links to the mobile menu. Decoupled menu addressed in the decoupled files.
+      const $utility = $('.su-site-header-links', context);
+      if ($utility.length) {
+        const $clonedUtility = $utility.clone();
+        $clonedUtility.addClass('utility-navigation-mobile');
+        // for the Drupal menu
+        $clonedUtility.insertBefore('.su-masthead .su-multi-menu > ul li:eq(1)', context)
+          .wrap('<li class="su-mobile-site-utility"></li>');
+
+        // Change the utilty links to a list.
+        var list = $("<ul class='stanford-basic-site-settings su-site-header-links utility-navigation-mobile'></ul>");
+          $(".su-mobile-site-utility .su-site-header-links div").each(function() {
+            list.append("<li>" + $(this).html() + "</li>");
+          });
+          $(".su-mobile-site-utility .su-site-header-links").first().replaceWith(list);
+      }
+
       // Add an outline class to the page-content region if local tasks are
       // available.
       var localTab = $('#block-stanford-basic-local-tasks', context);
@@ -100,7 +131,7 @@ export default {
        */
       $('.topics__collapsable-menu', context).click(function () {
         $(this).toggleClass('show');
-        if ($(this).siblings('.menu').css('display') != 'none') {
+        if ($(this).siblings('.menu').css('display') !== 'none') {
           $(this).attr('aria-expanded', 'true');
         }
         else {
@@ -109,25 +140,7 @@ export default {
       });
 
       $(once('faq-expand-all', '.ptype-stanford-faq', context)).each((index, faq) => {
-        const $details = $('details', faq);
-
-        $('summary', $details).each((sumIndex, summary) => {
-          const $summary = $(summary);
-          const groupId = $summary.text()
-            .toLowerCase()
-            .replace(/[^\w]/g, '-')
-            .replace(/^-+/, '')
-            .replace(/-+$/, '')
-            .substring(0, 25);
-
-          $summary.attr('aria-expanded', 'false')
-            .attr('aria-controls', `${groupId}-panel`)
-            .attr('id', `${groupId}-button`);
-          $summary.next().attr('id', `${groupId}-panel`)
-            .attr('aria-labelledby', `${groupId}-button`);
-        });
-
-        if ($details.length < 2 || $('.ptype-stanford-faq', faq).length) {
+        if ($('.accordion__title', faq).length < 2 || $('.ptype-stanford-faq', faq).length) {
           return;
         }
 
@@ -137,16 +150,13 @@ export default {
           '<span class="visually-hidden"> Items below.</span>' +
           '</button>',
         );
+
         $button.click(function () {
           $button.toggleClass('expand-all').toggleClass('collapse-all');
           const expanded = !$button.hasClass('expand-all');
 
           $('span', $button).text(expanded ? 'Collapse' : 'Expand');
-          $details.each((i, detail) => {
-            $(detail).attr('open', expanded);
-            $('summary', detail).attr('aria-expanded', expanded)
-              .attr('aria-pressed', expanded);
-          });
+          $(`.accordion__title[aria-expanded="${expanded ? 'false' : 'true'}"]`, faq).click();
         });
 
         const $headline = $('.su-faq-headline', faq);

@@ -1,40 +1,6 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 8035:
-/***/ (function() {
-
-var header = document.getElementById('block-stanford-basic-local-tasks');
-var sticky = 0;
-if (header) {
-  sticky = header.getBoundingClientRect().top;
-  window.onscroll = function () {
-    stickyHeaderOnScroll();
-  };
-}
-
-/**
- * Stick the local block tasks to the top of the window.
- */
-function stickyHeaderOnScroll() {
-  var toolbarHeight = 0;
-  var toolbarOpen = document.body.classList.contains('toolbar-tray-open');
-  if (toolbarOpen === true) {
-    toolbarHeight = 79;
-  } else {
-    toolbarHeight = 39;
-  }
-  if (window.pageYOffset >= sticky - toolbarHeight) {
-    header.classList.add('sticky');
-    header.style.marginTop = toolbarHeight + 'px';
-  } else {
-    header.classList.remove('sticky');
-    header.style.marginTop = '0px';
-  }
-}
-
-/***/ }),
-
 /***/ 5644:
 /***/ (function() {
 
@@ -99,6 +65,35 @@ window.Drupal.behaviors.stanford_basic = {
         $clonedSearch.prependTo('.su-masthead .su-multi-menu > ul', context).wrap('<li class="su-mobile-site-search"></li>');
       }
 
+      // Check for empty navigation and add space.
+      var $MenRegion = $('.region-menu', context);
+      if ($MenRegion.children().length === 0) {
+        $MenRegion.addClass("empty-menu");
+      }
+
+      // Move the utility button to the brand bar for mobile users
+      var $utiltyBtn = $('.su-site-header-button', context);
+      if ($utiltyBtn.length) {
+        var $clonedutiltyBtn = $utiltyBtn.clone();
+        $clonedutiltyBtn.appendTo('.su-brand-bar__container', context).wrap('<div class="su-mobile-utility-button"></div>');
+      }
+
+      // Move the Utiltiy links to the mobile menu. Decoupled menu addressed in the decoupled files.
+      var $utility = $('.su-site-header-links', context);
+      if ($utility.length) {
+        var $clonedUtility = $utility.clone();
+        $clonedUtility.addClass('utility-navigation-mobile');
+        // for the Drupal menu
+        $clonedUtility.insertBefore('.su-masthead .su-multi-menu > ul li:eq(1)', context).wrap('<li class="su-mobile-site-utility"></li>');
+
+        // Change the utilty links to a list.
+        var list = $("<ul class='stanford-basic-site-settings su-site-header-links utility-navigation-mobile'></ul>");
+        $(".su-mobile-site-utility .su-site-header-links div").each(function () {
+          list.append("<li>" + $(this).html() + "</li>");
+        });
+        $(".su-mobile-site-utility .su-site-header-links").first().replaceWith(list);
+      }
+
       // Add an outline class to the page-content region if local tasks are
       // available.
       var localTab = $('#block-stanford-basic-local-tasks', context);
@@ -135,21 +130,14 @@ window.Drupal.behaviors.stanford_basic = {
        */
       $('.topics__collapsable-menu', context).click(function () {
         $(this).toggleClass('show');
-        if ($(this).siblings('.menu').css('display') != 'none') {
+        if ($(this).siblings('.menu').css('display') !== 'none') {
           $(this).attr('aria-expanded', 'true');
         } else {
           $(this).attr('aria-expanded', 'false');
         }
       });
       $(once('faq-expand-all', '.ptype-stanford-faq', context)).each(function (index, faq) {
-        var $details = $('details', faq);
-        $('summary', $details).each(function (sumIndex, summary) {
-          var $summary = $(summary);
-          var groupId = $summary.text().toLowerCase().replace(/[^\w]/g, '-').replace(/^-+/, '').replace(/-+$/, '').substring(0, 25);
-          $summary.attr('aria-expanded', 'false').attr('aria-controls', "".concat(groupId, "-panel")).attr('id', "".concat(groupId, "-button"));
-          $summary.next().attr('id', "".concat(groupId, "-panel")).attr('aria-labelledby', "".concat(groupId, "-button"));
-        });
-        if ($details.length < 2 || $('.ptype-stanford-faq', faq).length) {
+        if ($('.accordion__title', faq).length < 2 || $('.ptype-stanford-faq', faq).length) {
           return;
         }
         var $button = $('<button class="expand-collapse-button expand-all su-button--secondary">' + '<span class="expand-collapse">Expand</span> All' + '<span class="visually-hidden"> Items below.</span>' + '</button>');
@@ -157,10 +145,7 @@ window.Drupal.behaviors.stanford_basic = {
           $button.toggleClass('expand-all').toggleClass('collapse-all');
           var expanded = !$button.hasClass('expand-all');
           $('span', $button).text(expanded ? 'Collapse' : 'Expand');
-          $details.each(function (i, detail) {
-            $(detail).attr('open', expanded);
-            $('summary', detail).attr('aria-expanded', expanded).attr('aria-pressed', expanded);
-          });
+          $(".accordion__title[aria-expanded=\"".concat(expanded ? 'false' : 'true', "\"]"), faq).click();
         });
         var $headline = $('.su-faq-headline', faq);
         if ($headline.length) {
@@ -176,6 +161,40 @@ window.Drupal.behaviors.stanford_basic = {
     // console.log("Detached.");
   }
 };
+
+/***/ }),
+
+/***/ 8035:
+/***/ (function() {
+
+var header = document.getElementById('block-stanford-basic-local-tasks');
+var sticky = 0;
+if (header) {
+  sticky = header.getBoundingClientRect().top;
+  window.onscroll = function () {
+    stickyHeaderOnScroll();
+  };
+}
+
+/**
+ * Stick the local block tasks to the top of the window.
+ */
+function stickyHeaderOnScroll() {
+  var toolbarHeight = 0;
+  var toolbarOpen = document.body.classList.contains('toolbar-tray-open');
+  if (toolbarOpen === true) {
+    toolbarHeight = 79;
+  } else {
+    toolbarHeight = 39;
+  }
+  if (window.pageYOffset >= sticky - toolbarHeight) {
+    header.classList.add('sticky');
+    header.style.marginTop = toolbarHeight + 'px';
+  } else {
+    header.classList.remove('sticky');
+    header.style.marginTop = '0px';
+  }
+}
 
 /***/ })
 

@@ -17,10 +17,13 @@ dependencies:
     - field.field.config_pages.stanford_basic_site_settings.su_site_algolia_index
     - field.field.config_pages.stanford_basic_site_settings.su_site_algolia_key
     - field.field.config_pages.stanford_basic_site_settings.su_site_algolia_search
+    - field.field.config_pages.stanford_basic_site_settings.su_site_algolia_terms
     - field.field.config_pages.stanford_basic_site_settings.su_site_algolia_ui
     - field.field.config_pages.stanford_basic_site_settings.su_site_created
     - field.field.config_pages.stanford_basic_site_settings.su_site_dropdowns
     - field.field.config_pages.stanford_basic_site_settings.su_site_email
+    - field.field.config_pages.stanford_basic_site_settings.su_site_header_button
+    - field.field.config_pages.stanford_basic_site_settings.su_site_header_links
     - field.field.config_pages.stanford_basic_site_settings.su_site_home
     - field.field.config_pages.stanford_basic_site_settings.su_site_menu_levels
     - field.field.config_pages.stanford_basic_site_settings.su_site_name
@@ -29,6 +32,7 @@ dependencies:
     - field.field.config_pages.stanford_basic_site_settings.su_site_org
     - field.field.config_pages.stanford_basic_site_settings.su_site_owner_contact
     - field.field.config_pages.stanford_basic_site_settings.su_site_renewal_due
+    - field.field.config_pages.stanford_basic_site_settings.su_site_sunetid
     - field.field.config_pages.stanford_basic_site_settings.su_site_tech_contact
     - field.field.config_pages.stanford_basic_site_settings.su_site_type
     - field.field.config_pages.stanford_basic_site_settings.su_site_url
@@ -151,6 +155,16 @@ content:
     third_party_settings: {  }
     weight: 23
     region: content
+  su_site_algolia_terms:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 27
+    region: content
   su_site_created:
     type: timestamp
     label: above
@@ -186,6 +200,30 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 2
+    region: content
+  su_site_header_button:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 29
+    region: content
+  su_site_header_links:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 30
     region: content
   su_site_home:
     type: entity_reference_label
@@ -255,6 +293,14 @@ content:
       format_type: medium
     third_party_settings: {  }
     weight: 15
+    region: content
+  su_site_sunetid:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 28
     region: content
   su_site_tech_contact:
     type: basic_string
