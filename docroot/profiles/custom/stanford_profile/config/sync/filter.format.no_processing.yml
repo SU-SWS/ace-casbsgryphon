@@ -1,0 +1,10 @@
+uuid: 278a8b19-061b-490e-a8d3-2ec5691fc6c4
+langcode: en
+status: true
+dependencies:
+  module:
+    - responsive_tables_filter
+name: 'No processing'
+format: no_processing
+weight: -10
+filters: {  }
