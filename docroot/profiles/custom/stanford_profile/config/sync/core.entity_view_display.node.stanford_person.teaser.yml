@@ -55,6 +55,7 @@ dependencies:
     - field.field.node.stanford_person.su_person_research_interests
     - field.field.node.stanford_person.su_person_scholarly_interests
     - field.field.node.stanford_person.su_person_short_title
+    - field.field.node.stanford_person.su_person_source
     - field.field.node.stanford_person.su_person_telephone
     - field.field.node.stanford_person.su_person_type_group
     - field.field.node.stanford_person.su_shared_tags
@@ -108,6 +109,7 @@ hidden:
   su_casbs_ra_year_in_stu: true
   su_casbs_visiting_scholar_year: true
   su_casbs_vs_year_in_stu: true
+  su_imported: true
   su_metatags: true
   su_person_academic_appt: true
   su_person_admin_appts: true
@@ -132,6 +134,7 @@ hidden:
   su_person_research_interests: true
   su_person_scholarly_interests: true
   su_person_short_title: true
+  su_person_source: true
   su_person_telephone: true
   su_person_type_group: true
   su_shared_tags: true

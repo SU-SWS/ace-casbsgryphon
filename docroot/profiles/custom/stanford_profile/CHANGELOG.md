@@ -1,5 +1,148 @@
 # Stanford Profile
 
+11.8.3
+-------------------------------------------------------------------------------
+- Fixed minimally branded theme unpublished banner visibility
+- Update book config
+
+11.8.2
+-------------------------------------------------------------------------------
+- D8CORE-8052 Style social link for "X.com" to match "twitter.com"
+- Upgrade to drupal 10.5
+
+11.8.1
+-------------------------------------------------------------------------------
+- UE-536: adjusting opportunity layout to be in only 2 cols (#956)
+- Wrap page header and page footer in `data-nosnippet` to prevent google snippets from the menus
+- D8CORE-8144: Removed duplication of fields in sidebar on opportunities
+
+11.8.0
+-------------------------------------------------------------------------------
+- D8CORE-8019: Move opportunity fields into a view for better styles (#924)
+- D8CORE-8063 Fix html structure on opportunity list items (#952)
+- D8CORE-8071 Added an "Imported" field populated by importers (#951)
+- D8CORE-8014 Fix hover state on mobile menu hamburger
+- D8CORE-8065 Move opportunity node page "Main content" anchor above page title
+- Adjust opportunity filters to use radio buttons (#950)
+- D8CORE-8036: RSS Feed For News (#936)
+- Added heading level selection for stat card paragraph (#949)
+- D8CORE-8045: Adding spacing to header bottom when there is no navigation menu. (#943)
+- Add fontawesome icon template to hide icon from screen readers
+- D8CORE-7987: Copy the utility links and buttons for the mobile display (#935)
+- D8CORE-8133: Changed sort for the opportunities view (#945)
+- Update stat card color choices
+- Updated editorially settings
+- Require headline in stat card (#940)
+- Added stat card icon
+- D8CORE-8000: Add validation for numeric "Items to display" on list paragraph (#937)
+- D8CORE-7843 D8CORE-8086 Add stat card and section background color options (#932)
+- D8CORE-8042 - External source field for person with page redirect (#933)
+- D8CORE-7736: Add unpublished site banner to all pages (#931)
+- D8CORE-7836: added past and upcoming filter and indicator to "Manage events" page. (#928)
+- D8CORE-8047: Manage Basic Pages content management view (#927)
+- D8CORE-6470: Update Event Importer help text (#929)
+
+11.7.0
+-------------------------------------------------------------------------------
+- D8CORE-8031 Force displaying both regions on opportunity  layout
+- D8CORE-8029: made the contact email a link (#921)
+- Add fallback sorting to graphql views
+- Fixed course card grid to display as a grid, instead of list
+- Exclude external link icon from news teasers due to template implementation
+- D8CORE-8024 Fix order of decoupled menu items (#919)
+- D8CORE-8025 D8CORE-8027: fixed tabing order and spacing on the header and utility nav (#920)
+- D8CORE-8020: Opportunities header items changes for alignment when no icon (#918)
+- Expose entity ids in graphql to allow for view filtering'
+- D8CORE-7927: Utility navigation styles (#911)
+- FEATURE: Opportunities content type enhanced with node display, views and filterable views. (#883)
+- D8CORE-7997: Updated edit form for Site Header Options (#916)
+- D8CORE-7924 Add header utility links to site settings (#900)
+- Remove unwanted fields from search indexing displays
+- Updated decoupled menu to correctly display sub menu items
+- D8CORE-7654: Fixed full width basic page title position (#891)
+- Update trash module config
+
+11.6.2
+-------------------------------------------------------------------------------
+- Fixed logic error in main menu when home page is a node path.
+
+11.6.1
+-------------------------------------------------------------------------------
+- Improve reliability of acceptance tests.
+
+11.6.0
+-------------------------------------------------------------------------------
+- D8CORE-7292 - Updated the help pages. (#864)
+- Traverse entire main menu to add appropriate unpublished indicators
+- D8CORE-7835 Fix accordion expand/collapse all behavior to not behave like a toggle
+- Update field Validation plugins to new constraints (#879)
+- Modify field validation on social link field to improve error display.
+- D8CORE-7649: Changing the color of headings in wysiwyg for Minimal subtheme. (#872)
+- D8CORE-7723: Allow unpublishing of taxonomy terms (#874)
+- D8CORE-7885: Change Character Limit for Accordion (#875)
+- Added stage file proxy for dev, stage, and local
+- Implement shield on dev and stage (#873)
+- D8CORE-7737 D8CORE-7738 D8CORE-7824 Install state changes (#871)
+- D8CORE-7704: Configure trash module with necessary test changes (#852)
+- D8CORE-7663: reorganized the opportunity node page (#833)
+- D8CORE-7813: fixed the text color in the more publications button (#870)
+
+11.5.3
+-------------------------------------------------------------------------------
+- Added site manager permission to grant site reviewer role.
+
+11.5.2
+-------------------------------------------------------------------------------
+- Removed non-existent permissions
+
+11.5.1
+-------------------------------------------------------------------------------
+- D8CORE 7753 refactor accordion paragraph to use button and div elements (#863)
+- Fix typo in lockup config page settings. (#862)
+- D8CORE-7705: Self-Service Enhanced Search (#861)
+- D8CORE-7780: Content Management pages for person, event and news (#858)
+- D8CORE-7622: Site Reviewer Role (#855)
+- D8CORE-7339: added net to the local footer social link validation (#859)
+- D8CORE-7644: updated user creation mail (#856)
+- D8CORE-7220: h1 on Homepage (#847)
+- D8Core-7339: added help text and additional icons to social links in footer. (#846)
+- Revert "Add and configure trash module for soft deleteing content (#835)" (#851)
+- Update tests to work correctly with trash module (#850)
+- D8CORE-7531: removed max-width on intro text and drop cap text (#843)
+- D8CORE-7703: fixed bad link, updated text (#844)
+- D8CORE-7532: removed wysiwyg p line length (#842)
+- Add and configure trash module for soft deleteing content (#835)
+- D8CORE-7678: removed the medium and small quote (#840)
+- Updated editora11y module config (#841)
+- Fix tests with profile helper module dev (#839)
+- Remove obsolete module block_content_permissions (#838)
+- Drupal 11.4 update
+- D8CORE-7533: Change to the Quote style in the wysiwyg
+- Fixup citation entity config export
+- Updated environment indicator settings after update
+- Update linkit module (#834)
+- D8CORE-7664: add gutters to accordions on full width
+- D8CORE-7668: Adjust skip secondary nav anchor link
+- D8CORE-7670: allow all language options in ckeditor
+- Update ultimate cron config after module update (#832)
+- Updated config from db update
+
+11.5.0
+-------------------------------------------------------------------------------
+- Updated metatag module config
+- Exposed opportunity in graphql
+- D8CORE-7194 Embed codes with captions respect 100% widths on iframes
+- D8CORE-6644 Omit default favicons if one is uploaded in the theme settings
+- D8CORE-5828 If home page starts with a wysiwyg, add some space at the top
+- Added aria label to masthead section
+- D8CORE-6821 Adjust skip to main content location
+- D8CORE-7454: Move back-to-top inside the <main> element
+- D8CORE-7434 D8CORE-7435 D8CORE-7436 | Opportunity full content layout and configure card and list display (#813)
+- D8CORE-7578 Adjust person display for lists and improve resolution (#828)
+- D8CORE-7558: added the global footer to minimal theme in dark with no logo (#820)
+- Added FAQ Accordion List paragraph type based on CAW (#827)
+- Added modal colorbox image display choices in the wysiwyg (#826)
+
 11.4.5
 -------------------------------------------------------------------------------
 - Remove edit links in views (#821)

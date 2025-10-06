@@ -1,5 +1,23 @@
 # Stanford Media
 
+11.2.2
+--------------------------------------------------------------------------------
+_Release Date: 2025-09-09_
+
+- Provide `default_name` for embed code media entity
+
+11.2.1
+--------------------------------------------------------------------------------
+_Release Date: 2025-09-04_
+
+- Replace file_validate_size due to removal in Drupal 11
+
+11.2.0
+--------------------------------------------------------------------------------
+_Release Date: 2025-08-12_
+
+- Update plugins to use attributes instead of annotations
+
 11.1.3
 --------------------------------------------------------------------------------
 _Release Date: 2024-12-02_

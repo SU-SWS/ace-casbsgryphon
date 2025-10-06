@@ -14,12 +14,12 @@
         }
     ],
     "require": {
-        "drupal/core": "^9.0 || ^10 || ^11",
+        "drupal/core": "^10.2 || ^11",
         "drupal/views_bulk_operations": "^4.2"
     },
     "require-dev": {
-        "drupal/paragraphs": "^1.15",
-        "drupal/smart_date": "^3.4"
+        "drupal/paragraphs": ">=1.15",
+        "drupal/smart_date": ">=3.4"
     },
     "config": {
         "sort-packages": true

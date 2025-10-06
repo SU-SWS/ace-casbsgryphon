@@ -202,3 +202,5 @@ docroot/sites/settings/settings.local.php
 
 #ian_notes.txt
 ian_notes.txt
+logs/
+.claude/

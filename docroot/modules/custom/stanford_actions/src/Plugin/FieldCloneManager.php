@@ -5,7 +5,8 @@ namespace Drupal\stanford_actions\Plugin;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
-use Drupal\stanford_actions\Annotation\FieldClone;
+use Drupal\stanford_actions\Annotation\FieldClone as FieldCloneAnnotation;
+use Drupal\stanford_actions\Attribute\FieldClone;
 use Drupal\stanford_actions\Plugin\Action\FieldClone\FieldCloneInterface;
 
 /**
@@ -22,7 +23,8 @@ class FieldCloneManager extends DefaultPluginManager implements FieldCloneManage
       $namespaces,
       $module_handler,
       FieldCloneInterface::class,
-      FieldClone::class
+      FieldClone::class,
+      FieldCloneAnnotation::class
     );
     $this->alterInfo('field_clone_info');
     $this->setCacheBackend($cache_backend, 'field_clone_info_plugins');

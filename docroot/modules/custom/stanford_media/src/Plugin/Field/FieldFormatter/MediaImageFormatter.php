@@ -2,20 +2,19 @@
 
 namespace Drupal\stanford_media\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Render\Element;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Plugin implementation of the 'media_image_formatter' formatter.
- *
- * @FieldFormatter (
- *   id = "media_image_formatter",
- *   label = @Translation("Media Image Style"),
- *   description = @Translation("Apply an image style to image media items."),
- *   field_types = {
- *     "entity_reference"
- *   }
- * )
  */
+#[FieldFormatter(
+  id: "media_image_formatter",
+  label: new TranslatableMarkup("Media Image Style"),
+  description: new TranslatableMarkup("Apply an image style to image media items."),
+  field_types: ["entity_reference"]
+)]
 class MediaImageFormatter extends MediaImageFormatterBase {
 
   /**
