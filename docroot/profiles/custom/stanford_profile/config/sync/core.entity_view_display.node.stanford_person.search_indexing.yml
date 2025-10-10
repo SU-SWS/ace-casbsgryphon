@@ -200,6 +200,7 @@ hidden:
   su_casbs_ra_year_in_stu: true
   su_casbs_visiting_scholar_year: true
   su_casbs_vs_year_in_stu: true
+  su_imported: true
   su_metatags: true
   su_person_email: true
   su_person_fax: true
