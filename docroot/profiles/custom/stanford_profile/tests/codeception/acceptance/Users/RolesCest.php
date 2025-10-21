@@ -16,10 +16,9 @@ class RolesCest {
     $I->canSee('Contributor');
     $I->canSee('Site Editor');
     $I->canSee('Site Manager');
-    $I->canSee('Site Builder');
-    $I->canSee('Site Developer');
     $I->canSee('Administrator');
     $I->canSee('Site Embedder');
+    $I->canSee('Site Reviewer');
   }
 
   /**
@@ -53,6 +52,15 @@ class RolesCest {
     // the admin toolbar.
     $I->amOnPage('/');
     $I->cantSeeElement('#toolbar-administration');
+  }
+
+  /**
+   * Site Reviewer role should be limited to viewing unpublished page.
+   */
+  public function testReviewerRole(AcceptanceTester $I) {
+    $I->logInWithRole('site_reviewer');
+    // D8CORE-7622
+    // would be nice to have a test if they CAN see unpublished pages
   }
 
   /**
@@ -163,6 +171,8 @@ class RolesCest {
 
   /**
    * D8CORE-6983: Site Manager and Site embedder should play well together.
+   *
+   * @group D8CORE-6983
    */
   public function testSiteEmbedderStacking(AcceptanceTester $I){
     // Site manager cannot create custom embeddables.
@@ -192,45 +202,6 @@ class RolesCest {
     $I->click('Save');
     $I->cantSee('error has been found');
     $I->canSee('Embeddable test embed has been created');
-  }
-
-  /**
-   * Site builder will get more access than site manager.
-   */
-  public function testSiteBuilderRole(AcceptanceTester $I) {
-    $I->logInWithRole('site_builder');
-
-    $I->amOnPage('/node/add/stanford_page');
-    $I->canSee('Layout');
-
-    $allowed_pages = [
-      '/admin/content',
-      $this->getFrontPagePath($I) . '/delete',
-    ];
-    $this->runAccessCheck($I, $allowed_pages);
-
-    // D8CORE-2538 Staff and students without additional roles shouldn't see
-    // the admin toolbar.
-    $I->amOnPage('/');
-    $I->canSeeElement('#toolbar-administration');
-  }
-
-  /**
-   * Developers have the most access.
-   */
-  public function testSiteDeveloperRole(AcceptanceTester $I) {
-    $I->logInWithRole('site_developer');
-
-    $I->amOnPage('/node/add/stanford_page');
-    $I->canSee('Layout');
-
-    $allowed_pages = ['/admin/content'];
-    $this->runAccessCheck($I, $allowed_pages);
-
-    // D8CORE-2538 Staff and students without additional roles shouldn't see
-    // the admin toolbar.
-    $I->amOnPage('/');
-    $I->canSeeElement('#toolbar-administration');
   }
 
   /**

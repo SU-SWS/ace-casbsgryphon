@@ -1,5 +1,12 @@
 # Stanford Actions
 
+8.3.0
+--------------------------------------------------------------------------------
+_Release Date: 2025-08-12_
+
+- Update plugins to use attributes instead of annotations
+- Removed D9 support
+
 8.2.10
 --------------------------------------------------------------------------------
 _Release Date: 2024-06-26_

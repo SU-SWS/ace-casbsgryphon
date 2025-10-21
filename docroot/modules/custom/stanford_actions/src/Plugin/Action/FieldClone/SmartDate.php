@@ -2,6 +2,9 @@
 
 namespace Drupal\stanford_actions\Plugin\Action\FieldClone;
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\stanford_actions\Attribute\FieldClone;
+
 /**
  * Class Date to increment date fields.
  *
@@ -14,6 +17,12 @@ namespace Drupal\stanford_actions\Plugin\Action\FieldClone;
  *   }
  * )
  */
+#[FieldClone(
+  id: 'smart_date',
+  label: new TranslatableMarkup('Smart Date'),
+  description: new TranslatableMarkup('Incrementally increase the Smart date on the field for every cloned item.'),
+  fieldTypes: ['smartdate']
+)]
 class SmartDate extends DateClone {
 
   /**

@@ -99,7 +99,7 @@ settings:
         - heading4
         - heading5
     ckeditor5_icons_icon:
-      fa_version: '5'
+      fa_version: '6'
       fa_styles:
         - solid
         - regular
@@ -108,7 +108,7 @@ settings:
       async_metadata: true
       recommended_enabled: false
     ckeditor5_language:
-      language_list: un
+      language_list: all
     ckeditor5_list:
       properties:
         reversed: true
@@ -169,7 +169,7 @@ settings:
           label: 'Splash Font'
           element: '<p class="su-font-splash">'
         -
-          label: 'Quote Text'
+          label: Quote
           element: '<p class="su-quote-text">'
         -
           label: 'Drop Cap First Letter'

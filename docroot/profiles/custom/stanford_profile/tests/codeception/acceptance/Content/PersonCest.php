@@ -252,7 +252,7 @@ class PersonCest {
       'name' => $this->faker->word,
     ], 'taxonomy_term');
     $I->amOnPage($term->toUrl('edit-form')->toString());
-    $I->cantSee('Published');
+    $I->canSeeCheckboxIsChecked('Published');
   }
 
   /**
@@ -366,6 +366,26 @@ class PersonCest {
 
     $I->canSeeInCurrentUrl($node->toUrl()->toString());
     $I->canSee($node->label(), 'h1');
+  }
+
+  /**
+   * Validate external content redirect.
+   */
+  public function testExternalSourcePerson(AcceptanceTester $I) {
+    $node = $I->createEntity([
+      'type' => 'stanford_person',
+      'title' => $this->faker->words(3, TRUE),
+      'su_person_source' => "http://google.com/",
+    ]);
+
+    // Redirect as anon.
+    $I->amOnPage($node->toUrl()->toString());
+    $I->seeCurrentUrlEquals('/');
+
+    // See content as admin.
+    $I->logInWithRole('administrator');
+    $I->amOnPage($node->toUrl()->toString());
+    $I->canSeeInCurrentUrl($node->toUrl()->toString());
   }
 
 }

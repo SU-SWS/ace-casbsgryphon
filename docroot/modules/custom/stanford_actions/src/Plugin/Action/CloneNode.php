@@ -2,6 +2,7 @@
 
 namespace Drupal\stanford_actions\Plugin\Action;
 
+use Drupal\Core\Action\Attribute\Action;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
@@ -13,6 +14,7 @@ use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\field\FieldConfigInterface;
 use Drupal\node\NodeInterface;
 use Drupal\stanford_actions\Events\NodeCloneEvent;
@@ -25,13 +27,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Clones a node.
- *
- * @Action(
- *   id = "node_clone_action",
- *   label = @Translation("Clone selected content"),
- *   type = "node"
- * )
  */
+#[Action(
+  id: 'node_clone_action',
+  label: new TranslatableMarkup('Clone selected content'),
+  type: 'node'
+)]
 class CloneNode extends ViewsBulkOperationsActionBase implements PluginFormInterface, ContainerFactoryPluginInterface {
 
   /**

@@ -9,7 +9,9 @@ use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Utility\Token;
+use Drupal\media\Attribute\OEmbedMediaSource;
 use Drupal\media\IFrameUrlHelper;
 use Drupal\media\MediaInterface;
 use Drupal\media\OEmbed\ResourceFetcherInterface;
@@ -22,19 +24,33 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Embeddable Media Source plugin.
- *
- * @MediaSource(
- *   id = "embeddable",
- *   label = @Translation("Stanford Embedded Media"),
- *   description = @Translation("Embeds a third-party resource."),
- *   default_thumbnail_filename = "generic.png",
- *   providers = {"ArcGIS StoryMaps", "CircuitLab", "Codepen", "Dailymotion",
- *   "Facebook", "Flickr", "Getty Images", "Instagram", "Issuu", "Livestream",
- *   "MathEmbed", "SimpleCast", "SlideShare", "SoundCloud", "Spotify",
- *   "Stanford Digital Repository", "Twitter"}, allowed_field_types =
- *   {"string", "string_long"},
- * )
  */
+#[OEmbedMediaSource(
+  id: 'embeddable',
+  label: new TranslatableMarkup('Stanford Embedded Media'),
+  description: new TranslatableMarkup('Embeds a third-party resource'),
+  allowed_field_types: ["string", "string_long"],
+  providers: [
+    "ArcGIS StoryMaps",
+    "CircuitLab",
+    "Codepen",
+    "Dailymotion",
+    "Facebook",
+    "Flickr",
+    "Getty Images",
+    "Instagram",
+    "Issuu",
+    "Livestream",
+    "MathEmbed",
+    "SimpleCast",
+    "SlideShare",
+    "SoundCloud",
+    "Spotify",
+    "Stanford Digital Repository",
+    "Twitter",
+  ],
+  default_thumbnail_filename: 'generic.png'
+)]
 class Embeddable extends OEmbed implements EmbeddableInterface {
 
   /**
@@ -143,7 +159,11 @@ class Embeddable extends OEmbed implements EmbeddableInterface {
     switch ($name) {
       case 'title':
         return $media->label();
+
+      case 'default_name':
+        return $this->getPluginDefinition()['label'];
     }
+    return NULL;
   }
 
   /**

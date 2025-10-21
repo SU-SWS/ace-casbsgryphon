@@ -1,5 +1,56 @@
 # Stanford Profile Helper
 
+9.10.3
+--------------------------------------------------------------------------------
+_Release Date: 2025-07-16_
+
+- Revert basic auth global provider in favor of router subscriber modification for private file auth.
+
+9.10.2
+--------------------------------------------------------------------------------
+_Release Date: 2025-07-16_
+
+- Alter basic auth provider to be global for all routes
+
+9.10.1
+--------------------------------------------------------------------------------
+_Release Date: 2025-06-19_
+
+- UE-536: Corrected opportunity  node page mobile layout and some spacing issues
+
+9.10.0
+--------------------------------------------------------------------------------
+_Release Date: 2025-06-13_
+
+- D8CORE-8019: Updating spacing on Opportunity page right column. (#404)
+- D8CORE-7574: Updated spacing on Events' contact to be a11y compliant (#407)
+- Added visible/invisible state to stat card color fields in UI
+- Updated stat card with additional colors
+- Support trailing zeros after a decimal for stat card counter
+- Added section margin and padding options. Adjusted section colors
+- Animate stat card numbers
+- D8CORE-7843: Added stat card component & row layout background colors (#405)
+- Add "Color Field" support for graphql field data
+
+9.9.1
+--------------------------------------------------------------------------------
+_Release Date: 2025-03-19_
+
+-D8CORE-8066 Adjust CAP org code taxonomy term population
+
+9.9.0
+--------------------------------------------------------------------------------
+_Release Date: 2025-03-10_
+
+- D8CORE-8031 Allow force displaying both regions on two column layout
+- Adjust intranet settings for anonymous users redirect message
+- D8CORE-5741: Opportunities content type and views styles (#391)
+- Adjust decoupled detector for editoria11y library
+- D8CORE-7799: adding spacing below the profile link when no other content (#390)
+- Allow publishing home page for only admins
+- D8CORE-7674: styling the code block in ckeditor to look the same in editing, preview, and live page (#380)
+- D8CORE-7625: changed event schedule heading level for best order (#385)
+
 9.8.14
 --------------------------------------------------------------------------------
 _Release Date: 2025-03-10_

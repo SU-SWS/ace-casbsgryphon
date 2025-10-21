@@ -3,15 +3,13 @@
 namespace Drupal\media_duplicate_validation\Plugin\MediaDuplicateValidation;
 
 use Drupal\media\MediaInterface;
+use Drupal\media_duplicate_validation\Attribute\MediaDuplicateValidation;
 use Drupal\media_duplicate_validation\Plugin\MediaDuplicateValidationBase;
 
 /**
  * Duplication plugin to check md5 hash of the entire file contents.
- *
- * @MediaDuplicateValidation(
- *   id = "md5"
- * )
  */
+#[MediaDuplicateValidation('md5')]
 class Md5 extends MediaDuplicateValidationBase {
 
   /**

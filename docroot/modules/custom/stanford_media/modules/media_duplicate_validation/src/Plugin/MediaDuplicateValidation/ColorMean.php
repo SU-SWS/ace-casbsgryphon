@@ -3,6 +3,7 @@
 namespace Drupal\media_duplicate_validation\Plugin\MediaDuplicateValidation;
 
 use Drupal\media\MediaInterface;
+use Drupal\media_duplicate_validation\Attribute\MediaDuplicateValidation;
 use Drupal\media_duplicate_validation\Plugin\MediaDuplicateValidationBase;
 
 /**
@@ -12,11 +13,8 @@ use Drupal\media_duplicate_validation\Plugin\MediaDuplicateValidationBase;
  * the average color value of each row and column we collect a subset of similar
  * images. Then we compare pixel by pixel and with the thresholds we can mark
  * each one as similar or not.
- *
- * @MediaDuplicateValidation(
- *   id = "color_mean"
- * )
  */
+#[MediaDuplicateValidation('color_mean')]
 class ColorMean extends MediaDuplicateValidationBase {
 
   /**
