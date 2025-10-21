@@ -1,5 +1,5 @@
 name: casbs
-recipe: drupal10
+recipe: drupal9
 config:
   webroot: docroot
   php: "8.3"
@@ -71,7 +71,6 @@ tooling:
   phpcs:
     service: appserver
     cmd: "/app/vendor/bin/phpcs --standard=Drupal,DrupalPractice"
-    options:
     description: Run phpcs for given folder or file.
   phpunit:
     service: appserver
