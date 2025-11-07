@@ -1,0 +1,3 @@
+site:
+  profile: stanford_profile
+  remote-alias: default.prod

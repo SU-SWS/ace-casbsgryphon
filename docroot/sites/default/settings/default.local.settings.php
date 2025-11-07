@@ -5,7 +5,7 @@
  * Local development override configuration feature.
  */
 
-use Acquia\Blt\Robo\Common\EnvironmentDetector;
+use Drupal\SwsDrush\Helpers\EnvironmentDetector;
 
 $db_name = '${drupal.db.database}';
 
@@ -29,25 +29,6 @@ $settings['container_yamls'][] = EnvironmentDetector::getRepoRoot() . '/docroot/
 
 // Allow access to update.php.
 $settings['update_free_access'] = TRUE;
-
-/**
- * Assertions.
- *
- * The Drupal project primarily uses runtime assertions to enforce the
- * expectations of the API by failing when incorrect calls are made by code
- * under development.
- *
- * @see http://php.net/assert
- * @see https://www.drupal.org/node/2492225
- *
- * If you are using PHP 7.0 it is strongly recommended that you set
- * zend.assertions=1 in the PHP.ini file (It cannot be changed from .htaccess
- * or runtime) on development machines and to 0 in production.
- *
- * @see https://wiki.php.net/rfc/expectations
- */
-assert_options(ASSERT_ACTIVE, TRUE);
-assert_options(ASSERT_EXCEPTION, TRUE);
 
 /**
  * Show all error messages, with backtrace information.
@@ -133,7 +114,7 @@ $settings['skip_permissions_hardening'] = TRUE;
 /**
  * Files paths.
  */
-$settings['file_private_path'] = EnvironmentDetector::getRepoRoot() . '/files-private/default';
+$settings['file_private_path'] = EnvironmentDetector::getRepoRoot() . '/files-private/' . EnvironmentDetector::getSiteName($site_path);
 /**
  * Site path.
  *
