@@ -1,19 +1,19 @@
-uuid: 7549c36b-7142-43b2-801d-33c1ce8fe011
+uuid: f161f11f-125e-4d8b-945a-63b69a5f9071
 langcode: en
 status: true
 dependencies:
   module:
-    - datetime
     - node
-id: node.su_opp_start_date
-field_name: su_opp_start_date
+    - taxonomy
+id: node.su_event_tags
+field_name: su_event_tags
 entity_type: node
-type: datetime
+type: entity_reference
 settings:
-  datetime_type: date
-module: datetime
+  target_type: taxonomy_term
+module: core
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

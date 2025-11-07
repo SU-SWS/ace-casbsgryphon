@@ -1,10 +1,12 @@
 <?php
 
+use Codeception\Attribute as CodeceptionAttribute;
 use Faker\Factory;
 
 /**
  * Test the news functionality.
  */
+#[CodeceptionAttribute\Group('news')]
 class StanfordNewsCest {
 
   /**
@@ -23,20 +25,19 @@ class StanfordNewsCest {
 
   /**
    * Taxonomy terms in SHS should save in the order they were chosen.
-   *
-   * @group D8CORE-6003
    */
+  #[CodeceptionAttribute\Group('D8CORE-6003')]
   public function testTermOrder(FunctionalTester $I) {
     $first_term = $I->createEntity([
-      'name' => 'c-' . $this->faker->word,
+      'name' => 'c-' . $this->faker->word(),
       'vid' => 'stanford_news_topics',
     ], 'taxonomy_term');
     $second_term = $I->createEntity([
-      'name' => 'b-' . $this->faker->word,
+      'name' => 'b-' . $this->faker->word(),
       'vid' => 'stanford_news_topics',
     ], 'taxonomy_term');
     $third_term = $I->createEntity([
-      'name' => 'a-' . $this->faker->word,
+      'name' => 'a-' . $this->faker->word(),
       'vid' => 'stanford_news_topics',
     ], 'taxonomy_term');
 
@@ -93,4 +94,32 @@ class StanfordNewsCest {
     $I->canSee($third_term->label() . ', ' . $first_term->label() . ', ' . $second_term->label());
   }
 
+  #[CodeceptionAttribute\Group('news_variant')]
+  public function testDefaultVariantHidesFields(FunctionalTester $I) {
+    $default_news = $I->createEntity([
+      'title' => $this->faker->words(3, TRUE),
+      'type' => 'stanford_news',
+      'su_news_dek' => $this->faker->sentence(),
+      'su_news_byline' => $this->faker->name(),
+    ]);
+    $spotlight_news = $I->createEntity([
+      'title' => $this->faker->words(2, TRUE),
+      'type' => 'stanford_news',
+      'layout_selection' => 'news_spotlight',
+      'su_news_quote' => $this->faker->sentence(),
+      'su_news_subtitle' => $this->faker->sentence(),
+    ]);
+
+    $I->logInWithRole('site_manager');
+    $I->amOnPage($default_news->toUrl('edit-form')->toString());
+    $I->canSeeInField('Headline', $default_news->label());
+    $I->canSeeInField('Dek', $default_news->get('su_news_dek')->value);
+    $I->canSeeInField('Byline', $default_news->get('su_news_byline')->value);
+    
+    $I->amOnPage($spotlight_news->toUrl('edit-form')->toString());
+    $I->canSeeInField('Headline', $spotlight_news->label());
+    // $I->selectOption('Layout', 'Spotlight'); 
+    $I->canSeeInField('Quote / Big Text', $spotlight_news->get('su_news_quote')->value);
+    $I->canSeeInField('Subtitle', $spotlight_news->get('su_news_subtitle')->value);
+  }
 }

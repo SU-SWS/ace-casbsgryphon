@@ -1,5 +1,41 @@
 # Stanford Profile
 
+12.0.2
+-------------------------------------------------------------------------------
+
+- Updated external link settings
+- Added acceptance test for publication csv importer
+- Prevent federated search checkbox shrinking
+- Added person and policy external source fields to graphql
+
+12.0.2
+-------------------------------------------------------------------------------
+- D8CORE-8244: Fix label display when fields are empty (#985)
+- Adjust opportunity form display field order
+
+12.0.1
+-------------------------------------------------------------------------------
+
+- D8CORE-8279: A11y changes for federated search (#982)
+- Set title on profile helper cron job
+
+
+12.0.0
+-------------------------------------------------------------------------------
+
+- Remove response_code_condition (#978)
+- D8CORE-8098: adding events, person, and publication filter tag fields (#969)
+- D8CORE-7937 Remove "Bright" brand bar option
+- D8CORE-8132: Adding sponsors to the Opportunity node (#965)
+- Remove jsonapi endpoint for users (#974)
+- D8Core-8174: RSS Feeds for Events (#972)
+- D8CORE-8028: Added ext link icons to Utility nav (#967)
+- D8CORE-8195: Added external source field and functionality to policy content type (#971)
+- Upgrade everything to Drupal 11 (#968)
+- D8CORE-7586 D8CORE-7583: Expand algolia to allow for federated search feature (#966)
+- Updated filtered opportunities GQL view settings
+- Fixed typo in site org taxonomy term
+
 11.8.3
 -------------------------------------------------------------------------------
 - Fixed minimally branded theme unpublished banner visibility
