@@ -6,7 +6,7 @@ parameters:
     debug: true
     auto_reload: true
     cache: false
-  cors:
+  cors.config:
     enabled: false
     # Specify allowed headers, like 'x-allowed-header'
     allowedHeaders: ['*']
