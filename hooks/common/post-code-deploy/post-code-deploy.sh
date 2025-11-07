@@ -24,9 +24,6 @@ repo_root="/var/www/html/$site.$target_env"
 export PATH=$repo_root/vendor/bin:$PATH
 cd $repo_root
 
-# Removed for ACE environment
-# blt artifact:ac-hooks:post-code-deploy $site $target_env $source_branch $deployed_tag $repo_url $repo_type --environment=$target_env -v --no-interaction -D drush.ansi=false
-
-blt drupal:update --environment=$target_env -v --no-interaction
+drush sws:multisite:update:parallel
 
 set +v
