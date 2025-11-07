@@ -1,3 +1,3 @@
 site:
-  profile: null
-  remote-alias: casbsgryphon.dev
+  profile: stanford_profile
+  remote-alias: default.prod

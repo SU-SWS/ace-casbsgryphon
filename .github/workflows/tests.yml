@@ -157,7 +157,7 @@ jobs:
         run: |
           n=${{ vars.TEST_SHARDS || 3 }} &&
           PROFILE=`drush st --fields=install-profile --format=list` &&
-          drush codeception --site-domain=localhost --suite=${{ matrix.suite }} --test-dir=docroot/profiles/lagunita/$PROFILE/tests/codeception --shard=${{ matrix.shard }}/$n &&
+          drush codeception --site-domain=localhost --suite=${{ matrix.suite }} --test-dir=docroot/profiles/custom/$PROFILE/tests/codeception --shard=${{ matrix.shard }}/$n &&
           if [ ! -f artifacts/report.html ]; then
             exit 1
           fi
