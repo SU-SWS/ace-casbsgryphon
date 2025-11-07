@@ -1,7 +1,0 @@
-name: Stanford Layout Paragraphs
-type: module
-description: Modifications to Layout Paragraphs module
-package: Stanford
-core_version_requirement: ^10.3 || ^11
-dependencies:
-  - layout_paragraphs:layout_paragraphs

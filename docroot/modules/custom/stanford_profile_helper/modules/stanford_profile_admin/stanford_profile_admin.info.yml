@@ -1,5 +1,0 @@
-name: 'Stanford Profile Admin'
-type: module
-description: 'Admin UI helper'
-core_version_requirement: ^10.3 || ^11
-package: Stanford

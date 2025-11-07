@@ -1,25 +1,11 @@
-# deal with ignoring or not  bin, vendor, phpstorm files...
-.idea
-.idea/**
-bin/
-!docroot/**
-!docroot/vendor/**
-!docroot/**/vendor/**
-!composer.json
-!docroot/**/composer.json
-!composer.lock
-!docroot/**/composer.lock
-!docroot/modules/**
-.git
-.env
+# https://blog.martinhujer.cz/17-tips-for-using-composer-efficiently/#tip-%239%3A-do-not-attempt-to-merge-%60composer.lock%60-when-rebasing-or-merging
+/composer.lock -merge
+config/envs/local/stage_file_proxy.settings.yml
 
 # Ignore configuration files that may contain sensitive information.
 local.settings.php
-local.sites.php
-local.drushrc.php
 local.drush.yml
 local.site.yml
-local.aliases.drushrc.php
 local.services.yml
 local.authsources.php
 local.config.php
@@ -32,13 +18,9 @@ local.blt.yml
 /keys
 /certs
 .env
-#.lando.yml
+.lando.yml
 lando/php.ini
 docroot/sites/simpletest
-/nobackup
-nobackup
-deploy
-/deploy
 
 # Ignore custom test configuration.
 tests/codeception.yml
@@ -54,39 +36,24 @@ docroot/core
 docroot/sites/*/files
 /files-private
 docroot/sites/*/private
-docroot/sites/simpletest
-/artifacts
-keys
-docroot/.htaccess.orig
-docroot/.htaccess.rej
-LocalCommands.php
 
-# Ignore custom test configuration.
-tests/codeception.yml
-tests/codeception/*.suite.yml
-tests/codeception/_output
-tests/codeception/_data
-tests/codeception/_support/_generated
-
+# Ignore stanford contrib items.
+docroot/modules/custom
+docroot/themes/custom
+docroot/profiles/custom/*
+!docroot/profiles/custom/stanford_profile
 
 # Ignore contrib modules. These should be created during build process.
 docroot/modules/contrib
-# docroot/modules/custom
 docroot/themes/contrib
-# docroot/themes/custom
 docroot/profiles/contrib
-# docroot/profiles/custom
 docroot/libraries
 drush/Commands
 
-# Ignore stanford contrib items.
-# docroot/modules/stanford
-# docroot/themes/stanford
-# docroot/profiles/stanford
-
 # Ignore custom theme build artifacts
-node_modules
-styleguide
+docroot/themes/custom/*/node_modules
+docroot/themes/custom/*/css
+docroot/themes/custom/*/styleguide
 
 # Ignore build artifacts
 deployment_identifier
@@ -94,6 +61,7 @@ deployment_identifier
 bin/*
 tmp
 reports
+/travis_wait*
 
 # OS X
 .DS_Store
@@ -194,13 +162,12 @@ drush/sites/.checksums
 
 # Deprecation detector rules
 .rules
-docroot/sites/settings/settings.local.php
-.docksal/docksal-local.env
 
-# local lando file
-.lando.yml
+# ignore ddev settings
+docroot/sites/**/settings/settings.ddev.php
 
-#ian_notes.txt
-ian_notes.txt
-logs/
-.claude/
+# ignore any notes txt documents
+notes.txt
+
+# ignore the NextJS frontend directories
+frontend-*

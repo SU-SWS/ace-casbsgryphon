@@ -1,5 +1,0 @@
-
-stanford_samlauth.settings:
-  title: SAML Authorization
-  route_name: stanford_samlauth.settings
-  weight: 10

@@ -1,7 +1,0 @@
-
-colorbox:
-  js:
-    js/colorbox.js: {}
-  dependencies:
-    - colorbox/init
-    - core/once

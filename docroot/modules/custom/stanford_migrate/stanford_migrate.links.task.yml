@@ -1,7 +1,0 @@
-stanford_migrate.local_tasks:
-  deriver: 'Drupal\stanford_migrate\Plugin\Derivative\MigrateLocalTasks'
-
-stanford_migrate.ultimate_cron:
-  title: 'Migrations'
-  route_name: stanford_migrate.ultimate_cron
-  base_route: entity.ultimate_cron_job.collection

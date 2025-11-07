@@ -1,4 +1,0 @@
-menu_link_form:
-  css:
-    theme:
-      dist/css/menu_link_form.css: {}
