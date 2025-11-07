@@ -141,9 +141,9 @@ jobs:
           rm -rf /var/www/html &&
           ln -snf $GITHUB_WORKSPACE /var/www/html &&
           mkdir -p -m 777 docroot/sites/default/files &&
-          if  [ "${{ matrix.site }}" != "default" ]; then
+          if [ "${{ matrix.site }}" != "default" ]; then
             rm -rf docroot/sites/${{ matrix.site }}/files &&
-            ln -sL ../default/files/ docroot/sites/${{ matrix.site }}/files &&
+            ln -sL ../default/files/ docroot/sites/${{ matrix.site }}/files
           fi &&
           apachectl stop &&
           apachectl start &&
