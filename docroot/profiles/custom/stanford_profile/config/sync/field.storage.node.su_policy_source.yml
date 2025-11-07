@@ -1,17 +1,16 @@
-uuid: 2dfa675d-bef5-418c-83f4-c7c139fd0a5a
+uuid: eb7b9f53-1a9b-4f13-a73e-3de4bdd5eb0b
 langcode: en
 status: true
 dependencies:
   module:
-    - datetime
+    - link
     - node
-id: node.su_opp_open_date
-field_name: su_opp_open_date
+id: node.su_policy_source
+field_name: su_policy_source
 entity_type: node
-type: datetime
-settings:
-  datetime_type: datetime
-module: datetime
+type: link
+settings: {  }
+module: link
 locked: false
 cardinality: 1
 translatable: true
