@@ -207,6 +207,9 @@
             }
         },
         "patches": {
+            "drupal/config_readonly": {
+                "https://www.drupal.org/project/config_readonly/issues/3469854": "https://git.drupalcode.org/project/config_readonly/-/merge_requests/17.patch"
+            },
             "drupal/fontawesome": {
                 "https://www.drupal.org/project/fontawesome/issues/3380581": "https://www.drupal.org/files/issues/2025-03-06/iconpicker-does-not-render_3380581_11.patch"
             },
