@@ -31,3 +31,8 @@ if (getenv('GITPOD_WORKSPACE_URL') || getenv('TUGBOAT_REPO')) {
     'local_login_fieldset_open' => true,
   ];
 }
+
+if (getenv('CODESPACES')) {
+  $settings['reverse_proxy'] = TRUE;
+  $settings['reverse_proxy_addresses'] = ['127.0.0.1'];
+}

@@ -1,6 +1,6 @@
 <?php
 
-use Acquia\Blt\Robo\Common\EnvironmentDetector;
+use Drupal\SwsDrush\Helpers\EnvironmentDetector;
 
 // When the encryption environment variable is not provided (local/ci/etc),
 // fake the encryption string so that the site doesn't break.
@@ -26,35 +26,43 @@ $settings['file_temp_path'] = '/tmp';
 // factory-hooks/post-settings-php/includes.php file
 $settings['config_sync_directory'] = $repo_root . "/docroot/profiles/custom/stanford_profile/config/sync";
 
-// Prevent field encrypt module from using eval() for entity hooks.
-$settings['field_encrypt.use_eval_for_entity_hooks'] = FALSE;
+//$settings['stanford_capture_ownership'] = EnvironmentDetector::isProdEnv();
+
+if (EnvironmentDetector::isAhEnv()) {
+//  $config['config_split.config_split.acsf']['status'] = TRUE;
+//  $config['simple_oauth.settings']['public_key'] = EnvironmentDetector::getAhFilesRoot() . '/nobackup/oauth/oauth_public.key';
+//  $config['simple_oauth.settings']['private_key'] = EnvironmentDetector::getAhFilesRoot() . '/nobackup/oauth/oauth_private.key';
 
   // Lock the UI to read_only when on production or test in Acquia.
   if (
-    (EnvironmentDetector::isAhProdEnv() || EnvironmentDetector::isAhStageEnv())
+    (EnvironmentDetector::isProdEnv() || EnvironmentDetector::isStageEnv())
     && PHP_SAPI !== 'cli'
   ) {
     $settings['config_readonly'] = TRUE;
     $settings['config_readonly_whitelist_patterns'] = [
-      'system.menu.*',
       'core.menu.static_menu_link_overrides',
-      'system.theme',
       'google_tag.container.*',
       'google_tag.settings',
-      'user.role.*',
+      'next.next_entity_type_config.*',
+      'next.next_site.*',
+      'samlauth.authentication',
       'system.action.user_add_role_action.*',
       'system.action.user_remove_role_action.*',
-      'samlauth.authentication',
+      'system.menu.*',
+      'system.theme',
+      'user.role.*',
     ];
     $settings['config_readonly_content_link_providers'] = [
       'menu_link_content',
       'menu_link',
     ];
   }
+}
 
 // Block the bots when not on production.
-if (!EnvironmentDetector::isAhProdEnv()) {
+if (!EnvironmentDetector::isProdEnv()) {
   $settings['nobots'] = TRUE;
+  $config['next.settings']['debug'] = TRUE;
 }
 
 /**
@@ -71,6 +79,7 @@ $additionalSettingsFiles = [
   __DIR__ . '/saml.settings.php',
   __DIR__ . '/xmlsitemap.settings.php',
   "$repo_root/keys/secrets.settings.php",
+  EnvironmentDetector::getAhFilesRoot() . "/nobackup/sites/$site_name/secrets.settings.php",
 ];
 
 foreach ($additionalSettingsFiles as $settingsFile) {

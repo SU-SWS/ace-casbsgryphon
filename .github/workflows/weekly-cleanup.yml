@@ -66,4 +66,4 @@ jobs:
         run: |
           ssh-keyscan -t rsa svn-45197.prod.hosting.acquia.com >> /root/.ssh/known_hosts &&
           composer install -n &&
-          drush sws:acquia:clean-git --app-id=5d2dbbe5-3255-417b-b398-4c1086cec925 --app-key="$ACQUIA_APP_KEY" --app-secret="$ACQUIA_APP_SECRET" -n
+          drush sws:acquia:clean-git --app-key="$ACQUIA_APP_KEY" --app-secret="$ACQUIA_APP_SECRET" -n

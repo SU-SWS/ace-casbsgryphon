@@ -74,7 +74,7 @@ jobs:
         id: set-matrix
         run: |
           composer install -n &&
-          SITES=$(echo -n "$(drush sws:drush-config command.sws.options.multisites | grep -v default)" | jq -R -s -c 'split("\n") | sort') &&
+          SITES=$(echo -n "$(drush sws:drush-config command.sws.options.multisites)" | jq -R -s -c 'split("\n") | sort') &&
           echo "matrix=$SITES" >> $GITHUB_OUTPUT
   shard_matrix:
     name: Test Shards
