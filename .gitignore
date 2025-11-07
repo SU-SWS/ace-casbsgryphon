@@ -41,7 +41,7 @@ docroot/sites/*/private
 docroot/modules/custom
 docroot/themes/custom
 docroot/profiles/custom/*
-!docroot/profiles/custom/stanford_profile
+!docroot/profiles/custom/stanford_profile/**/*
 
 # Ignore contrib modules. These should be created during build process.
 docroot/modules/contrib

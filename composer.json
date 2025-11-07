@@ -54,10 +54,10 @@
     "require": {
         "php": ">=8.3",
         "cweagans/composer-patches": "^1.6",
-        "drupal/acquia_connector": "^3.0",
-        "drupal/acquia_purge": "^1.3",
-        "drupal/core-composer-scaffold": "^10",
-        "drupal/core-recommended": "^10",
+        "drupal/acquia_connector": "^4.1",
+        "drupal/acquia_purge": "^1.5",
+        "drupal/core-composer-scaffold": "^11",
+        "drupal/core-recommended": "^11",
         "drush/drush": "^13",
         "su-sws/sws-drush-commands": "1.x-dev",
         "wikimedia/composer-merge-plugin": "^2.1"
@@ -83,7 +83,8 @@
             "require": [
                 "docroot/profiles/custom/stanford_profile/composer.json"
             ],
-            "merge-extra": true
+            "merge-extra": true,
+            "merge-extra-deep": true
         },
         "drupal-scaffold": {
             "locations": {
