@@ -1,0 +1,14 @@
+uuid: 5d8e0ea2-b07b-4dee-94bb-c9dd75388e30
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.casbs_book
+id: node_type_casbs_book
+entity_type_id: node_type
+entity_id: casbs_book
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

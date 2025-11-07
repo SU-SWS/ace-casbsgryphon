@@ -1,0 +1,19 @@
+uuid: 6f6ec184-3014-4aba-ab40-2833fa0b5d0f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.su_casbs_person_book_links
+field_name: su_casbs_person_book_links
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

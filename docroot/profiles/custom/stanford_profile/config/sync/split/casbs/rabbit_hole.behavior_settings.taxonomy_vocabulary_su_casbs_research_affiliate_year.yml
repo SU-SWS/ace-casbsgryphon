@@ -1,0 +1,14 @@
+uuid: c056033f-63ed-44c7-8a31-4ff9218a8463
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.su_casbs_research_affiliate_year
+id: taxonomy_vocabulary_su_casbs_research_affiliate_year
+entity_type_id: taxonomy_vocabulary
+entity_id: su_casbs_research_affiliate_year
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

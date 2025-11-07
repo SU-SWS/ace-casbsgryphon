@@ -1,0 +1,12 @@
+adding:
+  resourceFields:
+    su_wysiwyg_text:
+      enhancer:
+        id: ''
+removing:
+  resourceFields:
+    su_wysiwyg_text:
+      enhancer:
+        id: nested
+        settings:
+          path: processed

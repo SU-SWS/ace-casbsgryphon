@@ -1,0 +1,72 @@
+adding:
+  dependencies:
+    config:
+      - field.field.node.stanford_person.su_casbs_cs_year
+      - field.field.node.stanford_person.su_casbs_cs_year_in_stu
+      - field.field.node.stanford_person.su_casbs_current_affiliation
+      - field.field.node.stanford_person.su_casbs_custom_order
+      - field.field.node.stanford_person.su_casbs_facfellow_year_in_stu
+      - field.field.node.stanford_person.su_casbs_faculty_fellow_year
+      - field.field.node.stanford_person.su_casbs_feature_people
+      - field.field.node.stanford_person.su_casbs_feature_people_text
+      - field.field.node.stanford_person.su_casbs_fellow_year
+      - field.field.node.stanford_person.su_casbs_fellow_year_in_stu
+      - field.field.node.stanford_person.su_casbs_field_discipline
+      - field.field.node.stanford_person.su_casbs_person_bio
+      - field.field.node.stanford_person.su_casbs_person_book_links
+      - field.field.node.stanford_person.su_casbs_person_id
+      - field.field.node.stanford_person.su_casbs_person_journal_links
+      - field.field.node.stanford_person.su_casbs_person_type
+      - field.field.node.stanford_person.su_casbs_pract_year_in_stu
+      - field.field.node.stanford_person.su_casbs_practitioner_year
+      - field.field.node.stanford_person.su_casbs_profile_picture
+      - field.field.node.stanford_person.su_casbs_ra_year
+      - field.field.node.stanford_person.su_casbs_ra_year_in_stu
+      - field.field.node.stanford_person.su_casbs_visiting_scholar_year
+      - field.field.node.stanford_person.su_casbs_vs_year_in_stu
+  content:
+    su_person_admin_appts:
+      weight: 22
+    su_person_affiliations:
+      settings:
+        trim_length: 80
+      weight: 7
+    su_person_components:
+      weight: 25
+  hidden:
+    su_casbs_cs_year: true
+    su_casbs_cs_year_in_stu: true
+    su_casbs_current_affiliation: true
+    su_casbs_custom_order: true
+    su_casbs_facfellow_year_in_stu: true
+    su_casbs_faculty_fellow_year: true
+    su_casbs_feature_people: true
+    su_casbs_feature_people_text: true
+    su_casbs_fellow_year: true
+    su_casbs_fellow_year_in_stu: true
+    su_casbs_field_discipline: true
+    su_casbs_person_bio: true
+    su_casbs_person_book_links: true
+    su_casbs_person_id: true
+    su_casbs_person_journal_links: true
+    su_casbs_person_type: true
+    su_casbs_pract_year_in_stu: true
+    su_casbs_practitioner_year: true
+    su_casbs_profile_picture: true
+    su_casbs_ra_year: true
+    su_casbs_ra_year_in_stu: true
+    su_casbs_visiting_scholar_year: true
+    su_casbs_vs_year_in_stu: true
+removing:
+  dependencies:
+    config:
+      - field.field.node.stanford_person.su_imported
+  content:
+    su_person_admin_appts:
+      weight: 9
+    su_person_affiliations:
+      settings:
+        trim_length: null
+      weight: 4
+    su_person_components:
+      weight: 12

@@ -1,0 +1,20 @@
+uuid: cd8d9008-6fbf-4bca-bc87-cb3a58b09b02
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.su_casbs_fellow_year
+field_name: su_casbs_fellow_year
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

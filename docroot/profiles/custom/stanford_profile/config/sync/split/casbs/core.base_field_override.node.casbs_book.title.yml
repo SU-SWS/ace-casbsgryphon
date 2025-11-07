@@ -1,0 +1,18 @@
+uuid: 9655cb7a-45d1-4fd5-90ac-16bc4c57e062
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.casbs_book
+id: node.casbs_book.title
+field_name: title
+entity_type: node
+bundle: casbs_book
+label: 'CASBS Book'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

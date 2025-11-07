@@ -1,0 +1,14 @@
+uuid: c04c45c1-b613-474e-b611-1d4f6a42013d
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.su_casbs_visiting_scholar_year
+id: taxonomy_vocabulary_su_casbs_visiting_scholar_year
+entity_type_id: taxonomy_vocabulary
+entity_id: su_casbs_visiting_scholar_year
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

@@ -1,0 +1,20 @@
+uuid: 748d5391-95c9-49ef-abb6-d8a35d317058
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.su_casbs_book_title
+field_name: su_casbs_book_title
+entity_type: node
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

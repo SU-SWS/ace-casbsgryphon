@@ -1,0 +1,19 @@
+uuid: d7f08923-afd7-48ec-8e5c-f280a3f85741
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.su_casbs_book_publisher_loc
+field_name: su_casbs_book_publisher_loc
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

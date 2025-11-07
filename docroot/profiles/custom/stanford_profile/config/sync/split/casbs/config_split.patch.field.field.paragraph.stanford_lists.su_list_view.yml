@@ -1,0 +1,13 @@
+adding:
+  settings:
+    allowed_views:
+      _book_mosaic: _book_mosaic
+      casbs_board_of_directors: casbs_board_of_directors
+      casbs_book_mosaic: casbs_book_mosaic
+      casbs_current_faculty_fellows_and_research_affiliates: casbs_current_faculty_fellows_and_research_affiliates
+      casbs_current_fellows: casbs_current_fellows
+      casbs_current_visiting_scholars: casbs_current_visiting_scholars
+      casbs_recentworks: casbs_recentworks
+      casbs_recentworks_mosaic: casbs_recentworks_mosaic
+      casbs_staff: casbs_staff
+removing: {  }

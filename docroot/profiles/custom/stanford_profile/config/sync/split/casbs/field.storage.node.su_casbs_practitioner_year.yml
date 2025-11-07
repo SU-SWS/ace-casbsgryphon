@@ -1,0 +1,20 @@
+uuid: 3411d894-6251-4963-900f-5dbf1012998b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.su_casbs_practitioner_year
+field_name: su_casbs_practitioner_year
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

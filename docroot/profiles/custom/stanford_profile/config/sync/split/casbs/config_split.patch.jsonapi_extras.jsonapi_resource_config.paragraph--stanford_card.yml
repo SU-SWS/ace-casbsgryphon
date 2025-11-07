@@ -1,0 +1,12 @@
+adding:
+  resourceFields:
+    su_card_body:
+      enhancer:
+        id: ''
+removing:
+  resourceFields:
+    su_card_body:
+      enhancer:
+        id: nested
+        settings:
+          path: processed

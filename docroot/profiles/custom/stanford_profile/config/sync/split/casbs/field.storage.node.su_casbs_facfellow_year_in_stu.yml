@@ -1,0 +1,19 @@
+uuid: 8f1ee173-7818-484d-bfd5-2ed28e758987
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.su_casbs_facfellow_year_in_stu
+field_name: su_casbs_facfellow_year_in_stu
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

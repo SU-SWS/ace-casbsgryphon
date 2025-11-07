@@ -1,0 +1,7 @@
+adding:
+  dependencies:
+    config:
+      - core.entity_view_display.node.stanford_person.default
+  permissions:
+    - 'configure editable stanford_person node layout overrides'
+removing: {  }

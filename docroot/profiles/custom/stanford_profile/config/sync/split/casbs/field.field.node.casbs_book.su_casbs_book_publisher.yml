@@ -1,0 +1,22 @@
+uuid: 33f691ec-f237-46a7-a7d3-1598c7a5eeb3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_book_publisher
+    - node.type.casbs_book
+  module:
+    - text
+id: node.casbs_book.su_casbs_book_publisher
+field_name: su_casbs_book_publisher
+entity_type: node
+bundle: casbs_book
+label: 'Book Publisher'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

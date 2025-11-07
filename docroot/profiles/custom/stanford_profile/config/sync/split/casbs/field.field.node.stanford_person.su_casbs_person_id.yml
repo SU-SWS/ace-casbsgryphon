@@ -1,0 +1,23 @@
+uuid: 336e9e37-2211-46fd-a41f-22709cab14cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_person_id
+    - node.type.stanford_person
+id: node.stanford_person.su_casbs_person_id
+field_name: su_casbs_person_id
+entity_type: node
+bundle: stanford_person
+label: casbs_person_id
+description: 'primary key for internal CASBS database table casbs.BASE.ID - casbs.person.id'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

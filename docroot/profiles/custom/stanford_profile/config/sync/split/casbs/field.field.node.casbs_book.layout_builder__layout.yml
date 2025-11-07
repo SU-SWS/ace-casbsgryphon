@@ -1,0 +1,21 @@
+uuid: 94877d79-7de5-4ecc-a43f-c3852ea8f345
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.layout_builder__layout
+    - node.type.casbs_book
+  module:
+    - layout_builder
+id: node.casbs_book.layout_builder__layout
+field_name: layout_builder__layout
+entity_type: node
+bundle: casbs_book
+label: Layout
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: layout_section
