@@ -61,6 +61,7 @@ removing:
   dependencies:
     config:
       - field.field.node.stanford_person.su_imported
+      - field.field.node.stanford_person.su_person_tags
   content:
     su_person_admin_appts:
       weight: 9

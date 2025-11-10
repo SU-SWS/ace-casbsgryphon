@@ -53,3 +53,4 @@ removing:
     config:
       - field.field.node.stanford_person.su_imported
       - field.field.node.stanford_person.su_person_source
+      - field.field.node.stanford_person.su_person_tags
