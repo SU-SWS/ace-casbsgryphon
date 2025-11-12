@@ -11,7 +11,7 @@ debug_header: false
 unset_basic_auth_headers: true
 print: Authenticate
 method: 0
-paths: /graphql
+paths: "/graphql\r\n/jsonapi/*"
 allowlist: ''
 http_method_allowlist:
   post: post
