@@ -1,0 +1,7 @@
+adding:
+  dependencies:
+    config:
+      - filter.format.no_processing
+  permissions:
+    - 'use text format no_processing'
+removing: {  }
