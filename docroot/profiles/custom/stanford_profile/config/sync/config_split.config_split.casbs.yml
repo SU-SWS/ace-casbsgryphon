@@ -14,14 +14,10 @@ module: {  }
 theme: {  }
 complete_list:
   - core.entity_view_display.node.stanford_person.full
-  - filter.format.no_processing
   - views.view._book_mosaic
-  - 'node.type.casbs_*'
-  - 'node.type.datatables*'
   - 'core.entity_form_display.node.casbs_*'
   - core.entity_view_display.node.casbs_
   - 'views.view.casbs_*'
-  - 'taxonomy.vocabulary.su_casbs_*'
   - 'core.entity_form_display.taxonomy_term.su_casbs_*'
   - core.entity_view_display.taxonomy_term.su_casbs_
   - core.entity_view_display.node.stanford_person.default
