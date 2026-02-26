@@ -1,5 +1,5 @@
 name: casbs
-recipe: drupal9
+recipe: drupal10
 config:
   webroot: docroot
   php: "8.3"
@@ -21,7 +21,6 @@ services:
       - ~/.acquia:/var/www/.acquia
     ssl: true
     config:
-      php: lando/php.ini
     # Uncomment the below for behat testing
       overrides:
         environment:
@@ -35,10 +34,14 @@ services:
               }
             }
   database:
+    type: mysql:8.0
     creds:
       user: drupal
       password: drupal
       database: drupal
+    overrides:
+      volumes:
+        - ./lando/mysql8.cnf:/opt/bitnami/mysql/conf/my_custom.cnf
   adminer:
     type: compose
     services:
@@ -60,9 +63,6 @@ services:
       ports:
         - 4444
 tooling:
-  blt:
-    service: appserver
-    cmd: /app/vendor/bin/blt
   composer:
     service: appserver
     cmd: /usr/local/bin/composer
@@ -71,6 +71,7 @@ tooling:
   phpcs:
     service: appserver
     cmd: "/app/vendor/bin/phpcs --standard=Drupal,DrupalPractice"
+    options:
     description: Run phpcs for given folder or file.
   phpunit:
     service: appserver

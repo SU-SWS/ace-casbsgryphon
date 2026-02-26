@@ -169,3 +169,6 @@ notes.txt
 
 # ignore the NextJS frontend directories
 frontend-*
+
+# ignore logs, etc.
+logs/
