@@ -46,14 +46,16 @@ third_party_settings:
       children:
         - su_news_featured_media
         - group_banner
-      label: Media
+      label: 'Featured Images'
       region: content
       parent_name: ''
-      weight: 5
+      weight: 3
       format_type: fieldset
       format_settings:
         classes: ''
+        show_empty_fields: false
         id: ''
+        label_as_html: false
         description: ''
         required_fields: true
     group_editorial_content:
@@ -67,7 +69,7 @@ third_party_settings:
       label: 'Editorial Content'
       region: content
       parent_name: ''
-      weight: 4
+      weight: 2
       format_type: fieldset
       format_settings:
         classes: ''
@@ -86,6 +88,24 @@ third_party_settings:
       format_settings:
         classes: ''
         id: ''
+        description: ''
+        required_fields: true
+    group_taxonomy:
+      children:
+        - su_news_topics
+        - su_news_spotlight_filters
+        - su_shared_tags
+      label: Taxonomy
+      region: content
+      parent_name: ''
+      weight: 6
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
         description: ''
         required_fields: true
 id: node.stanford_news.default
@@ -144,7 +164,7 @@ content:
               recurse: '0'
   layout_builder__layout:
     type: null
-    weight: 29
+    weight: 33
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -156,18 +176,18 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 13
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 15
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   scheduler_settings:
-    weight: 14
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -186,7 +206,7 @@ content:
     third_party_settings: {  }
   su_metatags:
     type: metatag_firehose
-    weight: 11
+    weight: 10
     region: content
     settings:
       sidebar: true
@@ -236,7 +256,7 @@ content:
             selector: ''
   su_news_components:
     type: layout_paragraphs
-    weight: 7
+    weight: 4
     region: content
     settings:
       view_mode: default
@@ -284,7 +304,7 @@ content:
     third_party_settings: {  }
   su_news_hide_social:
     type: boolean_checkbox
-    weight: 12
+    weight: 7
     region: content
     settings:
       display_label: true
@@ -310,7 +330,7 @@ content:
             selector: ''
   su_news_person:
     type: options_select
-    weight: 14
+    weight: 5
     region: content
     settings: {  }
     third_party_settings:
@@ -392,10 +412,17 @@ content:
     third_party_settings: {  }
   su_news_spotlight_filters:
     type: taxonomy_label_hierarchy
-    weight: 28
+    weight: 5
     region: content
     settings: {  }
     third_party_settings:
+      change_labels:
+        add_another: ''
+        field_label_overwrite: ''
+        hide_add_another: 0
+        force_single_cardinality: 0
+      field_formatter_class:
+        class: ''
       conditional_fields:
         ea6602ea-f047-48ee-af29-1ea7d973513c:
           entity_type: node
@@ -433,17 +460,25 @@ content:
             selector: ''
   su_news_topics:
     type: cshs
-    weight: 6
+    weight: 4
     region: content
     settings:
       save_lineage: false
       force_deepest: false
-      parent: ''
+      parent: null
       level_labels: ''
       hierarchy_depth: 0
       required_depth: 0
       none_label: '- Please select -'
+      allow_unpublished: true
     third_party_settings:
+      change_labels:
+        add_another: ''
+        field_label_overwrite: ''
+        hide_add_another: 0
+        force_single_cardinality: 0
+      field_formatter_class:
+        class: ''
       conditional_fields:
         81413e3f-d838-4f80-a0a9-b7a9bfcee457:
           entity_type: node
@@ -486,17 +521,25 @@ content:
             selector: ''
   su_shared_tags:
     type: cshs
-    weight: 10
+    weight: 7
     region: content
     settings:
       save_lineage: false
       force_deepest: false
-      parent: ''
+      parent: null
       level_labels: ''
       hierarchy_depth: 0
       required_depth: 0
       none_label: '- Please select -'
+      allow_unpublished: true
     third_party_settings:
+      change_labels:
+        add_another: ''
+        field_label_overwrite: ''
+        hide_add_another: 0
+        force_single_cardinality: 0
+      field_formatter_class:
+        class: ''
       conditional_fields:
         a9e65130-20ec-4cd6-9dde-713dc31fd90c:
           entity_type: node
@@ -518,7 +561,7 @@ content:
             selector: ''
   title:
     type: string_textfield
-    weight: 2
+    weight: 1
     region: content
     settings:
       size: 60

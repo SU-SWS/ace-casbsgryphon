@@ -56,9 +56,15 @@ So, for instance, to clear the caches on your local copy of CASBS:
 lando drush -y @default.local cr
 ```
 
+# Upstream updates
+
+See additional documentation on performing upstream updates [here](docs/upstream_updates.md).
+
 ---
 
 # Setup Local Environment - Native LAMP Stack
+
+** Note: this is outdated, since we no longer use BLT **
 
 TL;DR
 

@@ -18,6 +18,7 @@ dependencies:
     - field.field.node.stanford_event.su_event_ext_image
     - field.field.node.stanford_event.su_event_groups
     - field.field.node.stanford_event.su_event_keywords
+    - field.field.node.stanford_event.su_event_localist_id
     - field.field.node.stanford_event.su_event_location
     - field.field.node.stanford_event.su_event_map_link
     - field.field.node.stanford_event.su_event_schedule
@@ -37,6 +38,7 @@ dependencies:
     - ds
     - empty_fields
     - field_formatter_class
+    - field_formatter_range
     - field_label
     - smart_date
     - user
@@ -72,6 +74,7 @@ third_party_settings:
         - su_event_date_time
       location:
         - su_event_alt_loc
+      address:
         - su_event_location
     fields:
       'display_field_copy:node-event_date_time_1':
@@ -108,7 +111,7 @@ third_party_settings:
               end: 0
               duration: 0
             timezone_override: ''
-            format: day
+            format: day_leading
             duration:
               separator: ' | '
               unit: ''
@@ -224,7 +227,7 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 10
-    region: location
+    region: address
   su_event_subheadline:
     type: string
     label: hidden
@@ -245,11 +248,15 @@ content:
         handler: ''
       field_formatter_class:
         class: ''
+      field_formatter_range:
+        order: 0
+        limit: 0
+        offset: 0
       field_label:
         label_value: ''
         label_tag: ''
       ds:
-        ds_limit: ''
+        ds_limit: '1'
     weight: 4
     region: event_type
 hidden:
@@ -266,6 +273,7 @@ hidden:
   su_event_ext_image: true
   su_event_groups: true
   su_event_keywords: true
+  su_event_localist_id: true
   su_event_map_link: true
   su_event_schedule: true
   su_event_source: true
