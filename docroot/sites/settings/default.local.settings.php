@@ -10,14 +10,14 @@
 /**
  * SAML configuration
  */
-$config['samlauth.authentication']['sp_x509_certificate'] = 'file:' . DRUPAL_ROOT . '/../keys/saml.crt';
-$config['samlauth.authentication']['sp_private_key'] = 'file:' . DRUPAL_ROOT . '/../keys/saml.pem';
+$config['samlauth.authentication']['sp_x509_certificate'] = 'file:' . DRUPAL_ROOT . '/../keys/simplesamlphp/saml.crt';
+$config['samlauth.authentication']['sp_private_key'] = 'file:' . DRUPAL_ROOT . '/../keys/simplesamlphp/saml.pem';
 $config['samlauth.authentication']['idp_certs'] = [
-  'file:' . DRUPAL_ROOT . '/../keys/signing.crt',
+  'file:' . DRUPAL_ROOT . '/../keys/simplesamlphp/signing.crt',
 ];
 $config['stanford_samlauth.settings']['role_mapping']['workgroup_api'] = [
-  'cert' => DRUPAL_ROOT . '/../keys/workgroup_api.cert',
-  'key' => DRUPAL_ROOT . '/../keys/workgroup_api.key',
+  'cert' => DRUPAL_ROOT . '/../keys/simplesamlphp/workgroup_api.cert',
+  'key' => DRUPAL_ROOT . '/../keys/simplesamlphp/workgroup_api.key',
 ];
 
 error_reporting(E_ALL & ~E_DEPRECATED);
