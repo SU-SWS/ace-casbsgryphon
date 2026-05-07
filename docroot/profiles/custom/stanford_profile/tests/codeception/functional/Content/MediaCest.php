@@ -27,7 +27,7 @@ class MediaCest {
     'https://www.youtube.com/watch?v=WNEyg3UKTVQ',
     'https://www.youtube.com/watch?v=myjrQS_7zNk',
   ])]
-  public function testAddImageMedia(FunctionalTester $I, Example $example) {
+  private function testAddImageMedia(FunctionalTester $I, Example $example) {
     foreach ($example['videos'] as $videoUrl) {
       $mediaVideos[] = $I->createEntity([
         'bundle' => 'video',

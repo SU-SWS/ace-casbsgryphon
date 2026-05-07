@@ -279,7 +279,7 @@ class SystemSiteConfigCest {
   }
 
   #[CodeceptionAttribute\Group('redirect')]
-  public function testRedirectingRecentDelete(AcceptanceTester $I) {
+  private function testRedirectingRecentDelete(AcceptanceTester $I) {
     $node = $I->createEntity([
       'type' => 'stanford_page',
       'title' => $this->faker->words(3, TRUE),
