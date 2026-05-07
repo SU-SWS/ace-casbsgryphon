@@ -1,0 +1,25 @@
+uuid: 7eda152c-90b2-4cfa-aeb0-ec95a91bc049
+langcode: en
+status: true
+dependencies:
+  module:
+    - scheduler
+third_party_settings:
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: vertical_tab
+    publish_enable: false
+    publish_past_date: error
+    publish_past_date_created: false
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: false
+    unpublish_required: false
+    unpublish_revision: false
+name: su_casbs_visiting_scholar_year
+vid: su_casbs_visiting_scholar_year
+description: 'Visiting Scholar Year'
+weight: 0
+new_revision: false

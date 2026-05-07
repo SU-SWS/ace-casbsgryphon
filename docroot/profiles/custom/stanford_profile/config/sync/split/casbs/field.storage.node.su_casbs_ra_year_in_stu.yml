@@ -1,0 +1,19 @@
+uuid: 32a135f6-5c9a-4b68-8e4b-a82ef754e02d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.su_casbs_ra_year_in_stu
+field_name: su_casbs_ra_year_in_stu
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

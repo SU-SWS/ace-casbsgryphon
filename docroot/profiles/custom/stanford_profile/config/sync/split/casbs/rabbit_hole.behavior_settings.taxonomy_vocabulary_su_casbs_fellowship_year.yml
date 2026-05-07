@@ -1,0 +1,14 @@
+uuid: 13b66427-d641-4638-acca-0d999da7f6d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.su_casbs_fellowship_year
+id: taxonomy_vocabulary_su_casbs_fellowship_year
+entity_type_id: taxonomy_vocabulary
+entity_id: su_casbs_fellowship_year
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

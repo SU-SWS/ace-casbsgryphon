@@ -1,0 +1,23 @@
+uuid: 542b9318-c74c-42fe-8612-c14e0042ddc7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_recent_works
+    - node.type.casbs_book
+id: node.casbs_book.su_casbs_recent_works
+field_name: su_casbs_recent_works
+entity_type: node
+bundle: casbs_book
+label: casbs_recent_works
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

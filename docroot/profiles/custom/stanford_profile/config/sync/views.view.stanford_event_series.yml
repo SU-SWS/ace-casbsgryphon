@@ -465,49 +465,49 @@ display:
       row:
         type: ui_patterns
         options:
-          default_field_elements: false
+          default_field_elements: 0
           inline:
-            su_event_series_type: '0'
-            title: '0'
-            su_event_series_subheadline: '0'
-            su_event_series_dek: '0'
-            edit_node: '0'
-            view_node: '0'
+            su_event_series_type: 0
+            title: 0
+            su_event_series_subheadline: 0
+            su_event_series_dek: 0
+            edit_node: 0
+            view_node: 0
           separator: ''
-          hide_empty: true
+          hide_empty: 1
           pattern: events_list
-          pattern_variant: h3_header
           pattern_mapping:
             'views_row:su_event_series_type':
-              plugin: views_row
-              source: su_event_series_type
               destination: event_type
               weight: 0
-            'views_row:edit_node':
               plugin: views_row
-              source: edit_node
+              source: su_event_series_type
+            'views_row:edit_node':
               destination: edit
               weight: 1
-            'views_row:view_node':
               plugin: views_row
-              source: view_node
+              source: edit_node
+            'views_row:view_node':
               destination: url
               weight: 2
-            'views_row:title':
               plugin: views_row
-              source: title
+              source: view_node
+            'views_row:title':
               destination: headline
               weight: 3
-            'views_row:su_event_series_subheadline':
               plugin: views_row
-              source: su_event_series_subheadline
+              source: title
+            'views_row:su_event_series_subheadline':
               destination: subheadline
               weight: 4
-            'views_row:su_event_series_dek':
               plugin: views_row
-              source: su_event_series_dek
+              source: su_event_series_subheadline
+            'views_row:su_event_series_dek':
               destination: dek
               weight: 5
+              plugin: views_row
+              source: su_event_series_dek
+          pattern_variant: h3_header
       query:
         type: views_query
         options:

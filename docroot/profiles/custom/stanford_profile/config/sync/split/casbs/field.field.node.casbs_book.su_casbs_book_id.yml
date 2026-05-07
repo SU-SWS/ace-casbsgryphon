@@ -1,0 +1,23 @@
+uuid: 34010463-354d-4c9d-8dda-915db2dd3213
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_book_id
+    - node.type.casbs_book
+id: node.casbs_book.su_casbs_book_id
+field_name: su_casbs_book_id
+entity_type: node
+bundle: casbs_book
+label: casbs_book_id
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

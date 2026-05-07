@@ -1,0 +1,14 @@
+uuid: 4bd9a53d-ba0d-45ef-bc67-e8e6b7dbd618
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.su_casbs_practitioner_year
+id: taxonomy_vocabulary_su_casbs_practitioner_year
+entity_type_id: taxonomy_vocabulary
+entity_id: su_casbs_practitioner_year
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

@@ -1,0 +1,14 @@
+uuid: 2ac25222-eba7-4f11-a246-5996bd6356a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.su_casbs_faculty_fellow_year
+id: taxonomy_vocabulary_su_casbs_faculty_fellow_year
+entity_type_id: taxonomy_vocabulary
+entity_id: su_casbs_faculty_fellow_year
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

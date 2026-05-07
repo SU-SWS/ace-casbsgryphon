@@ -1,0 +1,27 @@
+uuid: 5ee9c697-49fa-44d9-9d8a-5123c48206b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_file_data
+    - node.type.datatables_data
+  module:
+    - file
+id: node.datatables_data.su_casbs_file_data
+field_name: su_casbs_file_data
+entity_type: node
+bundle: datatables_data
+label: casbs_file_data
+description: 'file with datatables_data as array'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: txt
+  max_filesize: ''
+  description_field: false
+field_type: file

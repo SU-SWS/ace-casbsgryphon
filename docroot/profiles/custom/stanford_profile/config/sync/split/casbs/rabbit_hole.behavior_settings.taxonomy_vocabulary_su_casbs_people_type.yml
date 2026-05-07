@@ -1,0 +1,14 @@
+uuid: f33ba9ca-2bc4-47c8-af29-8535b1673e34
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.su_casbs_people_type
+id: taxonomy_vocabulary_su_casbs_people_type
+entity_type_id: taxonomy_vocabulary
+entity_id: su_casbs_people_type
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

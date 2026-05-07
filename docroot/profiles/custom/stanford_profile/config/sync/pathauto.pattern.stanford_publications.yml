@@ -7,7 +7,7 @@ dependencies:
 id: stanford_publications
 label: Publications
 type: 'canonical_entities:node'
-pattern: 'publications/[node:su_publication_topics:0:entity:name]/[node:title]'
+pattern: '/publications/[node:su_publication_topics:0:entity:name]/[node:title]'
 selection_criteria:
   ef034bef-fc25-4dde-ade8-4a026e5b99a7:
     id: 'entity_bundle:node'

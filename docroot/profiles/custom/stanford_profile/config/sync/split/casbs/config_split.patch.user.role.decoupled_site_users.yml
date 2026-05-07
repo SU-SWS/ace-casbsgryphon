@@ -1,0 +1,16 @@
+adding:
+  dependencies:
+    module:
+      - file
+      - node
+      - subrequests
+      - view_unpublished
+  is_admin: false
+  permissions:
+    - 'access user profiles'
+    - 'bypass node access'
+    - 'delete own files'
+    - 'issue subrequests'
+    - 'view any unpublished content'
+removing:
+  is_admin: null

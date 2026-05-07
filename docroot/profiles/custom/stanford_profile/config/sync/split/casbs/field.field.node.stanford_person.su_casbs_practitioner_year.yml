@@ -1,0 +1,29 @@
+uuid: 0a892be5-011f-46b6-bf3c-009b61a19421
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_practitioner_year
+    - node.type.stanford_person
+    - taxonomy.vocabulary.su_casbs_practitioner_year
+id: node.stanford_person.su_casbs_practitioner_year
+field_name: su_casbs_practitioner_year
+entity_type: node
+bundle: stanford_person
+label: casbs_practitioner_year
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      su_casbs_practitioner_year: su_casbs_practitioner_year
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

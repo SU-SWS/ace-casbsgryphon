@@ -1,0 +1,36 @@
+uuid: 6c67324a-e2eb-4918-a802-c6a71fccb7ba
+langcode: en
+status: true
+dependencies: {  }
+id: casbs
+label: CASBS
+description: ''
+weight: 0
+stackable: false
+no_patching: false
+storage: collection
+folder: ''
+module: {  }
+theme: {  }
+complete_list:
+  - core.entity_view_display.node.stanford_person.full
+  - filter.format.no_processing
+  - views.view._book_mosaic
+  - 'node.type.casbs_*'
+  - 'node.type.datatables*'
+  - 'core.entity_form_display.node.casbs_*'
+  - core.entity_view_display.node.casbs_
+  - 'views.view.casbs_*'
+  - 'field.field.node.stanford_person.su_casbs_*'
+  - 'field.storage.node.su_casbs_*'
+  - 'taxonomy.vocabulary.su_casbs_*'
+  - 'core.entity_form_display.taxonomy_term.su_casbs_*'
+  - core.entity_view_display.taxonomy_term.su_casbs_
+  - core.entity_view_display.node.stanford_person.default
+partial_list:
+  - core.entity_form_display.node.stanford_person.default
+  - field.field.paragraph.stanford_lists.su_list_view
+  - jsonapi.settings
+  - user.role.decoupled_site_users
+  - 'jsonapi_extras.*'
+  - 'core.entity_view_display.node.stanford_person.*'

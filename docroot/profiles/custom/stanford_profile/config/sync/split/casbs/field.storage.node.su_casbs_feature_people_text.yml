@@ -1,0 +1,19 @@
+uuid: 253c1824-2a01-43e6-8ce6-cb8478524d29
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.su_casbs_feature_people_text
+field_name: su_casbs_feature_people_text
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

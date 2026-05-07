@@ -1638,39 +1638,39 @@ display:
       row:
         type: ui_patterns
         options:
-          default_field_elements: false
+          default_field_elements: 0
           inline:
-            type: '0'
-            view_node: '0'
-            su_url: '0'
-            title: '0'
-            su_publication_topics_1: '0'
-            edit_node: '0'
+            type: 0
+            view_node: 0
+            su_url: 0
+            title: 0
+            su_publication_topics_1: 0
+            edit_node: 0
           separator: ''
-          hide_empty: false
+          hide_empty: 0
           pattern: card
-          pattern_variant: default
           pattern_mapping:
             'views_row:type':
-              plugin: views_row
-              source: type
               destination: card_super_headline
               weight: 0
-            'views_row:edit_node':
               plugin: views_row
-              source: edit_node
+              source: type
+            'views_row:edit_node':
               destination: card_body
               weight: 1
-            'views_row:title':
               plugin: views_row
-              source: title
+              source: edit_node
+            'views_row:title':
               destination: card_headline
               weight: 2
-            'views_row:su_publication_topics_1':
               plugin: views_row
-              source: su_publication_topics_1
+              source: title
+            'views_row:su_publication_topics_1':
               destination: card_body
               weight: 3
+              plugin: views_row
+              source: su_publication_topics_1
+          pattern_variant: default
       defaults:
         title: false
         css_class: false

@@ -1,0 +1,14 @@
+uuid: 3cf335d1-bc21-46d5-bb47-bdc550a3bfed
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.datatables_data
+id: node_type_datatables_data
+entity_type_id: node_type
+entity_id: datatables_data
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

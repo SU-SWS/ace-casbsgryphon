@@ -1,0 +1,22 @@
+uuid: 8c712227-fa5e-4db7-909a-1b55a3aa9203
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.su_casbs_long_data
+    - node.type.datatables_data
+  module:
+    - text
+id: node.datatables_data.su_casbs_long_data
+field_name: su_casbs_long_data
+entity_type: node
+bundle: datatables_data
+label: casbs_long_data
+description: 'casbs_long_data for datatables as array'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

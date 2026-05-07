@@ -1,0 +1,18 @@
+uuid: 495506ce-a69d-4f0a-add5-df1c3d4c3973
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.datatables_data
+id: node.datatables_data.title
+field_name: title
+entity_type: node
+bundle: datatables_data
+label: 'Datatables Data'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

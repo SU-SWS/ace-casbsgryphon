@@ -1,0 +1,20 @@
+uuid: 59935fd7-510e-48be-983c-a2618ae06c3b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.su_casbs_faculty_fellow_year
+field_name: su_casbs_faculty_fellow_year
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: 1cb46f57-42b4-4eac-9dea-de95f456b3cb
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - node
+id: node.su_casbs_file_data
+field_name: su_casbs_file_data
+entity_type: node
+type: file
+settings:
+  target_type: file
+  display_field: false
+  display_default: false
+  uri_scheme: public
+module: file
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
