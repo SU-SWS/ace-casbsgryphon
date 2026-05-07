@@ -160,9 +160,6 @@
             "drupal/config_readonly": {
                 "https://www.drupal.org/project/config_readonly/issues/3469854": "https://git.drupalcode.org/project/config_readonly/-/merge_requests/17.patch"
             },
-            "drupal/next": {
-                "Fix CORS": "https://sws-devguide.stanford.edu/sites/g/files/sbiybj17516/files/next-cors.patch"
-            },
             "su-sws/paranoia": {
                 "https://stanfordits.atlassian.net/browse/D8CORE-1351": "patches/contrib/paranoia.patch"
             },
