@@ -1,57 +1,16 @@
-# https://blog.martinhujer.cz/17-tips-for-using-composer-efficiently/#tip-%239%3A-do-not-attempt-to-merge-%60composer.lock%60-when-rebasing-or-merging
-/composer.lock -merge
-config/envs/local/stage_file_proxy.settings.yml
+config/install
+content/**/*.jpg
+content/**/*.png
+content/**/*.gif
 
-# Ignore configuration files that may contain sensitive information.
-local.settings.php
-local.drush.yml
-local.site.yml
-local.services.yml
-local.authsources.php
-local.config.php
-local.sites.php
-tests/behat/local.yml
-LocalCommands.php
-box/local.config.yml
-*.local
-local.blt.yml
-/keys
-/certs
-.env
-.lando.yml
-lando/php.ini
-docroot/sites/simpletest
-
-# Ignore custom test configuration.
-tests/codeception.yml
-tests/codeception/*.suite.yml
-tests/codeception/_output
-tests/codeception/_support/_generated
-artifacts
-
-# Ignore drupal core.
-docroot/core
-
-# Ignore paths that contain user-generated content.
-docroot/sites/*/files
-/files-private
-docroot/sites/*/private
-
-# Ignore stanford contrib items.
-docroot/modules/custom
-docroot/themes/custom
-
-# Ignore contrib modules. These should be created during build process.
-docroot/modules/contrib
-docroot/themes/contrib
-docroot/profiles/contrib
-docroot/libraries
-drush/Commands
+# deal with ignoring or not  bin, vendor, phpstorm files...
+.idea
+.idea/**
+bin/
 
 # Ignore custom theme build artifacts
-docroot/themes/custom/*/node_modules
-docroot/themes/custom/*/css
-docroot/themes/custom/*/styleguide
+node_modules
+styleguide
 
 # Ignore build artifacts
 deployment_identifier
@@ -59,7 +18,7 @@ deployment_identifier
 bin/*
 tmp
 reports
-/travis_wait*
+.yarn/
 
 # OS X
 .DS_Store
@@ -155,20 +114,5 @@ atlassian-ide-plugin.xml
 #NPM
 npm-debug.log
 
-# Drush 9 Checksums
-drush/sites/.checksums
-
 # Deprecation detector rules
 .rules
-
-# ignore ddev settings
-docroot/sites/**/settings/settings.ddev.php
-
-# ignore any notes txt documents
-notes.txt
-
-# ignore the NextJS frontend directories
-frontend-*
-
-# ignore logs, etc.
-logs/

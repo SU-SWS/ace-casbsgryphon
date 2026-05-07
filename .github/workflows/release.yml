@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     if: github.event.pull_request.merged
-    container:
-      image: pookmish/drupal8ci:php8.3
     steps:
       - name: Get Next Release
         id: tag
@@ -34,22 +32,4 @@ jobs:
           commit: ${{ github.sha }}
           generateReleaseNotes: true
           makeLatest: true
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          name: id_rsa
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-          if_key_exists: fail
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-      - name: Deploy Tag
-        if: ${{ steps.tag.outputs.tag }}
-        run: |
-          git config --system --add safe.directory '*' &&
-          git config --global user.email "sws-developers@lists.stanford.edu" &&
-          git config --global user.name "Github Actions" &&
-          ssh-keyscan -t rsa svn-45197.prod.hosting.acquia.com >> /root/.ssh/known_hosts &&
-          composer install -n &&
-          drush sws:artifact:deploy --tag=$(date +'%Y-%m-%d')"_"${{ steps.tag.outputs.tag }} --no-interaction
+
