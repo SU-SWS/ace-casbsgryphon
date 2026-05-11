@@ -172,3 +172,4 @@ frontend-*
 
 # ignore logs, etc.
 logs/
+.gstack/
