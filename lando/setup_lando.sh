@@ -13,12 +13,23 @@ try lando composer install --prefer-source --no-security-blocking
 try cp ./docroot/sites/settings/default.local.settings.php ./docroot/sites/settings/local.settings.php
 try cp ./docroot/sites/default/default.local.drush.yml ./docroot/sites/default/local.drush.yml
 try cp ./docroot/sites/default/settings/default.local.settings.php ./docroot/sites/default/settings/local.settings.php
+try cp ./lando/lando.drush.yml ./drush/local.drush.yml
+
+echo "Please edit ./drush/local.drush.yml file and make sure"
+echo "the values are correct for your database, app-key, and"
+echo "app-secret are correct. You can get the app values from "
+echo "Acquia at https://profile.acquia.com/tokens"
+
+while true; do
+    read -r -p "Type 'y' to continue: " answer
+    [[ "$answer" == "y" ]] && break
+done
+echo "Continuing..."
 
 try lando drush settings
 try lando drush sws:keys
-try lando drush drupal:install --site=default
-# Uncomment the next line to install with content from the DEV environment.
-try lando composer
+try lando drush -y sql:sync @default.prod @default.local --structure-tables-list=search_*,cache_*,history,watchdog,sessions
+try lando drush -y rsync @default.prod:%files @default.local:%files
 try lando drush deploy
 
 yell "Your site is good to go."

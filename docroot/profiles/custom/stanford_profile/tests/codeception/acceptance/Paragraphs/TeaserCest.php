@@ -21,11 +21,10 @@ class TeaserCest {
   }
 
   #[CodeceptionAttribute\Group('teaser-headers')]
-  public function testTeaserParagraphHeaders(AcceptanceTester $I) {
+  private function testTeaserParagraphHeaders(AcceptanceTester $I) {
     $node_types = \Drupal::entityTypeManager()
       ->getStorage('node_type')
       ->loadMultiple();
-    $node_types = array_filter($node_types, fn($type) => str_starts_with($type->id(), 'stanford_'));
     $teaser_entities = [];
     $teaser_item_field = [];
     foreach ($node_types as $node_type) {
