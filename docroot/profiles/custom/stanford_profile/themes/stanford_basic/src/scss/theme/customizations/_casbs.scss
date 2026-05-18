@@ -1,0 +1,30 @@
+.casbs-jumpmenu__item {
+  display: inline-block;
+}
+
+.casbs-person,
+.casbs-recent-work {
+  margin-top: 40px;
+}
+
+.casbs-person__image,
+.casbs-recent-work__image {
+  padding: 0.4em 1.5em 0 0;
+  float: left;
+}
+
+.casbs-person__discipline {
+  text-transform: uppercase;
+}
+
+.casbs-person__affiliation {
+  font-weight: bold
+}
+
+.su-media__caption {
+  max-width: 100%;
+}
+
+.casbs-person__title {
+  padding: 15px;
+}
