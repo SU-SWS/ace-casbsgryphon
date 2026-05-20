@@ -57,7 +57,7 @@
         "drupal/acquia_connector": "^4.1",
         "drupal/acquia_purge": "^1.5",
         "drupal/core-composer-scaffold": "^11",
-        "drupal/core-recommended": "^11",
+        "drupal/core-recommended": "~11.2.2",
         "drupal/js_cookie": "^2.0",
         "drush/drush": "^13",
         "su-sws/sws-drush-commands": "1.x-dev",
