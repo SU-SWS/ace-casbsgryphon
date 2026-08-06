@@ -65,6 +65,14 @@ if (!EnvironmentDetector::isProdEnv()) {
   $config['next.settings']['debug'] = TRUE;
 }
 
+// The shared sws-drush-commands logging.settings.php sets error_reporting to
+// E_ALL on local/dev, which surfaces PHP 8.4's new implicit-nullable-param
+// deprecations from contrib modules with no upstream fix yet. Keep every
+// other error type visible, just drop the deprecation noise.
+if (EnvironmentDetector::isLocalEnv() || EnvironmentDetector::isDevEnv()) {
+  error_reporting(E_ALL & ~E_DEPRECATED);
+}
+
 /**
  * Include settings files in docroot/sites/settings.
  *
