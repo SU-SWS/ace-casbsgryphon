@@ -2,6 +2,8 @@ uuid: 98020fda-54fe-4bc0-b132-aaa9b2eeb7d7
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.stanford_policy
   module:
     - node
 id: stanford_policies
@@ -12,7 +14,6 @@ selection_criteria:
   ab61ebc7-31dc-4efc-b1c9-80422f08548c:
     id: 'entity_bundle:node'
     negate: false
-    uuid: ab61ebc7-31dc-4efc-b1c9-80422f08548c
     context_mapping:
       node: node
     bundles:

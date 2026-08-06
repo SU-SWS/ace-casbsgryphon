@@ -38,7 +38,7 @@ class NavigationDropDownsCest {
    * Create some content and test the dropdown menu.
    */
   #[CodeceptionAttribute\Group('menu_link_weight')]
-  private function testDropdownMenus(FunctionalTester $I) {
+  public function testDropdownMenus(FunctionalTester $I) {
     $org_term = $I->createEntity([
       'vid' => 'site_owner_orgs',
       'name' => $this->faker->words(2, TRUE),

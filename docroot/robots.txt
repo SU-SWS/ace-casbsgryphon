@@ -71,11 +71,15 @@ Disallow: /index.php/user/login
 Disallow: /index.php/user/logout
 Disallow: /index.php/media/oembed
 Disallow: /index.php/*/media/oembed
+# Block Printable Paths
+Disallow: /*/printable/print
 # Block saml paths links
 Disallow: /sso/login
 Disallow: /saml_login
 Disallow: /saml/login
 Disallow: /saml/acs
+# Disallow search path with no trailing slash
+Disallow: /search
 # Block Femtosearch
 User-agent: FemtosearchBot
 Crawl-Delay: 120
@@ -84,3 +88,7 @@ Disallow: /
 User-agent: SemrushBot
 Crawl-Delay: 120
 Disallow: /
+# Honeypot for misbehaving crawlers.
+Disallow: /honeypot-for-misbehaving-crawlers-do-not-enter/
+Disallow: /honeypot-for-misbehaving-crawlers-do-not-enter
+Disallow: /honeypot-for-misbehaving-crawlers-do-not-enter/index.html

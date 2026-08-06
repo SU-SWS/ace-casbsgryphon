@@ -14,4 +14,19 @@ use Codeception\Module;
  */
 class Acceptance extends Module {
 
+  /**
+   * The current request should not contain a specific header in the response.
+   *
+   * @param string $header
+   *   Header key.
+   */
+  public function cantSeeResponseHeader($header) {
+    /** @var \Codeception\Module\PhpBrowser $browser */
+    $browser = $this->getModule('PhpBrowser');
+    /** @var \Symfony\Component\BrowserKit\Response $response */
+    $response = $browser->client->getResponse();
+    $headers = $response->getHeaders();
+    $this->assertArrayNotHasKey($header, $headers, sprintf('Header "%s" exists in the current response', $header));
+  }
+
 }

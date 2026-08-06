@@ -35,7 +35,7 @@ class DecoupledMenuCest {
       ->save();
   }
 
-  private function testDecoupledMenu(FunctionalTester $I) {
+  public function testDecoupledMenu(FunctionalTester $I) {
     $this->enableDecoupledMenu();
     $parent_1_title = $this->faker->uuid();
     $child_1_title = $this->faker->uuid();

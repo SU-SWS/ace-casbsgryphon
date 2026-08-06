@@ -1,3 +1,14 @@
+# Block bad bots
+# See https://docs.acquia.com/cloud-platform/arch/security/restrict/#cloud-blocking-by-ip.
+<ifmodule mod_setenvif.c>
+# See https://support-acquia.force.com/s/case/5006g00000i7TdjAAE/continued-and-ongoing-service-disruption-on-multiple-applications
+SetEnvIf AH_CLIENT_IP ^146\.190\.24\.114$ Deny_Host
+
+Order allow,deny
+Allow from all
+Deny from env=Deny_Host
+</ifmodule>
+
 #
 # Apache/PHP/Drupal settings:
 #
@@ -23,6 +34,9 @@ AddType image/svg+xml svg svgz
 AddEncoding gzip svgz
 
 # Add correct encoding for webp.
+AddType image/webp .webp
+
+# Add webp MIME type so that Apache knows how to handle WebP images
 AddType image/webp .webp
 
 # Most of the following PHP settings cannot be changed at runtime. See
@@ -62,6 +76,12 @@ AddType image/webp .webp
 # Various rewrite rules.
 <IfModule mod_rewrite.c>
   RewriteEngine on
+
+  # Rewrite all requests to www.earth.stanford.edu and earth.stanford.edu to
+  # sustainability.stanford.edu. Include request paths and query strings.
+  RewriteCond %{HTTP_HOST} ^earth\.stanford\.edu [NC,OR]
+  RewriteCond %{HTTP_HOST} ^www\.earth\.stanford\.edu [NC]
+  RewriteRule ^(.*)$ https://sustainability.stanford.edu/$1 [R=301,L,QSA]
 
   # Block access via specific user-agents
   RewriteCond %{HTTP_USER_AGENT} CQ-API-Spyder [NC]
@@ -208,6 +228,8 @@ AddType image/webp .webp
   RewriteCond %{REQUEST_URI} !/core/[^/]*\.php$
   # Allow access to test-specific PHP files:
   RewriteCond %{REQUEST_URI} !/core/modules/system/tests/https?\.php
+  # ACSF requirement: allow access to apc_rebuild.php.
+  RewriteCond %{REQUEST_URI} !/sites/g/apc_rebuild.php$
   # Deny access to any other PHP files that do not match the rules above.
   # Specifically, disallow autoload.php from being served directly.
   RewriteRule "^(.+/.*|autoload)\.php($|/)" - [F]

@@ -220,6 +220,7 @@ permissions:
   - 'mark as hidden in editoria11y'
   - 'mark as ok in editoria11y'
   - 'notify of path changes'
+  - 'rebuild node access permissions'
   - 'reorder book pages'
   - 'revert stanford_course revisions'
   - 'revert stanford_event revisions'

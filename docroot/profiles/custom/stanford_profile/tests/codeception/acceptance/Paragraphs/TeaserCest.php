@@ -21,7 +21,7 @@ class TeaserCest {
   }
 
   #[CodeceptionAttribute\Group('teaser-headers')]
-  private function testTeaserParagraphHeaders(AcceptanceTester $I) {
+  public function testTeaserParagraphHeaders(AcceptanceTester $I) {
     $node_types = \Drupal::entityTypeManager()
       ->getStorage('node_type')
       ->loadMultiple();
