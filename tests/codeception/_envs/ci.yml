@@ -1,0 +1,13 @@
+# CI environment overrides.
+#
+# Applied via `--env=ci`, which the `drush codeception` command adds
+# automatically when the CI environment variable is set.
+#
+# The CI job runs inside the drupal8ci container, alongside a `selenium`
+# service container (see .github/workflows/tests.yml). In that topology the
+# Selenium server is reachable by its service hostname (`selenium`), not on
+# 127.0.0.1 — so the functional suite's WebDriver must target that host.
+modules:
+  config:
+    WebDriver:
+      host: selenium
