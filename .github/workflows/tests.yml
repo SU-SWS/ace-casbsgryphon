@@ -227,6 +227,9 @@ jobs:
           apachectl stop &&
           apachectl start &&
           composer install -n &&
+          SHIM_DIR=$(mktemp -d) &&
+          { for c in mysql mariadb; do r=$(command -v "$c" 2>/dev/null) || continue; printf '#!/bin/sh\nexec "%s" "$@" --skip-ssl\n' "$r" > "$SHIM_DIR/$c"; chmod +x "$SHIM_DIR/$c"; done; } &&
+          export PATH="$SHIM_DIR:$PATH" &&
           drush sa @${{ matrix.site }}.prod || exit 0 &&
           drush drupal:sync --site=${{ matrix.site }} -n &&
           curl -I http://localhost --fail
