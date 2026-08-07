@@ -86,7 +86,7 @@ class LocalFooterLockupCest {
   /**
    * Test the lockup settings overrides.
    */
-  public function testLockupSettingsD(AcceptanceTester $I) {
+  private function testLockupSettingsD(AcceptanceTester $I) {
     $I->logInWithRole('administrator');
     $I->amOnPage('/admin/config/system/local-footer');
     $I->canSeeResponseCodeIs(200);
