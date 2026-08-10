@@ -1,0 +1,23 @@
+# CI environment overrides.
+#
+# Applied via `--env=ci`, which the `drush codeception` command adds
+# automatically when the CI environment variable is set.
+#
+# The CI job runs inside the drupal8ci container, alongside a `selenium`
+# service container (see .github/workflows/tests.yml). Two consequences for the
+# functional suite's WebDriver:
+#
+#   host: the Selenium server is reachable by its service hostname (`selenium`),
+#     not on 127.0.0.1.
+#   url:  Chrome runs inside the selenium container, so it must load the site by
+#     the job container's network alias (`drupal8ci`) rather than `localhost`,
+#     which from Chrome's perspective would be the selenium container itself.
+#
+# WebDriver is only enabled in the functional suite (the acceptance suite uses
+# PhpBrowser from within the Apache container), so these overrides do not affect
+# acceptance.
+modules:
+  config:
+    WebDriver:
+      host: selenium
+      url: 'http://drupal8ci/'

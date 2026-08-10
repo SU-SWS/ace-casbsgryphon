@@ -4,7 +4,6 @@ drush:
       - docroot/sites/default/local.drush.yml
       - local.drush.yml
       - drush/local.drush.yml
-      - drush/local.drush.yml
     include:
       - '${env.home}/.drush'
       - /usr/share/drush/commands

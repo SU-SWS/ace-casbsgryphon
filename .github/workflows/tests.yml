@@ -8,7 +8,7 @@ jobs:
     name: PHPUnit
     runs-on: ubuntu-latest
     container:
-      image: pookmish/drupal8ci:php8.3
+      image: pookmish/drupal8ci:php8.4
     services:
       mysql:
         image: mysql:8.0
@@ -52,7 +52,7 @@ jobs:
     name: Sites to test
     runs-on: ubuntu-latest
     container:
-      image: pookmish/drupal8ci:php8.3
+      image: pookmish/drupal8ci:php8.4
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -101,7 +101,7 @@ jobs:
         shard: ${{fromJSON(needs.shard_matrix.outputs.matrix)}}
     runs-on: ubuntu-latest
     container:
-      image: pookmish/drupal8ci:php8.3
+      image: pookmish/drupal8ci:php8.4
       options: '--network-alias drupal8ci'
     env:
       STANFORD_ENCRYPT: ${{secrets.STANFORD_ENCRYPT}}
@@ -137,6 +137,7 @@ jobs:
       - name: Install Site
         run: |
           git config --system --add safe.directory '*' &&
+          printf '[client]\nskip-ssl\n' > ~/.my.cnf &&
           mysql -h mysql -P 3306 -u root -pdrupal -e 'SET GLOBAL max_allowed_packet=67108864;' &&
           rm -rf /var/www/html &&
           ln -snf $GITHUB_WORKSPACE /var/www/html &&
@@ -149,7 +150,7 @@ jobs:
           apachectl start &&
           composer install -n &&
           drush drupal:install --site=${{ matrix.site }} -n &&
-          drush image:derive thumbnail $(drush sql:query 'select uri from file_managed where uri like "%//media/%" limit 1') &&
+          drush image:derive thumbnail $(drush php:eval 'echo \Drupal::database()->query("SELECT uri FROM {file_managed} WHERE uri LIKE :p LIMIT 1", [":p" => "%//media/%"])->fetchField();') &&
           drush xmlsitemap:rebuild &&
           drush cr &&
           mkdir -p artifacts/_data/
@@ -176,7 +177,7 @@ jobs:
         site: ${{fromJSON(needs.sites_to_test.outputs.matrix)}}
     runs-on: ubuntu-latest
     container:
-      image: pookmish/drupal8ci:php8.3
+      image: pookmish/drupal8ci:php8.4
       options: '--network-alias drupal8ci'
     env:
       STANFORD_ENCRYPT: ${{secrets.STANFORD_ENCRYPT}}
@@ -216,6 +217,7 @@ jobs:
       - name: Sync and Update Site
         run: |
           git config --system --add safe.directory '*' &&
+          printf '[client]\nskip-ssl\n' > ~/.my.cnf &&
           mysql -h mysql -P 3306 -u root -pdrupal -e 'SET GLOBAL max_allowed_packet=67108864;' &&
           rm -rf /var/www/html &&
           ln -snf $GITHUB_WORKSPACE /var/www/html &&
@@ -225,6 +227,9 @@ jobs:
           apachectl stop &&
           apachectl start &&
           composer install -n &&
+          SHIM_DIR=$(mktemp -d) &&
+          { for c in mysql mariadb; do r=$(command -v "$c" 2>/dev/null) || continue; printf '#!/bin/sh\nexec "%s" "$@" --skip-ssl\n' "$r" > "$SHIM_DIR/$c"; chmod +x "$SHIM_DIR/$c"; done; } &&
+          export PATH="$SHIM_DIR:$PATH" &&
           drush sa @${{ matrix.site }}.prod || exit 0 &&
           drush drupal:sync --site=${{ matrix.site }} -n &&
           curl -I http://localhost --fail
@@ -239,7 +244,7 @@ jobs:
     needs: [phpunit, codeception, db_updates]
     runs-on: ubuntu-latest
     container:
-      image: pookmish/drupal8ci:php8.3
+      image: pookmish/drupal8ci:php8.4
     steps:
       - uses: actions/checkout@v4
       - name: Restore Cache

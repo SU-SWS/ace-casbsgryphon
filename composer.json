@@ -49,28 +49,39 @@
                     "type": "zip"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "cure53/dompurify",
+                "version": "3.3.0",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/cure53/DOMPurify.git",
+                    "type": "git",
+                    "reference": "3.3.0"
+                }
+            }
         }
     ],
     "require": {
         "php": ">=8.3",
+        "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.6",
-        "drupal/acquia_connector": "^4.1",
-        "drupal/acquia_purge": "^1.5",
-        "drupal/core-composer-scaffold": "^11",
-        "drupal/core-recommended": "~11.2.2",
-        "drupal/js_cookie": "^2.0",
+        "drupal/acquia_purge": "^1.1",
+        "drupal/core-composer-scaffold": "^11.3.0",
+        "drupal/core-recommended": "^11.3.0",
         "drush/drush": "^13",
         "su-sws/sws-drush-commands": "1.x-dev",
         "wikimedia/composer-merge-plugin": "^2.1"
     },
     "require-dev": {
-        "su-sws/drupal-dev": "^10.0"
+        "su-sws/drupal-dev": "^11.0"
     },
     "replace": {
         "drupal/coder": "*"
     },
     "conflict": {
-        "drupal/core": ">=11.3.0",
         "drupal/drupal": "*"
     },
     "minimum-stability": "dev",
@@ -79,7 +90,9 @@
         "sort-packages": true,
         "discard-changes": true,
         "allow-plugins": true,
-        "process-timeout": 0
+        "audit": {
+            "ignore": ["PKSA-y2cr-5h3j-g3ys"]
+        }
     },
     "extra": {
         "merge-plugin": {
@@ -146,21 +159,17 @@
             ]
         },
         "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
         "patches": {
-            "drupal/hook_event_dispatcher": {
-                "https://www.drupal.org/project/hook_event_dispatcher/issues/3354751": "https://www.drupal.org/files/issues/2024-03-14/hook_event_dispatcher-4.x-3354751-7.patch"
-            },
-            "drupal/menu_link": {
-                "https://www.drupal.org/project/menu_link/issues/3358081": "https://git.drupalcode.org/project/menu_link/-/merge_requests/9.patch"
-            },
-            "drupal/menu_link_weight": {
-                "https://www.drupal.org/project/menu_link_weight/issues/2875984": "https://git.drupalcode.org/project/menu_link_weight/-/merge_requests/2.diff"
-            },
             "drupal/core": {
-                "https://www.drupal.org/project/drupal/issues/3151977": "patches/media-recursion-limit.patch"
+                "https://www.drupal.org/project/drupal/issues/3151977": "patches/media-recursion-limit.patch",
+                "https://www.drupal.org/project/drupal/issues/3530911": "patches/core-render-button.patch"
             },
-            "drupal/config_readonly": {
-                "https://www.drupal.org/project/config_readonly/issues/3469854": "https://git.drupalcode.org/project/config_readonly/-/merge_requests/17.patch"
+            "drupal/graphql_compose": {
+                "Remove link language setting on field results": "patches/contrib/graphql_compose-link_language.patch"
+            },
+            "drupal/paranoia": {
+                "https://stanfordits.atlassian.net/browse/D8CORE-1351": "patches/contrib/paranoia.patch"
             },
             "su-sws/paranoia": {
                 "https://stanfordits.atlassian.net/browse/D8CORE-1351": "patches/contrib/paranoia.patch"
@@ -198,7 +207,7 @@
             "drush -y rsync @default.prod:%files @default.local:%files"
         ],
         "sync-db": [
-            "drush -y sql:sync @default.dev @default.local"
+            "drush -y sql:sync @default.prod @default.local"
         ],
         "pull-profile": [
             "rm -rf docroot/profiles/custom/stanford_profile",

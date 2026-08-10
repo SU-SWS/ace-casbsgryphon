@@ -2,6 +2,8 @@ uuid: 135eea69-04ce-4179-b894-30831ca11727
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.stanford_publication
   module:
     - node
 id: stanford_publications
@@ -12,7 +14,6 @@ selection_criteria:
   ef034bef-fc25-4dde-ade8-4a026e5b99a7:
     id: 'entity_bundle:node'
     negate: false
-    uuid: ef034bef-fc25-4dde-ade8-4a026e5b99a7
     context_mapping:
       node: node
     bundles:

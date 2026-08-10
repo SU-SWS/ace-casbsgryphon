@@ -146,7 +146,6 @@ module:
   options: 0
   page_cache: 0
   paragraphs_edit: 0
-  paranoia: 0
   path: 0
   path_alias: 0
   path_redirect_import: 0
@@ -161,8 +160,6 @@ module:
   purge_tokens: 0
   r4032login: 0
   rabbit_hole: 0
-  react_paragraphs: 0
-  react_paragraphs_behaviors: 0
   readonly_field_widget: 0
   real_aes: 0
   redirect: 0

@@ -649,36 +649,6 @@ field_config:
       su_video_duration:
         enabled: true
   node:
-    casbs_book:
-      body:
-        enabled: true
-      layout_builder__layout:
-        enabled: true
-      su_casbs_author_links:
-        enabled: true
-      su_casbs_author_name:
-        enabled: true
-      su_casbs_book_cover:
-        enabled: true
-      su_casbs_book_id:
-        enabled: true
-      su_casbs_book_publish_year:
-        enabled: true
-      su_casbs_book_publisher:
-        enabled: true
-      su_casbs_book_publisher_loc:
-        enabled: true
-      su_casbs_book_title:
-        enabled: true
-      su_casbs_recent_works:
-        enabled: true
-    datatables_data:
-      body:
-        enabled: true
-      su_casbs_file_data:
-        enabled: true
-      su_casbs_long_data:
-        enabled: true
     stanford_course:
       body:
         enabled: true
@@ -882,52 +852,6 @@ field_config:
         enabled: true
     stanford_person:
       body:
-        enabled: true
-      su_casbs_cs_year:
-        enabled: true
-      su_casbs_cs_year_in_stu:
-        enabled: true
-      su_casbs_current_affiliation:
-        enabled: true
-      su_casbs_custom_order:
-        enabled: true
-      su_casbs_facfellow_year_in_stu:
-        enabled: true
-      su_casbs_faculty_fellow_year:
-        enabled: true
-      su_casbs_feature_people:
-        enabled: true
-      su_casbs_feature_people_text:
-        enabled: true
-      su_casbs_fellow_year:
-        enabled: true
-      su_casbs_fellow_year_in_stu:
-        enabled: true
-      su_casbs_field_discipline:
-        enabled: true
-      su_casbs_person_bio:
-        enabled: true
-      su_casbs_person_book_links:
-        enabled: true
-      su_casbs_person_id:
-        enabled: true
-      su_casbs_person_journal_links:
-        enabled: true
-      su_casbs_person_type:
-        enabled: true
-      su_casbs_pract_year_in_stu:
-        enabled: true
-      su_casbs_practitioner_year:
-        enabled: true
-      su_casbs_profile_picture:
-        enabled: true
-      su_casbs_ra_year:
-        enabled: true
-      su_casbs_ra_year_in_stu:
-        enabled: true
-      su_casbs_visiting_scholar_year:
-        enabled: true
-      su_casbs_vs_year_in_stu:
         enabled: true
       su_person_academic_appt:
         enabled: true
