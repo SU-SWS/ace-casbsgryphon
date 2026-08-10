@@ -82,7 +82,8 @@
         "drupal/coder": "*"
     },
     "conflict": {
-        "drupal/drupal": "*"
+        "drupal/drupal": "*",
+        "drupal/readonly_field_widget": ">2.1.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
