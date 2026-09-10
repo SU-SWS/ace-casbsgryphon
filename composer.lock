@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2918f3ab87083449abc3ece4e2ef3ea",
+    "content-hash": "1fff682fc9c6527ef55a3bc406aeae8b",
     "packages": [
         {
             "name": "acquia/drupal-environment-detector",
@@ -17253,16 +17253,16 @@
         },
         {
             "name": "su-sws/drupal-patches",
-            "version": "11.1.10",
+            "version": "11.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SU-SWS/drupal-patches.git",
-                "reference": "ae3093a4263d80a0d17e9d32d4d52f53778d7430"
+                "reference": "4e23e4e1bdab8ea6cc63942b41f1af0fc847a8de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SU-SWS/drupal-patches/zipball/ae3093a4263d80a0d17e9d32d4d52f53778d7430",
-                "reference": "ae3093a4263d80a0d17e9d32d4d52f53778d7430",
+                "url": "https://api.github.com/repos/SU-SWS/drupal-patches/zipball/4e23e4e1bdab8ea6cc63942b41f1af0fc847a8de",
+                "reference": "4e23e4e1bdab8ea6cc63942b41f1af0fc847a8de",
                 "shasum": ""
             },
             "require": {
@@ -17299,9 +17299,6 @@
                         "https://www.drupal.org/project/drupal/issues/3332063": "https://www.drupal.org/files/issues/2023-03-12/path-alias-not-available-3332063.patch",
                         "Disable https://www.drupal.org/project/drupal/issues/343535": "https://sws-devguide.stanford.edu/sites/g/files/sbiybj17516/files/drupal-disable_ajax_views_query_params-343535.patch"
                     },
-                    "drupal/diff": {
-                        "https://www.drupal.org/project/diff/issues/2882334#comment-13913401": "https://git.drupalcode.org/project/diff/-/merge_requests/42.patch"
-                    },
                     "drupal/webp": {
                         "https://www.drupal.org/project/webp/issues/3281606": "https://git.drupalcode.org/project/webp/-/merge_requests/33.patch",
                         "https://www.drupal.org/project/webp/issues/3551539": "https://sws-devguide.stanford.edu/sites/g/files/sbiybj17516/files/webp-3551539-1-0-0.patch"
@@ -17334,9 +17331,6 @@
                     },
                     "drupal/flat_taxonomy": {
                         "https://www.drupal.org/project/flat_taxonomy/issues/3569637": "https://sws-devguide.stanford.edu/sites/g/files/sbiybj17516/files/flat_taxonomy-form_setting-3569637.patch"
-                    },
-                    "drupal/jsonapi_views": {
-                        "https://www.drupal.org/project/jsonapi_views/issues/3213575": "https://www.drupal.org/files/issues/2023-09-29/3213575-views_json-pagination-10.patch"
                     },
                     "drupal/config_readonly": {
                         "https://www.drupal.org/project/config_readonly/issues/2892631": "https://www.drupal.org/files/issues/2023-07-18/config-readonly-2892631-27.patch"
@@ -17372,9 +17366,9 @@
             "description": "Drupal core and contrib shared patches",
             "support": {
                 "issues": "https://github.com/SU-SWS/drupal-patches/issues",
-                "source": "https://github.com/SU-SWS/drupal-patches/tree/11.1.10"
+                "source": "https://github.com/SU-SWS/drupal-patches/tree/11.1.12"
             },
-            "time": "2026-06-17T16:25:59+00:00"
+            "time": "2026-08-24T18:47:55+00:00"
         },
         {
             "name": "su-sws/paranoia",

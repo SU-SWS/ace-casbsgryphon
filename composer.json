@@ -84,7 +84,8 @@
     "conflict": {
         "drupal/drupal": "*",
         "drupal/jsonapi_views": ">1.1.0",
-        "drupal/readonly_field_widget": ">2.1.0"
+        "drupal/readonly_field_widget": ">2.1.0",
+        "su-sws/drupal-patches": ">11.1.12"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
