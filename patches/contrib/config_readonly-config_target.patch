@@ -1,0 +1,33 @@
+diff --git a/src/EventSubscriber/ReadOnlyFormSubscriber.php b/src/EventSubscriber/ReadOnlyFormSubscriber.php
+index a2935e5..e40f02f 100644
+--- a/src/EventSubscriber/ReadOnlyFormSubscriber.php
++++ b/src/EventSubscriber/ReadOnlyFormSubscriber.php
+@@ -10,6 +10,7 @@ use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
+ use Drupal\Core\Entity\EntityFormInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+ use Drupal\Core\Form\ConfigFormBase;
++use Drupal\Core\Form\ConfigTarget;
+ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+ 
+ /**
+@@ -163,12 +164,16 @@ class ReadOnlyFormSubscriber implements EventSubscriberInterface {
+   protected function getConfigTargetNames(array $form): array {
+     $config_targets = [];
+     foreach ($form as $name => $config) {
+-      if (isset($config['#config_target'])) {
+-        $config_targets[$config['#config_target']] = strstr($config['#config_target'], ':', TRUE);
++      if (is_array($config) && isset($config['#config_target'])) {
++        if ($config['#config_target'] instanceof ConfigTarget) {
++          $config_targets[] = $config['#config_target']->configName;
++        }
++        else {
++          $config_targets[] = strstr($config['#config_target'], ':', TRUE);
++        }
+       }
+     }
+-    $config_forms = array_flip($config_targets);
+-    return array_keys($config_forms);
++    return array_unique($config_targets);
+   }
+ 
+ }
