@@ -83,7 +83,9 @@
     },
     "conflict": {
         "drupal/drupal": "*",
-        "drupal/readonly_field_widget": ">2.1.0"
+        "drupal/jsonapi_views": ">1.1.0",
+        "drupal/readonly_field_widget": ">2.1.0",
+        "su-sws/drupal-patches": ">11.1.12"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -165,6 +167,9 @@
             "drupal/core": {
                 "https://www.drupal.org/project/drupal/issues/3151977": "patches/media-recursion-limit.patch",
                 "https://www.drupal.org/project/drupal/issues/3530911": "patches/core-render-button.patch"
+            },
+            "drupal/config_readonly": {
+                "Handle ConfigTarget objects in #config_target form elements": "patches/contrib/config_readonly-config_target.patch"
             },
             "drupal/graphql_compose": {
                 "Remove link language setting on field results": "patches/contrib/graphql_compose-link_language.patch"
