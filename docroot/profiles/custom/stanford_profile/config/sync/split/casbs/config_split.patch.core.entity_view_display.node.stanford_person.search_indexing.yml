@@ -62,6 +62,7 @@ removing:
     config:
       - field.field.node.stanford_person.su_imported
       - field.field.node.stanford_person.su_person_tags
+      - field.field.node.stanford_person.su_search_exclusion
   content:
     su_person_admin_appts:
       weight: 9

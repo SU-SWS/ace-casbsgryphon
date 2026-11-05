@@ -24,6 +24,8 @@ adding:
       - field.field.node.stanford_person.su_casbs_ra_year_in_stu
       - field.field.node.stanford_person.su_casbs_visiting_scholar_year
       - field.field.node.stanford_person.su_casbs_vs_year_in_stu
+    module:
+      - layout_builder
   hidden:
     su_casbs_cs_year: true
     su_casbs_cs_year_in_stu: true
@@ -53,3 +55,4 @@ removing:
     config:
       - field.field.node.stanford_person.su_imported
       - field.field.node.stanford_person.su_person_tags
+      - field.field.node.stanford_person.su_search_exclusion

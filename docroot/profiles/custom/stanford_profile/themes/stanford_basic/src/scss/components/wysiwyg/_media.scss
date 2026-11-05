@@ -39,3 +39,13 @@
     }
   }
 }
+
+.media {
+  iframe[src*="purl.stanford"] {
+    min-height: 800px;
+
+    .su-media-audio-video & {
+      min-height: 600px;
+    }
+  }
+}

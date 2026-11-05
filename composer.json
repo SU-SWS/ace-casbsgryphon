@@ -65,12 +65,13 @@
         }
     ],
     "require": {
-        "php": ">=8.3",
-        "composer/installers": "^1.9",
+        "php": ">=8.4",
+        "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.6",
         "drupal/acquia_purge": "^1.1",
-        "drupal/core-composer-scaffold": "^11.3.0",
-        "drupal/core-recommended": "^11.3.0",
+        "drupal/core-composer-scaffold": "^11.4",
+        "drupal/core-recommended": "^11.4",
+        "drupal/ui_patterns_ds": "^1.0@alpha",
         "drush/drush": "^13",
         "su-sws/sws-drush-commands": "1.x-dev",
         "wikimedia/composer-merge-plugin": "^2.1"
@@ -84,8 +85,7 @@
     "conflict": {
         "drupal/drupal": "*",
         "drupal/jsonapi_views": ">1.1.0",
-        "drupal/readonly_field_widget": ">2.1.0",
-        "su-sws/drupal-patches": ">11.1.12"
+        "su-sws/drupal-patches": ">11.2.5"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -95,7 +95,8 @@
         "allow-plugins": true,
         "audit": {
             "ignore": ["PKSA-y2cr-5h3j-g3ys"]
-        }
+        },
+        "policy": false
     },
     "extra": {
         "merge-plugin": {
@@ -171,17 +172,11 @@
             "drupal/config_readonly": {
                 "Handle ConfigTarget objects in #config_target form elements": "patches/contrib/config_readonly-config_target.patch"
             },
-            "drupal/graphql_compose": {
-                "Remove link language setting on field results": "patches/contrib/graphql_compose-link_language.patch"
-            },
             "drupal/paranoia": {
                 "https://stanfordits.atlassian.net/browse/D8CORE-1351": "patches/contrib/paranoia.patch"
             },
             "su-sws/paranoia": {
                 "https://stanfordits.atlassian.net/browse/D8CORE-1351": "patches/contrib/paranoia.patch"
-            },
-            "drupal/ui_patterns": {
-                "Ui Patterns Views Fixes": "patches/contrib/ui_patterns_views-preview.patch"
             },
             "drupal/taxonomy_entity_index": {
                 "Fix PHP 8 strict error with arrays": "patches/contrib/taxonomy_entity_index.patch"
@@ -219,7 +214,7 @@
             "rm -rf docroot/profiles/custom/stanford_profile",
             "git checkout docroot/profiles/custom/stanford_profile",
             "git remote add stanford_profile git@github.com:SU-SWS/stanford_profile.git || true",
-            "git subtree pull --prefix=docroot/profiles/custom/stanford_profile --squash stanford_profile 12.x || true",
+            "git subtree pull --prefix=docroot/profiles/custom/stanford_profile --squash stanford_profile tags/13.0.12 || true",
             "git checkout --ours docroot/profiles/custom/stanford_profile/composer.json",
             "git checkout --ours docroot/profiles/custom/stanford_profile/stanford_profile.info.yml",
             "git add docroot/profiles/custom/stanford_profile/composer.json docroot/profiles/custom/stanford_profile/stanford_profile.info.yml"

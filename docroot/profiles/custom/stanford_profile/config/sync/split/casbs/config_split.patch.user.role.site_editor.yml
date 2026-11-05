@@ -3,6 +3,5 @@ adding:
     config:
       - filter.format.no_processing
   permissions:
-    - 'choose layout for node stanford_media'
     - 'use text format no_processing'
 removing: {  }

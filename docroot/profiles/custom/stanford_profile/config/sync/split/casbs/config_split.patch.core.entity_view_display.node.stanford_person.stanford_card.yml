@@ -54,3 +54,9 @@ removing:
       - field.field.node.stanford_person.su_imported
       - field.field.node.stanford_person.su_person_source
       - field.field.node.stanford_person.su_person_tags
+      - field.field.node.stanford_person.su_search_exclusion
+    module:
+      - empty_fields
+      - field_formatter_class
+      - field_label
+      - stanford_media

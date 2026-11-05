@@ -1,5 +1,76 @@
 # Stanford Profile
 
+13.0.12
+-------------------------------------------------------------------------------
+- Updated metatag for 403 and 404 pages
+- Updated contrib config
+
+13.0.11
+-------------------------------------------------------------------------------
+- Require stanford_migrate ^9.4 and stanford_profile_helper ^11.1.1
+- Update migrate source plugins (#1128)
+- D8CORE-9064: Add consistent descriptions to all taxonomy vocabularies (#1126)
+- D8CORE-8661: Add help text to Audio/Visual content type fields (#1127)
+
+13.0.10
+-------------------------------------------------------------------------------
+- Require stanford_profile_helper ^11.1
+- D8Core-8558: Updating editoria11y settings (#1121)
+- D8CORE-9045: Add data-nosnippet to views and teaser field (#1123)
+- STVP: Split AV items into separate pages (#1122)
+- Updated book configuration settings (#1120)
+- Adjust SDR style to ensure minimum 800px size
+- Updated mathjax to v4
+- Update entity usage settings for contrib supported feature (#1119)
+- Tests: Fix media linking around an image in the wysiwyg (#1118)
+- Updated book, graphql, graphql_compose, Imagick, Editoria11y, and extlink (#1117)
+
+13.0.9
+-------------------------------------------------------------------------------
+- Refactor deprecated code and functions to prepare for D12 (#1116)
+- Update to drupal 11.4
+- Adjusted home page acceptance test (#1115)
+
+13.0.8
+-------------------------------------------------------------------------------
+- Change opportunity cards images to squares
+- D8CORE-8670: Remove media_content_filters permissions for site editor (#1113)
+- D8CORE-8526: Add publication_filters permissions for site_manager role (#1112)
+- Remove event schedule view that is not used (#1111)
+- Fixed event series cards
+
+13.0.7
+-------------------------------------------------------------------------------
+- Fixed template rendering for event schedule paragraphs.
+
+13.0.5
+-------------------------------------------------------------------------------
+- Adjusted content widths in the local footer
+
+13.0.4
+-------------------------------------------------------------------------------
+- Adjusted card displays for news and AV content types.
+
+13.0.3
+-------------------------------------------------------------------------------
+- Reduced unwanted markup around images in basic page teasers.
+
+13.0.2
+-------------------------------------------------------------------------------
+- Adjusted local footer and minimally branded theme.
+
+13.0.0
+-------------------------------------------------------------------------------
+- Refactor display logic to use SDC instead of UI Patterns (#1094)
+- Convert procedural hooks into OOP hooks (#1095)
+- Removed DS module dependencies (#1101)
+- Allow user to exclude a page from search and configure schema metatags (#1096)
+- Added SDR Media type and added to AV node and wysiwygs (#1097)
+- Create hotfix style sheet that loads from github pages (#1098)
+- Build out event filter list and card grid (#1099)
+- Schedule unpublish for News, Events, People, Opportunities (#1061)
+- Added AV and Opportunity content to sitemap
+
 12.2.4
 -------------------------------------------------------------------------------
 - Update content_lock settings.

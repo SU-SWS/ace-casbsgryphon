@@ -20,6 +20,7 @@ services:
     volumes:
       - ~/.acquia:/var/www/.acquia
     ssl: true
+    scanner: false
     config:
     # Uncomment the below for behat testing
       overrides:
@@ -42,12 +43,6 @@ services:
     overrides:
       volumes:
         - ./lando/mysql8.cnf:/opt/bitnami/mysql/conf/my_custom.cnf
-  adminer:
-    type: compose
-    services:
-      image: dehy/adminer
-      command: /bin/s6-svscan /etc/services.d
-    portforward: true
   # Uncomment the below for behat testing.
   chromedriver:
     type: lando

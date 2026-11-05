@@ -1,9 +1,9 @@
 name: 'Stanford Profile'
 description: 'Jumpstart Website Profile'
-version: 12.2.4
+version: 13.0.12
 type: profile
 project: Stanford
-core_version_requirement: ^11.2
+core_version_requirement: ^11.4 || ^12
 install:
   - 'address:address'
   - 'admin_toolbar:admin_toolbar'
@@ -107,9 +107,6 @@ install:
   - 'stanford_text_editor:stanford_text_editor'
   - 'token:token'
   - 'ui_patterns:ui_patterns'
-  - 'ui_patterns:ui_patterns_ds'
-  - 'ui_patterns:ui_patterns_layouts'
-  - 'ui_patterns:ui_patterns_library'
   - 'ui_patterns:ui_patterns_views'
   - 'view_unpublished:view_unpublished'
   - 'views_bulk_operations:views_bulk_operations'
@@ -117,7 +114,7 @@ install:
   - 'xmlsitemap:xmlsitemap_engines'
 themes:
     - stable9
-    - seven
+    - claro
     - stanford_basic
 default_content:
   block_content:
