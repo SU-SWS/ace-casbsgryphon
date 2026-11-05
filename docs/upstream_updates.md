@@ -19,14 +19,15 @@ runbook reflects the 12.2.4 to 13.0.12 upgrade (SWSDEVOPS-347).
 
 ## 1. Prerequisites
 
-- A working Lando site (see the [README](../README.md)). Run `lando info` and
-  check that the `casbs` app is mounted from **this** checkout. Another checkout,
+- A working Lando site (see the [README](../README.md)). Check that the `casbs`
+  containers run from **this** checkout:
+  `docker ps --format '{{.Names}} {{.Label "io.lando.src"}}'`. Another checkout,
   `~/code/casbs_profile_updates/ace-casbsgryphon`, uses the same Lando name,
   `casbs`.
 - `gh` CLI authenticated. In some sandboxes SSH to GitHub fails. HTTPS and
   `gh api` work, and every command below uses them.
-- A local DB that matches prod (`lando composer sync-casbs` overwrites your
-  local DB and files from **prod**, so be sure before you run it).
+- A local DB that matches prod (`lando composer run-script --timeout=0 sync-casbs`
+  overwrites your local DB and files from **prod**, so be sure before you run it).
 - A feature branch off `12.x`:
 
   ```bash
@@ -119,8 +120,9 @@ destroys that commit.** That is what happened with PR #99: history pointed at
    git stash push -- composer.json   # stash specific paths only
    ```
 
-   Avoid `git stash --include-untracked`. It also stashes untracked local
-   files such as `.claude/`, `.lando.yml` and editor config.
+   Avoid `git stash --include-untracked`. It also stashes untracked files such
+   as `.claude/`. Never use `git stash --all`; it also stashes ignored files:
+   `local.settings.php`, `local.drush.yml`, `keys/`.
 
 3. Run it:
 
@@ -396,9 +398,9 @@ render, and imports run.
 | `cim` fails on missing plugin/layout | Split config depends on a removed module. Convert it in `split/casbs/`, and check stored LB overrides |
 | A removed permission comes back after `cim` | Remove it from the `config_split.patch.user.role.*` file too |
 | CASBS styles are missing | Rebuild the theme. Check `customizations/index` import and `.casbs-*` in `dist/css/theme.css` |
-| Wrong site responds in Lando | Another checkout also uses Lando name `casbs`. Check the mount in `lando info` |
+| Wrong site responds in Lando | Another checkout also uses Lando name `casbs`. Run `docker ps --format '{{.Names}} {{.Label "io.lando.src"}}'` |
 | `git fetch`/`subtree` over SSH fails | Use the HTTPS URL |
-| Composer timeout | `"process-timeout": 0` in the root `composer.json` `config` |
+| Composer timeout | For scripts such as `sync-casbs`, use `lando composer run-script --timeout=0 <script>`. Otherwise set `"process-timeout": 0` in the root `composer.json` `config` |
 
 Debug config with:
 
