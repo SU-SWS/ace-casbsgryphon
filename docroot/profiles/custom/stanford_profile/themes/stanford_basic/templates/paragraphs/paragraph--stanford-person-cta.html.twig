@@ -1,0 +1,21 @@
+<div{{ attributes }}>
+  {{ title_prefix }}
+  {% embed "stanford_events:events_person_cta" with {
+    name: paragraph.su_person_cta_name.value,
+    title: paragraph.su_person_cta_title.value,
+    url: paragraph.su_person_cta_link.get(0).getUrl().toString(),
+    image: content.su_person_cta_image
+  } only %}
+
+    {% block image %}
+      {% if image[0] %}
+        <div class="su-person-cta__image">
+          {{ image }}
+        </div>
+      {% endif %}
+    {% endblock %}
+
+  {% endembed %}
+
+  {{ title_suffix }}
+</div>

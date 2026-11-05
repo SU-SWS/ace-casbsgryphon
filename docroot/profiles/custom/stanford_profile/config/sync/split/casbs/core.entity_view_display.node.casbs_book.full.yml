@@ -17,7 +17,6 @@ dependencies:
     - field.field.node.casbs_book.su_casbs_recent_works
     - node.type.casbs_book
   module:
-    - ds
     - image
     - jumpstart_ui
     - layout_builder
@@ -32,22 +31,17 @@ third_party_settings:
     allow_custom: true
     sections:
       -
-        layout_id: ds_1col
+        layout_id: jumpstart_ui_one_column
         layout_settings:
           label: ''
           context_mapping: {  }
-          wrappers:
-            ds_content: div
-          outer_wrapper: div
-          attributes: ''
-          link_attribute: ''
-          link_custom: ''
-          classes:
-            layout_class: {  }
+          extra_classes: ''
+          centered: null
+          columns: default
         components:
           4bdb969d-2143-4c16-a841-984d5b3f85d3:
             uuid: 4bdb969d-2143-4c16-a841-984d5b3f85d3
-            region: ds_content
+            region: main
             configuration:
               id: jumpstart_ui_skipnav_main_anchor
               label: Spacer

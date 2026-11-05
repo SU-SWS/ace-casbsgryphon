@@ -34,3 +34,4 @@ partial_list:
   - user.role.decoupled_site_users
   - 'jsonapi_extras.*'
   - 'core.entity_view_display.node.stanford_person.*'
+  - graphql_compose.settings.graphql_compose_server

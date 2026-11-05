@@ -1,0 +1,56 @@
+adding:
+  entity_config:
+    node:
+      casbs_book:
+        enabled: true
+        query_load_enabled: true
+        edges_enabled: true
+        routes_enabled: true
+      datatables_data:
+        enabled: true
+        query_load_enabled: true
+        edges_enabled: true
+        routes_enabled: true
+    taxonomy_term:
+      su_casbs_consulting_scholar_year:
+        enabled: true
+        query_load_enabled: true
+      su_casbs_faculty_fellow_year:
+        enabled: true
+        query_load_enabled: true
+      su_casbs_fellowship_year:
+        enabled: true
+        query_load_enabled: true
+      su_casbs_people_type:
+        enabled: true
+        query_load_enabled: true
+      su_casbs_practitioner_year:
+        enabled: true
+        query_load_enabled: true
+      su_casbs_research_affiliate_year:
+        enabled: true
+        query_load_enabled: true
+      su_casbs_visiting_scholar_year:
+        enabled: true
+        query_load_enabled: true
+  field_config:
+    node:
+      stanford_course:
+        su_search_exclusion:
+          enabled: true
+      stanford_event:
+        su_search_exclusion:
+          enabled: true
+      stanford_news:
+        su_search_exclusion:
+          enabled: true
+      stanford_page:
+        su_search_exclusion:
+          enabled: true
+      stanford_person:
+        su_search_exclusion:
+          enabled: true
+      stanford_publication:
+        su_search_exclusion:
+          enabled: true
+removing: {  }

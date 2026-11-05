@@ -1,181 +1,229 @@
 # ACE CASBS Gryphon
 
-This stack is based on the ace-gryphon stack, but it is customized for CASBS. The 11.x branch is the default branch, and contains the Drupal 10 version of the site.
+The CASBS website. Based on the SWS ace-gryphon stack, customized for CASBS, and
+hosted on Acquia Cloud.
+
+- Default and development branch: `12.x`
+- Drupal 11, PHP 8.4, Drush 13, MySQL 8.0
+- Install profile: [stanford_profile](https://github.com/SU-SWS/stanford_profile),
+  kept as a git subtree in `docroot/profiles/custom/stanford_profile`
+- Local site: https://casbs.lndo.site/ (Lando)
+- Drush aliases: `@default.local`, `@default.dev`, `@default.test`, `@default.prod`
 
 ---
 
-# Setup Local Environment - Lando
-
-The easiest way to set up a local development environment is going to be using Lando and Docker in a linux-like environment. If you are setting this up on a fresh machine, with none of the prerequisites present, it may take you a little time for the initial setup, but once the prerequisites are in place, you should be able to set up the CASBS site locally in less than 20 minutes.
+# Local development with Lando
 
 ## Prerequisites
 
-### Linux/MacOS
+1. **Git.**
+2. **Docker.**
+   - macOS: [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/).
+   - Linux: [Docker Engine](https://docs.docker.com/engine/install/).
+   - Windows: [install WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install)
+     (Ubuntu), then Docker Desktop with the
+     [WSL 2 backend](https://docs.docker.com/desktop/features/wsl/). Do all of
+     the steps below inside the WSL 2 shell, and clone the repository into the
+     Linux file system (for example `~/code`), not under `/mnt/c`. Builds are
+     much slower on `/mnt/c`.
+3. **Lando 3.26 or later**: [Linux / WSL 2](https://docs.lando.dev/install/linux.html),
+   [macOS](https://docs.lando.dev/install/macos.html),
+   [Windows](https://docs.lando.dev/install/windows.html).
+4. **Acquia access** to the CASBS application (ask the CASBS web team), with
+   your SSH public key added to your Acquia Cloud profile. The setup script
+   copies the database, files and secrets from production over SSH.
+   - Lando loads the keys in your `~/.ssh` into the containers at
+     `lando start`. If you add a key later, run `lando restart`.
+   - Passphrase-protected keys must be loaded in `ssh-agent` (`ssh-add`).
+   - To check your access once Lando is running:
+     `lando drush @default.prod status` (read-only). It should print the prod
+     site's status, not `Permission denied (publickey)`.
 
-1. Set up Docker on your distro of choice. Instructions for installing Docker in linux [can be found here](https://docs.docker.com/desktop/linux/install/), and these are [the MacOS instructions.](https://docs.docker.com/desktop/mac/install/)
-2. Set up Lando on your distro of choice. Instructions for installing Lando in linux [can be found here](https://docs.lando.dev/getting-started/installation.html#linux), and these are [the MacOS instructions.](https://docs.lando.dev/getting-started/installation.html#macos)
+   No Acquia access? See [No prod access?](#no-prod-access).
 
-### Windows/WSL
+You don't need PHP or Composer on your machine. They run inside Lando
+(`lando php`, `lando composer`). You only need Node on your machine for theme
+work (see [Theme / CSS changes](#theme--css-changes)).
 
-Because Docker works best with Windows Subsystem for Linux V.2, we suggest you proceed that way.
+Optional: an [Acquia API token](https://cloud.acquia.com/a/profile/tokens). You
+only need it for the `drush sws:acquia:*` commands. Put the key and secret in
+`app-key` / `app-secret` in `drush/local.drush.yml`. Never commit that file.
 
-1. [Install Windows Subsystem for Linux V.2](https://docs.microsoft.com/en-us/windows/wsl/install)
-2. [Install Docker Desktop for Windows, and enable the WSL2 extensions.](https://docs.docker.com/desktop/windows/wsl/)
-3. [Install Docker for linux in your WSL2 environment.](https://docs.docker.com/desktop/linux/install/ubuntu/)
-4. Install Lando for linux in your WSL2 environment. [Instructions can be found here.](https://docs.lando.dev/getting-started/installation.html#linux)
+## First-time setup
 
-No other prerequisites are necessary except Git, though you may find it helpful to have PHP 8.1+, and Composer 2 installed locally on your system. Once you have met the prerequisites, you can proceed with the installation.
-
-## Installation:
-
-1. Clone this repository somewhere on your local system.
-2. Change directory into the location where you cloned the repository.
-3. Run `cp ./lando/lando.drush.yml ./drush/local.drush.yml`
-4. In the `./drush/local.drush.yml` file, update:
-
-```
-  app-key: <YOUR-APP-KEY-HERE>
-  app-secret: <YOUR-APP-SECRET-HERE>
-```
-
-to correctly reflect your `ACQUIA_KEY` and `ACQUIA_SECRET` values. You can get these at https://profile.acquia.com/tokens
-
-5. Run `./lando/setup_lando.sh`
-6. Your application should be available locally at http://casbs.lndo.site/
-7. Optional: if you didn't get the database and files from the Production server during the setup script, you can get it now by doing a `lando composer sync-casbs && lando drush deploy`.
-
-If using lando, prefix any `drush` commands with `lando`, e.g., `lando drush cr`. The same applies to composer commands.
-
-### Lando local drush aliases
-
-The CASBS site is `@default` -- e.g, `@default.local, @default.dev, @default.test`
-
-So, for instance, to clear the caches on your local copy of CASBS:
-
-```
-lando drush -y @default.local cr
+```bash
+git clone git@github.com:SU-SWS/ace-casbsgryphon.git
+cd ace-casbsgryphon
+./lando/setup_lando.sh
 ```
 
-# Upstream updates
+The script is safe to re-run. It doesn't overwrite local files that already
+exist. It:
 
-See additional documentation on performing upstream updates [here](docs/upstream_updates.md).
+1. Starts Lando and runs `composer install`. The first start builds the
+   containers and takes several minutes.
+2. Creates the gitignored local files: `drush/local.drush.yml` (from
+   `lando/lando.drush.yml`, with the Lando database credentials),
+   `docroot/sites/default/local.drush.yml` (sets the local URI), and then
+   `lando drush @default.local settings` creates `salt.txt` and the
+   `local.settings.php` files.
+3. Runs `lando drush @default.local sws:keys`, which copies the SAML/secrets
+   files from Acquia prod into `keys/`. If that fails (no SSH access), the
+   script warns and carries on. `keys/` is optional; without it SAML login
+   doesn't work locally.
+4. Asks whether to copy the production database and files. Answer `y` on a new
+   machine. It then runs `sync-casbs` and `drush deploy`.
 
----
+Then open https://casbs.lndo.site/ and log in with:
 
-# Setup Local Environment - Native LAMP Stack
-
-** Note: this is outdated, since we no longer use BLT **
-
-TL;DR
-
-```
-composer update --prefer-source --no-interaction
-cp lando/example.local.blt.yml blt/local.blt.yml
-```
-
-Edit the `blt/local.blt.yml` file to match your setup (e.g., database settings, hostname, etc.).
-
-```
-cp simplesamlphp/config/default.local.config.php simplesamlphp/config/local.config.php
-blt blt:init:settings
-blt source:build:simplesamlphp-config
+```bash
+lando drush @default.local uli --uri=https://casbs.lndo.site
 ```
 
-BLT provides an automation layer for testing, building, and launching Drupal 8 applications. For ease when updating codebase it is recommended to use Drupal VM. If you prefer, you can use another tool such as Docker, [DDEV](https://docs.acquia.com/blt/install/alt-env/ddev/), [Docksal](https://docs.acquia.com/blt/install/alt-env/docksal/), [Lando](https://docs.acquia.com/blt/install/alt-env/lando/), (other) Vagrant, or your own custom LAMP stack, however support is very limited for these solutions.
+Lando serves the site with its own CA certificate. If your browser shows a
+certificate warning (always the case for Windows browsers with WSL 2), trust
+the Lando CA: see [Lando: trusting the CA](https://docs.lando.dev/core/v3/security.html#trusting-the-ca).
 
-1. Install Composer dependencies.
-   After you have forked, cloned the project and setup your blt.yml file install Composer Dependencies. (Warning: this can take some time based on internet speeds.)
-   `    $ composer install`
-2. Setup a local blt alias.
-   If the blt alias is not available use this command outside and inside vagrant (one time only).
-   `    $ composer run-script blt-alias`
-3. Set up local BLT
-   Copy the file `blt/example.local.blt.yml` and name it `local.blt.yml`. Populate all available information with your local configuration values.
+### No prod access?
 
-4. Setup Local settings
-   After you have the `local.blt.yml` file configured, set up the settings.php for you setup.
-   `    $ blt blt:init:settings`
-5. Get secret keys and settings
-   SAML and other certificate files will be download for local use.
-   `    $ blt sws:keys`
+Answer `N` at the "Copy the database and files from production now?" prompt,
+then install a clean stanford_profile site (the same thing CI does):
 
-Optional:
-If you wish to not provide statistics and user information back to Acquia run
-`     $ blt blt:telemetry:disable --no-interaction
-    `
-
----
-
-## Other Local Setup Steps
-
-1. Set up frontend build and theme.
-   By default BLT sets up a site with the lightning profile and a cog base theme. You can choose your own profile before setup in the blt.yml file. If you do choose to use cog, see [Cog's documentation](https://github.com/acquia-pso/cog/blob/8.x-1.x/STARTERKIT/README.md#create-cog-sub-theme) for installation.
-   See [BLT's Frontend docs](https://docs.acquia.com/blt/developer/frontend/) to see how to automate the theme requirements and frontend tests.
-   After the initial theme setup you can configure `blt/blt.yml` to install and configure your frontend dependencies with `blt setup`.
-
-2. Pull Files locally.
-   Use BLT to pull all files down from your Cloud environment.
-
-   ```
-   $ blt drupal:sync:files
-   ```
-
-3. Sync the Cloud Database.
-   If you have an existing database you can use BLT to pull down the database from your Cloud environment.
-   ```
-   $ blt sync
-   ```
-
----
-
-# Config Management
-
-~~Each site has the ability to determine its own configuration management strategy.
-The default site in this repo will be using a configuration management that uses
-the configuration from the `stanford_profile`. By default this is the behavior
-of all other sites unless defined within their own settings.php.
-
-There are three options a site can choose from:
-
-1. Do nothing and the configuration sync directory will use what is in `stanford_profile`.
-2. Modify the configuration sync directory to a desired directory such as another profile.
-3. Modify the configuration sync directory to point to an empty directory. This
-   will bypass any configuration management strategy and the site's configuration will be updated via update hooks.~~
-
----
-
-# Resources
-
-Additional [BLT documentation](https://docs.acquia.com/blt/) may be useful. You may also access a list of BLT commands by running this:
-
-```
-$ blt
+```bash
+lando drush @default.local drupal:install -n
 ```
 
-Note the following properties of this project:
+This gives you a fresh stanford_profile site without CASBS production content.
+It replaces whatever is in your local database.
 
-- Primary development branch: 1.x
-- Local environment: @default.local
-- Local site URL: http://local.example.loc/
+## Daily commands
 
-## Working With a BLT Project
+Prefix `drush` and `composer` with `lando`. Use the `@default.local` alias.
 
-BLT projects are designed to instill software development best practices (including git workflows).
+```bash
+lando start
+lando stop
+lando restart
+lando info                                   # URLs and services
 
-Our BLT Developer documentation includes an [example workflow](https://docs.acquia.com/blt/developer/dev-workflow/).
+lando drush @default.local cr
+lando drush @default.local status
+lando drush @default.local config:status
+lando drush @default.local cex -y            # export config after changing it in the UI
+lando drush @default.local deploy -y         # updb + cim + cr + deploy hooks, e.g. after pulling new code
 
-### Important Configuration Files
+lando composer install
+lando composer update vendor/package --with-dependencies   # targeted updates only
 
-BLT uses a number of configuration (`.yml` or `.json`) files to define and customize behaviors. Some examples of these are:
+lando db-export snapshot.sql.gz              # local DB backup
+lando db-import snapshot.sql.gz
+```
 
-- `blt/blt.yml` (formerly blt/project.yml prior to BLT 9.x)
-- `blt/local.blt.yml` (local only specific blt configuration)
-- `box/config.yml` (if using Drupal VM)
-- `drush/sites` (contains Drush aliases for this project)
-- `composer.json` (includes required components, including Drupal Modules, for this project)
+### Refresh from production
 
-## Helpful links and resources
+These commands **overwrite your local database** (and files) with production:
 
-- SWS devguide: https://sws-devguide.stanford.edu/
-- Decanter styleguide: https://decanter.stanford.edu/
-- Stanford Identity guide: https://identity.stanford.edu/
+```bash
+lando composer run-script --timeout=0 sync-casbs   # database + public files; cache_*, search_*, history, watchdog, sessions are structure-only
+lando composer run-script --timeout=0 sync-db      # full database only
+lando drush @default.local deploy -y
+```
+
+Use `run-script --timeout=0`. A plain `lando composer sync-casbs` stops after
+Composer's 300 second script timeout.
+
+`@default.dev`, `@default.test` and `@default.prod` are the live Acquia sites.
+Only run read-only commands against them.
+
+### Running tests
+
+PHPUnit (unit and kernel tests, the same as CI). First generate
+`docroot/core/phpunit.xml` (gitignored). `phpunit:config` is an alias of
+`sws:source:tests:phpunit:config`, and its database defaults already match
+Lando (`drupal`/`drupal`@`database`):
+
+```bash
+lando drush @default.local phpunit:config
+lando ssh -c "mkdir -p /app/docroot/sites/simpletest"
+```
+
+Then run single test files:
+
+```bash
+lando phpunit /app/docroot/profiles/custom/stanford_profile/tests/src/Unit/Hook/InstallHooksTest.php
+lando ssh -c "env SIMPLETEST_DB=mysql://drupal:drupal@database/drupal /app/vendor/bin/phpunit -c /app/docroot/core /app/docroot/profiles/custom/stanford_profile/tests/src/Kernel/StanfordProfilePermissionsTest.php"
+```
+
+The `SIMPLETEST_DB` override is needed for kernel tests. The `drupal10` Lando
+recipe sets `SIMPLETEST_DB` to its default `drupal10` credentials, but
+`.lando.yml` sets the database credentials to `drupal`. Without the override,
+kernel tests fail with `Access denied for user 'drupal10'`. Unit tests don't
+need it.
+
+The whole suite, as CI runs it, takes more than 10 minutes:
+
+```bash
+lando ssh -c "env SIMPLETEST_DB=mysql://drupal:drupal@database/drupal /app/vendor/bin/drush @default.local phpunit"
+```
+
+Codeception (the profile's suites, the same as CI):
+
+```bash
+lando drush @default.local codeception --site-domain=localhost --suite=acceptance \
+  --test-dir=docroot/profiles/custom/stanford_profile/tests/codeception \
+  --filter='HomePageCest:testHomepage$'
+```
+
+- `--suite` is `acceptance` or `functional`. Leave out `--filter` to run the
+  whole suite.
+- The HTML report is written to `artifacts/report.html`.
+- CI runs these tests against a freshly installed site
+  (`drush drupal:install`). Some of them fail against a production copy, and
+  they create and delete content in your local database.
+- The `functional` suite uses WebDriver. Locally that is the `chromedriver`
+  Lando service, but `tests/codeception.dist.yml` has no local WebDriver host,
+  so it only runs in CI as-is.
+
+There is no working local `phpcs`. `drupal/coder` isn't installed, and the
+`lando phpcs` and `lando codeception` tooling entries in `.lando.yml` point to
+binaries that don't exist. Use the drush commands above.
+
+## Theme / CSS changes
+
+CASBS styles live in
+`docroot/profiles/custom/stanford_profile/themes/stanford_basic/src/scss/theme/customizations/_casbs.scss`.
+Lando has no Node service, so build the theme on your machine with Node 20
+(see the theme's `.nvmrc`) and Yarn 4 (enable it with `corepack enable`):
+
+```bash
+cd docroot/profiles/custom/stanford_profile/themes/stanford_basic
+nvm use            # or any Node 20
+yarn install
+yarn build         # or `yarn watch` while you work
+```
+
+Then run `lando drush @default.local cr`.
+
+Ignore `.gitpod.yml`, `lando/example.local.blt.yml` and `lando/codeception.yml`.
+They are leftovers from the old BLT setup and aren't used.
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| Lando commands hit the wrong site or code | Another checkout also uses the Lando name `casbs`. Run `docker ps --format '{{.Names}} {{.Label "io.lando.src"}}'` to see which `.lando.yml` the `casbs_*` containers come from. Run `lando stop` in the other checkout, then `lando start` here. |
+| New PHP class (Drush command, hook class) isn't found | Run `lando restart`. `drush cr` doesn't clear the PHP opcache. |
+| `lando drush ...` without an alias fails with `Invalid URI: Host is malformed` | `docroot/sites/default/local.drush.yml` still has the `${uri}` placeholder from the template. Set `uri: 'https://casbs.lndo.site'` under `options:`, or use `@default.local`. |
+| `drush uli` links point to `http://default/...` | Add `--uri=https://casbs.lndo.site`. |
+| `Permission denied (publickey)` during `sws:keys` or `sync-casbs` | Add your SSH public key to your Acquia Cloud profile, and check that you have access to the CASBS application. Run `lando restart` after adding a key, and `ssh-add` passphrase-protected keys first. To see which keys Lando loaded, run `lando logs -s appserver`. |
+| `sync-casbs` stops after 300 seconds | Use `lando composer run-script --timeout=0 sync-casbs`. |
+| Kernel tests fail with `Access denied for user 'drupal10'` | Pass `SIMPLETEST_DB=mysql://drupal:drupal@database/drupal` (see [Running tests](#running-tests)). |
+| `drush cr` fatals after pulling a big update | Don't just `cr`; run `lando drush @default.local deploy -y`. |
+
+## More documentation
+
+- [Upstream (stanford_profile) updates](docs/upstream_updates.md)
+- [CHANGELOG](CHANGELOG.md)
+- SWS developer guide: https://sws-devguide.stanford.edu/
+- Decanter style guide: https://decanter.stanford.edu/
+- Stanford identity guide: https://identity.stanford.edu/
