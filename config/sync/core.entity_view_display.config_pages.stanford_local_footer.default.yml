@@ -1,0 +1,301 @@
+uuid: 0954e3dd-14f2-41c0-a5da-a65fcfa1c432
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.stanford_local_footer
+    - field.field.config_pages.stanford_local_footer.su_footer_enabled
+    - field.field.config_pages.stanford_local_footer.su_local_foot_action
+    - field.field.config_pages.stanford_local_footer.su_local_foot_address
+    - field.field.config_pages.stanford_local_footer.su_local_foot_f_button
+    - field.field.config_pages.stanford_local_footer.su_local_foot_f_intro
+    - field.field.config_pages.stanford_local_footer.su_local_foot_f_method
+    - field.field.config_pages.stanford_local_footer.su_local_foot_f_url
+    - field.field.config_pages.stanford_local_footer.su_local_foot_help
+    - field.field.config_pages.stanford_local_footer.su_local_foot_line_1
+    - field.field.config_pages.stanford_local_footer.su_local_foot_line_2
+    - field.field.config_pages.stanford_local_footer.su_local_foot_line_3
+    - field.field.config_pages.stanford_local_footer.su_local_foot_line_4
+    - field.field.config_pages.stanford_local_footer.su_local_foot_line_5
+    - field.field.config_pages.stanford_local_footer.su_local_foot_loc_img
+    - field.field.config_pages.stanford_local_footer.su_local_foot_loc_link
+    - field.field.config_pages.stanford_local_footer.su_local_foot_loc_op
+    - field.field.config_pages.stanford_local_footer.su_local_foot_pr_co
+    - field.field.config_pages.stanford_local_footer.su_local_foot_primary
+    - field.field.config_pages.stanford_local_footer.su_local_foot_prime_h
+    - field.field.config_pages.stanford_local_footer.su_local_foot_se_co
+    - field.field.config_pages.stanford_local_footer.su_local_foot_second
+    - field.field.config_pages.stanford_local_footer.su_local_foot_second_h
+    - field.field.config_pages.stanford_local_footer.su_local_foot_social
+    - field.field.config_pages.stanford_local_footer.su_local_foot_sunet_t
+    - field.field.config_pages.stanford_local_footer.su_local_foot_tr2_co
+    - field.field.config_pages.stanford_local_footer.su_local_foot_tr_co
+    - field.field.config_pages.stanford_local_footer.su_local_foot_use_loc
+    - field.field.config_pages.stanford_local_footer.su_local_foot_use_logo
+  module:
+    - address
+    - element_class_formatter
+    - empty_fields
+    - field_formatter_class
+    - field_formatter_range
+    - field_label
+    - image
+    - link
+    - options
+    - text
+id: config_pages.stanford_local_footer.default
+targetEntityType: config_pages
+bundle: stanford_local_footer
+mode: default
+content:
+  su_local_foot_action:
+    type: link_list_class
+    label: hidden
+    settings:
+      class: su-local-footer__action-links
+      list_type: ul
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_formatter_range:
+        order: 0
+        limit: 0
+        offset: 0
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 5
+    region: content
+  su_local_foot_address:
+    type: address_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  su_local_foot_f_button:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  su_local_foot_f_intro:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  su_local_foot_f_method:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  su_local_foot_f_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 12
+    region: content
+  su_local_foot_line_1:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  su_local_foot_line_2:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 17
+    region: content
+  su_local_foot_line_3:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 18
+    region: content
+  su_local_foot_line_4:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 19
+    region: content
+  su_local_foot_line_5:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  su_local_foot_loc_img:
+    type: image_url
+    label: hidden
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    weight: 21
+    region: content
+  su_local_foot_pr_co:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  su_local_foot_primary:
+    type: link_list_class
+    label: hidden
+    settings:
+      class: su-local-footer__primary-links
+      list_type: ul
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_formatter_range:
+        order: 0
+        limit: 0
+        offset: 0
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 8
+    region: content
+  su_local_foot_prime_h:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  su_local_foot_se_co:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  su_local_foot_second:
+    type: link_list_class
+    label: hidden
+    settings:
+      class: su-local-footer__secondary-links
+      list_type: ul
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_formatter_range:
+        order: 0
+        limit: 0
+        offset: 0
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 10
+    region: content
+  su_local_foot_second_h:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  su_local_foot_social:
+    type: link_list_class
+    label: hidden
+    settings:
+      class: su-local-footer__social-links
+      list_type: ul
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_formatter_range:
+        order: 0
+        limit: 0
+        offset: 0
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 6
+    region: content
+  su_local_foot_sunet_t:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  su_local_foot_tr2_co:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  su_local_foot_tr_co:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  search_api_excerpt: true
+  su_footer_enabled: true
+  su_local_foot_help: true
+  su_local_foot_loc_link: true
+  su_local_foot_loc_op: true
+  su_local_foot_use_loc: true
+  su_local_foot_use_logo: true

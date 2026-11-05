@@ -1,0 +1,85 @@
+uuid: 13b9bb6d-7b5c-4966-a5c4-e7ad3c9e937d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.stanford_banner.su_banner_body
+    - field.field.paragraph.stanford_banner.su_banner_button
+    - field.field.paragraph.stanford_banner.su_banner_header
+    - field.field.paragraph.stanford_banner.su_banner_image
+    - field.field.paragraph.stanford_banner.su_banner_sup_header
+    - paragraphs.paragraphs_type.stanford_banner
+  module:
+    - empty_fields
+    - field_formatter_class
+    - field_label
+    - link
+    - stanford_media
+    - text
+id: paragraph.stanford_banner.default
+targetEntityType: paragraph
+bundle: stanford_banner
+mode: default
+content:
+  su_banner_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  su_banner_button:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 4
+    region: content
+  su_banner_header:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  su_banner_image:
+    type: media_responsive_image_formatter
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+      image_style: stanford_hero_block_wide
+      remove_alt: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  su_banner_sup_header:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: su-card__superhead
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

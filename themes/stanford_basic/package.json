@@ -1,0 +1,38 @@
+{
+  "name": "stanford_starter",
+  "version": "1.0.0",
+  "description": "Changelog: [CHANGELOG.md](CHANGELOG.md)",
+  "main": "webpack.config.js",
+  "scripts": {
+    "watch": "NODE_ENV=production webpack --watch",
+    "build": "NODE_ENV=production webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.29.7",
+    "autoprefixer": "^10.5.4",
+    "babel-loader": "^10.1.1",
+    "css-loader": "^7.1.4",
+    "decanter": "^6.3.3",
+    "drupal-behaviors-loader": "^1.0.1",
+    "element-closest-polyfill": "^1.0.7",
+    "element-matches-polyfill": "^1.0.0",
+    "element-qsa-scope": "^1.1.0",
+    "es6-object-assign": "^1.1.0",
+    "filemanager-webpack-plugin": "^8.0.0",
+    "mini-css-extract-plugin": "^2.10.2",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "postcss-loader": "^8.2.1",
+    "postcss-preset-env": "^10.6.1",
+    "sass": "^1.102.0",
+    "sass-loader": "^16.0.8",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.109.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-remove-empty-scripts": "^1.1.1"
+  },
+  "packageManager": "yarn@4.9.2"
+}

@@ -1,0 +1,216 @@
+uuid: ea699f93-1a97-44e2-99db-249c4df8b53b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.stanford_h3_card
+    - field.field.node.stanford_media.body
+    - field.field.node.stanford_media.su_media_audio_video
+    - field.field.node.stanford_media.su_media_category
+    - field.field.node.stanford_media.su_media_date
+    - field.field.node.stanford_media.su_media_dek
+    - field.field.node.stanford_media.su_media_duration
+    - field.field.node.stanford_media.su_media_episode
+    - field.field.node.stanford_media.su_media_filters
+    - field.field.node.stanford_media.su_media_image
+    - field.field.node.stanford_media.su_media_person
+    - field.field.node.stanford_media.su_media_season
+    - field.field.node.stanford_media.su_media_series
+    - field.field.node.stanford_media.su_media_source
+    - field.field.node.stanford_media.su_media_subtitles
+    - field.field.node.stanford_media.su_media_transcript
+    - field.field.node.stanford_media.su_media_types
+    - node.type.stanford_media
+  module:
+    - datetime
+    - empty_fields
+    - field_formatter_class
+    - field_label
+    - file
+    - link
+    - options
+    - smart_trim
+    - stanford_media
+    - text
+    - user
+id: node.stanford_media.stanford_h3_card
+targetEntityType: node
+bundle: stanford_media
+mode: stanford_h3_card
+content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 600
+      trim_type: chars
+      trim_suffix: ''
+      wrap_output: false
+      wrap_class: trimmed
+      more:
+        display_link: false
+        target_blank: false
+        link_trim_only: false
+        class: more-link
+        text: More
+        aria_label: 'Read more about [node:title]'
+      summary_handler: full
+      trim_options: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  su_media_audio_video:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  su_media_category:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: '[node:su_media_category]'
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 15
+    region: content
+  su_media_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: stanford_month_date_year
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 12
+    region: content
+  su_media_dek:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  su_media_duration:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  su_media_episode:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  su_media_filters:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  su_media_image:
+    type: media_responsive_image_formatter
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+      image_style: card_2_1
+      remove_alt: 0
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 10
+    region: content
+  su_media_person:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  su_media_season:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  su_media_series:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  su_media_source:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  su_media_subtitles:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  su_media_transcript:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  su_media_types:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+hidden:
+  links: true
+  search_api_excerpt: true
+  su_imported: true
+  su_media_clips: true
+  su_metatags: true
+  su_shared_tags: true

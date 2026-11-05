@@ -1,0 +1,79 @@
+{#
+/**
+ * @file
+ * Main Page Template.
+ *
+ * Available variables:
+ * - page: The content regions for this page.
+ * - attributes: HTML attributes for the region div.
+ *
+ * @see template_preprocess_page()
+ */
+#}
+
+{# Masthead Section. #}
+{%- block block_header -%}
+  {%- if page.header or page.search or page.menu -%}
+    <header class="su-masthead su-masthead--right" data-nosnippet>
+
+      {% block block_skiplinks %}
+        <a href="#main-content" class="visually-hidden focusable su-skipnav su-skipnav--content">
+          {{ 'Skip to main content'|t }}
+        </a>
+        <a href="#secondary-navigation" class="visually-hidden focusable su-skipnav su-skipnav--secondary">
+          {{ 'Skip to secondary navigation'|t }}
+        </a>
+      {% endblock %}
+
+      {# Brand Bar #}
+      {%- block block_brandbar -%}
+        {{ include("jumpstart_ui:brand_bar", {}, with_context = false) }}
+      {%- endblock -%}
+
+      {# Help Section #}
+      {%- block block_help -%}
+        {{ page.help }}
+      {%- endblock -%}
+
+      <section class="su-masthead--inner" aria-label="Page logo, menu and search">
+        {% if page.header %}
+          <div class="region region-header">
+            {{ page.header }}
+          </div>
+        {% endif %}
+        {% if page.search %}
+          <div class="region region-search">
+            {{ page.search }}
+          </div>
+        {% endif %}
+        {% if page.menu %}
+          <div class="region region-menu">
+            {{ page.menu }}
+          </div>
+        {% endif %}
+      </section>
+    </header>
+  {%- endif -%}
+{%- endblock -%}
+
+{# Main Page Content Section #}
+<main class="page-content" id="page-content">
+  {%- block block_main -%}
+    {{ page.content }}
+  {%- endblock -%}
+
+  <button id="back-to-top">
+    <span class="fas fa-chevron-up"></span>
+    Back to Top
+  </button>
+</main>
+
+{# Footer Section #}
+{%- block block_footer -%}
+  <footer id="footer" data-nosnippet>
+    {{ page.footer }}
+
+    {{ include("jumpstart_ui:global_footer", {}, with_context = false) }}
+
+  </footer>
+{%- endblock -%}

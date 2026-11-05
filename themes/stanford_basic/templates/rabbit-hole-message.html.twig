@@ -1,0 +1,11 @@
+
+{# Good for everyone. #}
+{% if status_headings[type] %}
+  <h2 class="visually-hidden">{{ 'Warning'|t }}</h2>
+{% endif %}
+
+{% set message = {'#markup': 'You are seeing this page because you are logged in with appropriate permissions. For anonymous users, this page will redirect to ' ~ (link(destination, destination)|render)} %}
+{{ include("jumpstart_ui:alert", {
+  level: "warning",
+  message: message
+}, with_context = false) }}

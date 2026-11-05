@@ -1,0 +1,107 @@
+uuid: 8fcc2198-636c-4d86-b700-5a78e89d01ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.stanford_card
+    - field.field.node.stanford_publication.layout_builder__layout
+    - field.field.node.stanford_publication.stanford_intranet__access
+    - field.field.node.stanford_publication.su_imported
+    - field.field.node.stanford_publication.su_metatags
+    - field.field.node.stanford_publication.su_publication_author_ref
+    - field.field.node.stanford_publication.su_publication_citation
+    - field.field.node.stanford_publication.su_publication_components
+    - field.field.node.stanford_publication.su_publication_cta
+    - field.field.node.stanford_publication.su_publication_image
+    - field.field.node.stanford_publication.su_publication_tags
+    - field.field.node.stanford_publication.su_publication_topics
+    - field.field.node.stanford_publication.su_shared_tags
+    - node.type.stanford_publication
+  module:
+    - element_class_formatter
+    - field_formatter_class
+    - link
+    - user
+id: node.stanford_publication.stanford_card
+targetEntityType: node
+bundle: stanford_publication
+mode: stanford_card
+content:
+  citation_type:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  su_publication_author_ref:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  su_publication_citation:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  su_publication_cta:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  su_publication_image:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  su_publication_tags:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  su_publication_topics:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_formatter_range:
+        order: 0
+        limit: 0
+        offset: 0
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 6
+    region: content
+hidden:
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  stanford_intranet__access: true
+  su_imported: true
+  su_metatags: true
+  su_publication_components: true
+  su_search_exclusion: true
+  su_shared_tags: true

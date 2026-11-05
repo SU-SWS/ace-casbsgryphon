@@ -1,0 +1,34 @@
+_core:
+  default_config_hash: 8d0nv-vvXs9MZkqD1mhxm8mPeF4yF9fqLLIcVp4cnLQ
+content_root: '#page-content, .block-config-pages-super-footer, .ds-entity--stanford-local-footer'
+assertiveness: assertive
+no_load: ''
+ignore_all_if_absent: ''
+ignore_elements: 'nav, .ds-entity--node, .menu-block'
+panel_no_cover: ''
+embedded_content_warning: .media.embeddable
+download_links: 'false'
+link_strings_new_windows: ''
+ignore_link_strings: ''
+link_ignore_selector: 'svg.ext, svg.mailto, .link-purpose-text'
+hidden_handlers: ''
+element_hides_overflow: ''
+ed11y_theme: sleekTheme
+panel_pin: right
+shadow_components: ''
+detect_shadow: false
+watch_for_changes: 'true'
+disable_sync: false
+preserve_params: ''
+redundant_prefix: ''
+custom_tests: 0
+disable_live: false
+live_h_inherit: ''
+live_h2: 'form[id^="node-"] #edit-body-wrapper .ck-content, .ui-dialog, .ck-content'
+live_h3: ''
+live_h4: ''
+hide_edit_links: ''
+ck5_table_headers: row
+tests_off: 'CONTRAST_WARNING_GRAPHIC,LINK_CLICK_HERE,LINK_IMAGE_ALT,LINK_NEW_TAB,LINK_UNPRONOUNCEABLE,QA_DOCUMENT'
+ignore_containers: .su-secondary-nav
+allow_overflow: ''

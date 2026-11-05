@@ -1,0 +1,129 @@
+uuid: 277e1970-82ee-4de3-8a20-ce96a19535aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.stanford_h3_card
+    - field.field.node.stanford_course.body
+    - field.field.node.stanford_course.su_course_academic_year
+    - field.field.node.stanford_course.su_course_code
+    - field.field.node.stanford_course.su_course_filters
+    - field.field.node.stanford_course.su_course_id
+    - field.field.node.stanford_course.su_course_instructors
+    - field.field.node.stanford_course.su_course_link
+    - field.field.node.stanford_course.su_course_quarters
+    - field.field.node.stanford_course.su_course_section_units
+    - field.field.node.stanford_course.su_course_subject
+    - field.field.node.stanford_course.su_course_tags
+    - field.field.node.stanford_course.su_imported
+    - field.field.node.stanford_course.su_metatags
+    - field.field.node.stanford_course.su_shared_tags
+    - node.type.stanford_course
+  module:
+    - field_formatter_class
+    - link
+    - user
+_core:
+  default_config_hash: 3q3wp63fQ-h1XTJTAHRzKP7uFPch4KfSFHFXWC50bIw
+id: node.stanford_course.stanford_h3_card
+targetEntityType: node
+bundle: stanford_course
+mode: stanford_h3_card
+content:
+  su_course_academic_year:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: course_academic_year
+  su_course_code:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: course_code
+  su_course_filters:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  su_course_id:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  su_course_instructors:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  su_course_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 4
+    region: course_url
+  su_course_quarters:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  su_course_section_units:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  su_course_subject:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 0
+    region: course_code
+  su_course_tags:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: content
+hidden:
+  body: true
+  links: true
+  search_api_excerpt: true
+  su_imported: true
+  su_metatags: true
+  su_search_exclusion: true
+  su_shared_tags: true

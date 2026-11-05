@@ -1,0 +1,153 @@
+uuid: 024ed14f-7eac-470d-ac31-c1963629bf02
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.printable
+    - field.field.node.stanford_policy.body
+    - field.field.node.stanford_policy.field_menulink
+    - field.field.node.stanford_policy.layout_builder__layout
+    - field.field.node.stanford_policy.su_policy_authority
+    - field.field.node.stanford_policy.su_policy_auto_prefix
+    - field.field.node.stanford_policy.su_policy_changelog
+    - field.field.node.stanford_policy.su_policy_chapter
+    - field.field.node.stanford_policy.su_policy_effective
+    - field.field.node.stanford_policy.su_policy_policy_num
+    - field.field.node.stanford_policy.su_policy_related
+    - field.field.node.stanford_policy.su_policy_source
+    - field.field.node.stanford_policy.su_policy_subchapter
+    - field.field.node.stanford_policy.su_policy_title
+    - field.field.node.stanford_policy.su_policy_updated
+    - node.type.stanford_policy
+  module:
+    - datetime
+    - empty_fields
+    - field_formatter_class
+    - layout_builder
+    - layout_builder_restrictions
+    - layout_library
+    - link
+    - text
+    - user
+id: node.stanford_policy.printable
+targetEntityType: node
+bundle: stanford_policy
+mode: printable
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  su_policy_authority:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  su_policy_auto_prefix:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  su_policy_changelog:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  su_policy_chapter:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  su_policy_effective:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: stanford_month_date_year
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  su_policy_policy_num:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  su_policy_related:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  su_policy_source:
+    type: link
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  su_policy_subchapter:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  su_policy_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  su_policy_updated:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: stanford_month_date_year
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+    weight: 2
+    region: content
+hidden:
+  book_navigation: true
+  book_navigation_without_tree: true
+  field_menulink: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true
+  su_imported: true
+  su_metatags: true
+  su_shared_tags: true

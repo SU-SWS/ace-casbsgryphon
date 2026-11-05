@@ -1,0 +1,100 @@
+uuid: 4362ca68-4ab4-4c22-9d3f-7a137283e7a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.stanford_schedule.su_schedule_date_time
+    - field.field.paragraph.stanford_schedule.su_schedule_description
+    - field.field.paragraph.stanford_schedule.su_schedule_headline
+    - field.field.paragraph.stanford_schedule.su_schedule_location
+    - field.field.paragraph.stanford_schedule.su_schedule_speaker
+    - field.field.paragraph.stanford_schedule.su_schedule_url
+    - paragraphs.paragraphs_type.stanford_schedule
+  module:
+    - address
+    - empty_fields
+    - entity_reference_revisions
+    - field_formatter_class
+    - field_label
+    - link
+    - smart_date
+    - text
+id: paragraph.stanford_schedule.default
+targetEntityType: paragraph
+bundle: stanford_schedule
+mode: default
+content:
+  su_schedule_date_time:
+    type: smartdate_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+      format: time_only_no_all_day
+      force_chronological: false
+      add_classes: false
+      time_wrapper: true
+      localize: false
+      parts:
+        - start
+        - end
+      duration:
+        separator: ' | '
+        unit: ''
+        decimals: 2
+        suffix: h
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  su_schedule_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  su_schedule_headline:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  su_schedule_location:
+    type: address_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  su_schedule_speaker:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  su_schedule_url:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      empty_fields:
+        handler: ''
+      field_formatter_class:
+        class: ''
+      field_label:
+        label_value: ''
+        label_tag: ''
+    weight: 4
+    region: content
+hidden:
+  search_api_excerpt: true

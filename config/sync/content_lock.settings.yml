@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: 6Ka3T1c-CIjEUO1Q64NXKksLthkMhj53a6zy4RJBtkc
+verbose: false
+types:
+  node:
+    '*': '*'
+types_translation_lock: {  }
+form_op_lock:
+  node:
+    mode: 2
+    values:
+      delete: delete
+      delete-multiple-confirm: delete-multiple-confirm
+timeout: 900
